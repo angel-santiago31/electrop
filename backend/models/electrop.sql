@@ -32,12 +32,13 @@ CREATE TABLE `admin` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `password_reset_token` (`password_reset_token`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `admin` */
 
 insert  into `admin`(`id`,`auth_key`,`password_hash`,`password_reset_token`,`email`,`status`,`created_at`,`updated_at`) values 
-(7,'DxKkH2hGDkUj5L2LnB8qrMVLkGFAT82M','$2y$13$D92/maDAYUX2W.25sYURRecRl4TvGpEPvgzqzQosMwiHJO6jymLji','jGCqlkpYD0UQNSodS-yMSvIoqyA5aF_p_1489764767','admin@admin.com',10,17,17);
+(7,'DxKkH2hGDkUj5L2LnB8qrMVLkGFAT82M','$2y$13$D92/maDAYUX2W.25sYURRecRl4TvGpEPvgzqzQosMwiHJO6jymLji','jGCqlkpYD0UQNSodS-yMSvIoqyA5aF_p_1489764767','admin@admin.com',10,17,17),
+(11,'FHRGKaaqo4ZvDlZPPMmkIqxtdGZBziVF','$2y$13$c4TudIrJOXWkJ4xh57618OHd60g1CFcmv7f.iy8JCH4F2JJPPRfvi','NUHKloHkVlA29Y_xv5MQ0IVgu4Njkm7-_1491401476','mystery_Person@outlook.com',10,1491401476,1491401476);
 
 /*Table structure for table `contains` */
 
@@ -85,14 +86,15 @@ CREATE TABLE `customer` (
 
 insert  into `customer`(`id`,`email`,`password_hash`,`first_name`,`middle_name`,`fathers_last_name`,`mothers_last_name`,`date_of_birth`,`age`,`auth_key`,`password_reset_token`,`status`,`created_at`,`updated_at`,`active`) values 
 (1,'user.email@email.com','$2y$13$V8eU2o5c7BglU/34IoBsWeAUAzCGTadXSo5ZKmT4X07iptoO3GGYq','','','','',0,NULL,'Pp_csdgHIplh2uuWB462flNhyXsdFFXs','Xw9-2-ZntWmFqHvbXtYXr-tGCRl6unWJ_1489159485',0,1489158191,1491370090,0),
-(5,'angel.santiago31@upr.edu','$2y$13$vue2Q2o8aokBqm2tSOs6eOWQ5KyPAzaW7bvF6UOGQU54OasPssNdy','','','','',0,NULL,'2Q-Yp2AMrRgAhz_mj1ZW3rCPH_bZYr1I',NULL,10,1491362920,1491362920,0);
+(5,'angel.santiago31@upr.edu','$2y$13$vue2Q2o8aokBqm2tSOs6eOWQ5KyPAzaW7bvF6UOGQU54OasPssNdy','','','','',0,NULL,'2Q-Yp2AMrRgAhz_mj1ZW3rCPH_bZYr1I',NULL,10,1491362920,1491362920,0),
+(6,'test@email.com','$2y$13$VynLtlv6LN.6RbMYvPpri.IIJuyS3mpdDQNYhVuSDqGNzRXr/UlXW','','','','',0,NULL,'_YCkvStQKJuUxFiuRJsn7bA18TYleq4-',NULL,10,1491400864,1491400864,0);
 
 /*Table structure for table `item` */
 
 DROP TABLE IF EXISTS `item`;
 
 CREATE TABLE `item` (
-  `item_id` int(11) NOT NULL,
+  `item_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(32) NOT NULL,
   `picture` varchar(256) NOT NULL,
   `quantity_remaining` int(11) NOT NULL,
@@ -108,13 +110,14 @@ CREATE TABLE `item` (
   KEY `item_sub_category_id` (`item_sub_category_id`),
   CONSTRAINT `item_ibfk_1` FOREIGN KEY (`item_category_id`) REFERENCES `item_category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `item_ibfk_2` FOREIGN KEY (`item_sub_category_id`) REFERENCES `item_sub_category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 /*Data for the table `item` */
 
 insert  into `item`(`item_id`,`name`,`picture`,`quantity_remaining`,`size`,`gross_price`,`production_cost`,`description`,`item_category_id`,`item_sub_category_id`,`active`) values 
 (1,'Sanic','uploads/Sanic.jpg',10,'12 Inches',1.00,0.25,'Sanic The HedgeHawg',1,1,0),
-(2,'Rainbow Drip','uploads/Rainbow Drip.jpg',5,'2 Inches',0.23,1.68,'Colors.',2,4,1);
+(2,'Rainbow Drip','uploads/Rainbow Drip.jpg',5,'2 Inches',0.23,1.68,'Colors.',2,4,1),
+(3,'Ice Cream Skull','uploads/Ice Cream Skull.png',20,'3 Inches',1.00,0.20,'Green Skull and his love for Ice',1,4,1);
 
 /*Table structure for table `item_category` */
 

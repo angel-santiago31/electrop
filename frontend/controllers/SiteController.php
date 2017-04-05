@@ -75,6 +75,17 @@ class SiteController extends Controller
         return $this->render('index');
     }
 
+    /*
+
+    * Displays the stickers product page.
+
+    */
+    public function actionStickers()
+    {
+        return $this->render('stickers');
+    }
+
+
     /**
      * Logs in a user.
      *

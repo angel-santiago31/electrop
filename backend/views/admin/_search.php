@@ -1,0 +1,45 @@
+<?php
+
+use yii\helpers\Html;
+use yii\widgets\ActiveForm;
+
+/* @var $this yii\web\View */
+/* @var $model common\models\AdminSearch */
+/* @var $form yii\widgets\ActiveForm */
+?>
+
+<div class="admin-search">
+
+    <?php $form = ActiveForm::begin([
+        'action' => ['index'],
+        'method' => 'get',
+    ]); ?>
+    
+    <div class="col-sm-3">
+        <?= $form->field($model, 'status')->dropDownList([10 => 'Active', 0 => 'Inactive']) ?>
+    </div>
+     <div class="col-sm-9">
+         <br>
+        <div class="btn-group">
+            <?= Html::submitButton('<span class="glyphicon glyphicon-search"></span> Search', ['class' => 'btn btn-primary']) ?>
+            <?= Html::a('<span class="glyphicon glyphicon-refresh"></span> Reset', ['admin/index'],['class' => 'btn btn-default']) ?>
+        </div>
+    </div>
+
+    <?php //$form->field($model, 'id') ?>
+
+    <?php //$form->field($model, 'auth_key') ?>
+
+    <?php //$form->field($model, 'password_hash') ?>
+
+    <?php //$form->field($model, 'password_reset_token') ?>
+
+    <?php //$form->field($model, 'email') ?>
+
+    <?php // echo $form->field($model, 'created_at') ?>
+
+    <?php // echo $form->field($model, 'updated_at') ?>
+
+    <?php ActiveForm::end(); ?>
+
+</div>

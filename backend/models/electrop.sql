@@ -69,7 +69,7 @@ CREATE TABLE `customer` (
   `middle_name` varchar(18) COLLATE utf8_unicode_ci NOT NULL,
   `fathers_last_name` varchar(18) COLLATE utf8_unicode_ci NOT NULL,
   `mothers_last_name` varchar(18) COLLATE utf8_unicode_ci NOT NULL,
-  `date_of_birth` int(8) unsigned NOT NULL,
+  `date_of_birth` int(8) NOT NULL,
   `age` int(2) DEFAULT NULL,
   `auth_key` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
   `password_reset_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -80,14 +80,12 @@ CREATE TABLE `customer` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `password_reset_token` (`password_reset_token`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `customer` */
 
 insert  into `customer`(`id`,`email`,`password_hash`,`first_name`,`middle_name`,`fathers_last_name`,`mothers_last_name`,`date_of_birth`,`age`,`auth_key`,`password_reset_token`,`status`,`created_at`,`updated_at`,`active`) values 
-(1,'user.email@email.com','$2y$13$V8eU2o5c7BglU/34IoBsWeAUAzCGTadXSo5ZKmT4X07iptoO3GGYq','','','','',0,NULL,'Pp_csdgHIplh2uuWB462flNhyXsdFFXs','Xw9-2-ZntWmFqHvbXtYXr-tGCRl6unWJ_1489159485',0,1489158191,1491370090,0),
-(5,'angel.santiago31@upr.edu','$2y$13$vue2Q2o8aokBqm2tSOs6eOWQ5KyPAzaW7bvF6UOGQU54OasPssNdy','','','','',0,NULL,'2Q-Yp2AMrRgAhz_mj1ZW3rCPH_bZYr1I',NULL,10,1491362920,1491362920,0),
-(6,'test@email.com','$2y$13$VynLtlv6LN.6RbMYvPpri.IIJuyS3mpdDQNYhVuSDqGNzRXr/UlXW','','','','',0,NULL,'_YCkvStQKJuUxFiuRJsn7bA18TYleq4-',NULL,10,1491400864,1491400864,0);
+(11,'angel.santiago31@upr.edu','$2y$13$FRoVVuY51PeOSprQgXqxyOoT3a6uZdODj4uqmsAd0Y9WFzWrHnU/O','Angel','Eduardo','Santiago','González',10,NULL,'i76U4HtSj5hRm19MRcV3zpXw9I0uFRhM',NULL,10,1491411798,1491411798,0);
 
 /*Table structure for table `item` */
 

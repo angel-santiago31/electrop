@@ -12,6 +12,11 @@ class SignupForm extends Model
     //public $username;
     public $email;
     public $password;
+    public $firstName;
+    public $middleName;
+    public $fathersLastName;
+    public $mothersLastName;
+    public $dateOfBirth;
 
 
     /**
@@ -24,6 +29,11 @@ class SignupForm extends Model
             //['username', 'required'],
             //['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
             //['username', 'string', 'min' => 2, 'max' => 255],
+
+            [['firstName', 'fathersLastName', 'mothersLastName', 'dateOfBirth'], 'required'],
+            [['firstName', 'fathersLastName', 'mothersLastName', 'middleName'], 'string', 'max' => 32],
+            [['dateOfBirth'], 'safe'],
+
 
             ['email', 'trim'],
             ['email', 'required'],
@@ -50,6 +60,12 @@ class SignupForm extends Model
         $user = new Customer();
         //$user->username = $this->username;
         $user->email = $this->email;
+        $user->first_name = $this->firstName;
+        $user->middle_name = $this->middleName;
+        $user->fathers_last_name = $this->fathersLastName;
+        $user->mothers_last_name = $this->mothersLastName;
+        $user->date_of_birth = $this->dateOfBirth;
+
         $user->setPassword($this->password);
         $user->generateAuthKey();
         

@@ -41,7 +41,7 @@ $this->title = $model->name;
                           },
                     ],
                       'name',
-                      'picture',
+                      //'picture',
                       'quantity_remaining',
                       'size',
                       [

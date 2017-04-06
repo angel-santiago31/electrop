@@ -12,6 +12,7 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use backend\models\Item;
 
 /**
  * Site controller
@@ -76,15 +77,17 @@ class SiteController extends Controller
     }
 
     /*
-
     * Displays the stickers product page.
-
     */
     public function actionStickers()
     {
-        return $this->render('stickers');
-    }
+        //$stickerList = Item::find()->where(['active' => Item::ACTIVE])->all();
+        $stickerList = Item::findAll(['active' => Item::ACTIVE]);
 
+        return $this->render('stickersAlt', [
+            'stickerList' => $stickerList,
+        ]);
+    }
 
     /**
      * Logs in a user.

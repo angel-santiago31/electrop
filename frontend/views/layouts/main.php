@@ -25,7 +25,7 @@ AppAsset::register($this);
 <body>
 <?php $this->beginBody() ?>
 
-<div class="wrap">
+<div class="wrap" style="background-color: #f0f0f5">
     <?php
     NavBar::begin([
         'brandLabel' => 'Electrop',
@@ -37,7 +37,7 @@ AppAsset::register($this);
     $menuItems = [
         //['label' => 'Home', 'url' => ['/site/index']],
         ['label' => 'Stickers', 'url' => ['/site/stickers']],
-        ['label' => 'Contact', 'url' => ['/site/about']],
+        ['label' => 'Contact', 'url' => ['/site/contact']],
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];

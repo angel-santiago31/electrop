@@ -17,7 +17,8 @@
         "php": ">=5.4.0",
         "yiisoft/yii2": "~2.0.6",
         "yiisoft/yii2-bootstrap": "~2.0.0",
-        "yiisoft/yii2-swiftmailer": "~2.0.0"
+        "yiisoft/yii2-swiftmailer": "~2.0.0",
+        "omnilight/yii2-shopping-cart": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
@@ -31,7 +32,7 @@
         "kartik-v/yii2-mpdf": "dev-master",
         "kartik-v/yii2-widget-sidenav": "*",
         "kartik-v/yii2-datecontrol": "dev-master",
-        "2amigos/yii2-date-picker-widget" : "~1.0"
+        "2amigos/yii2-date-picker-widget": "~1.0"
     },
     "config": {
         "process-timeout": 1800

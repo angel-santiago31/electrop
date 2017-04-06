@@ -13,5 +13,9 @@ return [
             //'thousandSeparator' => ' ',
             //'currencyCode' => 'EUR',
         ],
+         'cart' => [
+            'class' => 'yz\shoppingcart\ShoppingCart',
+            'cartId' => 'my_application_cart',
+        ],
     ],
 ];

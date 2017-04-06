@@ -13,12 +13,12 @@ use yii\helpers\Url;
 
     <ul class="list-group">
       <?php foreach($stickerList as $sticker): ?>
-          <div class="col-sm-4">
+          <div class="col-sm-2">
               <div class="panel panel-default">
                     <div class="panel-body">
                         <img src="<?= '/electrop/backend/web/' . $sticker->picture ?>" class="stickerImg">
                     </div>
-                    <div class="panel-footer text-center" style="background-color: red">
+                    <div class="panel-footer text-center">
                         <label><?= Html::encode($sticker->name)?></label>
                         <br>
                         $ <?= Html::encode($sticker->gross_price) ?>

@@ -8,6 +8,11 @@ body {
   width: 100%
 }
 
+.stickerImgCarousel {
+  height: 30%;
+  width: 100%
+}
+
 #stickerImgFooter {
   background-color: red;
 }

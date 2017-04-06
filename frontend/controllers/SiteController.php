@@ -13,6 +13,7 @@ use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
 use backend\models\Item;
+use backend\models\ItemSearch;
 
 /**
  * Site controller
@@ -73,18 +74,32 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $stickerList = Item::find()->limit(6)->offset(0)->where(['active' => Item::ACTIVE])->all();
+
+        return $this->render('index', [
+            'stickerList' => $stickerList,
+        ]);
     }
 
-    /*
-    * Displays the stickers product page.
-    */
     public function actionStickers()
     {
-        //$stickerList = Item::find()->where(['active' => Item::ACTIVE])->all();
+        $model = new Item();
+
+        if ($model->load(Yii::$app->request->post())) {
+            $stickerList = Item::find()->where(['item_category_id' => $model->item_category_id,
+                                                'item_sub_category_id' => $model->item_sub_category_id,
+                                                'active' => Item::ACTIVE])->all();
+
+             return $this->render('stickers', [
+                 'model' => $model,
+                 'stickerList' => $stickerList,
+             ]);
+        }
+
         $stickerList = Item::findAll(['active' => Item::ACTIVE]);
 
-        return $this->render('stickersAlt', [
+        return $this->render('stickers', [
+            'model' => $model,
             'stickerList' => $stickerList,
         ]);
     }

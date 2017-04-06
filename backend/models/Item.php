@@ -106,4 +106,14 @@ class Item extends \yii\db\ActiveRecord
     {
         return $this->hasOne(ItemSubCategory::className(), ['id' => 'item_sub_category_id']);
     }
+
+    public function getIsActive()
+    {
+      return ($this->active === self::DELETED)? 'btn btn-success' : 'btn btn-success disabled';
+    }
+
+    public function getIsInactive()
+    {
+      return ($this->active === self::ACTIVE)? 'btn btn-danger' : 'btn btn-danger disabled';
+    }
 }

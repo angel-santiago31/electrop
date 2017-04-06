@@ -143,6 +143,21 @@ class ItemController extends Controller
     }
 
     /**
+     * Restores an existing Item model.
+     * If restore is successful, the browser will be redirected to the 'index' page.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionRestore($id)
+    {
+        $model = $this->findModel($id);
+        $model->active = 1;
+        $model->save(false);
+
+        return $this->redirect(['index']);
+    }
+
+    /**
      * Finds the Item model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id

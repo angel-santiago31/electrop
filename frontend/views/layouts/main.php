@@ -55,7 +55,7 @@ AppAsset::register($this);
             . Html::endForm()
             . '</li>';
     }
-    $menuItems[] = ['label' => '<i class="material-icons">shopping_cart</i>', 'url' => ['/site/cart-view']];
+    $menuItems[] = ['label' => '<i class="material-icons">shopping_cart</i>', 'url' => ['/item/cart-view']];
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'encodeLabels' => false,

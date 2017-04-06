@@ -141,20 +141,4 @@ class ItemController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
-    /*
-    *
-    *
-    *
-    */
-    public function actionAddToCart($id)
-    {
-        $cart = new ShoppingCart($id);
-
-        $model = Item::findOne($id);
-        if ($model) {
-            $cart->put($model, 1);
-            return $this->redirect(['cart-view']);
-        }
-        throw new NotFoundHttpException();
-    }
 }

@@ -210,13 +210,5 @@ class SiteController extends Controller
             'model' => $model,
         ]);
     }
-    /**
-     * 
-     *
-     * @return 
-     */
-     public function actionCartView() 
-     {
-        return $this->render('cart-view');
-     }
+    
 }

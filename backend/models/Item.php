@@ -24,8 +24,10 @@ use Yii;
  * @property ItemCategory $itemCategory
  * @property ItemSubCategory $itemSubCategory
  */
-class Item extends \yii\db\ActiveRecord
+class Item extends \yii\db\ActiveRecord implements \yz\shoppingcart\CartPositionInterface
 {
+    use CartPositionTrait;
+
     public const ACTIVE = 1;
     public const DELETED = 0;
     public $file;
@@ -116,6 +118,21 @@ class Item extends \yii\db\ActiveRecord
         return $this->hasOne(ItemSubCategory::className(), ['id' => 'item_sub_category_id']);
     }
 
+    /**
+     * @return 
+     */
+     public function getPrice() 
+     {
+         return $this->gross_price;
+     }
+     /**
+     * @return \yii\db\ActiveQuery
+     */
+     public function getId()
+     {
+         return $this->item_id;
+     }
+
     public function getIsActive()
     {
       return ($this->active === self::DELETED)? 'btn btn-success' : 'btn btn-success disabled';
@@ -125,4 +142,5 @@ class Item extends \yii\db\ActiveRecord
     {
       return ($this->active === self::ACTIVE)? 'btn btn-danger' : 'btn btn-danger disabled';
     }
+
 }

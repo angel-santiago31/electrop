@@ -18,10 +18,15 @@ use yii\helpers\Url;
                     <div class="panel-body">
                         <img src="<?= '/electrop/backend/web/' . $sticker->picture ?>" class="stickerImg">
                     </div>
-                    <div class="panel-footer text-center" style="background-color: red">
+                    <div class="panel-footer text-center">
                         <label><?= Html::encode($sticker->name)?></label>
-                        <br>
+                        <br><br>
                         $ <?= Html::encode($sticker->gross_price) ?>
+                        <br><br>
+                        <div class="btn-group">
+                            <?= Html::a('View Details', [''], ['class' => 'btn btn-default']) ?>
+                            <?= Html::a('<i class="glyphicon glyphicon-shopping-cart"></i> Add to cart', [''], ['class' => 'btn btn-danger']) ?>
+                        </div>
                     </div>
               </div>
           </div>

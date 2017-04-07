@@ -17,9 +17,11 @@ class AppAsset extends AssetBundle
     ];
     public $js = [
         'js/script.js',
+        'js/quantity_selection.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
+        'yii\web\JqueryAsset'
     ];
 }

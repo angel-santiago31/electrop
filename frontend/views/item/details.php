@@ -10,6 +10,12 @@ use backend\models\Item;
 $this->title = 'Product Details';
 //$this->params['breadcrumbs'][] = ['label' => 'Items', 'url' => ['index']];
 //$this->params['breadcrumbs'][] = $this->title;
+
+$this->registerJsFile(
+    'web/js/quantity_selection.js',
+    ['depends' => [\yii\web\JqueryAsset::className()]]
+);
+
 ?>
 <div class="container">
   <div class="col-sm-6 col-xs-push-1">
@@ -76,7 +82,7 @@ $this->title = 'Product Details';
   <div class="col-sm-3 col-xs-push-1">
       <div class="panel panel-default">
           <div class="panel-heading text-center">
-              <h1>Quantity: <span id="copiasDisplay">1</span></h1>
+              <h1>Quantity: <span id="quantity"></span></h1>
           </div>
           <div class="panel-body">
               <div class="col-sm-6">

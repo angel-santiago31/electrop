@@ -26,7 +26,7 @@ use Yii;
  */
 class Item extends \yii\db\ActiveRecord implements \yz\shoppingcart\CartPositionInterface
 {
-    use CartPositionTrait;
+    use \yz\shoppingcart\CartPositionTrait;
 
     public const ACTIVE = 1;
     public const DELETED = 0;

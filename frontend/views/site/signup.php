@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= $form->field($model, 'password')->passwordInput() ?>
 
                 <div class="form-group">
-                    <?= Html::submitButton('<i class="glyphicon glyphicon-log-in"></i> Register', ['class' => 'btn btn-danger', 'name' => 'signup-button']) ?>
+                    <?= Html::submitButton('<i class="glyphicon glyphicon-pencil"></i> Register', ['class' => 'btn btn-danger redCss', 'name' => 'signup-button']) ?>
                 </div>
 
             <?php ActiveForm::end(); ?>

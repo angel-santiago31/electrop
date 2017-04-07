@@ -33,7 +33,7 @@ use yii\widgets\ActiveForm;
         <div class="form-group">
             <br>
             <div class="btn-group">
-                <?= Html::submitButton('<i class="glyphicon glyphicon-search"></i> Search', ['class' => 'btn btn-danger', 'name' => 'search-button']) ?>
+                <?= Html::submitButton('<i class="glyphicon glyphicon-search"></i> Search', ['class' => 'btn btn-danger redCss', 'name' => 'search-button']) ?>
                 <?= Html::a('<span class="glyphicon glyphicon-refresh"></span> Reset', ['site/stickers'], ['class' => 'btn btn-default']) ?>
             </div>
         </div>

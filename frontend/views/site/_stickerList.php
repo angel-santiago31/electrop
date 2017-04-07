@@ -25,7 +25,7 @@ use yii\helpers\Url;
                         <br><br>
                         <div class="btn-group">
                             <?= Html::a('View details', [''], ['class' => 'btn btn-default']) ?>
-                            <?= Html::a('<i class="glyphicon glyphicon-shopping-cart"></i> Add to cart', [''], ['class' => 'btn btn-danger']) ?>
+                            <?= Html::a('<i class="glyphicon glyphicon-shopping-cart"></i> Add to cart', [''], ['class' => 'btn btn-danger redCss']) ?>
                         </div>
                     </div>
               </div>

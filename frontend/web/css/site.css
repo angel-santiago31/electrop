@@ -9,8 +9,12 @@ body {
 }
 
 #hov:hover {
-  color: red;
+  color: #ff0000;
   text-decoration: none;
+}
+
+.redCss {
+  background-color: #ff0000;
 }
 
 #hov {

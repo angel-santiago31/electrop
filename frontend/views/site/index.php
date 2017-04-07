@@ -15,8 +15,8 @@ $this->title = 'Home';
     </div>
     <?= $this->render('_stickerListIndex', ['stickerList' => $stickerList]); ?>
     <div class="panel panel-default">
-        <div class="panel-body">
-            Hi
+        <div class="panel-body text-center">
+            What should we put here?
         </div>
     </div>
 </div>

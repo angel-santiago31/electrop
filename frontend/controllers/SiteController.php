@@ -81,13 +81,22 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionStickers()
+    public function actionStickers($category = NULL, $subcategory = NULL)
     {
         $model = new Item();
 
-        if ($model->load(Yii::$app->request->post())) {
+        if ($model->load(Yii::$app->request->post()) && $category == NULL && $subcategory == NULL) {
             $stickerList = Item::find()->where(['item_category_id' => $model->item_category_id,
                                                 'item_sub_category_id' => $model->item_sub_category_id,
+                                                'active' => Item::ACTIVE])->all();
+
+             return $this->render('stickers', [
+                 'model' => $model,
+                 'stickerList' => $stickerList,
+             ]);
+        } else if ($category != NULL && $subcategory != NULL) {
+            $stickerList = Item::find()->where(['item_category_id' => $category,
+                                                'item_sub_category_id' => $subcategory,
                                                 'active' => Item::ACTIVE])->all();
 
              return $this->render('stickers', [

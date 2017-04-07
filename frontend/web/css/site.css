@@ -8,6 +8,15 @@ body {
   width: 100%
 }
 
+#hov:hover {
+  color: red;
+  text-decoration: none;
+}
+
+#hov {
+  color: black;
+}
+
 .stickerImgCarousel {
   height: 30%;
   width: 100%

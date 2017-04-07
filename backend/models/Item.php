@@ -30,6 +30,15 @@ class Item extends \yii\db\ActiveRecord
     public const DELETED = 0;
     public $file;
 
+    public const DECALS = 1;
+    public const WALL = 2;
+    public const FLOOR = 3;
+
+    public const JOKES = 1;
+    public const BRANDS = 2;
+    public const ANIMALS = 3;
+    public const RANDOM = 4;
+
     /**
      * @inheritdoc
      */

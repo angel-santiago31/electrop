@@ -24,25 +24,49 @@ $this->params['breadcrumbs'][] = $this->title;
               </div>
               <ul class="list-group">
                     <li class="list-group-item borderless" style="border: none"><label>STICKERS</label></li>
-                    <li class="list-group-item borderless" style="border: none">Decals</li>
-                    <li class="list-group-item borderless text-center" style="border: none">Jokes</li>
-                    <li class="list-group-item borderless text-center" style="border: none">Brands</li>
-                    <li class="list-group-item borderless text-center" style="border: none">Animals</li>
-                    <li class="list-group-item borderless text-center" style="border: none">Random</li>
+                    <li class="list-group-item borderless">Decals</li>
+                    <li class="list-group-item borderless text-center" style="border: none" id="hov">
+                        <?= Html::a('Jokes', ['site/stickers', 'category' => Item::DECALS, 'subcategory' => Item::JOKES], ['class' => 'btn btn-link', 'id' => 'hov']) ?>
+                    </li>
+                    <li class="list-group-item borderless text-center" style="border: none" id="hov">
+                        <?= Html::a('Brands', ['site/stickers', 'category' => Item::DECALS, 'subcategory' => Item::BRANDS], ['class' => 'btn btn-link', 'id' => 'hov']) ?>
+                    </li>
+                    <li class="list-group-item borderless text-center" style="border: none" id="hov">
+                        <?= Html::a('Animals', ['site/stickers', 'category' => Item::DECALS, 'subcategory' => Item::ANIMALS], ['class' => 'btn btn-link', 'id' => 'hov']) ?>
+                    </li>
+                    <li class="list-group-item borderless text-center" style="border: none" id="hov">
+                        <?= Html::a('Random', ['site/stickers', 'category' => Item::DECALS, 'subcategory' => Item::RANDOM], ['class' => 'btn btn-link', 'id' => 'hov']) ?>
+                    </li>
               </ul>
               <ul class="list-group">
-                    <li class="list-group-item borderless" style="border: none">Wall</li>
-                    <li class="list-group-item borderless text-center" style="border: none">Jokes</li>
-                    <li class="list-group-item borderless text-center" style="border: none">Brands</li>
-                    <li class="list-group-item borderless text-center" style="border: none">Animals</li>
-                    <li class="list-group-item borderless text-center" style="border: none">Random</li>
+                    <li class="list-group-item borderless">Wall</li>
+                    <li class="list-group-item borderless text-center" style="border: none" id="hov">
+                        <?= Html::a('Jokes', ['site/stickers', 'category' => Item::WALL, 'subcategory' => Item::JOKES], ['class' => 'btn btn-link', 'id' => 'hov']) ?>
+                    </li>
+                    <li class="list-group-item borderless text-center" style="border: none" id="hov">
+                        <?= Html::a('Brands', ['site/stickers', 'category' => Item::WALL, 'subcategory' => Item::BRANDS], ['class' => 'btn btn-link', 'id' => 'hov']) ?>
+                    </li>
+                    <li class="list-group-item borderless text-center" style="border: none" id="hov">
+                        <?= Html::a('Animals', ['site/stickers', 'category' => Item::WALL, 'subcategory' => Item::ANIMALS], ['class' => 'btn btn-link', 'id' => 'hov']) ?>
+                    </li>
+                    <li class="list-group-item borderless text-center" style="border: none" id="hov">
+                        <?= Html::a('Random', ['site/stickers', 'category' => Item::WALL, 'subcategory' => ITEM::RANDOM], ['class' => 'btn btn-link', 'id' => 'hov']) ?>
+                    </li>
               </ul>
               <ul class="list-group">
-                    <li class="list-group-item borderless" style="border: none">Floor</li>
-                    <li class="list-group-item borderless text-center" style="border: none">Jokes</li>
-                    <li class="list-group-item borderless text-center" style="border: none">Brands</li>
-                    <li class="list-group-item borderless text-center" style="border: none">Animals</li>
-                    <li class="list-group-item borderless text-center" style="border: none">Random</li>
+                    <li class="list-group-item borderless">Floor</li>
+                    <li class="list-group-item borderless text-center" style="border: none" id="hov">
+                        <?= Html::a('Jokes', ['site/stickers', 'category' => Item::FLOOR, 'subcategory' => Item::JOKES], ['class' => 'btn btn-link', 'id' => 'hov']) ?>
+                    </li>
+                    <li class="list-group-item borderless text-center" style="border: none" id="hov">
+                        <?= Html::a('Brands', ['site/stickers', 'category' => Item::FLOOR, 'subcategory' => Item::BRANDS], ['class' => 'btn btn-link', 'id' => 'hov']) ?>
+                    </li>
+                    <li class="list-group-item borderless text-center" style="border: none" id="hov">
+                        <?= Html::a('Animals', ['site/stickers', 'category' => Item::FLOOR, 'subcategory' => Item::ANIMALS], ['class' => 'btn btn-link', 'id' => 'hov']) ?>
+                    </li>
+                    <li class="list-group-item borderless text-center" style="border: none" id="hov">
+                        <?= Html::a('Random', ['site/stickers', 'category' => Item::FLOOR, 'subcategory' => Item::RANDOM], ['class' => 'btn btn-link', 'id' => 'hov']) ?>
+                    </li>
               </ul>
           </div>
           <div class="panel panel-default">

@@ -62,11 +62,11 @@ class ItemController extends Controller
     }
 
     /**
-     * 
      *
-     * @return 
+     *
+     * @return
      */
-     public function actionCartView() 
+     public function actionCartView()
      {
         $itemsCount = \Yii::$app->cart->getCount();
         $total = \Yii::$app->cart->getCost();
@@ -91,5 +91,11 @@ class ItemController extends Controller
             return $this->redirect(['cart-view']);
         }
         throw new NotFoundHttpException();
+    }
+
+    public function actionDetails($id) {
+        $model = Item::findOne($id);
+
+        return $this->render('details', ['model' => $model]);
     }
 }

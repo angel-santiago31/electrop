@@ -24,7 +24,7 @@ use yii\helpers\Url;
                         $ <?= Html::encode($sticker->gross_price) ?>
                         <br><br>
                         <div class="btn-group">
-                            <?= Html::a('View details', [''], ['class' => 'btn btn-default']) ?>
+                            <?= Html::a('View details', ['/item/details', 'id' => $sticker->item_id], ['class' => 'btn btn-default']) ?>
                             <?= Html::a('<i class="glyphicon glyphicon-shopping-cart"></i> Add to cart', [''], ['class' => 'btn btn-danger redCss']) ?>
                         </div>
                     </div>

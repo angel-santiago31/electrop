@@ -6,8 +6,6 @@ use yii\helpers\Html;
 
 $this->title = 'Shopping Cart';
 //$this->params['breadcrumbs'][] = $this->title;
-$itemsCount = \Yii::$app->cart->getCount();
-$total = \Yii::$app->cart->getCost();
 ?>
 <div class="site-about">
     <div class"container">

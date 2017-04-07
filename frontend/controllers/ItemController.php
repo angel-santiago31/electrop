@@ -68,7 +68,13 @@ class ItemController extends Controller
      */
      public function actionCartView() 
      {
-        return $this->render('cart-view');
+        $itemsCount = \Yii::$app->cart->getCount();
+        $total = \Yii::$app->cart->getCost();
+
+        return $this->render('cart-view', [
+            'itemsCount' => $itemsCount,
+             'total' => $total,
+             ]);
      }
 
    /**

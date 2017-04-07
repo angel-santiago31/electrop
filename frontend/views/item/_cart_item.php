@@ -5,7 +5,6 @@
 use yii\helpers\Html;
 
 $this->title = 'Cart Items';
-
 ?>
 <div class="site-about">
     <div class"container">
@@ -13,7 +12,7 @@ $this->title = 'Cart Items';
              <?= $position->id ?>
              <?= $position->price ?>
              <?= $position->name ?>
-             <?= $position->quantity ?> 
+             <?= $position->quantity ?>
         </div>
     </div>
 </div>

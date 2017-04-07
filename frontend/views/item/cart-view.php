@@ -7,30 +7,30 @@ use yii\helpers\Html;
 $this->title = 'Shopping Cart';
 //$this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-about">
-    <div class"container">
-        <div class"col-sm-12">
-            <h1><?= Html::encode($this->title) ?></h1>
-            <hr>
-            <br>
-            <h4>Your items in cart: <?= $itemsCount ?>  </h4>
-            <br>
-            <br>
-            <?php
-                $positions = \Yii::$app->cart->positions;
-                //var_dump($positions); 
-                foreach($positions as $position) {
-                    //echo "hello";
-                    echo $this->render('_cart_item',['position' => $position]);
-                    //var_dump($position);
-                }
-            ?>
-            <hr>
-            <h4 class="pull-right">Subtotal (<?= $itemsCount?> item): $ <?= $total?> </h4>
-            <br>
-            <br>
-            <br>
-            <?= Html::Button('Proceed to Checkout',['class' => 'submit pull-right'])?> 
-        </div>
-    </div>
+<div class="container">
+      <div class="panel panel-default">
+          <div class="panel-heading">
+              <h1><i class="glyphicon glyphicon-shopping-cart"></i> <?= Html::encode($this->title) ?></h1>
+          </div>
+          <div class="panel-body">
+              <?php
+                  $positions = \Yii::$app->cart->positions;
+                  //var_dump($positions);
+                  foreach($positions as $position) {
+                      //echo "hello";
+                      echo $this->render('_cart_item',['position' => $position]);
+                      //var_dump($position);
+                  }
+              ?>
+              <?php if (Yii::$app->user->isGuest): ?>
+                <h4>You currently have <?= $itemsCount ?> items in your cart.</h4>
+              <?php endif ?>
+              <?php if (!Yii::$app->user->isGuest): ?>
+                <h4><?= Yii::$app->user->identity->first_name ?>, you currently have <?= $itemsCount ?> items in your cart.</h4>
+              <?php endif ?>
+
+              <h4 class="pull-right">Subtotal (<?= $itemsCount?> items): $ <?= $total?> </h4> <br><br>
+              <?= Html::submitButton('<i class="glyphicon glyphicon-send"></i> Proceed to checkout', ['class' => 'btn btn-danger pull-right redCss']) ?>
+          </div>
+      </div>
 </div>

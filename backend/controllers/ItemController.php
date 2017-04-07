@@ -102,8 +102,24 @@ class ItemController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+
+            //get the instance of the uploaded file
+            $imageName = $model->name;
+            $model->file = UploadedFile::getInstance($model, 'file');
+
+            //save the path to the db column
+            $model->picture = 'uploads/'. $imageName . '.' . $model->file->extension;
+
+            if ($model->save()) {
+                $model->file->saveAs('uploads/'. $imageName . '.' . $model->file->extension);
+
+                return $this->redirect(['index']);
+            } else {
+                return $this->render('update', [
+                    'model' => $model,
+                ]);
+            }
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -121,6 +137,21 @@ class ItemController extends Controller
     {
         $model = $this->findModel($id);
         $model->active = 0;
+        $model->save(false);
+
+        return $this->redirect(['index']);
+    }
+
+    /**
+     * Restores an existing Item model.
+     * If restore is successful, the browser will be redirected to the 'index' page.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionRestore($id)
+    {
+        $model = $this->findModel($id);
+        $model->active = 1;
         $model->save(false);
 
         return $this->redirect(['index']);

@@ -3,6 +3,15 @@ body {
     height: 100%;
 }
 
+.stickerImg {
+  height: 100%;
+  width: 100%
+}
+
+#stickerImgFooter {
+  background-color: red;
+}
+
 .wrap {
     min-height: 100%;
     height: auto;

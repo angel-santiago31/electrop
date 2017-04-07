@@ -124,4 +124,14 @@ class Item extends \yii\db\ActiveRecord implements \yz\shoppingcart\CartPosition
          return $this->item_id;
      }
 
+    public function getIsActive()
+    {
+      return ($this->active === self::DELETED)? 'btn btn-success' : 'btn btn-success disabled';
+    }
+
+    public function getIsInactive()
+    {
+      return ($this->active === self::ACTIVE)? 'btn btn-danger' : 'btn btn-danger disabled';
+    }
+
 }

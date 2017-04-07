@@ -19,8 +19,9 @@ $this->title = $model->name;
         <div class="panel-body">
               <p>
                   <?= Html::a('<span class="glyphicon glyphicon-pencil"></span> Update', ['update', 'id' => $model->item_id], ['class' => 'btn btn-warning']) ?>
+                  <?= Html::a('<span class="glyphicon glyphicon-ok"></span> Restore', ['restore', 'id' => $model->item_id], ['class' => $model->isActive]) ?>
                   <?= Html::a('<span class="glyphicon glyphicon-floppy-remove"></span> Delete', ['delete', 'id' => $model->item_id], [
-                      'class' => 'btn btn-danger',
+                      'class' => $model->IsInactive,
                       'data' => [
                           'confirm' => 'Are you sure you want to delete this item?',
                           'method' => 'post',
@@ -40,7 +41,7 @@ $this->title = $model->name;
                           },
                     ],
                       'name',
-                      'picture',
+                      //'picture',
                       'quantity_remaining',
                       'size',
                       [

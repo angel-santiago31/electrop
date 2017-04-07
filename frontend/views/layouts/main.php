@@ -19,7 +19,6 @@ AppAsset::register($this);
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
@@ -35,7 +34,7 @@ AppAsset::register($this);
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
-       
+
     ]);
     $menuItems = [
         //['label' => 'Home', 'url' => ['/site/index']],
@@ -55,7 +54,7 @@ AppAsset::register($this);
             . Html::endForm()
             . '</li>';
     }
-    $menuItems[] = ['label' => '<i class="material-icons">shopping_cart</i>', 'url' => ['/item/cart-view']];
+    $menuItems[] = ['label' => '<i class="glyphicon glyphicon-shopping-cart"></i>', 'url' => ['/item/cart-view']];
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'encodeLabels' => false,

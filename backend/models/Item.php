@@ -3,6 +3,8 @@
 namespace backend\models;
 
 use Yii;
+use yii\db\ActiveRecord;
+use \yz\shoppingcart\CartPositionTrait;
 
 /**
  * This is the model class for table "item".
@@ -24,7 +26,7 @@ use Yii;
  * @property ItemCategory $itemCategory
  * @property ItemSubCategory $itemSubCategory
  */
-class Item extends \yii\db\ActiveRecord implements \yz\shoppingcart\CartPositionInterface
+class Item extends ActiveRecord implements \yz\shoppingcart\CartPositionInterface
 {
     use \yz\shoppingcart\CartPositionTrait;
 
@@ -119,9 +121,9 @@ class Item extends \yii\db\ActiveRecord implements \yz\shoppingcart\CartPosition
     }
 
     /**
-     * @return 
+     * @return
      */
-     public function getPrice() 
+     public function getPrice()
      {
          return $this->gross_price;
      }
@@ -142,5 +144,4 @@ class Item extends \yii\db\ActiveRecord implements \yz\shoppingcart\CartPosition
     {
       return ($this->active === self::ACTIVE)? 'btn btn-danger' : 'btn btn-danger disabled';
     }
-
 }

@@ -135,6 +135,15 @@ class SiteController extends Controller
     }
 
     /**
+
+    ** View User Account 
+    
+    **/
+    public function actionAccount() {
+        return $this->render('account');
+    }
+
+    /**
      * Logs out the current user.
      *
      * @return mixed

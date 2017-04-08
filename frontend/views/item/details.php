@@ -21,7 +21,10 @@ $this->registerJsFile(
   <div class="col-sm-6 col-xs-push-1">
     <div class="panel panel-default">
         <div class="panel-heading text-center">
-            <h1><?= '<span class="glyphicon glyphicon-list"></span> ' . Html::encode($this->title) ?></h1>
+            <h1><?= Html::encode($model->name) ?></h1>
+        </div>
+        <div class="panel-body" align="center">
+                <img src="<?= '/electrop/backend/web/' . $model->picture ?>" width="70%" height="70%" />
         </div>
         <div class="panel-body">
               <?= DetailView::widget([
@@ -67,13 +70,7 @@ $this->registerJsFile(
                               return $priceToShow;
                           },
                       ],
-                      'description:ntext',
-                      [
-                          'attribute'=>'file',
-                          'label' => 'Picture',
-                          'value'=> '/electrop/backend/web/'.$model->picture,
-                          'format' => ['image',['width'=>'100','height'=>'100']],
-                      ],
+                      'description:ntext'
                   ],
               ]) ?>
         </div>
@@ -93,7 +90,7 @@ $this->registerJsFile(
                   </div>
               </div>
               <div class="col-sm-6">
-                  <div class="form-group text-left"><h1> <span>$ <span id="precioDisplay">1</span></span></h1></div>
+                  <div class="form-group text-left"><h1> <span>$ <span id="precioDisplay"></span></span></h1></div>
               </div>
           </div>
       </div>

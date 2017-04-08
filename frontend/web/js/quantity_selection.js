@@ -21,11 +21,12 @@ $('#decrementar').click(function()
             xmlhttp.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
                     document.getElementById("quantity").innerHTML = quantity;
+                    document.getElementById("precioDisplay").innerHTML = quantity;
                 }
             };
             xmlhttp.open("GET", "index.php?r=item%2Fdetails&id=4", true);
             xmlhttp.send();
-        }
+       }
  }
 );
 
@@ -38,6 +39,7 @@ $('#incrementar').click(function()
         xmlhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 document.getElementById("quantity").innerHTML = quantity;
+                document.getElementById("precioDisplay").innerHTML = quantity;
             }
         };
         xmlhttp.open("GET", "index.php?r=item%2Fdetails&id=4", true);

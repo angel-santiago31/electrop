@@ -9,6 +9,7 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use common\widgets\Alert;
+use frontend\controllers\CustomerController;
 
 
 AppAsset::register($this);
@@ -45,14 +46,28 @@ AppAsset::register($this);
         $menuItems[] = ['label' => 'Register', 'url' => ['/site/signup']];
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
-        $menuItems[] = '<li>'
-            . Html::beginForm(['/site/logout'], 'post')
-            . Html::submitButton(
-                'Logout (' . Yii::$app->user->identity->first_name . ')',
-                ['class' => 'btn btn-link logout']
-            )
-            . Html::endForm()
-            . '</li>';
+        $menuItems[] = ['label' => '<i class="glyphicon glyphicon-user"></i>',
+            'items' => [
+                ['label' => '<li>'
+                . Html::beginForm(['/customer/account'])
+                . Html::submitButton( 
+                    'My Account',
+                    ['class' => 'btn btn-link logout']
+                )
+                . Html::endForm()
+                . '</li>'
+                ],
+                ['label' => 
+                    '<li>'
+                . Html::beginForm(['/site/logout'], 'post')
+                . Html::submitButton(
+                    'Logout (' . Yii::$app->user->identity->first_name . ')',
+                    ['class' => 'btn btn-link logout']
+                )
+                . Html::endForm()
+                . '</li>']
+            ]
+        ];
     }
     $menuItems[] = ['label' => '<i class="glyphicon glyphicon-shopping-cart"></i>', 'url' => ['/item/cart-view']];
     echo Nav::widget([

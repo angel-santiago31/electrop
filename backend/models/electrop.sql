@@ -12,7 +12,7 @@ MySQL - 10.1.21-MariaDB : Database - electrop
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`electrop` /*!40100 DEFAULT CHARACTER SET latin1 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`electrop` /*!40100 DEFAULT CHARACTER SET utf8 */;
 
 USE `electrop`;
 
@@ -80,13 +80,12 @@ CREATE TABLE `customer` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `password_reset_token` (`password_reset_token`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `customer` */
 
 insert  into `customer`(`id`,`email`,`password_hash`,`first_name`,`middle_name`,`fathers_last_name`,`mothers_last_name`,`date_of_birth`,`age`,`auth_key`,`password_reset_token`,`status`,`created_at`,`updated_at`,`active`) values 
-(11,'angel.santiago31@upr.edu','$2y$13$FRoVVuY51PeOSprQgXqxyOoT3a6uZdODj4uqmsAd0Y9WFzWrHnU/O','Angel','Eduardo','Santiago','González',10,NULL,'i76U4HtSj5hRm19MRcV3zpXw9I0uFRhM',NULL,10,1491411798,1491411798,0),
-(12,'bryan@upr.edu','$2y$13$pZTEwVEpVBIxuQzRW53yte8/pGlpJssfVYBpMiM7TsNdfMUtXw32O','Bryan','Y','Hernandez','Cuevas',10,NULL,'_YUFbU6oPdsufo9f7F-nP4vqZFlbpBYP',NULL,10,1491596527,1491596527,0);
+(11,'angel.santiago31@upr.edu','$2y$13$FRoVVuY51PeOSprQgXqxyOoT3a6uZdODj4uqmsAd0Y9WFzWrHnU/O','Angel','Eduardo','Santiago','González',10,NULL,'i76U4HtSj5hRm19MRcV3zpXw9I0uFRhM',NULL,10,1491411798,1491411798,0);
 
 /*Table structure for table `item` */
 

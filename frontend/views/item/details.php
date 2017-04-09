@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\widgets\ActiveForm;
 use backend\models\Item;
 
 /* @var $this yii\web\View */
@@ -16,8 +17,16 @@ $this->registerJsFile(
     ['depends' => [\yii\web\JqueryAsset::className()]]
 );
 
+// Converting the total to dollars 
+function convertingDollars($amount) {
+  return '$'.number_format($amount,2);
+}
+
 ?>
 <div class="container">
+  <?php $form = ActiveForm::begin(); ?>
+    <?= $form->field($model, 'gross_price')->hiddenInput(['id' => 'basePrice'])->label(false) ?> 
+  <?php ActiveForm::end(); ?>
   <div class="col-sm-6 col-xs-push-1">
     <div class="panel panel-default">
         <div class="panel-heading text-center">
@@ -89,8 +98,14 @@ $this->registerJsFile(
                       <?= Html::a('', '#', ['class' => 'btn btn-default glyphicon glyphicon-plus', 'id' => 'incrementar']) ?>
                   </div>
               </div>
-              <div class="col-sm-6">
-                  <div class="form-group text-left"><h1> <span>$ <span id="precioDisplay"></span></span></h1></div>
+              <div class="col-sm-7">
+                  <div class="form-group text-left"><h1> <span>$<span id="precioDisplay"><?= $model->gross_price?></span></span></h1></div>
+                  <br>
+              </div>
+              <div style="text-align:center;">
+                  <br>
+                  <br>
+                  <?= Html::a('<i class="glyphicon glyphicon-shopping-cart"></i> Add to cart', [''], ['class' => 'btn btn-danger redCss']) ?>
               </div>
           </div>
       </div>

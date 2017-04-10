@@ -33,10 +33,11 @@ AppAsset::register($this);
            'size' => 'modal-lg',
            // keeps from closing modal with esc key or by clicking out of the modal screen.
            // The user must click cancel or ‘x’ to close the modal.
-           'clientOptions' => ['backdrop' => 'static', 'keyboard' => FALSE]
+           'clientOptions' => ['keyboard' => FALSE]
        ]);
 
-       echo "<div id = 'modalContent'></div>";
+       echo "<div id = 'modalContent'>
+       </div>";
 
        Modal::end();
    ?>

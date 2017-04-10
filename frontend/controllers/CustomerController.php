@@ -70,7 +70,7 @@ class CustomerController extends Controller
        ['model' => $model]);
     }
 
-    public function actionUpdateInfo()
+    public function actionForm()
     {
         $id = Yii::$app->user->identity->id;
         $model = $this->findModel($id);
@@ -80,7 +80,7 @@ class CustomerController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['account', 'id' => $model->id]);
         } else {
-            return $this->renderAjax('updateinfo', [
+            return $this->renderAjax('form', [
                 'model' => $model,
             ]);
         }

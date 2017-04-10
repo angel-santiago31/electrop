@@ -12,21 +12,9 @@ $this->title = 'Product Details';
 //$this->params['breadcrumbs'][] = ['label' => 'Items', 'url' => ['index']];
 //$this->params['breadcrumbs'][] = $this->title;
 
-$this->registerJsFile(
-    'web/js/quantity_selection.js',
-    ['depends' => [\yii\web\JqueryAsset::className()]]
-);
-
-// Converting the total to dollars 
-function convertingDollars($amount) {
-  return '$'.number_format($amount,2);
-}
-
 ?>
 <div class="container">
-  <?php $form = ActiveForm::begin(); ?>
-    <?= $form->field($model, 'gross_price')->hiddenInput(['id' => 'basePrice'])->label(false) ?> 
-  <?php ActiveForm::end(); ?>
+  
   <div class="col-sm-6 col-xs-push-1">
     <div class="panel panel-default">
         <div class="panel-heading text-center">

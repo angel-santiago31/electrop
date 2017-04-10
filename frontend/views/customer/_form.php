@@ -1,20 +1,16 @@
 <?php
 
-/* @var $this yii\web\View */
-
 use yii\helpers\Html;
-use kartik\sidenav\SideNav;
-use yii\widgets\Breadcrumbs;
-use common\widgets\Alert;   
-use yii\widgets\DetailView;
-use yii\bootstrap\ActiveForm;
+use yii\widgets\ActiveForm;
 
-$this->title = 'My Account';
-$this->params['breadcrumbs'][] = $this->title;
-//$this->params['breadcrumbs'][] = $this->title;
-
+/* @var $this yii\web\View */
+/* @var $model common\models\Customer */
+/* @var $form yii\widgets\ActiveForm */
 ?>
-<div id="modalContent" align="center"> 
+
+<br>
+<br>
+<div class="container" align="center"> 
                 <div class="row">
             <div class="col-sm-12">
                 <?php $form = ActiveForm::begin(['id' => 'customer-account-form']); ?>
@@ -23,23 +19,23 @@ $this->params['breadcrumbs'][] = $this->title;
                             <?= $form->field($model, 'email')->textInput() ?>
                         </div>
                         <div class="col-sm-4">
-                            <?= $form->field($model, 'firstName')->textInput() ?>
+                            <?= $form->field($model, 'first_name')->textInput() ?>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-4">
-                            <?= $form->field($model, 'middleName')->label('Middle Name (Optional)') ?>
+                            <?= $form->field($model, 'middle_name')->label('Middle Name (Optional)') ?>
                         </div>
                         <div class="col-sm-4">
-                            <?= $form->field($model, 'fathersLastName')->textInput() ?>
-                        </div>
-                        <div class="col-sm-4">
-                            <?= $form->field($model, 'mothersLastName')->textInput()?>
+                            <?= $form->field($model, 'fathers_last_name')->textInput() ?>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-4">
-                            <?= $form->field($model, 'dateOfBirth')->textInput() ?>
+                            <?= $form->field($model, 'mothers_last_name')->textInput()?>
+                        </div>
+                        <div class="col-sm-4">
+                            <?= $form->field($model, 'date_of_birth')->textInput() ?>
                         </div>
                     </div>
                     <div class="form-group">

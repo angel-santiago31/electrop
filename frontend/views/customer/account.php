@@ -60,12 +60,12 @@ $this->registerJsFile(
                                         'first_name',
                                         'middle_name',
                                         'fathers_last_name'
-                                    ],
+                                    ], 
                                 ]) ?>
                             </div>
                             <div class="form-group">
                                 <?=
-                                    Html::submitButton('<i class="glyphicon glyphicon-pencil"></i> Change', [ 'value' => Url::to(['/customer/updateinfo']), 'class' => 'btn btn-danger redCss', 'id' => 'updateInfo', 'name' => 'update-customer-info-button']);
+                                    Html::button('<i class="glyphicon glyphicon-pencil"></i> Change', [ 'value' => Url::to(['/customer/update-info']), 'class' => 'btn btn-danger redCss', 'id' => 'updateInfo']);
                                 ?>
                             </div>
                         </div>

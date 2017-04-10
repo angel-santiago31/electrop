@@ -75,12 +75,10 @@ class CustomerController extends Controller
         $id = Yii::$app->user->identity->id;
         $model = $this->findModel($id);
 
-        Yii::$app->session->setFlash('success', 'Hola');
-
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['account', 'id' => $model->id]);
         } else {
-            return $this->renderAjax('updateinfo', [
+            return $this->renderAjax('update', [
                 'model' => $model,
             ]);
         }

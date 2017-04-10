@@ -39,7 +39,6 @@ function convertingDollars($amount) {
               <?= DetailView::widget([
                   'model' => $model,
                   'attributes' => [
-                      'name',
                       [
                           'label' => 'Category',
                           'value' => function ($model) {

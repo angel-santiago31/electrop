@@ -21,8 +21,8 @@ $('#decrementar').click(function() {
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-                document.getElementById("quantity").innerHTML = basePrice * quantity;
-                document.getElementById("precioDisplay").innerHTML = basePrice * quantity;
+                document.getElementById("quantity").innerHTML = quantity;
+                document.getElementById("precioDisplay").innerHTML = quantity;
             }
         };
         xmlhttp.open("GET", "index.php?r=item%2Fdetails&id=4", true);

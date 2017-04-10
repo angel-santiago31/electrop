@@ -6,6 +6,7 @@ use Yii;
 use common\models\Customer;
 use common\models\CustomerSearch;
 use backend\models\CustomerCreate;
+use frontend\models\CustomerAccountForm;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -57,10 +58,40 @@ class CustomerController extends Controller
         ]);
     }
 
-    /*
-    * View the customer's account.
-    */
-    public function actionAccount() {
-        return $this->render('account');
+    /**
+
+    ** View User Account 
+    
+    **/
+    public function actionAccount() {  
+
+       $model = Yii::$app->user->identity;
+       return $this->render('account',
+       ['model' => $model]);
+    }
+
+    public function actionUpdateInfo()
+    {
+        $id = Yii::$app->user->identity->id;
+        $model = $this->findModel($id);
+
+        Yii::$app->session->setFlash('success', 'Hola');
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['account', 'id' => $model->id]);
+        } else {
+            return $this->renderAjax('updateinfo', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+    protected function findModel($id)
+    {
+        if (($model = Customer::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
     }
 }

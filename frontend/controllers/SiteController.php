@@ -99,15 +99,31 @@ class SiteController extends Controller
             $stickerList = Item::find()->where(['item_category_id' => $category,
                                                 'item_sub_category_id' => $subcategory,
                                                 'active' => Item::ACTIVE])->all();
-         
+            $sql ="SELECT * FROM item WHERE item_category_id = '$category' and item_sub_category_id = '$subcategory' and active = '1'";
+            echo Growl::widget([
+                    'type' => Growl::TYPE_SUCCESS,
+                    'icon' => 'glyphicon glyphicon-ok-sign',
+                    'title' => 'Query',
+                    'showSeparator' => true,
+                    'body' => $sql,
+                    'pluginOptions' => [
+                            'showProgressbar' => true,
+                            'placement' => [
+                                'from' => 'top',
+                                'align' => 'right',
+                            ]
+                        ]
+                ]);
              return $this->render('stickers', [
                  'model' => $model,
                  'stickerList' => $stickerList,
              ]);
         }
 
+        
         $stickerList = Item::findAll(['active' => Item::ACTIVE]);
-        $sqlQuery = "SELECT * FROM items WHERE active = 1";
+        $sqlQuery = "SELECT * FROM item WHERE active = 1";
+        //$stickerList = Yii::$app->db->createCommand($sqlQuery)->queryAll();
          echo Growl::widget([
                 'type' => Growl::TYPE_SUCCESS,
                 'icon' => 'glyphicon glyphicon-ok-sign',

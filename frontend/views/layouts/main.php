@@ -10,6 +10,7 @@ use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use common\widgets\Alert;
 use frontend\controllers\CustomerController;
+use yii\bootstrap\Modal;
 
 
 AppAsset::register($this);
@@ -24,6 +25,22 @@ AppAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
+<?php
+       Modal::begin([
+           'header' => '<h4>Change Account Information</h4>',
+           // ‘headerOptions’ => [‘id’ => ‘modalHeader’,],  // Modifica el título del Modal para el uso que se le quiera dar
+           'id' => 'modal',
+           'size' => 'modal-lg',
+           // keeps from closing modal with esc key or by clicking out of the modal screen.
+           // The user must click cancel or ‘x’ to close the modal.
+           'clientOptions' => ['keyboard' => FALSE]
+       ]);
+
+       echo "<div id = 'modalContent'>
+       </div>";
+
+       Modal::end();
+   ?>
 <body>
 <?php $this->beginBody() ?>
 

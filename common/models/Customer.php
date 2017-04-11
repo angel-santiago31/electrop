@@ -53,6 +53,13 @@ class Customer extends ActiveRecord implements IdentityInterface
         return [
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
+            ['email', 'trim'],
+            [['email'], 'required', 'message' => 'Email cannot be blank.'],
+            ['first_name', 'default'],
+            ['middle_name', 'default'],
+            ['fathers_last_name', 'default'],
+            ['mothers_last_name', 'default'],
+            ['date_of_birth', 'default']
         ];
     }
 

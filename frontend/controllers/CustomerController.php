@@ -5,7 +5,6 @@ namespace frontend\controllers;
 use Yii;
 use common\models\Customer;
 use common\models\CustomerSearch;
-use backend\models\CustomerCreate;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -57,10 +56,63 @@ class CustomerController extends Controller
         ]);
     }
 
-    /*
-    * View the customer's account.
-    */
-    public function actionAccount() {
-        return $this->render('account');
+    /**
+     * Displays a single Customer model.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionAccount($id)
+    {
+        return $this->render('account', [
+            'model' => $this->findModel($id),
+        ]);
+    }
+
+    /**
+     * Updates an existing Customer model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionUpdate($id)
+    {
+        $model = $this->findModel($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['account', 'id' => $model->id]);
+        } else {
+            return $this->renderAjax('update', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+    /**
+     * Deletes an existing Customer model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionDelete($id)
+    {
+        $this->findModel($id)->delete();
+
+        return $this->redirect(['index']);
+    }
+
+    /**
+     * Finds the Customer model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return Customer the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModel($id)
+    {
+        if (($model = Customer::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
     }
 }

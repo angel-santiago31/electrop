@@ -86,6 +86,12 @@ class CustomerController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            if ($model->validate())
+            {
+                $model->updateAll(
+                    ['email' => $model->email]
+                );
+            }
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [

@@ -18,7 +18,8 @@ $this->title = $model->email;
         </div> 
         <div class="panel-body">
             <p>
-                <?php //Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+                <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+                
                 <?= Html::a('<i class="glyphicon glyphicon-floppy-remove"></i> Delete', ['delete', 'id' => $model->id], [
                     'class' => 'btn btn-danger',
                     'data' => [

@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\widgets\ActiveForm;
 use backend\models\Item;
 
 /* @var $this yii\web\View */
@@ -11,13 +12,9 @@ $this->title = 'Product Details';
 //$this->params['breadcrumbs'][] = ['label' => 'Items', 'url' => ['index']];
 //$this->params['breadcrumbs'][] = $this->title;
 
-$this->registerJsFile(
-    'web/js/quantity_selection.js',
-    ['depends' => [\yii\web\JqueryAsset::className()]]
-);
-
 ?>
 <div class="container">
+  
   <div class="col-sm-6 col-xs-push-1">
     <div class="panel panel-default">
         <div class="panel-heading text-center">
@@ -30,7 +27,6 @@ $this->registerJsFile(
               <?= DetailView::widget([
                   'model' => $model,
                   'attributes' => [
-                      'name',
                       [
                           'label' => 'Category',
                           'value' => function ($model) {
@@ -89,8 +85,14 @@ $this->registerJsFile(
                       <?= Html::a('', '#', ['class' => 'btn btn-default glyphicon glyphicon-plus', 'id' => 'incrementar']) ?>
                   </div>
               </div>
-              <div class="col-sm-6">
-                  <div class="form-group text-left"><h1> <span>$ <span id="precioDisplay"></span></span></h1></div>
+              <div class="col-sm-7">
+                  <div class="form-group text-left"><h1> <span>$<span id="precioDisplay"><?= $model->gross_price?></span></span></h1></div>
+                  <br>
+              </div>
+              <div style="text-align:center;">
+                  <br>
+                  <br>
+                  <?= Html::a('<i class="glyphicon glyphicon-shopping-cart"></i> Add to cart', [''], ['class' => 'btn btn-danger redCss']) ?>
               </div>
           </div>
       </div>

@@ -65,7 +65,7 @@ $this->registerJsFile(
                             </div>
                             <div class="form-group">
                                 <?=
-                                    Html::button('<i class="glyphicon glyphicon-pencil"></i> Change', [ 'value' => Url::to(['/customer/update-info']), 'class' => 'btn btn-danger redCss', 'id' => 'updateInfo']);
+                                    Html::a('<i class="glyphicon glyphicon-pencil"></i> Change', ['/customer/update-info', 'id' => $model->id], ['class' => 'btn btn-danger redCss']);
                                 ?>
                             </div>
                         </div>

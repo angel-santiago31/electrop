@@ -71,20 +71,15 @@ class CustomerController extends Controller
        ['model' => $model]);
     }
 
-    public function actionUpdateInfo()
+    public function actionUpdate($id)
     {
-        $id = Yii::$app->user->identity->id;
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) 
         {
-            if($model->update())
-            {
-                echo "This has been updated.";
-            }
-            return $this->redirect(['account', 'id' => $model->id]);
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
-            return $this->renderAjax('update', [
+            return $this->render('update', [
                 'model' => $model,
             ]);
         }

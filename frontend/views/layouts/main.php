@@ -66,7 +66,7 @@ AppAsset::register($this);
         $menuItems[] = ['label' => '<i class="glyphicon glyphicon-user"></i>',
             'items' => [
                 ['label' => '<li>'
-                . Html::beginForm(['/customer/account'])
+                . Html::beginForm(['/customer/view'])
                 . Html::submitButton( 
                     'My Account',
                     ['class' => 'btn btn-link logout']

@@ -66,7 +66,7 @@ AppAsset::register($this);
         $menuItems[] = ['label' => '<i class="glyphicon glyphicon-user"></i>',
             'items' => [
                 ['label' => '<li>'
-                . Html::beginForm(['/customer/view'])
+                . Html::beginForm(['/customer/account', 'id' => Yii::$app->user->identity->id])
                 . Html::submitButton( 
                     'My Account',
                     ['class' => 'btn btn-link logout']

@@ -56,16 +56,24 @@ $this->registerJsFile(
                                 <?= DetailView::widget([
                                     'model' => $model,
                                     'attributes' => [
-                                        'email',
+                                        'id',
+                                        'email:email',
                                         'first_name',
                                         'middle_name',
-                                        'fathers_last_name'
-                                    ], 
+                                        'fathers_last_name',
+                                        'mothers_last_name',
+                                        'date_of_birth',
+                                        'age',
+                                        'status',
+                                        'created_at',
+                                        'updated_at',
+                                        'active',
+                                    ],
                                 ]) ?>
                             </div>
                             <div class="form-group">
                                 <?=
-                                    Html::a('<i class="glyphicon glyphicon-pencil"></i> Change', ['/customer/update-info', 'id' => $model->id], ['class' => 'btn btn-danger redCss']);
+                                    Html::button('<i class="glyphicon glyphicon-pencil"></i> Change', [ 'value' => Url::to(['update', 'id' => $model->id]), 'class' => 'btn btn-danger redCss', 'id' => 'updateInfo']);
                                 ?>
                             </div>
                         </div>

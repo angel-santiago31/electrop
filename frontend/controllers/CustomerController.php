@@ -51,8 +51,9 @@ class CustomerController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionView($id)
+    public function actionView()
     {
+        $id = Yii::$app->user->identity->id;
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -75,7 +76,12 @@ class CustomerController extends Controller
         $id = Yii::$app->user->identity->id;
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->save()) 
+        {
+            if($model->update())
+            {
+                echo "This has been updated.";
+            }
             return $this->redirect(['account', 'id' => $model->id]);
         } else {
             return $this->renderAjax('update', [

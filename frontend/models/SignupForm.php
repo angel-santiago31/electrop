@@ -3,6 +3,7 @@ namespace frontend\models;
 
 use yii\base\Model;
 use common\models\Customer;
+use backend\models\PhoneNumber;
 
 /**
  * Signup form
@@ -17,6 +18,7 @@ class SignupForm extends Model
     public $fathersLastName;
     public $mothersLastName;
     public $dateOfBirth;
+    public $phoneNumber;
 
 
     /**
@@ -43,6 +45,9 @@ class SignupForm extends Model
 
             ['password', 'required'],
             ['password', 'string', 'min' => 6],
+
+            ['phoneNumber', 'required'],
+            ['phoneNumber', 'integer', 'min' => 10],
         ];
     }
 
@@ -69,6 +74,20 @@ class SignupForm extends Model
         $user->setPassword($this->password);
         $user->generateAuthKey();
         
-        return $user->save() ? $user : null;
+        if ($user->save()) {
+            $phone = new PhoneNumber();
+            $phone->customer_id = $user->id;
+            $phone->number = $this->phoneNumber;
+            
+            // if ($phone->save() && && ) {
+            //     return $user;
+            // }
+
+            // return null;
+
+            $phone->save();
+
+            return $user;
+        }   
     }
 }

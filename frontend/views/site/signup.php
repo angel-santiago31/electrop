@@ -46,6 +46,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="col-sm-4">
                         <?= $form->field($model, 'dateOfBirth')->widget(MaskedInput::className(),['mask' => '99-99-9999', 'clientOptions' =>['removeMaskOnSubmit']]) ?>
                     </div>
+                    <div class="col-sm-4">
+                        <?= $form->field($model, 'phoneNumber')->textInput() ?>
+                    </div>
                 </div>
                 <div class="form-group">
                     <?= Html::submitButton('<i class="glyphicon glyphicon-pencil"></i> Register', ['class' => 'btn btn-danger redCss', 'name' => 'signup-button']) ?>

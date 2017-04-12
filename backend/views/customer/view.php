@@ -15,10 +15,11 @@ $this->title = $model->email;
     <div class="panel panel-info">
         <div class="panel-heading">
             <h1><i class="glyphicon glyphicon-user"></i> <?= Html::encode($this->title) ?></h1>
-        </div> 
+        </div>
         <div class="panel-body">
             <p>
                 <?php //Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+
                 <?= Html::a('<i class="glyphicon glyphicon-floppy-remove"></i> Delete', ['delete', 'id' => $model->id], [
                     'class' => 'btn btn-danger',
                     'data' => [
@@ -27,7 +28,7 @@ $this->title = $model->email;
                     ],
                 ]) ?>
             </p>
-            
+
                 <?= DetailView::widget([
                     'model' => $model,
                     'attributes' => [

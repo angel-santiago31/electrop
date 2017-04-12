@@ -15,19 +15,17 @@ $this->title = 'Product Details';
 
 ?>
 <div class="container">
-  
-  <div class="col-sm-6 col-xs-push-1">
+
+  <div class="col-sm-5 col-xs-push-2">
     <div class="panel panel-default">
-        <div class="panel-heading text-center">
-            <h1><?= Html::encode($model->name) ?></h1>
-        </div>
         <div class="panel-body" align="center">
-                <img src="<?= '/electrop/backend/web/' . $model->picture ?>" width="70%" height="70%" />
+                <img src="<?= '/electrop/backend/web/' . $model->picture ?>" class="stickerImg"/>
         </div>
-        <div class="panel-body">
+        <div class="panel-footer">
               <?= DetailView::widget([
                   'model' => $model,
                   'attributes' => [
+                          'name',
                       [
                           'label' => 'Category',
                           'value' => function ($model) {
@@ -73,22 +71,21 @@ $this->title = 'Product Details';
         </div>
     </div>
   </div>
-  <div class="col-sm-3 col-xs-push-1">
+  <div class="col-sm-3 col-xs-push-2">
       <div class="panel panel-default">
           <div class="panel-heading text-center">
               <h1>Quantity: <span id="quantity"></span></h1>
           </div>
-          <div class="panel-body">
+          <div class="panel-body text-center">
               <div class="col-sm-6">
-                <br>
+                  <br>
                   <div class="btn-group">
-                      <?= Html::a('', '#', ['class' => 'btn btn-danger glyphicon glyphicon-minus redCss', 'id' => 'decrementar']) ?>
-                      <?= Html::a('', '#', ['class' => 'btn btn-default glyphicon glyphicon-plus', 'id' => 'incrementar']) ?>
+                      <?= Html::a('', '#', ['class' => 'btn btn-default glyphicon glyphicon-minus', 'id' => 'decrementar']) ?>
+                      <?= Html::a('', '#', ['class' => 'btn btn-danger glyphicon glyphicon-plus redCss', 'id' => 'incrementar']) ?>
                   </div>
               </div>
-              <div class="col-sm-7">
-                  <div class="form-group text-left"><h1> <span>$<span id="precioDisplay"><?= $model->gross_price?></span></span></h1></div>
-                  <br>
+              <div class="col-sm-6">
+                  <div><h1> <span>$<span id="precioDisplay"><?= $model->gross_price?></span></span></h1></div>
               </div>
               <div style="text-align:center;">
                   <br>
@@ -96,6 +93,7 @@ $this->title = 'Product Details';
                      <?php $form = ActiveForm::begin(['class'=>'form-horizontal', 'action'=>Url::toRoute(['item/add-to-cart','id'=>$model->item_id])]); ?>
                                 <?=Html::input('submit','submit','Add to cart',[ 'class'=>'btn btn-danger redCss', ])?>
                      <?php ActiveForm::end(); ?>
+
               </div>
           </div>
       </div>

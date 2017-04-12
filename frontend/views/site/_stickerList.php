@@ -30,7 +30,7 @@ use yii\widgets\ActiveForm;
                            
                            <?php $form = ActiveForm::begin(['class'=>'form-horizontal', 'action'=>Url::toRoute(['item/add-to-cart','id'=>$sticker->item_id])]); ?>
                                 <?=Html::input('submit','submit','Add to cart',['class'=>'btn btn-danger redCss',])?>
-                        <?php ActiveForm::end(); ?>
+                          <?php ActiveForm::end(); ?>
                         </div>
                     </div>
               </div>

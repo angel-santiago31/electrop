@@ -27,13 +27,10 @@ AppAsset::register($this);
 </head>
 <?php
        Modal::begin([
-           'header' => '<h4>Change Account Information</h4>',
-           // ‘headerOptions’ => [‘id’ => ‘modalHeader’,],  // Modifica el título del Modal para el uso que se le quiera dar
+           'header' => '<h1><i class="glyphicon glyphicon-pencil"></i> Update Account Details</h1>',
            'id' => 'modal',
            'size' => 'modal-lg',
-           // keeps from closing modal with esc key or by clicking out of the modal screen.
-           // The user must click cancel or ‘x’ to close the modal.
-           'clientOptions' => ['keyboard' => FALSE]
+           'clientOptions' => ['keyboard' => FALSE, 'backdrop' => 'static']
        ]);
 
        echo "<div id = 'modalContent'>
@@ -67,18 +64,18 @@ AppAsset::register($this);
             'items' => [
                 ['label' => '<li>'
                 . Html::beginForm(['/customer/account', 'id' => Yii::$app->user->identity->id])
-                . Html::submitButton( 
-                    'My Account',
+                . Html::submitButton(
+                    '<i class="glyphicon glyphicon-user"></i> My Account',
                     ['class' => 'btn btn-link logout']
                 )
                 . Html::endForm()
-                . '</li>'
+                . '</li>' . '<li class="divider">|</li>'
                 ],
-                ['label' => 
+                ['label' =>
                     '<li>'
                 . Html::beginForm(['/site/logout'], 'post')
                 . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->first_name . ')',
+                    '<i class="glyphicon glyphicon-log-out"></i> Logout (' . Yii::$app->user->identity->first_name . ')',
                     ['class' => 'btn btn-link logout']
                 )
                 . Html::endForm()

@@ -1,8 +1,6 @@
 //Variable to control quantities.
 var quantity = 1;
 
-
-
 //Request at page's first load"
 var xmlhttp = new XMLHttpRequest();
 xmlhttp.onreadystatechange = function() {

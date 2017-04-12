@@ -77,13 +77,43 @@ class ItemController extends Controller
              ]);
      }
 
+     /**
+     *
+     *
+     * @return
+     */
+     public function actionCartRemove($id)
+     {
+        $cart = Yii::$app->cart;
+        $model = Item::findOne($id);
+        if ($model) {
+            $cart->remove($model);
+            return $this->redirect(['cart-view']);
+        }
+        throw new NotFoundHttpException();
+     }
+    /**
+     *
+     *
+     * @return
+     */
+     public function actionCartEmpty($id)
+     {
+        $cart = Yii::$app->cart;
+        if ($cart) {
+            $cart->removeAll();
+            return $this->redirect(['cart-view']);
+        }
+        throw new NotFoundHttpException();
+     }
+
    /**
     *
     *
     */
     public function actionAddToCart($id)
     {
-        $cart = new ShoppingCart($id);
+        $cart = Yii::$app->cart;
 
         $model = Item::findOne($id);
         if ($model) {

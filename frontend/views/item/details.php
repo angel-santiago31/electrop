@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\DetailView;
 use yii\widgets\ActiveForm;
 use backend\models\Item;
@@ -86,15 +87,15 @@ $this->title = 'Product Details';
               <div class="col-sm-6">
                   <div><h1> <span>$<span id="precioDisplay"><?= $model->gross_price?></span></span></h1></div>
               </div>
-          </div>
-      </div>
-      <div class="panel panel-default">
-          <div class="panel-body text-center">
-              <div class="btn-group">
-                  <?= Html::a('View More', ['/site/stickers'], ['class' => 'btn btn-default']) ?>
-                  <?= Html::a('<i class="glyphicon glyphicon-shopping-cart"></i> Add to cart', [''], ['class' => 'btn btn-danger redCss']) ?>
+              <div style="text-align:center;">
+                  <br>
+                  <br>
+                     <?php $form = ActiveForm::begin(['class'=>'form-horizontal', 'action'=>Url::toRoute(['item/add-to-cart','id'=>$model->item_id])]); ?>
+                                <?=Html::input('submit','submit','Add to cart',[ 'class'=>'btn btn-danger redCss', ])?>
+                     <?php ActiveForm::end(); ?>
+
               </div>
           </div>
       </div>
   </div>
-</div>
+</div> 

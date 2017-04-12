@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\widgets\ActiveForm;
+
 ?>
 <div class="row">
   <div class="col-sm-12">
@@ -24,8 +26,11 @@ use yii\helpers\Url;
                         $ <?= Html::encode($sticker->gross_price) ?>
                         <br><br>
                         <div class="btn-group">
-                            <?= Html::a('View details', ['/item/details', 'id' => $sticker->item_id], ['class' => 'btn btn-default']) ?>
-                            <?= Html::a('<i class="glyphicon glyphicon-shopping-cart"></i> Add to cart', [''], ['class' => 'btn btn-danger redCss']) ?>
+                            <?= Html::a('View details', ['/item/details', 'id' => $sticker->item_id], ['class' => 'btn btn-default align-center']) ?>
+                           
+                           <?php $form = ActiveForm::begin(['class'=>'form-horizontal', 'action'=>Url::toRoute(['item/add-to-cart','id'=>$sticker->item_id])]); ?>
+                                <?=Html::input('submit','submit','Add to cart',['class'=>'btn btn-danger redCss',])?>
+                          <?php ActiveForm::end(); ?>
                         </div>
                     </div>
               </div>

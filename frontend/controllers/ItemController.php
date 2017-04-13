@@ -114,7 +114,6 @@ class ItemController extends Controller
     public function actionAddToCart($id, $quantity)
     {
         $cart = Yii::$app->cart;
-        $quantity = 1;
 
         $model = Item::findOne($id);
         if ($model) {

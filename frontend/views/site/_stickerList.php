@@ -27,7 +27,7 @@ use yii\widgets\ActiveForm;
                         <br><br>
                         <div class="btn-group">
                             <?= Html::a('View details', ['/item/details', 'id' => $sticker->item_id], ['class' => 'btn btn-default align-center']) ?>
-                            <?= Html::a('<i class="glyphicon glyphicon-shopping-cart"></i> Add to Cart', ['item/add-to-cart', 'id' =>$sticker->item_id,'quantity'=>1], ['class' => 'btn btn-danger redCss']) ?>
+                            <?= Html::a('<i class="glyphicon glyphicon-shopping-cart"></i> Add to Cart', ['item/add-to-cart', 'id' => $sticker->item_id, 'quantity' => 1], ['class' => 'btn btn-danger redCss']) ?>
                         </div>
                     </div>
               </div>

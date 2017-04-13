@@ -30,7 +30,7 @@ class PhoneNumber extends \yii\db\ActiveRecord
         return [
             [['customer_id', 'number'], 'required'],
             [['customer_id', 'number'], 'integer'],
-            [['customer_id'], 'exist', 'skipOnError' => true, 'targetClass' => Customer::className(), 'targetAttribute' => ['customer_id' => 'id']],
+           // [['customer_id'], 'exist', 'skipOnError' => true, 'targetClass' => Customer::className(), 'targetAttribute' => ['customer_id' => 'id']],
         ];
     }
 

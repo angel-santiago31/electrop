@@ -4,7 +4,7 @@ namespace frontend\models;
 use yii\base\Model;
 use common\models\Customer;
 use backend\models\PhoneNumber;
-
+use backend\models\PaymentMethod;
 /**
  * Signup form
  */
@@ -19,7 +19,9 @@ class SignupForm extends Model
     public $mothersLastName;
     public $dateOfBirth;
     public $phoneNumber;
-
+    public $cardLastDigits;
+    public $expDate;
+    public $cardType;
 
     /**
      * @inheritdoc
@@ -48,6 +50,14 @@ class SignupForm extends Model
 
             ['phoneNumber', 'required'],
             ['phoneNumber', 'integer', 'min' => 10],
+           
+            ['cardLastDigits', 'required'],
+            ['cardLastDigits', 'integer', 'min' => 4],
+           
+            ['cardType', 'required'],
+           
+            ['expDate', 'required'],
+   
         ];
     }
 
@@ -78,15 +88,21 @@ class SignupForm extends Model
             $phone = new PhoneNumber();
             $phone->customer_id = $user->id;
             $phone->number = $this->phoneNumber;
-            
+             $phone->save();
+
+            $payment = new PaymentMethod();
+            $payment->customer_id = $user->id;
+            $payment->card_last_digits = $this->cardLastDigits;
+            $payment->exp_date = $this->expDate;
+            $payment->card_type = $this->cardType;
+            $payment->save();
             // if ($phone->save() && && ) {
             //     return $user;
             // }
 
             // return null;
-
-            $phone->save();
-
+            
+           
             return $user;
         }   
     }

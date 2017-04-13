@@ -50,6 +50,23 @@ $this->params['breadcrumbs'][] = $this->title;
                         <?= $form->field($model, 'phoneNumber')->textInput() ?>
                     </div>
                 </div>
+                 <h2><i class="glyphicon glyphicon-credit-card"></i> Payment Information</h2>
+                <div class="row">
+                    <div class="col-sm-4">
+                    <?= $form->field($model, 'cardLastDigits')->textInput() ?>
+                    </div>
+                    <div class="col-sm-4">
+                        <?= $form->field($model, 'expDate')->widget(MaskedInput::className(),['mask' => '99/99', 'clientOptions' =>['removeMaskOnSubmit']]) ?>
+                    </div>
+                    <div class="col-sm-4">
+                        <?= $form->field($model, 'cardType')->dropDownList([
+                                                                            '' => '--Choose Option--',
+                                                                            1 => 'VISA',
+                                                                            2 => 'Master Card',
+                                                                            3 => 'American Express',
+                                                                            ]) ?>
+                    </div>
+                </div>
                 <div class="form-group">
                     <?= Html::submitButton('<i class="glyphicon glyphicon-pencil"></i> Register', ['class' => 'btn btn-danger redCss', 'name' => 'signup-button']) ?>
                 </div>

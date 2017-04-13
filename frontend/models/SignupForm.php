@@ -5,6 +5,8 @@ use yii\base\Model;
 use common\models\Customer;
 use backend\models\PhoneNumber;
 use backend\models\PaymentMethod;
+use backend\models\ShippingAddress;
+
 /**
  * Signup form
  */
@@ -22,6 +24,10 @@ class SignupForm extends Model
     public $cardLastDigits;
     public $expDate;
     public $cardType;
+    public $streetName;
+    public $aptNumber;
+    public $zipCode;
+    public $state;
 
     /**
      * @inheritdoc
@@ -49,7 +55,7 @@ class SignupForm extends Model
             ['password', 'string', 'min' => 6],
 
             ['phoneNumber', 'required'],
-            ['phoneNumber', 'integer', 'min' => 10],
+            ['phoneNumber', 'integer'],
            
             ['cardLastDigits', 'required'],
             ['cardLastDigits', 'integer', 'min' => 4],
@@ -57,6 +63,11 @@ class SignupForm extends Model
             ['cardType', 'required'],
            
             ['expDate', 'required'],
+
+            ['streetName', 'required'],
+            ['aptNumber', 'required'],
+            ['zipCode', 'required'],
+            ['state', 'required'],
    
         ];
     }
@@ -88,7 +99,7 @@ class SignupForm extends Model
             $phone = new PhoneNumber();
             $phone->customer_id = $user->id;
             $phone->number = $this->phoneNumber;
-             $phone->save();
+            $phone->save();
 
             $payment = new PaymentMethod();
             $payment->customer_id = $user->id;
@@ -96,6 +107,16 @@ class SignupForm extends Model
             $payment->exp_date = $this->expDate;
             $payment->card_type = $this->cardType;
             $payment->save();
+
+            $shipping = new ShippingAddress();
+            $shipping->customer_id = $user->id;
+            $shipping->street_name = $this->streetName;
+            $shipping->apt_number = $this->aptNumber;
+            $shipping->zipcode = $this->zipCode;
+            $shipping->state = $this->state;
+            $shipping->save();
+
+            return $user;
             // if ($phone->save() && && ) {
             //     return $user;
             // }

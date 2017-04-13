@@ -61,12 +61,38 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="col-sm-4">
                         <?= $form->field($model, 'cardType')->dropDownList([
                                                                             '' => '--Choose Option--',
-                                                                            1 => 'VISA',
-                                                                            2 => 'Master Card',
-                                                                            3 => 'American Express',
+                                                                            'Visa' => 'Visa',
+                                                                            'Master card' => 'Master Card',
+                                                                            'American Exppress' => 'American Exppress',
                                                                             ]) ?>
                     </div>
+                    
                 </div>
+                <br>
+                <h2 ><i class="glyphicon glyphicon-plane"></i> Shipping Address</h2>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <?= $form->field($model, 'streetName')->textInput() ?>
+                    </div>
+                    <div class="col-sm-4">
+                        <?= $form->field($model, 'aptNumber')->textInput() ?>      
+                   </div>
+                    <div class="col-sm-4">
+                        <?= $form->field($model, 'zipCode')->textInput() ?>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                    
+                    </div>
+                    <div class="col-sm-4">
+                           
+                   </div>
+                    <div class="col-sm-4">
+                        <?= $form->field($model, 'state')->textInput() ?>
+                    </div>
+                </div>
+                <br>
                 <div class="form-group">
                     <?= Html::submitButton('<i class="glyphicon glyphicon-pencil"></i> Register', ['class' => 'btn btn-danger redCss', 'name' => 'signup-button']) ?>
                 </div>

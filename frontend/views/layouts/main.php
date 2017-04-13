@@ -44,12 +44,11 @@ AppAsset::register($this);
 <div class="wrap" style="background-color: #f0f0f5">
     <?php
     NavBar::begin([
-        'brandLabel' => 'Electrop',
+        'brandLabel' => Html::img('/electrop/backend/web/uploads/logo.png', ['alt'=>Yii::$app->name]),
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
-
     ]);
     $menuItems = [
         //['label' => 'Home', 'url' => ['/site/index']],
@@ -101,11 +100,11 @@ AppAsset::register($this);
     </div>
 </div>
 
-<footer class="footer">
+<footer class="footer" style="background: #4c4c4c;"background: orange;>
     <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
+        <p style="text-align:center; color:white;">&copy; Electrop  <?= date('Y') ?> at Puerto Rico</p>
 
-        <p class="pull-right"><?= Yii::powered() ?></p>
+        <!--<p class="pull-right"><?= Yii::powered() ?></p>-->
     </div>
 </footer>
 

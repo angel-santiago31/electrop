@@ -59,6 +59,9 @@ $this->params['breadcrumbs'][] = $this->title;
                         <?= $form->field($model, 'expDate')->widget(MaskedInput::className(),['mask' => '99/99', 'clientOptions' =>['removeMaskOnSubmit']]) ?>
                     </div>
                     <div class="col-sm-4">
+                        <?= $form->field($model, 'expDate')->widget(MaskedInput::className(),['mask' => '99/99', 'clientOptions' =>['removeMaskOnSubmit']]) ?>
+                    </div>
+                    <div class="col-sm-4">
                         <?= $form->field($model, 'cardType')->dropDownList([
                                                                             '' => '--Choose Option--',
                                                                             'Visa' => 'Visa',

@@ -115,6 +115,7 @@ class SignupForm extends Model
             $shipping->zipcode = $this->zipCode;
             $shipping->state = $this->state;
             $shipping->save();
+            print_r($shipping->error);
 
             return $user;
             // if ($phone->save() && && ) {

@@ -104,8 +104,8 @@ AppAsset::register($this);
                                 'label' => 'Reports',
                                 'icon' => 'file',
                                 'items' => [
-                                    ['label' => 'View All', 'url'=> Url::to(['report/index'])],
-                                    ['label' => 'Create Report', 'url'=> Url::to(['report/create'])],
+                                    ['label' => 'View All', 'url'=> Url::to(['reports/index'])],
+                                    ['label' => 'Create Report', 'url'=> Url::to(['reports/create'])],
                                 ],
                             ],
                             ],

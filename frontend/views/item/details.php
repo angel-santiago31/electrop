@@ -49,12 +49,12 @@ $this->title = 'Product Details';
                                   return 'Random';
                           },
                       ],
-                      [
-                          'label' => 'Qty. Available',
-                          'value' => function ($model) {
-                              return $model->quantity_remaining;
-                          },
-                      ],
+                    //   [
+                    //       'label' => 'Qty. Available',
+                    //       'value' => function ($model) {
+                    //           return $model->quantity_remaining;
+                    //       },
+                    //   ],
                       'size',
                       [
                           'label' => 'Price',
@@ -91,11 +91,10 @@ $this->title = 'Product Details';
                   <br>
                      <?php 
                      // A Post request is made from the Javascript and the quantity updated is stored in $qty php variable.
-                     $qty = Yii::$app->request->post('qty'); echo $qty; ?>
-                     <?php $form = ActiveForm::begin(['class'=>'form-horizontal', 'action'=>Url::toRoute(['item/add-to-cart','id'=>$model->item_id])]); ?>
-                                <?=Html::input('submit','submit','Add to cart',[ 'class'=>'btn btn-danger redCss', ])?>
-                     <?php ActiveForm::end(); ?>
-
+                     $qty = Yii::$app->request->post('qty'); 
+                     echo $qty; 
+                     ?>
+                    <?= Html::a('<i class="glyphicon glyphicon-shopping-cart"></i> Add to Cart', ['item/add-to-cart', 'id' =>$model->item_id,'quantity'=>1], ['class' => 'btn btn-danger redCss']) ?>
               </div>
           </div>
       </div>

@@ -29,9 +29,7 @@ $this->title = 'Cart Items';
                     <h5> <?= $position->quantity ?> </h5> 
                 </div>
                 <div class="col-sm-4">
-                    <?php $form = ActiveForm::begin(['class'=>'form-horizontal', 'action'=>Url::toRoute(['item/cart-remove','id'=>$position->id])]); ?>
-                                    <?=Html::input('submit','submit','Remove',['class'=>'btn btn-danger redCss',])?>
-                    <?php ActiveForm::end(); ?>
+                    <?= Html::a('<i class="glyphicon glyphicon-remove"></i> Remove', ['item/cart-remove', 'id'=>$position->id], ['class' => 'btn btn-danger redCss']) ?>
                 </div>   
             </div>
         </div>

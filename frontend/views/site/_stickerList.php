@@ -27,10 +27,7 @@ use yii\widgets\ActiveForm;
                         <br><br>
                         <div class="btn-group">
                             <?= Html::a('View details', ['/item/details', 'id' => $sticker->item_id], ['class' => 'btn btn-default align-center']) ?>
-                           
-                           <?php $form = ActiveForm::begin(['class'=>'form-horizontal', 'action'=>Url::toRoute(['item/add-to-cart','id'=>$sticker->item_id])]); ?>
-                                <?=Html::input('submit','submit','Add to cart',['class'=>'btn btn-danger redCss',])?>
-                          <?php ActiveForm::end(); ?>
+                            <?= Html::a('<i class="glyphicon glyphicon-shopping-cart"></i> Add to Cart', ['item/add-to-cart', 'id' =>$sticker->item_id,'quantity'=>1], ['class' => 'btn btn-danger redCss']) ?>
                         </div>
                     </div>
               </div>

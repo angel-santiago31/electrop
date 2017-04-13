@@ -111,13 +111,13 @@ class ItemController extends Controller
     *
     *
     */
-    public function actionAddToCart($id)
+    public function actionAddToCart($id, $quantity)
     {
         $cart = Yii::$app->cart;
 
         $model = Item::findOne($id);
         if ($model) {
-            $cart->put($model, 1);
+            $cart->put($model, $quantity);
             return $this->redirect(['cart-view']);
         }
         throw new NotFoundHttpException();

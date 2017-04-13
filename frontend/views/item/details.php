@@ -10,11 +10,8 @@ use backend\models\Item;
 /* @var $model backend\models\Item */
 
 $this->title = 'Product Details';
-//$this->params['breadcrumbs'][] = ['label' => 'Items', 'url' => ['index']];
-//$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="container">
-
   <div class="col-sm-5 col-xs-push-2">
     <div class="panel panel-default">
         <div class="panel-body" align="center">
@@ -49,12 +46,12 @@ $this->title = 'Product Details';
                                   return 'Random';
                           },
                       ],
-                    //   [
-                    //       'label' => 'Qty. Available',
-                    //       'value' => function ($model) {
-                    //           return $model->quantity_remaining;
-                    //       },
-                    //   ],
+                      [
+                          'label' => 'Qty. Available',
+                          'value' => function ($model) {
+                              return $model->quantity_remaining;
+                          },
+                      ],
                       'size',
                       [
                           'label' => 'Price',
@@ -79,24 +76,27 @@ $this->title = 'Product Details';
               <div class="col-sm-6">
                   <br>
                   <div class="btn-group">
-                      <?= Html::a('', '#', ['class' => 'btn btn-default glyphicon glyphicon-minus', 'id' => 'decrementar']) ?>
-                      <?= Html::a('', '#', ['class' => 'btn btn-danger glyphicon glyphicon-plus redCss', 'id' => 'incrementar']) ?>
+                      <?= Html::a('<i class="glyphicon glyphicon-minus"></i>', '#', ['class' => 'btn btn-default', 'id' => 'decrementar']) ?>
+                      <?= Html::a('<i class="glyphicon glyphicon-plus"></i>', '#', ['class' => 'btn btn-danger redCss', 'id' => 'incrementar']) ?>
                   </div>
               </div>
               <div class="col-sm-6">
-                  <div><h1> <span>$<span id="precioDisplay"><?= $model->gross_price?></span></span></h1></div>                 
+                  <div><h1> <span>$<span id="precioDisplay"><?= $model->gross_price?></span></span></h1></div>
               </div>
-              <div style="text-align:center;">
-                  <br>
-                  <br>
-                     <?php 
-                     // A Post request is made from the Javascript and the quantity updated is stored in $qty php variable.
-                     $qty = Yii::$app->request->post('qty'); 
-                     echo $qty; 
-                     ?>
-                    <?= Html::a('<i class="glyphicon glyphicon-shopping-cart"></i> Add to Cart', ['item/add-to-cart', 'id' =>$model->item_id,'quantity'=>1], ['class' => 'btn btn-danger redCss']) ?>
+          </div>
+      </div>
+      <div class="panel panel-default text-center">
+          <div class="panel-body">
+              <?php
+                  // A Post request is made from the Javascript and the quantity updated is stored in $qty php variable.
+                  $qty = Yii::$app->request->post('qty');
+                  echo $qty;
+              ?>
+              <div class="btn-group">
+                  <?= Html::a('View More', ['site/stickers'], ['class' => 'btn btn-default']) ?>
+                  <?= Html::a('<i class="glyphicon glyphicon-shopping-cart"></i> Add to Cart', ['item/add-to-cart', 'id' =>$model->item_id,'quantity'=>1], ['class' => 'btn btn-danger redCss']) ?>
               </div>
           </div>
       </div>
   </div>
-</div> 
+</div>

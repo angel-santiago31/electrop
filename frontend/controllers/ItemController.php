@@ -114,18 +114,30 @@ class ItemController extends Controller
     public function actionAddToCart($id, $quantity)
     {
         $cart = Yii::$app->cart;
+        $quantity = 1;
 
         $model = Item::findOne($id);
         if ($model) {
             $cart->put($model, $quantity);
             return $this->redirect(['cart-view']);
         }
-        throw new NotFoundHttpException();
+
+        Yii::$app->getSession()->setFlash('warning', 'An error occured. Please try again or contact our administrators.');
+        return $this->redirect(Yii::$app->request->referrer);
     }
 
-    public function actionDetails($id) {
+    public function actionDetails($id)
+    {
         $model = Item::findOne($id);
 
+        if ($model->load(Yii::$app->request->post())) {
+            $cart = Yii::$app->cart;
+            $cart->put($model, $model->quantity);
+
+            return $this->redirect(['cart-view']);
+        }
+
+        $model->quantity = 1;
         return $this->render('details', ['model' => $model]);
     }
 }

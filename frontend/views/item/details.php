@@ -70,7 +70,7 @@ $this->title = 'Product Details';
   <div class="col-sm-3 col-xs-push-2">
       <div class="panel panel-default">
           <div class="panel-heading text-center">
-              <h1>Quantity: <span id="quantity"></span></h1>
+              <h1>Quantity: <span id="qtyD"><?= $model->quantity ?></span></h1>
           </div>
           <div class="panel-body text-center">
               <div class="col-sm-6">
@@ -81,20 +81,19 @@ $this->title = 'Product Details';
                   </div>
               </div>
               <div class="col-sm-6">
-                  <div><h1> <span>$<span id="precioDisplay"><?= $model->gross_price?></span></span></h1></div>
+                  <div><h1><span>$<span id="precioDisplay"><?= $model->gross_price?></span></span></h1></div>
               </div>
           </div>
       </div>
       <div class="panel panel-default text-center">
           <div class="panel-body">
-              <?php
-                  // A Post request is made from the Javascript and the quantity updated is stored in $qty php variable.
-                  $qty = Yii::$app->request->post('qty');
-                  echo $qty;
-              ?>
               <div class="btn-group">
-                  <?= Html::a('View More', ['site/stickers'], ['class' => 'btn btn-default']) ?>
-                  <?= Html::a('<i class="glyphicon glyphicon-shopping-cart"></i> Add to Cart', ['item/add-to-cart', 'id' =>$model->item_id,'quantity'=>1], ['class' => 'btn btn-danger redCss']) ?>
+                  <?php $form = ActiveForm::begin(); ?>
+                      <?= $form->field($model, 'quantity')->hiddenInput()->label(false) ?>
+                      <?= $form->field($model, 'gross_price')->hiddenInput()->label(false) ?>
+                      <?= Html::a('View More', Yii::$app->request->referrer, ['class' => 'btn btn-default']) ?>
+                      <?= Html::submitButton('<i class="glyphicon glyphicon-shopping-cart"></i> Add to Cart', ['class' => 'btn btn-danger redCss']) ?>
+                  <?php ActiveForm::end(); ?>
               </div>
           </div>
       </div>

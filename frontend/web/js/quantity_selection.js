@@ -6,7 +6,6 @@ var xmlhttp = new XMLHttpRequest();
 xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
         document.getElementById("quantity").innerHTML = quantity;
-
     }
 };
 xmlhttp.open("GET", "index.php?r=item%2Fdetails&id=4", true);
@@ -28,6 +27,13 @@ $('#decrementar').click(function() {
         };
         xmlhttp.open("GET", "index.php?r=item%2Fdetails&id=4", true);
         xmlhttp.send();
+
+        var data = { qty: quantity };
+
+        $.post('index.php?r=item%2Fdetails&id=4', data, function(returnedData) {
+        // do something here with the returnedData
+        console.log(returnedData);
+    });
     }
 });
 
@@ -44,4 +50,11 @@ $('#incrementar').click(function() {
     };
     xmlhttp.open("GET", "index.php?r=item%2Fdetails&id=4", true);
     xmlhttp.send();
+
+    var data = { qty: quantity };
+
+    $.post('index.php?r=item%2Fdetails&id=4', data, function(returnedData) {
+    // do something here with the returnedData
+    console.log(returnedData);
+});
 });

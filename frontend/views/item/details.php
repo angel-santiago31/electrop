@@ -12,7 +12,6 @@ use backend\models\Item;
 $this->title = 'Product Details';
 //$this->params['breadcrumbs'][] = ['label' => 'Items', 'url' => ['index']];
 //$this->params['breadcrumbs'][] = $this->title;
-
 ?>
 <div class="container">
 
@@ -85,11 +84,14 @@ $this->title = 'Product Details';
                   </div>
               </div>
               <div class="col-sm-6">
-                  <div><h1> <span>$<span id="precioDisplay"><?= $model->gross_price?></span></span></h1></div>
+                  <div><h1> <span>$<span id="precioDisplay"><?= $model->gross_price?></span></span></h1></div>                 
               </div>
               <div style="text-align:center;">
                   <br>
                   <br>
+                     <?php 
+                     // A Post request is made from the Javascript and the quantity updated is stored in $qty php variable.
+                     $qty = Yii::$app->request->post('qty'); echo $qty; ?>
                      <?php $form = ActiveForm::begin(['class'=>'form-horizontal', 'action'=>Url::toRoute(['item/add-to-cart','id'=>$model->item_id])]); ?>
                                 <?=Html::input('submit','submit','Add to cart',[ 'class'=>'btn btn-danger redCss', ])?>
                      <?php ActiveForm::end(); ?>

@@ -79,7 +79,7 @@ $this->params['breadcrumbs'][] = $this->title;
           </div>
       </div>
     <div class="col-sm-9">
-        <div class="panel panel-default">
+        <div class="panel panel-default text-center">
             <div class="panel-body">
                 <h1><label>Stickers</label></h1>
                 <br>

@@ -6,7 +6,7 @@ use yii\widgets\ActiveForm;
 
 ?>
 <div class="row">
-  <div class="col-sm-12">
+  <div class="col-sm-13">
     <?php  if ($stickerList == NULL): ?>
       <div class="container text-left">
             <label>Oops! There are no search results for your search. Please try again.</label>

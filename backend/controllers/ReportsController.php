@@ -90,45 +90,48 @@ class ReportsController extends Controller
           $orders = new Order();
           $allOrders = Order::find()->where([ '>', 'order_date', $fromDate])->andWhere(['<', 'order_date', $toDate])->all();
 
-          if($allOrders != null) {
-          $ordersInfo = $allOrders[0]->find()->joinWith('contains', 'item')->all();
+          if($allOrders) 
+          {
+            $ordersInfo = $allOrders[0]->find()->joinWith('contains', 'item')->all();
 
-          //Sum of the quantities
-          $sumQty = $ordersInfo[0]->find()->sum('amount_stickers');
+            //Sum of the quantities
+            $sumQty = $ordersInfo[0]->find()->sum('amount_stickers');
 
-          //Sum of Total Sales
-          $sumSales = $ordersInfo[0]->find()->sum('total_price');
- 
-          $pdf = new Pdf(['mode' => Pdf::MODE_CORE,
-                          'format' => Pdf::FORMAT_A4,
-                          'orientation' => Pdf::ORIENT_PORTRAIT,
-                          'content' => $this->renderPartial('pdf', [
-                          'model' => $model,
-                          'ordersInfo' => $ordersInfo,
-                          'sumQty' => $sumQty,
-                          'sumSales' => $sumSales,
-                          'allOrders' => $allOrders
-                        ]),
-                          'methods' => [
-                                  'SetHeader' => ['Report Name: ' . $model->title],
-                                ]
-                          ]);
+            //Sum of Total Sales
+            $sumSales = $ordersInfo[0]->find()->sum('total_price');
+    
+            $pdf = new Pdf(['mode' => Pdf::MODE_CORE,
+                            'format' => Pdf::FORMAT_A4,
+                            'orientation' => Pdf::ORIENT_PORTRAIT,
+                            'content' => $this->renderPartial('pdf', [
+                            'model' => $model,
+                            'ordersInfo' => $ordersInfo,
+                            'sumQty' => $sumQty,
+                            'sumSales' => $sumSales,
+                            'allOrders' => $allOrders
+                            ]),
+                            'methods' => [
+                                    'SetHeader' => ['Report Name: ' . $model->title],
+                                    ]
+                            ]);
 
-            return $pdf->render();
-          } else {
-              $pdf = new Pdf(['mode' => Pdf::MODE_CORE,
-                          'format' => Pdf::FORMAT_A4,
-                          'orientation' => Pdf::ORIENT_PORTRAIT,
-                          'content' => $this->renderPartial('pdf', [
-                          'model' => $model,
-                          'allOrders' => $allOrders
-                        ]),
-                          'methods' => [
-                                  'SetHeader' => ['Report Name: ' . $model->title],
-                                ]
-                          ]);
+                return $pdf->render();
+          } 
+          else 
+          {
+                $pdf = new Pdf(['mode' => Pdf::MODE_CORE,
+                            'format' => Pdf::FORMAT_A4,
+                            'orientation' => Pdf::ORIENT_PORTRAIT,
+                            'content' => $this->renderPartial('pdf', [
+                            'model' => $model,
+                            'allOrders' => $allOrders
+                            ]),
+                            'methods' => [
+                                    'SetHeader' => ['Report Name: ' . $model->title],
+                                    ]
+                            ]);
 
-              return $pdf->render();
+                return $pdf->render();
           }
     }
 

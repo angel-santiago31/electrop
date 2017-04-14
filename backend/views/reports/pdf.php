@@ -40,52 +40,55 @@ use yii\helpers\Html;
         </table>
 
         <?php 
-
-            if($model->type == 'Sales') {
-                    if($allOrders){                            ?>
-                    <div style="margin-left: 25%;">
-                        <table style="font-family: "Helvetica Neue", Helvetica, sans-serif">
-                        <caption style="text-align: left;
-                        color: silver;
-                        font-weight: bold;
-                        text-transform: uppercase;
-                        padding: 5px;"><?= Html::encode($model->type); ?></caption>
-                        <thead>
-                            <tr style="background: #4682b4;
-                        color: white;">
-                            <th style="text-align: center; color: white; padding: 5px 10px;">Item</th>
-                            <th style="text-align: center; color: white; padding: 5px 10px;">Production Price</th>
-                            <th style="text-align: center; color: white; padding: 5px 10px;">Gross Price</th>
-                            <th style="text-align: center; color: white; padding: 5px 10px;">Quantity Sold</th>
-                            <th style="text-align: center; color: white; padding: 5px 10px;">Total Sales</th>
-                            </tr>
-                        </thead>
-                        <?php foreach($ordersInfo as $order): 
-                        ?>
-                        <tbody>
-                            <tr style="background: WhiteSmoke; text-align:center;">
-                            <td style="padding: 5px 10px;"> <?= $order->contains[0]->item_id; ?></td>
-                            <th style="padding: 5px 10px;"><?= '$' . $order->contains[0]->item->production_cost; ?></th>
-                            <th style="padding: 5px 10px;"><?= "$" . $order->contains[0]->item->gross_price;
-                            ?></th>            
-                            <td style="padding: 5px 10px;"><?= $order->contains[0]->quantity_in_order; ?></td>
-                            <td style="padding: 5px 10px;"><?= '$' . ($order->contains[0]->quantity_in_order * $order->contains[0]->item->gross_price); ?></td>
-                            </tr>
-                        </tbody>
-                        <?php endforeach;  ?>
-                        <tfoot>
-                            <tr style="background: #54FF9F;
-                        color: white;
-                        text-align: right;">
-                            <th style="padding: 5px 10px;" colspan="3">Grand Total</th>
-                            <th style="padding: 5px 10px; font-family: monospace;"><?= $sumQty;?></th>
-                            <th style="padding: 5px 10px; font-family: monospace;"><?= "$" . $sumSales ?></th>
-                            </tr>
-                        </tfoot>
-                        </table>
-                </div>
-                    <?php } 
-                    else echo "No orders were made in this time frame."; 
-                } ?>
+                if($allOrders)
+                    {                            ?>
+                        <div style="margin-left: 25%;">
+                            <table style="font-family: "Helvetica Neue", Helvetica, sans-serif">
+                            <caption style="text-align: left;
+                            color: silver;
+                            font-weight: bold;
+                            text-transform: uppercase;
+                            padding: 5px;"><?= Html::encode($model->type); ?></caption>
+                            <thead>
+                                <tr style="background: #4682b4;
+                            color: white;">
+                                <th style="text-align: center; color: white; padding: 5px 10px;">Item</th>
+                                <th style="text-align: center; color: white; padding: 5px 10px;">Production Price</th>
+                                <th style="text-align: center; color: white; padding: 5px 10px;">Gross Price</th>
+                                <th style="text-align: center; color: white; padding: 5px 10px;">Quantity Sold</th>
+                                <th style="text-align: center; color: white; padding: 5px 10px;"><?= 'Total ' . $model->type; ?></th>
+                                </tr>
+                            </thead>
+                            <?php foreach($ordersInfo as $order): 
+                            ?>
+                            <tbody>
+                                <tr style="background: WhiteSmoke; text-align:center;">
+                                <td style="padding: 5px 10px;"> <?= $order->contains[0]->item_id; ?></td>
+                                <th style="padding: 5px 10px;"><?= '$' . $order->contains[0]->item->production_cost; ?></th>
+                                <th style="padding: 5px 10px;"><?= "$" . $order->contains[0]->item->gross_price;
+                                ?></th>            
+                                <td style="padding: 5px 10px;"><?= $order->contains[0]->quantity_in_order; ?></td>
+                                <td style="padding: 5px 10px;"><?= '$' . ($order->contains[0]->quantity_in_order * $order->contains[0]->item->gross_price); ?></td>
+                                </tr>
+                            </tbody>
+                            <?php endforeach;  ?>
+                            <tfoot>
+                                <tr style="background: #54FF9F;
+                                    color: white;
+                                    text-align: right;">
+                                <th style="padding: 5px 10px;" colspan="3">Grand Total</th>
+                                <th style="padding: 5px 10px; font-family: monospace;"><?= $sumQty;?></th>
+                                <th style="padding: 5px 10px; font-family: monospace;"><?= "$" . $sumSales ?></th>
+                                </tr>
+                            </tfoot>
+                            </table>
+                    </div>
+            <?php   } 
+                    else 
+                    {
+                        echo "No orders were made in this time frame.";
+                    }
+                  
+                   ?>
 </div>
 

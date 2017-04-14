@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\grid\ActionColumn;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\ReportsSearch */
@@ -20,20 +21,17 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
             'id',
             'title',
             'description:ntext',
             'type',
             'from_date',
-            // 'to_date',
+            'to_date',
             // 'refers_to',
 
             [
-                'label' => 'View Details',
+                'label' => 'View PDF',
                 'format' => 'raw',
                 'value' => function ($model) {
                     return Html::a('<i class="glyphicon glyphicon-file"></i> PDF', ['pdf', 'id' => $model->id, 'fromDate' => $model->from_date, 'toDate' => $model->to_date], ['class' => 'btn btn-xs btn-danger', 'target' => '_blank']);

@@ -30,7 +30,7 @@ $this->title = 'Cart Items';
                 </div>
                 <div class="col-sm-4">
                     <?= Html::a('<i class="glyphicon glyphicon-remove"></i> Remove', ['item/cart-remove', 'id'=>$position->id], ['class' => 'btn btn-danger redCss']) ?>
-                </div>   
+                </div> 
             </div>
         </div>
     </div>

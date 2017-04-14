@@ -33,7 +33,7 @@ class Item extends ActiveRecord implements \yz\shoppingcart\CartPositionInterfac
     public const ACTIVE = 1;
     public const DELETED = 0;
     public $file;
-    public $quantity;
+    public $quota;
 
     public const DECALS = 1;
     public const WALL = 2;

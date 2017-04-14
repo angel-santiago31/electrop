@@ -1,8 +1,8 @@
-$(document).ready(function(){
+$(document).ready(function() {
     var quantity = $('#item-quantity').val();
     var price = $('#item-gross_price').val();
 
-    $("#decrementar").click(function(){
+    $("#decrementar").click(function() {
         quantity--;
 
         if (quantity < 1) {
@@ -18,7 +18,7 @@ $(document).ready(function(){
         $("#qtyD").text(quantity.toString());
     });
 
-    $("#incrementar").click(function(){
+    $("#incrementar").click(function() {
         quantity++;
 
         $('#item-quantity').val(quantity);

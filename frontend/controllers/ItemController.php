@@ -111,13 +111,13 @@ class ItemController extends Controller
     *
     *
     */
-    public function actionAddToCart($id, $quantity)
+    public function actionAddToCart($id, $amount)
     {
         $cart = Yii::$app->cart;
 
         $model = Item::findOne($id);
         if ($model) {
-            $cart->put($model, $quantity);
+            $cart->put($model, $amount);
             return $this->redirect(['cart-view']);
         }
 

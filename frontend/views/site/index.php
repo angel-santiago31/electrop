@@ -5,7 +5,8 @@
 use yii\helpers\Url;
 
 $this->title = 'Home';
-?><?php $images=['<img align:center src="/electrop/backend/web/uploads/cr1.jpg""/>','<img src="/electrop/backend/web/uploads/cr2.jpg"'];
+?>
+<?php $images=['<img align:center src="/electrop/backend/web/uploads/cr1.jpg""/>','<img src="/electrop/backend/web/uploads/cr2.jpg">','<img src="/electrop/backend/web/uploads/sanic.jpg">',];
  echo yii\bootstrap\Carousel::widget(['items'=>$images]); ?>
 <hr>
 <div class="container">

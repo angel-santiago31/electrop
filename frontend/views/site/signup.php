@@ -44,7 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
                 <div class="row">
                     <div class="col-sm-4">
-                        <?= $form->field($model, 'dateOfBirth')->widget(MaskedInput::className(),['mask' => '99-99-9999', 'clientOptions' =>['removeMaskOnSubmit']]) ?>
+                        <?= $form->field($model, 'dateOfBirth')->widget(MaskedInput::className(),['mask' => '99-99-9999', 'clientOptions' =>['removeMaskOnSubmit']])->textInput(['placeholder' => "MM/DD/YYYY"])?>
                     </div>
                     <div class="col-sm-4">
                         <?= $form->field($model, 'phoneNumber')->textInput() ?>
@@ -56,10 +56,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?= $form->field($model, 'cardLastDigits')->textInput() ?>
                     </div>
                     <div class="col-sm-4">
-                        <?= $form->field($model, 'expDate')->widget(MaskedInput::className(),['mask' => '99/99', 'clientOptions' =>['removeMaskOnSubmit']]) ?>
-                    </div>
-                    <div class="col-sm-4">
-                        <?= $form->field($model, 'expDate')->widget(MaskedInput::className(),['mask' => '99/99', 'clientOptions' =>['removeMaskOnSubmit']]) ?>
+                        <?= $form->field($model, 'expDate')->widget(MaskedInput::className(),['mask' => '99/99', 'clientOptions' =>['removeMaskOnSubmit']])->textInput(['placeholder' => "MM/YY"]) ?>
                     </div>
                     <div class="col-sm-4">
                         <?= $form->field($model, 'cardType')->dropDownList([
@@ -81,7 +78,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <?= $form->field($model, 'aptNumber')->textInput() ?>      
                    </div>
                     <div class="col-sm-4">
-                        <?= $form->field($model, 'zipCode')->textInput() ?>
+                        <?= $form->field($model, 'zipCode')->widget(MaskedInput::className(),['mask' => '99999', 'clientOptions' =>['removeMaskOnSubmit']]) ?>
                     </div>
                 </div>
                 <div class="row">

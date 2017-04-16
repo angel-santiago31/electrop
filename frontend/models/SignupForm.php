@@ -55,10 +55,10 @@ class SignupForm extends Model
             ['password', 'string', 'min' => 6],
 
             ['phoneNumber', 'required'],
-            ['phoneNumber', 'integer'],
+            ['phoneNumber', 'integer', 'max' => 10],
            
             ['cardLastDigits', 'required'],
-            ['cardLastDigits', 'integer', 'min' => 4],
+            ['cardLastDigits', 'integer', 'max' => 4],
            
             ['cardType', 'required'],
            
@@ -67,8 +67,9 @@ class SignupForm extends Model
             ['streetName', 'required'],
             ['aptNumber', 'required'],
             ['zipCode', 'required'],
+            ['zipCode','integer', 'min' => 6],
             ['state', 'required'],
-   
+            ['state', 'string', 'max' => 2],
         ];
     }
 
@@ -115,7 +116,7 @@ class SignupForm extends Model
             $shipping->zipcode = $this->zipCode;
             $shipping->state = $this->state;
             $shipping->save();
-            print_r($shipping->error);
+            print_r($shipping->errors);
 
             return $user;
             // if ($phone->save() && && ) {

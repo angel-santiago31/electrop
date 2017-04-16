@@ -38,7 +38,7 @@ $this->title = 'Shopping Cart';
                     <br>
                     <hr>
                     <h4 class="pull-right">Subtotal (<?= $itemsCount?> items): $ <?= $total?> </h4> <br><br>
-                    <?= Html::submitButton('<i class="glyphicon glyphicon-send"></i> Proceed to checkout', ['class' => 'btn btn-default pull-right ']) ?>
+                    <?= Html::a('<i class="glyphicon glyphicon-send"></i> Proceed to checkout', ['item/checkout'], ['class' => 'btn btn-default pull-right ']) ?>
               </div>
           </div>
       </div>

@@ -6,6 +6,7 @@ use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
+use backend\models\PaymentMethod;
 
 /**
  * User model
@@ -192,5 +193,13 @@ class Customer extends ActiveRecord implements IdentityInterface
     public function removePasswordResetToken()
     {
         $this->password_reset_token = null;
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPaymentMethod()
+    {
+        return $this->hasOne(PaymentMethod::className(), ['customer_id' => $this->id]);
     }
 }

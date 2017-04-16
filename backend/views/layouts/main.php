@@ -11,6 +11,7 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
 use kartik\sidenav\SideNav;
+use yii\bootstrap\Modal;
 
 AppAsset::register($this);
 ?>
@@ -24,6 +25,18 @@ AppAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
+<?php
+       Modal::begin([
+           'header' => '<h1><i class="glyphicon glyphicon-pencil"></i> Update Status</h1>',
+           'id' => 'modalS',
+           'size' => 'modal-lg',
+           'clientOptions' => ['keyboard' => FALSE, 'backdrop' => 'static']
+       ]);
+
+       echo "<div id = 'modalContent'></div>";
+
+       Modal::end();
+   ?>
 <body>
 <?php $this->beginBody() ?>
 
@@ -93,12 +106,9 @@ AppAsset::register($this);
                                 ],
                             ],
                             [
-                                'url' => ['order-history/index'],
+                                'url' => ['order/index'],
                                 'label' => 'Order History',
                                 'icon' => 'list-alt',
-                                'items' => [
-                                    ['label' => 'View All', 'url'=>Url::to(['order-history/index'])],
-                                ],
                             ],
                             [
                                 'label' => 'Reports',
@@ -110,7 +120,7 @@ AppAsset::register($this);
                             ],
                             ],
                         ]);
-            }         ?>           
+            }         ?>
         </div>
         <div class="col-sm-10" id="contentDiv">
             <?= Breadcrumbs::widget([

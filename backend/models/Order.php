@@ -3,6 +3,10 @@
 namespace backend\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
+use common\models\Customer;
+use backend\models\Shipper;
 
 /**
  * This is the model class for table "order".
@@ -21,8 +25,14 @@ use Yii;
  * @property Customer $customer
  * @property Shipper $shipperCompanyName
  */
-class Order extends \yii\db\ActiveRecord
+class Order extends ActiveRecord
 {
+    const CANCELED = 0;
+    const PENDING = 1;
+    const VERIFIED = 2;
+    const SHIPPED = 3;
+    const DELIVERED = 4;
+
     /**
      * @inheritdoc
      */
@@ -30,6 +40,22 @@ class Order extends \yii\db\ActiveRecord
     {
         return 'order';
     }
+
+    /**
+     * @inheritdoc
+     */
+     public function behaviors()
+     {
+         return [
+             [
+                 'class' => TimestampBehavior::className(),
+                 'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['order_date'],
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['order_date'],
+                 ],
+             ],
+         ];
+     }
 
     /**
      * @inheritdoc

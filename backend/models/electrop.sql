@@ -57,6 +57,11 @@ CREATE TABLE `contains` (
 
 /*Data for the table `contains` */
 
+insert  into `contains`(`order_number`,`item_id`,`price_sold`,`quantity_in_order`) values 
+(18,11,3.50,1),
+(18,16,5.00,1),
+(18,17,3.45,1);
+
 /*Table structure for table `customer` */
 
 DROP TABLE IF EXISTS `customer`;
@@ -204,7 +209,7 @@ DROP TABLE IF EXISTS `order`;
 
 CREATE TABLE `order` (
   `order_number` int(11) NOT NULL AUTO_INCREMENT,
-  `order_date` int(8) DEFAULT NULL,
+  `order_date` int(11) DEFAULT NULL,
   `amount_stickers` int(11) NOT NULL,
   `total_price` decimal(4,2) DEFAULT NULL,
   `order_status` int(1) DEFAULT NULL,
@@ -216,9 +221,12 @@ CREATE TABLE `order` (
   KEY `shipper_company_name` (`shipper_company_name`),
   CONSTRAINT `order_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `order_ibfk_2` FOREIGN KEY (`shipper_company_name`) REFERENCES `shipper` (`shipper_name`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
 /*Data for the table `order` */
+
+insert  into `order`(`order_number`,`order_date`,`amount_stickers`,`total_price`,`order_status`,`customer_id`,`shipper_company_name`,`tracking_number`) values 
+(18,1492318469,3,11.95,1,11,'UPS',5613);
 
 /*Table structure for table `payment_method` */
 
@@ -260,6 +268,9 @@ CREATE TABLE `shipper` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `shipper` */
+
+insert  into `shipper`(`shipper_name`,`company_phone_num`,`company_address`) values 
+('UPS',999,'Sample Address');
 
 /*Table structure for table `shipping_address` */
 

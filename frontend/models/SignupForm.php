@@ -55,7 +55,7 @@ class SignupForm extends Model
             ['password', 'string', 'min' => 6],
 
             ['phoneNumber', 'required'],
-            ['phoneNumber', 'integer', 'max' => 10],
+            ['phoneNumber', 'integer', 'min' => 10],
            
             ['cardLastDigits', 'required'],
             ['cardLastDigits', 'integer', 'max' => 4],
@@ -101,6 +101,7 @@ class SignupForm extends Model
             $phone->customer_id = $user->id;
             $phone->number = $this->phoneNumber;
             $phone->save();
+            print_r($phone->errors);
 
             $payment = new PaymentMethod();
             $payment->customer_id = $user->id;
@@ -108,6 +109,7 @@ class SignupForm extends Model
             $payment->exp_date = $this->expDate;
             $payment->card_type = $this->cardType;
             $payment->save();
+            print_r($payment->errors);
 
             $shipping = new ShippingAddress();
             $shipping->customer_id = $user->id;
@@ -125,8 +127,6 @@ class SignupForm extends Model
 
             // return null;
             
-           
-            return $user;
         }   
     }
 }

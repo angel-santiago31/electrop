@@ -44,7 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
                 <div class="row">
                     <div class="col-sm-4">
-                        <?= $form->field($model, 'dateOfBirth')->textInput(['placeholder' => "MM/DD/YYYY"])?>
+                        <?= $form->field($model, 'dateOfBirth')->widget(MaskedInput::className(),['mask' => '99/99/9999', 'clientOptions' =>['removeMaskOnSubmit']])->textInput(['placeholder' => "MM/DD/YYYY"])?>
                     </div>
                     <div class="col-sm-4">
                         <?= $form->field($model, 'number')->widget(MaskedInput::className(),['mask' => '999-999-9999', 'clientOptions' =>['removeMaskOnSubmit']])->textInput(['placeholder' => "999-999-9999"]) ?>
@@ -56,7 +56,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?= $form->field($model, 'cardLastDigits')->widget(MaskedInput::className(),['mask' => '9999', 'clientOptions' =>['removeMaskOnSubmit']])  ?>
                     </div>
                     <div class="col-sm-4">
-                        <?= $form->field($model, 'expDate')->textInput(['placeholder' => "MM/YY"]) ?>
+                        <?= $form->field($model, 'expDate')->widget(MaskedInput::className(),['mask' => '99/99', 'clientOptions' =>['removeMaskOnSubmit']])->textInput(['placeholder' => "MM/YY"]) ?>
                     </div>
                     <div class="col-sm-4">
                         <?= $form->field($model, 'cardType')->dropDownList([

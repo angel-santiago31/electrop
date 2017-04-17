@@ -46,7 +46,7 @@ class SignupForm extends Model
 
             [['firstName', 'middleName', 'fathersLastName', 'mothersLastName', 'dateOfBirth'], 'required'],
             [['firstName', 'middleName', 'fathersLastName', 'mothersLastName'], 'string', 'max' => 18],
-            [['dateOfBirth'], 'integer'],
+            [['dateOfBirth'], 'string'],
 
             [['cardLastDigits', 'expDate', 'cardType'], 'required'],
             [['cardLastDigits'], 'integer', 'min' => 4],

@@ -92,13 +92,6 @@ class ItemController extends Controller
               return $this->redirect(['site/login']);
           }
 
-          //if user has no payment method, redirect him/her to update page
-          if (Yii::$app->user->identity->getPaymentMethod() == NULL) {
-              Yii::$app->getSession()->setFlash('info', 'You must have a payment method before placing an order.');
-
-              return $this->redirect(['customer/account', 'id' => Yii::$app->user->identity->id]);
-          }
-
           //create order
           $order = new Order();
           $order->amount_stickers = Yii::$app->cart->getCount();

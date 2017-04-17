@@ -12,7 +12,7 @@ MySQL - 10.1.21-MariaDB : Database - electrop
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`electrop` /*!40100 DEFAULT CHARACTER SET latin1 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`electrop` /*!40100 DEFAULT CHARACTER SET utf8 */;
 
 USE `electrop`;
 
@@ -32,14 +32,13 @@ CREATE TABLE `admin` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `password_reset_token` (`password_reset_token`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `admin` */
 
 insert  into `admin`(`id`,`auth_key`,`password_hash`,`password_reset_token`,`email`,`status`,`created_at`,`updated_at`) values 
 (7,'DxKkH2hGDkUj5L2LnB8qrMVLkGFAT82M','$2y$13$D92/maDAYUX2W.25sYURRecRl4TvGpEPvgzqzQosMwiHJO6jymLji','jGCqlkpYD0UQNSodS-yMSvIoqyA5aF_p_1489764767','admin@admin.com',10,17,17),
-(11,'FHRGKaaqo4ZvDlZPPMmkIqxtdGZBziVF','$2y$13$c4TudIrJOXWkJ4xh57618OHd60g1CFcmv7f.iy8JCH4F2JJPPRfvi','NUHKloHkVlA29Y_xv5MQ0IVgu4Njkm7-_1491401476','mystery_Person@outlook.com',10,1491401476,1491401476),
-(12,'1S7DtEdLYr6nPAGhi6RF4Lh0uXcOcHP3','$2y$13$hM6YRXG7bVCXtqu1lHFVp.QXfS/5Smu5.zAue2p0cieOOR1FRnnLC','LMCl8U9Dg_NhU12X5r1YwhSipC4JCpjc_1491862929','bryan@lindo.edu',10,1491862929,1491878050);
+(11,'FHRGKaaqo4ZvDlZPPMmkIqxtdGZBziVF','$2y$13$c4TudIrJOXWkJ4xh57618OHd60g1CFcmv7f.iy8JCH4F2JJPPRfvi','NUHKloHkVlA29Y_xv5MQ0IVgu4Njkm7-_1491401476','mystery_Person@outlook.com',10,1491401476,1491401476);
 
 /*Table structure for table `contains` */
 
@@ -59,9 +58,8 @@ CREATE TABLE `contains` (
 /*Data for the table `contains` */
 
 insert  into `contains`(`order_number`,`item_id`,`price_sold`,`quantity_in_order`) values 
-(1,4,1.35,3),
-(2,5,2.00,10),
-(3,9,3.45,10);
+(123,4,1.35,3),
+(143432,5,2.00,10);
 
 /*Table structure for table `customer` */
 
@@ -86,17 +84,14 @@ CREATE TABLE `customer` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `password_reset_token` (`password_reset_token`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `customer` */
 
 insert  into `customer`(`id`,`email`,`password_hash`,`first_name`,`middle_name`,`fathers_last_name`,`mothers_last_name`,`date_of_birth`,`age`,`auth_key`,`password_reset_token`,`status`,`created_at`,`updated_at`,`active`) values 
-(11,'angel.santiago31@upr.edu','$2y$13$FRoVVuY51PeOSprQgXqxyOoT3a6uZdODj4uqmsAd0Y9WFzWrHnU/O','','Eduardo','Santiago','González',10,NULL,'i76U4HtSj5hRm19MRcV3zpXw9I0uFRhM',NULL,10,1491411798,1491411798,0),
-(13,'culo@nalguita.com','$2y$13$skvggkWhUoiLH8YhkoC5c.S/PXtJ1DdtM8uz6iqKwHITB7Hmdf5le','Nalguita','NegraLoca','Martinica','Rodriguez',11,NULL,'33Ym4-Yt9BJcYlFtJJgInpgcQxg2S_t0',NULL,10,1491862426,1491949514,0),
-(14,'bryan@otro.com','$2y$13$AOKj0c76KtSnhS7lXckGM.ywAkc7Rv3TT.jMZcCwayV6ns2G/DUR.','Bryan','Yomar','Hernandez','Cuevas',10,NULL,'g08t4duBKPt7gnv6qcdel9710eJhCZ01',NULL,10,1492125119,1492125119,0),
-(15,'ndknd@sklmc.com','$2y$13$hCxUMQsJI91P5QU2qurb1.daO6WQp0JFfBXd9me3w3h7OIAOnzwGW','lksdmv','dklmv','ldml','dlmkl',2,NULL,'mcvJKV5CJDZx38e4cE_PcijlZj7NnM7P',NULL,10,1492125228,1492125228,0),
-(16,'aaaa@hotmail.com','$2y$13$PZ5vai0G36h7BRwm/CjTMutoo5iHED.hDa/EpD3mYh.WyunF3Ax3W','kldsnklds','lskdnvlk','dlvlkdn','dlkvlks',92,NULL,'P0Jts_jnSthz7_h3DoBLfWpQ09Db7eGG',NULL,10,1492125471,1492125471,0),
-(17,'bryan@otromas.com','$2y$13$HwRq1GzGdY2CW/ZIMMqh8.tZvWkFmBh1d/lCKlrZRjIDyWUSjuVe6','bryan','y','hernandez','lopez',10,NULL,'kOB4bWwpMdqM1eZJ7rgqwt2KOb2belOm',NULL,10,1492280180,1492280198,0);
+(11,'angel.santiago31@upr.edu','$2y$13$FRoVVuY51PeOSprQgXqxyOoT3a6uZdODj4uqmsAd0Y9WFzWrHnU/O','Angel','Eduardo','Santiago','González',10,NULL,'i76U4HtSj5hRm19MRcV3zpXw9I0uFRhM',NULL,10,1491411798,1491411798,0),
+(12,'erick.rivera6@upr.edu','$2y$13$M5UpksDkDlvgt/lUm1m/lOaQ7R97gkbNEZW.zl7ZGEhjSD0BNfPY.','Erick','','Rivera','Cruz',12,NULL,'DdZQQZEetFOXZcoL5LVzhOwOByIW07Xa',NULL,10,1491695547,1491695547,0),
+(13,'huelga@upra.com','$2y$13$Qqdd5SXlZpcVuL1sCrVgXuyraBjHDI/l4IyG0fhiv/Ccvd2iTnBTa','Once','Recintos','Una','Upr',12,NULL,'CFnXDz1i7Xdu29AkGMAxcPAaVgRdN0qD',NULL,10,1491842106,1491842106,0);
 
 /*Table structure for table `item` */
 
@@ -129,7 +124,7 @@ insert  into `item`(`item_id`,`name`,`picture`,`quantity_remaining`,`size`,`gros
 (6,'Blocked','uploads/Blocked.jpg',30,'10 Inches',7.00,2.67,'A beautiful labyrinth to admire.',2,4,0),
 (7,'Tree Love','uploads/Tree Love.jpg',12,'5 Inches',3.25,1.25,'Just hanging around.',2,3,1),
 (8,'High 5!','uploads/High 5!.jpg',17,'7 Inches',6.78,1.69,'Missing a finger there..',3,4,1),
-(9,'Pizza Lovers','uploads/Pizza Lover\'s.jpg',24,'6 Inches',3.45,0.78,'Pizza written in pizza.',1,4,1),
+(9,'Pizza Lover\'s','uploads/Pizza Lover\'s.jpg',24,'6 Inches',3.45,0.78,'Pizza written in pizza.',1,4,1),
 (10,'Shady Owl','uploads/Shady Owl.jpg',15,'4 Inches',3.00,1.28,'An owl who loves to be in the pr',2,3,1);
 
 /*Table structure for table `item_category` */
@@ -185,14 +180,13 @@ CREATE TABLE `order` (
   KEY `shipper_company_name` (`shipper_company_name`),
   CONSTRAINT `order_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `order_ibfk_2` FOREIGN KEY (`shipper_company_name`) REFERENCES `shipper` (`shipper_name`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=143433 DEFAULT CHARSET=utf8;
 
 /*Data for the table `order` */
 
 insert  into `order`(`order_number`,`order_date`,`amount_stickers`,`total_price`,`order_status`,`customer_id`,`shipper_company_name`,`tracking_number`) values 
-(1,'2017-04-13',3,4.05,0,13,'UPS',123),
-(2,'2017-04-13',10,20.00,1,13,'UPS',1234),
-(3,'2017-04-13',10,34.50,1,13,'UPS',12345);
+(123,'2017-04-06',3,4.05,1,11,'UPS',2147483647),
+(143432,'2017-06-04',10,20.00,0,11,'UPS',12345);
 
 /*Table structure for table `payment_method` */
 
@@ -222,10 +216,18 @@ CREATE TABLE `phone_number` (
 
 /*Data for the table `phone_number` */
 
-insert  into `phone_number`(`customer_id`,`number`) values 
-(14,19918293),
-(15,19191919),
-(16,82828282);
+/*Table structure for table `report_type` */
+
+DROP TABLE IF EXISTS `report_type`;
+
+CREATE TABLE `report_type` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `type_name` varchar(58) NOT NULL DEFAULT '',
+  `active` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `report_type` */
 
 /*Table structure for table `reports` */
 
@@ -235,30 +237,18 @@ CREATE TABLE `reports` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(250) NOT NULL DEFAULT '',
   `description` text,
-  `type` varchar(11) NOT NULL DEFAULT '',
-  `from_date` date DEFAULT NULL,
-  `to_date` date DEFAULT NULL,
+  `type` varchar(11) NOT NULL,
+  `from_date` timestamp NULL DEFAULT NULL,
+  `to_date` timestamp NULL DEFAULT NULL,
   `refers_to` varchar(58) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 /*Data for the table `reports` */
 
 insert  into `reports`(`id`,`title`,`description`,`type`,`from_date`,`to_date`,`refers_to`) values 
-(1,'Reporte 1','Primer reporte','0','0000-00-00','0000-00-00','1'),
-(2,'Reporte 2','Otro reporte','1','0000-00-00','0000-00-00','2'),
-(3,'Reporte 3','Reporte de prueba numero 3','2','0000-00-00','0000-00-00','3'),
-(4,'Reporte 4','Prueba con Sales Reports','1','0000-00-00','0000-00-00','1'),
-(5,'Reporte 5','Aja','1','2017-04-19','2017-04-28','2'),
-(6,'Reporte 6','Reporte pa fechas','1','2017-04-12','2017-04-15','3'),
-(7,'Reporte 7','Reporte de la vida','Sales','2017-04-11','2017-04-17','3'),
-(8,'Reporte 8','Reporte nuevo','Sales','2017-04-14','2017-04-21','3'),
-(9,'Reporte 9','Revenue Report for testing.','Revenue','2017-04-12','2017-04-15','2'),
-(11,'Reporte Nuevo','Nuevisimo','Revenue','2017-04-12','2017-04-21','1'),
-(12,'Reporte Calidad','Con calidad.','Sales','2017-04-12','2017-04-14','1'),
-(13,'Reporte de la verdad','Pura verdad.','Sales','2017-04-12','2017-04-21','2'),
-(14,'Reporte Real','Realista.','Revenue','2017-04-12','2017-04-15','No Group'),
-(15,'Reporte Mas','Reporte jajajajaj','Sales','2017-04-12','2017-04-14','3');
+(1,'Reporte 1','Hola Reporte','0','2017-01-01 00:00:00','2018-01-01 00:00:00','No Group'),
+(2,'Reporte 2','Reporte segundo.','Revenue','2017-02-01 00:00:00','2017-09-29 00:00:00','No Group');
 
 /*Table structure for table `shipper` */
 
@@ -291,11 +281,6 @@ CREATE TABLE `shipping_address` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `shipping_address` */
-
-insert  into `shipping_address`(`customer_id`,`street_name`,`apt_number`,`zipcode`,`state`) values 
-(14,'12uikso',111,627,'PR'),
-(15,'sjnckjen',181919,21029,'pr'),
-(16,'jkndjkwe',181,627,'PR');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

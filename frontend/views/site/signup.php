@@ -44,9 +44,55 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
                 <div class="row">
                     <div class="col-sm-4">
-                        <?= $form->field($model, 'dateOfBirth')->widget(MaskedInput::className(),['mask' => '99-99-9999', 'clientOptions' =>['removeMaskOnSubmit']]) ?>
+                        <?= $form->field($model, 'dateOfBirth')->widget(MaskedInput::className(),['mask' => '99/99/9999', 'clientOptions' =>['removeMaskOnSubmit']])->textInput(['placeholder' => "MM/DD/YYYY"])?>
+                    </div>
+                    <div class="col-sm-4">
+                        <?= $form->field($model, 'number')->widget(MaskedInput::className(),['mask' => '999-999-9999', 'clientOptions' =>['removeMaskOnSubmit']])->textInput(['placeholder' => "999-999-9999"]) ?>
                     </div>
                 </div>
+                 <h2><i class="glyphicon glyphicon-credit-card"></i> Payment Information</h2>
+                <div class="row">
+                    <div class="col-sm-4">
+                    <?= $form->field($model, 'cardLastDigits')->widget(MaskedInput::className(),['mask' => '9999', 'clientOptions' =>['removeMaskOnSubmit']])  ?>
+                    </div>
+                    <div class="col-sm-4">
+                        <?= $form->field($model, 'expDate')->widget(MaskedInput::className(),['mask' => '99/99', 'clientOptions' =>['removeMaskOnSubmit']])->textInput(['placeholder' => "MM/YY"]) ?>
+                    </div>
+                    <div class="col-sm-4">
+                        <?= $form->field($model, 'cardType')->dropDownList([
+                                                                            '' => '--Choose Option--',
+                                                                            'Visa' => 'Visa',
+                                                                            'Master card' => 'Master Card',
+                                                                            'American Exppress' => 'American Exppress',
+                                                                            ]) ?>
+                    </div>
+
+                </div>
+                <br>
+                <h2 ><i class="glyphicon glyphicon-plane"></i> Shipping Address</h2>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <?= $form->field($model, 'streetName')->textInput() ?>
+                    </div>
+                    <div class="col-sm-4">
+                        <?= $form->field($model, 'aptNumber')->textInput() ?>
+                   </div>
+                    <div class="col-sm-4">
+                        <?= $form->field($model, 'zipcode')->widget(MaskedInput::className(),['mask' => '99999', 'clientOptions' =>['removeMaskOnSubmit']]) ?>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+
+                    </div>
+                    <div class="col-sm-4">
+
+                   </div>
+                    <div class="col-sm-4">
+                        <?= $form->field($model, 'state')->textInput() ?>
+                    </div>
+                </div>
+                <br>
                 <div class="form-group">
                     <?= Html::submitButton('<i class="glyphicon glyphicon-pencil"></i> Register', ['class' => 'btn btn-danger redCss', 'name' => 'signup-button']) ?>
                 </div>

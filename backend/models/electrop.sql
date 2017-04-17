@@ -85,12 +85,14 @@ CREATE TABLE `customer` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `password_reset_token` (`password_reset_token`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `customer` */
 
 insert  into `customer`(`id`,`email`,`password_hash`,`first_name`,`middle_name`,`fathers_last_name`,`mothers_last_name`,`date_of_birth`,`age`,`auth_key`,`password_reset_token`,`status`,`created_at`,`updated_at`,`active`) values 
+
 (11,'angel.santiago31@upr.edu','$2y$13$FRoVVuY51PeOSprQgXqxyOoT3a6uZdODj4uqmsAd0Y9WFzWrHnU/O','Angel','Eduardo','Santiago','González',10,NULL,'i76U4HtSj5hRm19MRcV3zpXw9I0uFRhM',NULL,10,1491411798,1492117672,0);
+
 
 /*Table structure for table `item` */
 
@@ -221,7 +223,9 @@ CREATE TABLE `order` (
   KEY `shipper_company_name` (`shipper_company_name`),
   CONSTRAINT `order_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `order_ibfk_2` FOREIGN KEY (`shipper_company_name`) REFERENCES `shipper` (`shipper_name`) ON DELETE CASCADE ON UPDATE CASCADE
+
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+
 
 /*Data for the table `order` */
 
@@ -243,18 +247,24 @@ CREATE TABLE `payment_method` (
 
 /*Data for the table `payment_method` */
 
+insert  into `payment_method`(`customer_id`,`card_last_digits`,`exp_date`,`card_type`) values 
+(28,9999,9999,'Visa');
+
 /*Table structure for table `phone_number` */
 
 DROP TABLE IF EXISTS `phone_number`;
 
 CREATE TABLE `phone_number` (
   `customer_id` int(11) NOT NULL,
-  `number` int(11) NOT NULL,
+  `number` varchar(15) NOT NULL,
   PRIMARY KEY (`customer_id`),
   CONSTRAINT `phone_number_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `phone_number` */
+
+insert  into `phone_number`(`customer_id`,`number`) values 
+(28,'999-999-9999');
 
 /*Table structure for table `shipper` */
 
@@ -287,6 +297,9 @@ CREATE TABLE `shipping_address` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `shipping_address` */
+
+insert  into `shipping_address`(`customer_id`,`street_name`,`apt_number`,`zipcode`,`state`) values 
+(28,'uyhb',123,99999,'pr');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

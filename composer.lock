@@ -316,6 +316,31 @@
             "time": "2017-03-13T06:30:53+00:00"
         },
         {
+            "name": "fxp/composer-asset-plugin",
+            "version": "v1.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fxpio/composer-asset-plugin.git",
+                "reference": "0bfdd307d2cddbc42c634b14247f3f3a8525b836"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fxpio/composer-asset-plugin/zipball/0bfdd307d2cddbc42c634b14247f3f3a8525b836",
+                "reference": "0bfdd307d2cddbc42c634b14247f3f3a8525b836",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.0",
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "composer/composer": "^1.4.0"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "Fxp\\Composer\\AssetPlugin\\FxpAssetPlugin",
+                "branch-alias": {
+                    "dev-master": "1.3-dev"
             "name": "kartik-v/yii2-krajee-base",
             "version": "v1.8.8",
             "source": {
@@ -336,10 +361,40 @@
             "extra": {
                 "branch-alias": {
                     "dev-master": "1.8.x-dev"
+
                 }
             },
             "autoload": {
                 "psr-4": {
+
+                    "Fxp\\Composer\\AssetPlugin\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "François Pluchino",
+                    "email": "francois.pluchino@gmail.com"
+                }
+            ],
+            "description": "NPM/Bower Dependency Manager for Composer",
+            "homepage": "https://github.com/fxpio/composer-asset-plugin",
+            "keywords": [
+                "asset",
+                "bower",
+                "composer",
+                "dependency manager",
+                "nodejs",
+                "npm",
+                "package"
+            ],
+            "time": "2017-04-09T11:49:10+00:00"
                     "kartik\\base\\": ""
                 }
             },
@@ -414,6 +469,7 @@
                 "yii2"
             ],
             "time": "2015-05-03T08:23:04+00:00"
+
         },
         {
             "name": "omnilight/yii2-shopping-cart",
@@ -1390,7 +1446,7 @@
                 "yii",
                 "yii2"
             ],
-            "time": "2017-01-14T11:34:27+00:00"
+            "time": "2017-01-14 11:34:27"
         },
         {
             "name": "kartik-v/yii2-mpdf",

@@ -60,7 +60,7 @@ class Customer extends ActiveRecord implements IdentityInterface
             ['middle_name', 'default'],
             ['fathers_last_name', 'default'],
             ['mothers_last_name', 'default'],
-            ['date_of_birth', 'default']
+            ['date_of_birth', 'string']
         ];
     }
 

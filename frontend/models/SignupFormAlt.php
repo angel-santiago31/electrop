@@ -1,16 +1,18 @@
 <?php
 namespace frontend\models;
+
 use yii\base\Model;
 use common\models\Customer;
+use backend\models\PhoneNumber;
 use backend\models\PaymentMethod;
 use backend\models\ShippingAddress;
-use backend\models\PhoneNumber;
 
 /**
  * Signup form
  */
 class SignupForm extends Model
 {
+    //public $username;
     public $email;
     public $password;
     public $firstName;
@@ -18,17 +20,14 @@ class SignupForm extends Model
     public $fathersLastName;
     public $mothersLastName;
     public $dateOfBirth;
-
+    public $phoneNumber;
     public $cardLastDigits;
     public $expDate;
     public $cardType;
-
     public $streetName;
     public $aptNumber;
-    public $zipcode;
+    public $zipCode;
     public $state;
-
-    public $number;
 
     /**
      * @inheritdoc
@@ -36,31 +35,45 @@ class SignupForm extends Model
     public function rules()
     {
         return [
+            //['username', 'trim'],
+            //['username', 'required'],
+            //['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
+            //['username', 'string', 'min' => 2, 'max' => 255],
+
+            [['firstName', 'fathersLastName', 'mothersLastName', 'dateOfBirth'], 'required'],
+            [['firstName', 'fathersLastName', 'mothersLastName', 'middleName'], 'string', 'max' => 32],
+            [['dateOfBirth'], 'safe'],
+
+
             ['email', 'trim'],
             ['email', 'required'],
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
             ['email', 'unique', 'targetClass' => '\common\models\Customer', 'message' => 'This email address has already been taken.'],
+
             ['password', 'required'],
             ['password', 'string', 'min' => 6],
 
-            [['firstName', 'middleName', 'fathersLastName', 'mothersLastName', 'dateOfBirth'], 'required'],
-            [['firstName', 'middleName', 'fathersLastName', 'mothersLastName'], 'string', 'max' => 18],
-            [['dateOfBirth'], 'string'],
+            ['phoneNumber', 'required'],
+            ['phoneNumber', 'integer', 'min' => 10],
+           
+            ['cardLastDigits', 'required'],
+            ['cardLastDigits', 'integer', 'min' => 4],
+           
+            ['cardType', 'required'],
+           
+            ['expDate', 'required'],
+            ['expDate','string', 'min' => 4],
 
-            [['cardLastDigits', 'expDate', 'cardType'], 'required'],
-            [['cardLastDigits'], 'integer', 'min' => 4],
-            [['expDate'], 'integer'],
-            [['cardType'], 'string', 'max' => 32],
-
-            [['streetName', 'aptNumber', 'zipcode', 'state'], 'required'],
-            [['streetName'], 'string', 'max' => 32],
-            [['aptNumber', 'zipcode'], 'integer'],
-            [['state'], 'string'],
-
-            [['number'], 'string', 'max' => 15],
+            ['streetName', 'required'],
+            ['aptNumber', 'required'],
+            ['zipCode', 'required'],
+            ['zipCode','integer', 'min' => 6],
+            ['state', 'required'],
+            ['state', 'string', 'max' => 2],
         ];
     }
+
     /**
      * Signs user up.
      *
@@ -71,41 +84,50 @@ class SignupForm extends Model
         if (!$this->validate()) {
             return null;
         }
-
+        
         $user = new Customer();
+        //$user->username = $this->username;
         $user->email = $this->email;
-        $user->setPassword($this->password);
         $user->first_name = $this->firstName;
         $user->middle_name = $this->middleName;
         $user->fathers_last_name = $this->fathersLastName;
         $user->mothers_last_name = $this->mothersLastName;
         $user->date_of_birth = $this->dateOfBirth;
-        $user->generateAuthKey();
 
+        $user->setPassword($this->password);
+        $user->generateAuthKey();
+        
         if ($user->save()) {
+            $phone = new PhoneNumber();
+            $phone->customer_id = $user->id;
+            $phone->number = $this->phoneNumber;
+            $phone->save();
+            print_r($phone->errors);
+
             $payment = new PaymentMethod();
             $payment->customer_id = $user->id;
             $payment->card_last_digits = $this->cardLastDigits;
             $payment->exp_date = $this->expDate;
             $payment->card_type = $this->cardType;
-            $payment->save(false);
+            $payment->save();
+            print_r($payment->errors);
 
             $shipping = new ShippingAddress();
             $shipping->customer_id = $user->id;
             $shipping->street_name = $this->streetName;
             $shipping->apt_number = $this->aptNumber;
-            $shipping->zipcode = $this->zipcode;
+            $shipping->zipcode = $this->zipCode;
             $shipping->state = $this->state;
-            $shipping->save(false);
-
-            $phone = new PhoneNumber();
-            $phone->customer_id = $user->id;
-            $phone->number = $this->number;
-            $phone->save(false);
+            $shipping->save();
+            print_r($shipping->errors);
 
             return $user;
-        }
+            // if ($phone->save() && && ) {
+            //     return $user;
+            // }
 
-        return null;
+            // return null;
+            
+        }   
     }
 }

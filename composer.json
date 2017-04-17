@@ -19,6 +19,9 @@
         "yiisoft/yii2-bootstrap": "~2.0.0",
         "yiisoft/yii2-swiftmailer": "~2.0.0",
         "omnilight/yii2-shopping-cart": "*",
+        "kartik-v/yii2-field-range": "*",
+        "kartik-v/yii2-widget-datepicker": "@dev",
+        "kartik-v/yii2-mpdf": "*",
         "kartik-v/yii2-widget-growl": "*"
     },
     "require-dev": {
@@ -30,7 +33,6 @@
         "codeception/verify": "~0.3.1",
 
         "2amigos/yii2-tinymce-widget": "~1.1",
-        "kartik-v/yii2-mpdf": "dev-master",
         "kartik-v/yii2-widget-sidenav": "*",
         "kartik-v/yii2-datecontrol": "dev-master",
         "2amigos/yii2-date-picker-widget": "~1.0"

@@ -27,11 +27,16 @@ use backend\models\Shipper;
  */
 class Order extends ActiveRecord
 {
+
     const CANCELED = 0;
     const PENDING = 1;
     const VERIFIED = 2;
     const SHIPPED = 3;
     const DELIVERED = 4;
+
+    public $total_sum;
+    public $amount_sum;
+
 
     /**
      * @inheritdoc
@@ -63,7 +68,8 @@ class Order extends ActiveRecord
     public function rules()
     {
         return [
-            [['order_date', 'amount_stickers', 'order_status', 'customer_id', 'tracking_number'], 'integer'],
+            [['amount_stickers', 'order_status', 'customer_id', 'tracking_number'], 'integer'],
+            [['order_date'], 'date'],
             [['amount_stickers'], 'required'],
             [['total_price'], 'number'],
             [['shipper_company_name'], 'string', 'max' => 18],

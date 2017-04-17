@@ -14,6 +14,7 @@ use frontend\models\SignupForm;
 use frontend\models\ContactForm;
 use backend\models\Item;
 use backend\models\ItemSearch;
+use kartik\growl\Growl;
 
 /**
  * Site controller
@@ -75,7 +76,7 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $stickerList = Item::find()->limit(6)->offset(0)->where(['active' => Item::ACTIVE])->all();
-
+        
         return $this->render('index', [
             'stickerList' => $stickerList,
         ]);
@@ -89,7 +90,7 @@ class SiteController extends Controller
             $stickerList = Item::find()->where(['item_category_id' => $model->item_category_id,
                                                 'item_sub_category_id' => $model->item_sub_category_id,
                                                 'active' => Item::ACTIVE])->all();
-
+            
              return $this->render('stickers', [
                  'model' => $model,
                  'stickerList' => $stickerList,
@@ -98,14 +99,45 @@ class SiteController extends Controller
             $stickerList = Item::find()->where(['item_category_id' => $category,
                                                 'item_sub_category_id' => $subcategory,
                                                 'active' => Item::ACTIVE])->all();
-
+            $sql ="SELECT * FROM item WHERE item_category_id = '$category' and item_sub_category_id = '$subcategory' and active = '1'";
+            echo Growl::widget([
+                    'type' => Growl::TYPE_SUCCESS,
+                    'icon' => 'glyphicon glyphicon-ok-sign',
+                    'title' => 'Query',
+                    'showSeparator' => true,
+                    'body' => $sql,
+                    'pluginOptions' => [
+                            'showProgressbar' => true,
+                            'placement' => [
+                                'from' => 'top',
+                                'align' => 'right',
+                            ]
+                        ]
+                ]);
              return $this->render('stickers', [
                  'model' => $model,
                  'stickerList' => $stickerList,
              ]);
         }
 
+        
         $stickerList = Item::findAll(['active' => Item::ACTIVE]);
+        $sqlQuery = "SELECT * FROM item WHERE active = 1";
+        //$stickerList = Yii::$app->db->createCommand($sqlQuery)->queryAll();
+         echo Growl::widget([
+                'type' => Growl::TYPE_SUCCESS,
+                'icon' => 'glyphicon glyphicon-ok-sign',
+                'title' => 'Query',
+                'showSeparator' => true,
+                'body' => $sqlQuery,
+                 'pluginOptions' => [
+                        'showProgressbar' => true,
+                        'placement' => [
+                            'from' => 'top',
+                            'align' => 'right',
+                        ]
+                    ]
+            ]);
 
         return $this->render('stickers', [
             'model' => $model,

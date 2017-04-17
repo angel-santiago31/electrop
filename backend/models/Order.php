@@ -3,6 +3,10 @@
 namespace backend\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
+use common\models\Customer;
+use backend\models\Shipper;
 
 /**
  * This is the model class for table "order".
@@ -21,8 +25,19 @@ use Yii;
  * @property Customer $customer
  * @property Shipper $shipperCompanyName
  */
-class Order extends \yii\db\ActiveRecord
+class Order extends ActiveRecord
 {
+
+    const CANCELED = 0;
+    const PENDING = 1;
+    const VERIFIED = 2;
+    const SHIPPED = 3;
+    const DELIVERED = 4;
+
+    public $total_sum;
+    public $amount_sum;
+
+
     /**
      * @inheritdoc
      */
@@ -34,10 +49,27 @@ class Order extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+     public function behaviors()
+     {
+         return [
+             [
+                 'class' => TimestampBehavior::className(),
+                 'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['order_date'],
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['order_date'],
+                 ],
+             ],
+         ];
+     }
+
+    /**
+     * @inheritdoc
+     */
     public function rules()
     {
         return [
-            [['order_date', 'amount_stickers', 'order_status', 'customer_id', 'tracking_number'], 'integer'],
+            [['amount_stickers', 'order_status', 'customer_id', 'tracking_number'], 'integer'],
+            [['order_date'], 'date'],
             [['amount_stickers'], 'required'],
             [['total_price'], 'number'],
             [['shipper_company_name'], 'string', 'max' => 18],

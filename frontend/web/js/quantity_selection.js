@@ -1,49 +1,32 @@
-//Variable to control quantities.
-var quantity = 1;
+$(document).ready(function() {
+    var quantity = $('#item-quantity').val();
+    var price = $('#item-gross_price').val();
 
+    $("#decrementar").click(function() {
+        quantity--;
 
-
-//Request at page's first load"
-var xmlhttp = new XMLHttpRequest();
-xmlhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-        document.getElementById("quantity").innerHTML = quantity;
-
-    }
-};
-xmlhttp.open("GET", "index.php?r=item%2Fdetails&id=4", true);
-xmlhttp.send();
-
-var basePrice = Number(document.getElementById('precioDisplay').innerText);
-
-//If the user decreases, delete one from the variable and update in the view.
-$('#decrementar').click(function() {
-    if (quantity !== 0) {
-        quantity = quantity - 1;
-
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                document.getElementById("quantity").innerHTML = quantity;
-                document.getElementById("precioDisplay").innerHTML = (basePrice * quantity).toFixed(2);
-            }
-        };
-        xmlhttp.open("GET", "index.php?r=item%2Fdetails&id=4", true);
-        xmlhttp.send();
-    }
-});
-
-//If the user increases, add one on the variable and update in the view.
-$('#incrementar').click(function() {
-    quantity = quantity + 1;
-
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            document.getElementById("quantity").innerHTML = quantity;
-            document.getElementById("precioDisplay").innerHTML = (basePrice * quantity).toFixed(2);
+        if (quantity < 1) {
+            quantity = 1;
         }
-    };
-    xmlhttp.open("GET", "index.php?r=item%2Fdetails&id=4", true);
-    xmlhttp.send();
+
+        $('#item-quantity').val(quantity);
+
+        var t = quantity * price;
+        p = t.toFixed(2);
+        $("#precioDisplay").text(p.toString());
+
+        $("#qtyD").text(quantity.toString());
+    });
+
+    $("#incrementar").click(function() {
+        quantity++;
+
+        $('#item-quantity').val(quantity);
+
+        var t = quantity * price;
+        p = t.toFixed(2);
+        $("#precioDisplay").text(p.toString());
+
+        $("#qtyD").text(quantity.toString());
+    });
 });

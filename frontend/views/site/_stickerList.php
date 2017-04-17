@@ -2,9 +2,11 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\widgets\ActiveForm;
+
 ?>
 <div class="row">
-  <div class="col-sm-12">
+  <div class="col-sm-13">
     <?php  if ($stickerList == NULL): ?>
       <div class="container text-left">
             <label>Oops! There are no search results for your search. Please try again.</label>
@@ -24,8 +26,8 @@ use yii\helpers\Url;
                         $ <?= Html::encode($sticker->gross_price) ?>
                         <br><br>
                         <div class="btn-group">
-                            <?= Html::a('View details', ['/item/details', 'id' => $sticker->item_id], ['class' => 'btn btn-default']) ?>
-                            <?= Html::a('<i class="glyphicon glyphicon-shopping-cart"></i> Add to cart', [''], ['class' => 'btn btn-danger redCss']) ?>
+                            <?= Html::a('View details', ['/item/details', 'id' => $sticker->item_id], ['class' => 'btn btn-default align-center']) ?>
+                            <?= Html::a('<i class="glyphicon glyphicon-shopping-cart"></i> Add to Cart', ['item/add-to-cart', 'id' => $sticker->item_id, 'amount' => 1], ['class' => 'btn btn-danger redCss']) ?>
                         </div>
                     </div>
               </div>

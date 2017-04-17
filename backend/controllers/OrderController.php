@@ -1,18 +1,19 @@
 <?php
 
-namespace frontend\controllers;
+namespace backend\controllers;
 
 use Yii;
-use common\models\Customer;
-use common\models\CustomerSearch;
+use backend\models\Order;
+use backend\models\OrderSearch;
+use backend\models\ContainsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * CustomerController implements the CRUD actions for Customer model.
+ * OrderController implements the CRUD actions for Order model.
  */
-class CustomerController extends Controller
+class OrderController extends Controller
 {
     /**
      * @inheritdoc
@@ -30,12 +31,12 @@ class CustomerController extends Controller
     }
 
     /**
-     * Lists all Customer models.
+     * Lists all Order models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new CustomerSearch();
+        $searchModel = new OrderSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,31 +46,43 @@ class CustomerController extends Controller
     }
 
     /**
-     * Displays a single Customer model.
+     * Displays a single Order model.
      * @param integer $id
      * @return mixed
      */
     public function actionView($id)
     {
+        $order = $this->findModel($id);
+
+        $searchModel = new ContainsSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $order->order_number);
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $order,
+            'order_items' => $dataProvider,
         ]);
     }
 
     /**
-     * Displays a single Customer model.
-     * @param integer $id
+     * Creates a new Order model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionAccount($id)
+    public function actionCreate()
     {
-        return $this->render('account', [
-            'model' => $this->findModel($id),
-        ]);
+        $model = new Order();
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->order_number]);
+        } else {
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        }
     }
 
     /**
-     * Updates an existing Customer model.
+     * Updates an existing Order model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -79,7 +92,7 @@ class CustomerController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['account', 'id' => $model->id]);
+            return $this->redirect(['view', 'id' => $model->order_number]);
         } else {
             return $this->renderAjax('update', [
                 'model' => $model,
@@ -88,7 +101,7 @@ class CustomerController extends Controller
     }
 
     /**
-     * Deletes an existing Customer model.
+     * Deletes an existing Order model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -101,19 +114,18 @@ class CustomerController extends Controller
     }
 
     /**
-     * Finds the Customer model based on its primary key value.
+     * Finds the Order model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Customer the loaded model
+     * @return Order the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Customer::findOne($id)) !== null) {
+        if (($model = Order::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
-
 }

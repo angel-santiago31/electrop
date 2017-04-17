@@ -58,9 +58,8 @@ CREATE TABLE `contains` (
 /*Data for the table `contains` */
 
 insert  into `contains`(`order_number`,`item_id`,`price_sold`,`quantity_in_order`) values 
-(18,11,3.50,1),
-(18,16,5.00,1),
-(18,17,3.45,1);
+(123,4,1.35,3),
+(143432,5,2.00,10);
 
 /*Table structure for table `customer` */
 
@@ -85,14 +84,14 @@ CREATE TABLE `customer` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `password_reset_token` (`password_reset_token`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `customer` */
 
 insert  into `customer`(`id`,`email`,`password_hash`,`first_name`,`middle_name`,`fathers_last_name`,`mothers_last_name`,`date_of_birth`,`age`,`auth_key`,`password_reset_token`,`status`,`created_at`,`updated_at`,`active`) values 
-
-(11,'angel.santiago31@upr.edu','$2y$13$FRoVVuY51PeOSprQgXqxyOoT3a6uZdODj4uqmsAd0Y9WFzWrHnU/O','Angel','Eduardo','Santiago','González',10,NULL,'i76U4HtSj5hRm19MRcV3zpXw9I0uFRhM',NULL,10,1491411798,1492117672,0);
-
+(11,'angel.santiago31@upr.edu','$2y$13$FRoVVuY51PeOSprQgXqxyOoT3a6uZdODj4uqmsAd0Y9WFzWrHnU/O','Angel','Eduardo','Santiago','González',10,NULL,'i76U4HtSj5hRm19MRcV3zpXw9I0uFRhM',NULL,10,1491411798,1491411798,0),
+(12,'erick.rivera6@upr.edu','$2y$13$M5UpksDkDlvgt/lUm1m/lOaQ7R97gkbNEZW.zl7ZGEhjSD0BNfPY.','Erick','','Rivera','Cruz',12,NULL,'DdZQQZEetFOXZcoL5LVzhOwOByIW07Xa',NULL,10,1491695547,1491695547,0),
+(13,'huelga@upra.com','$2y$13$Qqdd5SXlZpcVuL1sCrVgXuyraBjHDI/l4IyG0fhiv/Ccvd2iTnBTa','Once','Recintos','Una','Upr',12,NULL,'CFnXDz1i7Xdu29AkGMAxcPAaVgRdN0qD',NULL,10,1491842106,1491842106,0);
 
 /*Table structure for table `item` */
 
@@ -115,7 +114,7 @@ CREATE TABLE `item` (
   KEY `item_sub_category_id` (`item_sub_category_id`),
   CONSTRAINT `item_ibfk_1` FOREIGN KEY (`item_category_id`) REFERENCES `item_category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `item_ibfk_2` FOREIGN KEY (`item_sub_category_id`) REFERENCES `item_sub_category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 /*Data for the table `item` */
 
@@ -125,32 +124,8 @@ insert  into `item`(`item_id`,`name`,`picture`,`quantity_remaining`,`size`,`gros
 (6,'Blocked','uploads/Blocked.jpg',30,'10 Inches',7.00,2.67,'A beautiful labyrinth to admire.',2,4,0),
 (7,'Tree Love','uploads/Tree Love.jpg',12,'5 Inches',3.25,1.25,'Just hanging around.',2,3,1),
 (8,'High 5!','uploads/High 5!.jpg',17,'7 Inches',6.78,1.69,'Missing a finger there..',3,4,1),
-(9,'Pizza Lovers','uploads/Pizza Lover\'s.jpg',24,'6 Inches',3.45,0.78,'Pizza written in pizza.',1,4,1),
-(10,'Shady Owl','uploads/Shady Owl.jpg',15,'4 Inches',3.00,1.28,'An owl who loves to be in the pr',2,3,1),
-(11,'Trump Bans Anime','uploads/Trump Bans Anime.jpg',15,'3 Inches',3.50,1.25,'Anime fans will rage about this.',1,1,1),
-(12,'Chick-fil-A','uploads/Chick-fil-A.jpg',10,'4 Inhes',4.00,0.59,'Chicken at its finest.',1,2,1),
-(13,'Bee','uploads/Bee.jpg',13,'2 Inches',2.00,0.20,'Bee your self.',1,3,1),
-(14,'Beautify','uploads/Beautify.jpg',20,'3 Inches',2.37,0.34,'Stare in deep into nature.',1,4,1),
-(15,'Doge','uploads/Doge.jpg',34,'4 Inches',4.56,1.27,'You\'re safe when riding a Doge.',2,1,1),
-(16,'Google','uploads/Google.jpg',17,'5 Inches',5.00,0.89,'Bringing people together.',2,2,1),
-(17,'Nightmare Wolf','uploads/Nightmare Wolf.jpg',5,'4 Inches',3.45,1.28,'Don\'t open your eyes.',2,3,1),
-(18,'Hypnotizing','uploads/Hypnotizing.jpg',12,'5 Inches',3.89,0.56,'Biggie Biggie why can\'t you see.',2,4,1),
-(19,'Micro','uploads/Micro.jpg',21,'3 Inches',4.55,2.34,'Gotta laugh at the little things',3,1,1),
-(20,'DC','uploads/DC.jpg',30,'7 Inches',5.76,2.67,'Skate on!',3,2,1),
-(21,'Gyaku Gire Panda','uploads/Gyaku Gire Panda.jpg',23,'4 Inches',3.57,0.99,'Panda-desu.',3,3,1),
-(22,'In Another Dimmension','uploads/In Another Dimmension.jpg',26,'6 Inches',4.78,1.99,'This is what I see.',3,4,1),
-(23,'Ninja CSS','uploads/Ninja CSS.jpg',24,'5 Inches',4.69,2.34,'Who would\'ve guessed.',1,1,1),
-(24,'MATH','uploads/MATH.jpg',19,'6 Inches',5.12,2.39,'Indeed.',3,1,1),
-(25,'Sarcasm','uploads/Sarcasm.jpg',9,'4 Inches',3.54,2.00,'The irony.',3,1,1),
-(26,'Real G','uploads/Real G.jpg',4,'3 Inches',2.68,0.76,'Let\'s just be real.',2,1,1),
-(27,'Hurley X','uploads/Hurley X.jpg',16,'5 Inches',5.56,2.38,'Skate or die.',1,2,1),
-(28,'Clorox','uploads/Clorox.jpg',11,'4 Inches',3.89,1.34,'A shot a day keeps the doctor aw',2,2,1),
-(29,'Harmonicat','uploads/Harmonicat.jpg',23,'5 Inches',6.87,3.00,'Soothe your soul with tunes from',3,3,1),
-(30,'That\'s what she said!','uploads/That\'s what she said!.jpg',6,'7 Inches',6.78,3.45,'All the time.',2,1,1),
-(31,'Heart Monkey','uploads/Heart Monkey.jpg',17,'5 Inches',4.45,1.24,'Love for all!',1,3,1),
-(32,'Just Do It','uploads/Just Do It.jpg',28,'4 Inches',6.55,2.33,'NIKE Co.',3,2,1),
-(33,'MLD','uploads/MLD.jpg',25,'6 Inches',5.55,1.12,'Mayor League Drinking',1,2,1),
-(34,'Fiesty','uploads/Fiesty.jpg',25,'5 Inches',5.56,1.00,'Latina Babe',1,4,1);
+(9,'Pizza Lover\'s','uploads/Pizza Lover\'s.jpg',24,'6 Inches',3.45,0.78,'Pizza written in pizza.',1,4,1),
+(10,'Shady Owl','uploads/Shady Owl.jpg',15,'4 Inches',3.00,1.28,'An owl who loves to be in the pr',2,3,1);
 
 /*Table structure for table `item_category` */
 
@@ -187,31 +162,13 @@ insert  into `item_sub_category`(`id`,`sub_category_name`) values
 (3,'Animals'),
 (4,'Random');
 
-/*Table structure for table `migration` */
-
-DROP TABLE IF EXISTS `migration`;
-
-CREATE TABLE `migration` (
-  `version` varchar(180) NOT NULL,
-  `apply_time` int(11) DEFAULT NULL,
-  PRIMARY KEY (`version`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-/*Data for the table `migration` */
-
-insert  into `migration`(`version`,`apply_time`) values 
-('m000000_000000_base',1491936124),
-('m160516_095943_init',1491936142),
-('m161109_124936_rename_cart_table',1491936142),
-('m161119_153348_alter_cart_data',1491936142);
-
 /*Table structure for table `order` */
 
 DROP TABLE IF EXISTS `order`;
 
 CREATE TABLE `order` (
   `order_number` int(11) NOT NULL AUTO_INCREMENT,
-  `order_date` int(11) DEFAULT NULL,
+  `order_date` date DEFAULT NULL,
   `amount_stickers` int(11) NOT NULL,
   `total_price` decimal(4,2) DEFAULT NULL,
   `order_status` int(1) DEFAULT NULL,
@@ -223,14 +180,13 @@ CREATE TABLE `order` (
   KEY `shipper_company_name` (`shipper_company_name`),
   CONSTRAINT `order_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `order_ibfk_2` FOREIGN KEY (`shipper_company_name`) REFERENCES `shipper` (`shipper_name`) ON DELETE CASCADE ON UPDATE CASCADE
-
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
-
+) ENGINE=InnoDB AUTO_INCREMENT=143433 DEFAULT CHARSET=utf8;
 
 /*Data for the table `order` */
 
 insert  into `order`(`order_number`,`order_date`,`amount_stickers`,`total_price`,`order_status`,`customer_id`,`shipper_company_name`,`tracking_number`) values 
-(18,1492318469,3,11.95,1,11,'UPS',5613);
+(123,'2017-04-06',3,4.05,1,11,'UPS',2147483647),
+(143432,'2017-06-04',10,20.00,0,11,'UPS',12345);
 
 /*Table structure for table `payment_method` */
 
@@ -247,24 +203,52 @@ CREATE TABLE `payment_method` (
 
 /*Data for the table `payment_method` */
 
-insert  into `payment_method`(`customer_id`,`card_last_digits`,`exp_date`,`card_type`) values 
-(28,9999,9999,'Visa');
-
 /*Table structure for table `phone_number` */
 
 DROP TABLE IF EXISTS `phone_number`;
 
 CREATE TABLE `phone_number` (
   `customer_id` int(11) NOT NULL,
-  `number` varchar(15) NOT NULL,
+  `number` int(11) NOT NULL,
   PRIMARY KEY (`customer_id`),
   CONSTRAINT `phone_number_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `phone_number` */
 
-insert  into `phone_number`(`customer_id`,`number`) values 
-(28,'999-999-9999');
+/*Table structure for table `report_type` */
+
+DROP TABLE IF EXISTS `report_type`;
+
+CREATE TABLE `report_type` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `type_name` varchar(58) NOT NULL DEFAULT '',
+  `active` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `report_type` */
+
+/*Table structure for table `reports` */
+
+DROP TABLE IF EXISTS `reports`;
+
+CREATE TABLE `reports` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(250) NOT NULL DEFAULT '',
+  `description` text,
+  `type` varchar(11) NOT NULL,
+  `from_date` timestamp NULL DEFAULT NULL,
+  `to_date` timestamp NULL DEFAULT NULL,
+  `refers_to` varchar(58) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+/*Data for the table `reports` */
+
+insert  into `reports`(`id`,`title`,`description`,`type`,`from_date`,`to_date`,`refers_to`) values 
+(1,'Reporte 1','Hola Reporte','0','2017-01-01 00:00:00','2018-01-01 00:00:00','No Group'),
+(2,'Reporte 2','Reporte segundo.','Revenue','2017-02-01 00:00:00','2017-09-29 00:00:00','No Group');
 
 /*Table structure for table `shipper` */
 
@@ -280,7 +264,7 @@ CREATE TABLE `shipper` (
 /*Data for the table `shipper` */
 
 insert  into `shipper`(`shipper_name`,`company_phone_num`,`company_address`) values 
-('UPS',999,'Sample Address');
+('UPS',2147483647,'Sector Lopez, Lares');
 
 /*Table structure for table `shipping_address` */
 
@@ -297,9 +281,6 @@ CREATE TABLE `shipping_address` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `shipping_address` */
-
-insert  into `shipping_address`(`customer_id`,`street_name`,`apt_number`,`zipcode`,`state`) values 
-(28,'uyhb',123,99999,'pr');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

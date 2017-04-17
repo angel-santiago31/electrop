@@ -33,6 +33,7 @@ class Item extends ActiveRecord implements \yz\shoppingcart\CartPositionInterfac
     public const ACTIVE = 1;
     public const DELETED = 0;
     public $file;
+    public $quota;
 
     public const DECALS = 1;
     public const WALL = 2;
@@ -65,6 +66,7 @@ class Item extends ActiveRecord implements \yz\shoppingcart\CartPositionInterfac
             [['item_category_id'], 'exist', 'skipOnError' => true, 'targetClass' => ItemCategory::className(), 'targetAttribute' => ['item_category_id' => 'id']],
             [['item_sub_category_id'], 'exist', 'skipOnError' => true, 'targetClass' => ItemSubCategory::className(), 'targetAttribute' => ['item_sub_category_id' => 'id']],
             [['file'], 'file', 'extensions' => 'png, jpg'],
+            [['quantity'], 'integer'],
         ];
     }
 

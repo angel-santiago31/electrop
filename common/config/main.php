@@ -6,7 +6,7 @@ return [
             'class' => 'yii\caching\FileCache',
         ],
         'formatter' => [
-            'dateFormat' => 'dd/MM/yyyy',
+            'dateFormat' => 'yyyy-MM-dd',
             'locale' => 'en-US',
             'timeZone' => 'America/Puerto_Rico',
             //'decimalSeparator' => ',',

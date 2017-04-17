@@ -58,11 +58,12 @@ class SignupForm extends Model
             ['phoneNumber', 'integer', 'min' => 10],
            
             ['cardLastDigits', 'required'],
-            ['cardLastDigits', 'integer', 'max' => 4],
+            ['cardLastDigits', 'integer', 'min' => 4],
            
             ['cardType', 'required'],
            
             ['expDate', 'required'],
+            ['expDate','string', 'min' => 4],
 
             ['streetName', 'required'],
             ['aptNumber', 'required'],

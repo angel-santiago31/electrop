@@ -3,6 +3,7 @@
 namespace backend\models;
 
 use Yii;
+use common\models\Customer;
 
 /**
  * This is the model class for table "shipping_address".
@@ -35,7 +36,7 @@ class ShippingAddress extends \yii\db\ActiveRecord
             [['customer_id', 'apt_number', 'zipcode'], 'integer'],
             [['street_name'], 'string', 'max' => 32],
             [['state'], 'string', 'max' => 2],
-            //[['customer_id'], 'exist', 'skipOnError' => true, 'targetClass' => Customer::className(), 'targetAttribute' => ['customer_id' => 'id']],
+            [['customer_id'], 'exist', 'skipOnError' => true, 'targetClass' => Customer::className(), 'targetAttribute' => ['customer_id' => 'id']],
         ];
     }
 

@@ -3,6 +3,7 @@
 namespace backend\models;
 
 use Yii;
+use common\models\Customer;
 
 /**
  * This is the model class for table "phone_number".
@@ -29,8 +30,9 @@ class PhoneNumber extends \yii\db\ActiveRecord
     {
         return [
             [['customer_id', 'number'], 'required'],
-            [['customer_id', 'number'], 'integer'],
-           // [['customer_id'], 'exist', 'skipOnError' => true, 'targetClass' => Customer::className(), 'targetAttribute' => ['customer_id' => 'id']],
+            [['customer_id'], 'integer'],
+            [['number'], 'string'],
+            [['customer_id'], 'exist', 'skipOnError' => true, 'targetClass' => Customer::className(), 'targetAttribute' => ['customer_id' => 'id']],
         ];
     }
 

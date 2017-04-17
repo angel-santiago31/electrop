@@ -11,6 +11,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use kartik\mpdf\Pdf;
+use kartik\growl\Growl;
 
 /**
  * ReportsController implements the CRUD actions for Reports model.
@@ -83,14 +84,14 @@ class ReportsController extends Controller
 
     */
 
-    public function actionPdf($id, $fromDate, $toDate)
+    public function actionPdf($id, $fromDate, $toDate, $groupedBy)
     {
           $model = $this->findModel($id);
 
           $orders = new Order();
           $allOrders = Order::find()->where([ '>', 'order_date', $fromDate])->andWhere(['<', 'order_date', $toDate])->all();
 
-          if($allOrders) 
+          if($allOrders && $groupedBy == 'No Group') 
           {
             $ordersInfo = $allOrders[0]->find()->joinWith('contains', 'item')->all();
 
@@ -108,7 +109,8 @@ class ReportsController extends Controller
                             'ordersInfo' => $ordersInfo,
                             'sumQty' => $sumQty,
                             'sumSales' => $sumSales,
-                            'allOrders' => $allOrders
+                            'allOrders' => $allOrders,
+                            'groupedBy' => $groupedBy
                             ]),
                             'methods' => [
                                     'SetHeader' => ['Report Name: ' . $model->title],
@@ -117,14 +119,76 @@ class ReportsController extends Controller
 
                 return $pdf->render();
           } 
-          else 
+          else if($allOrders)
+          {
+              $sql = 'SELECT *
+                        FROM `order` INNER JOIN `contains` INNER JOIN `item` INNER JOIN `item_category`
+                        WHERE `contains`.item_id = `item`.item_id AND `order`.order_number = `contains`.order_number AND `item`.item_category_id = `item_category`.id
+                        AND `item`.item_category_id = ' .  $groupedBy;
+              $ordersInfo = $allOrders[0]->findBySql($sql)->all();
+              if($ordersInfo != null)
+              {
+
+                //Sum of the quantities grouped by the item category selected.
+                $sqlGroupByQty = 'SELECT SUM(`order`.amount_stickers) AS amount_sum
+                            FROM `order` INNER JOIN `contains` INNER JOIN `item` INNER JOIN `item_category`
+                            WHERE `contains`.item_id = `item`.item_id AND `order`.order_number = `contains`.order_number AND `item`.item_category_id = `item_category`.id
+                            GROUP BY item_category_id
+                            HAVING item_category_id = ' . $groupedBy;
+                $sumQty = $ordersInfo[0]->findBySql($sqlGroupByQty)->all();
+
+                //Sum of Total Sales grouped by the item category selected.
+                $sqlGroupByPrice = 'SELECT SUM(`order`.total_price) AS total_sum
+                            FROM `order` INNER JOIN `contains` INNER JOIN `item` INNER JOIN `item_category`
+                            WHERE `contains`.item_id = `item`.item_id AND `order`.order_number = `contains`.order_number AND `item`.item_category_id = `item_category`.id
+                            GROUP BY item_category_id
+                            HAVING item_category_id = ' . $groupedBy;
+                $sumSales = $ordersInfo[0]->findBySql($sqlGroupByPrice)->all();
+        
+                $pdf = new Pdf(['mode' => Pdf::MODE_CORE,
+                                'format' => Pdf::FORMAT_A4,
+                                'orientation' => Pdf::ORIENT_PORTRAIT,
+                                'content' => $this->renderPartial('pdf', [
+                                'model' => $model,
+                                'ordersInfo' => $ordersInfo,
+                                'sumQty' => $sumQty,
+                                'sumSales' => $sumSales,
+                                'allOrders' => $allOrders,
+                                'groupedBy' => $groupedBy
+                                ]),
+                                'methods' => [
+                                        'SetHeader' => ['Report Name: ' . $model->title],
+                                        ]
+                                ]);
+
+                    return $pdf->render();
+              }
+              else 
+              {
+                  $pdf = new Pdf(['mode' => Pdf::MODE_CORE,
+                            'format' => Pdf::FORMAT_A4,
+                            'orientation' => Pdf::ORIENT_PORTRAIT,
+                            'content' => $this->renderPartial('pdf', [
+                            'model' => $model,
+                            'allOrders' => $allOrders,
+                            'ordersInfo' => $ordersInfo
+                            ]),
+                            'methods' => [
+                                    'SetHeader' => ['Report Name: ' . $model->title],
+                                    ]
+                            ]);
+
+                  return $pdf->render();
+              }
+          }
           {
                 $pdf = new Pdf(['mode' => Pdf::MODE_CORE,
                             'format' => Pdf::FORMAT_A4,
                             'orientation' => Pdf::ORIENT_PORTRAIT,
                             'content' => $this->renderPartial('pdf', [
                             'model' => $model,
-                            'allOrders' => $allOrders
+                            'allOrders' => $allOrders,
+                            'groupedBy' => $groupedBy
                             ]),
                             'methods' => [
                                     'SetHeader' => ['Report Name: ' . $model->title],

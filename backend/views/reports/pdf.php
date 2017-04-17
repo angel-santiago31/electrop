@@ -1,6 +1,6 @@
 <?php
 use yii\helpers\Html;
-
+use kartik\growl\Growl;
 ?>
 
 
@@ -16,7 +16,7 @@ use yii\helpers\Html;
     </div>
 
     <div style = "margin-top: 8%;, font-size: large;">
-        <p><strong>Report ID Number: <span><?= $model->id; ?></span></strong></p>
+        <p><strong>Report Number: <span><?= $model->id; ?></span></strong></p>
     </div>
 
     <div style = "margin-top: 3%;, font-size: large;">
@@ -40,7 +40,11 @@ use yii\helpers\Html;
         </table>
 
         <?php 
-                if($allOrders)
+
+        //total sum of the revenue.
+        $sumRevenue = 0;
+
+                if($allOrders && $ordersInfo != null)
                     {                            ?>
                         <div style="margin-left: 25%;">
                             <table style="font-family: "Helvetica Neue", Helvetica, sans-serif">
@@ -68,7 +72,19 @@ use yii\helpers\Html;
                                 <th style="padding: 5px 10px;"><?= "$" . $order->contains[0]->item->gross_price;
                                 ?></th>            
                                 <td style="padding: 5px 10px;"><?= $order->contains[0]->quantity_in_order; ?></td>
-                                <td style="padding: 5px 10px;"><?= '$' . ($order->contains[0]->quantity_in_order * $order->contains[0]->item->gross_price); ?></td>
+                                <td style="padding: 5px 10px;"><?php
+                                
+                                if($model->type == 'Sales')
+                                {
+                                    echo '$' . ($order->contains[0]->quantity_in_order * $order->contains[0]->item->gross_price);
+                                } 
+                                else 
+                                {
+                                    echo '$' . (($order->contains[0]->quantity_in_order * $order->contains[0]->item->gross_price) - ($order->contains[0]->quantity_in_order * $order->contains[0]->item->production_cost));
+                                    $sumRevenue += (($order->contains[0]->quantity_in_order * $order->contains[0]->item->gross_price) - ($order->contains[0]->quantity_in_order * $order->contains[0]->item->production_cost));
+                                }
+                                
+                                ?></td>
                                 </tr>
                             </tbody>
                             <?php endforeach;  ?>
@@ -77,8 +93,36 @@ use yii\helpers\Html;
                                     color: white;
                                     text-align: right;">
                                 <th style="padding: 5px 10px;" colspan="3">Grand Total</th>
-                                <th style="padding: 5px 10px; font-family: monospace;"><?= $sumQty;?></th>
-                                <th style="padding: 5px 10px; font-family: monospace;"><?= "$" . $sumSales ?></th>
+                                <th style="padding: 5px 10px; font-family: monospace;"><?php 
+                                
+                                if($allOrders && $groupedBy == 'No Group')
+                                {
+                                    echo $sumQty;
+                                }
+                                else
+                                {
+                                    echo $sumQty[0]->amount_sum;
+                                }
+                                ?></th>
+                                <th style="padding: 5px 10px; font-family: monospace;"><?php 
+                                
+                                if($model->type == 'Sales')
+                                {
+                                    if($allOrders && $groupedBy == 'No Group')
+                                    {
+                                        echo "$" . $sumSales;
+                                    }
+                                    else
+                                    {
+                                        echo "$" . $sumSales[0]->total_sum;
+                                    }
+                                }
+                                else 
+                                {
+                                    echo "$" . $sumRevenue;
+                                }
+                                
+                                ?></th>
                                 </tr>
                             </tfoot>
                             </table>

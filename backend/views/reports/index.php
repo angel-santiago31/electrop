@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label' => 'View PDF',
                 'format' => 'raw',
                 'value' => function ($model) {
-                    return Html::a('<i class="glyphicon glyphicon-file"></i> PDF', ['pdf', 'id' => $model->id, 'fromDate' => $model->from_date, 'toDate' => $model->to_date], ['class' => 'btn btn-xs btn-danger', 'target' => '_blank']);
+                    return Html::a('<i class="glyphicon glyphicon-file"></i> PDF', ['pdf', 'id' => $model->id, 'fromDate' => $model->from_date, 'toDate' => $model->to_date, 'groupedBy' => $model->refers_to], ['class' => 'btn btn-xs btn-danger', 'target' => '_blank']);
                 }
             ],
         ],

@@ -23,6 +23,10 @@ use Yii;
  */
 class Order extends \yii\db\ActiveRecord
 {
+
+    public $total_sum;
+    public $amount_sum;
+
     /**
      * @inheritdoc
      */

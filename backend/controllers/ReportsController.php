@@ -71,7 +71,11 @@ class ReportsController extends Controller
 
         $itemsList = Item::getItems();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            echo $model->itemId;
+            $value = $model->itemId;
+            $model->setItemId($value);
+            $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [

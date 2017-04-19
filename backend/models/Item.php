@@ -153,7 +153,7 @@ class Item extends ActiveRecord implements \yz\shoppingcart\CartPositionInterfac
         $sql = 'SELECT * FROM `item`';
         $items = Item::findBySql($sql)->all();
 
-        $itemsList = ArrayHelper::map($items, 'id', 'name');
+        $itemsList = ArrayHelper::map($items, 'name', 'name');
 
         return $itemsList;
     }

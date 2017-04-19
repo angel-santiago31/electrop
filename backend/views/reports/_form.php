@@ -41,7 +41,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'refers_to')->textInput(['maxlength' => true])->label('Grouped By')->dropDownList([ 'No Group' => 'No Group', '1' => 'Decals', '2' => 'Wall', '3' => 'Floor', '4' => 'By Item ID'], ['id' => 'refers_to', 'prompt'=>'--Select--']); ?>
 
     <div id="itemIdField">
-        <?= $form->field($model, 'item_id')->textInput()->dropDownList([$itemsList], ['prompt'=>'--Items--']); ?>
+        <?= $form->field($model, 'itemId')->textInput()->dropDownList([$itemsList], ['prompt'=>'--Items--']); ?>
     </div>
 
     <div class="form-group">

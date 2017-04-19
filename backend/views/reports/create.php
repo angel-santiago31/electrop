@@ -18,6 +18,7 @@ $this->title = 'Create Reports';
         <div class="panel-body">
             <?= $this->render('_form', [
                     'model' => $model,
+                    'itemsList' => $itemsList
                 ]) ?>
         </div>
     </div>

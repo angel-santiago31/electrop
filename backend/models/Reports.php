@@ -18,6 +18,7 @@ use Yii;
 class Reports extends \yii\db\ActiveRecord
 {
     public $item_id;
+    
     /**
      * @inheritdoc
      */

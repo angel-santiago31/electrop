@@ -58,7 +58,7 @@ class SignupForm extends Model
             [['aptNumber'], 'integer'],
             [['state', 'zipcode'], 'string'],
 
-            [['number'], 'string', 'max' => 15],
+            [['number'], 'string', 'min' => 12],
         ];
     }
     /**

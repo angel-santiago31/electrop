@@ -12,7 +12,7 @@ MySQL - 10.1.21-MariaDB : Database - electrop
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`electrop` /*!40100 DEFAULT CHARACTER SET utf8 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`electrop` /*!40100 DEFAULT CHARACTER SET latin1 */;
 
 USE `electrop`;
 
@@ -57,10 +57,6 @@ CREATE TABLE `contains` (
 
 /*Data for the table `contains` */
 
-insert  into `contains`(`order_number`,`item_id`,`price_sold`,`quantity_in_order`) values 
-(123,4,1.35,3),
-(143432,5,2.00,10);
-
 /*Table structure for table `customer` */
 
 DROP TABLE IF EXISTS `customer`;
@@ -70,10 +66,10 @@ CREATE TABLE `customer` (
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `password_hash` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `first_name` varchar(18) COLLATE utf8_unicode_ci NOT NULL,
-  `middle_name` varchar(18) COLLATE utf8_unicode_ci NOT NULL,
+  `middle_name` varchar(18) COLLATE utf8_unicode_ci DEFAULT NULL,
   `fathers_last_name` varchar(18) COLLATE utf8_unicode_ci NOT NULL,
   `mothers_last_name` varchar(18) COLLATE utf8_unicode_ci NOT NULL,
-  `date_of_birth` int(8) NOT NULL,
+  `date_of_birth` date NOT NULL,
   `age` int(2) DEFAULT NULL,
   `auth_key` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
   `password_reset_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -84,14 +80,12 @@ CREATE TABLE `customer` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `password_reset_token` (`password_reset_token`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `customer` */
 
 insert  into `customer`(`id`,`email`,`password_hash`,`first_name`,`middle_name`,`fathers_last_name`,`mothers_last_name`,`date_of_birth`,`age`,`auth_key`,`password_reset_token`,`status`,`created_at`,`updated_at`,`active`) values 
-(11,'angel.santiago31@upr.edu','$2y$13$FRoVVuY51PeOSprQgXqxyOoT3a6uZdODj4uqmsAd0Y9WFzWrHnU/O','Angel','Eduardo','Santiago','González',10,NULL,'i76U4HtSj5hRm19MRcV3zpXw9I0uFRhM',NULL,10,1491411798,1491411798,0),
-(12,'erick.rivera6@upr.edu','$2y$13$M5UpksDkDlvgt/lUm1m/lOaQ7R97gkbNEZW.zl7ZGEhjSD0BNfPY.','Erick','','Rivera','Cruz',12,NULL,'DdZQQZEetFOXZcoL5LVzhOwOByIW07Xa',NULL,10,1491695547,1491695547,0),
-(13,'huelga@upra.com','$2y$13$Qqdd5SXlZpcVuL1sCrVgXuyraBjHDI/l4IyG0fhiv/Ccvd2iTnBTa','Once','Recintos','Una','Upr',12,NULL,'CFnXDz1i7Xdu29AkGMAxcPAaVgRdN0qD',NULL,10,1491842106,1491842106,0);
+(17,'elliot.lopez1@upr.edu','$2y$13$bAWKXcpOd.SJU2E7fz7YCOcUpZ/dXxsmsE.weq/gbUK9i7ECbZ2P6','qwer',NULL,'eqrwte','wqer','2017-04-25',NULL,'Cd1gmOoaEbhsNj5P1SzzOEctAWs9F191',NULL,10,1492467071,1492467071,0);
 
 /*Table structure for table `item` */
 
@@ -180,13 +174,9 @@ CREATE TABLE `order` (
   KEY `shipper_company_name` (`shipper_company_name`),
   CONSTRAINT `order_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `order_ibfk_2` FOREIGN KEY (`shipper_company_name`) REFERENCES `shipper` (`shipper_name`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=143433 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `order` */
-
-insert  into `order`(`order_number`,`order_date`,`amount_stickers`,`total_price`,`order_status`,`customer_id`,`shipper_company_name`,`tracking_number`) values 
-(123,'2017-04-06',3,4.05,1,11,'UPS',2147483647),
-(143432,'2017-06-04',10,20.00,0,11,'UPS',12345);
 
 /*Table structure for table `payment_method` */
 
@@ -195,7 +185,7 @@ DROP TABLE IF EXISTS `payment_method`;
 CREATE TABLE `payment_method` (
   `customer_id` int(11) NOT NULL,
   `card_last_digits` int(4) NOT NULL,
-  `exp_date` int(10) NOT NULL,
+  `exp_date` varchar(6) NOT NULL,
   `card_type` varchar(32) NOT NULL,
   PRIMARY KEY (`customer_id`),
   CONSTRAINT `payment_method_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -203,18 +193,24 @@ CREATE TABLE `payment_method` (
 
 /*Data for the table `payment_method` */
 
+insert  into `payment_method`(`customer_id`,`card_last_digits`,`exp_date`,`card_type`) values 
+(17,1213,'43/12','American Exppress');
+
 /*Table structure for table `phone_number` */
 
 DROP TABLE IF EXISTS `phone_number`;
 
 CREATE TABLE `phone_number` (
   `customer_id` int(11) NOT NULL,
-  `number` int(11) NOT NULL,
+  `number` varchar(12) NOT NULL,
   PRIMARY KEY (`customer_id`),
   CONSTRAINT `phone_number_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `phone_number` */
+
+insert  into `phone_number`(`customer_id`,`number`) values 
+(17,'324-14_-____');
 
 /*Table structure for table `report_type` */
 
@@ -274,13 +270,16 @@ CREATE TABLE `shipping_address` (
   `customer_id` int(11) NOT NULL,
   `street_name` varchar(32) NOT NULL,
   `apt_number` int(11) NOT NULL,
-  `zipcode` int(5) NOT NULL,
+  `zipcode` varchar(5) NOT NULL,
   `state` varchar(2) NOT NULL,
   PRIMARY KEY (`customer_id`),
   CONSTRAINT `shipping_address_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `shipping_address` */
+
+insert  into `shipping_address`(`customer_id`,`street_name`,`apt_number`,`zipcode`,`state`) values 
+(17,'41324124',123441,'23344','IN');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

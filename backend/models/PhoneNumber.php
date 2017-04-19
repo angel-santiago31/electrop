@@ -43,7 +43,7 @@ class PhoneNumber extends \yii\db\ActiveRecord
     {
         return [
             'customer_id' => 'Customer ID',
-            'number' => 'Number',
+            'number' => 'Phone Number',
         ];
     }
 

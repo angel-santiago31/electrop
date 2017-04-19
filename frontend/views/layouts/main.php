@@ -61,7 +61,7 @@ AppAsset::register($this);
     } else {
         $menuItems[] = ['label' => '<i class="glyphicon glyphicon-user"></i>',
             'items' => [
-                ['label' => '<li>'
+                ['label' => '<li class="text-center">'
                 . Html::beginForm(['/customer/account', 'id' => Yii::$app->user->identity->id])
                 . Html::submitButton(
                     '<i class="glyphicon glyphicon-user"></i> My Account',
@@ -70,11 +70,10 @@ AppAsset::register($this);
                 . Html::endForm()
                 . '</li>' . '<li class="divider">|</li>'
                 ],
-                ['label' =>
-                    '<li>'
+                ['label' => '<li class="text-center">'
                 . Html::beginForm(['/site/logout'], 'post')
                 . Html::submitButton(
-                    '<i class="glyphicon glyphicon-log-out"></i> Logout (' . Yii::$app->user->identity->first_name . ')',
+                    '<i class="glyphicon glyphicon-log-out"></i> Logout',
                     ['class' => 'btn btn-link logout']
                 )
                 . Html::endForm()

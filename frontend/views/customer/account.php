@@ -8,10 +8,42 @@ use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
 use yii\widgets\DetailView;
 use yii\bootstrap\ActiveForm;
+use kartik\tabs\TabsX;
 
 $this->title = 'My Account';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
+<?php
+    $items = [
+        [
+           'label'=>'<i class="glyphicon glyphicon-user"></i> User',
+           'content'=> $this->render('_user', ['model' => $model,]),
+           'active'=>true,
+           //'linkOptions'=>['data-url'=>\yii\helpers\Url::to(['/default/solicitar-transcripcion'])],
+        ],
+        [
+           'label'=>'<i class="glyphicon glyphicon-user"></i> Phone',
+           'content'=> $this->render('_phone', ['phone' => $phone,]),
+           'active'=>false,
+           //'linkOptions'=>['data-url'=>\yii\helpers\Url::to(['/default/solicitar-transcripcion'])],
+        ],
+        [
+           'label'=>'<i class="glyphicon glyphicon-user"></i> Payment',
+           'content'=> $this->render('_paymentMethod', ['payment_method' => $payment_method,]),
+           'active'=>false,
+           //'linkOptions'=>['data-url'=>\yii\helpers\Url::to(['/default/solicitar-transcripcion'])],
+        ],
+        [
+           'label'=>'<i class="glyphicon glyphicon-user"></i> Shiping',
+           'content'=> $this->render('_shippingAddress', ['shipping_address' => $shipping_address,]),
+           'active'=>false,
+           //'linkOptions'=>['data-url'=>\yii\helpers\Url::to(['/default/solicitar-transcripcion'])],
+        ],
+    ];
+
+?>
+
 <div class="container">
   <div class="col-sm-12">
       <div class="panel panel-default">
@@ -23,23 +55,17 @@ $this->params['breadcrumbs'][] = $this->title;
   </div>
   <div class="col-sm-6">
       <div class="panel panel-default">
-          <div class="panel-heading" style="text-align:center">
+          <div class="panel-heading text-center">
               Account Details
           </div>
           <div class="panel-body">
-                  <?= DetailView::widget([
-                      'model' => $model,
-                      'attributes' => [
-                          'email:email',
-                          'first_name',
-                          'middle_name',
-                          'fathers_last_name',
-                          'mothers_last_name',
-                          'date_of_birth',
-                      ],
-                  ]) ?>
-
-                  <?= Html::button('<i class="glyphicon glyphicon-pencil"></i> Update', [ 'value' => Url::to(['update', 'id' => $model->id]), 'class' => 'btn btn-danger pull-right redCss', 'id' => 'updateInfo']); ?>
+              <?php
+                  echo TabsX::widget([
+                      'items'=>$items,
+                      'position'=>TabsX::POS_ABOVE,
+                      'encodeLabels'=>false
+                  ]);
+              ?>
           </div>
       </div>
   </div>

@@ -61,6 +61,17 @@ class SignupForm extends Model
             [['number'], 'string', 'min' => 12],
         ];
     }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'number' => 'Phone Number',
+        ];
+    }
+
     /**
      * Signs user up.
      *

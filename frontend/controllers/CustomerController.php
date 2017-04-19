@@ -8,6 +8,9 @@ use common\models\CustomerSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use backend\models\PhoneNumber;
+use backend\models\ShippingAddress;
+use backend\models\PaymentMethod;
 
 /**
  * CustomerController implements the CRUD actions for Customer model.
@@ -63,8 +66,16 @@ class CustomerController extends Controller
      */
     public function actionAccount($id)
     {
+        $customer = $this->findModel($id);
+        $customer_phone = $this->findPhone($customer->id);
+        $customer_shipping_address = $this->findShippingAddress($customer->id);
+        $customer_payment_method = $this->findPaymentMethod($customer->id);
+
         return $this->render('account', [
-            'model' => $this->findModel($id),
+            'model' => $customer,
+            'phone' => $customer_phone,
+            'shipping_address' => $customer_shipping_address,
+            'payment_method' => $customer_payment_method,
         ]);
     }
 
@@ -116,4 +127,51 @@ class CustomerController extends Controller
         }
     }
 
+    /**
+     * Finds the Customer's phone number model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return Customer's phone number the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findPhone($id)
+    {
+        if (($model = PhoneNumber::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+    /**
+     * Finds the Customer's payment method model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return Customer's phone number the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findShippingAddress($id)
+    {
+        if (($model = ShippingAddress::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+    /**
+     * Finds the Customer's payment method model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return Customer's phone number the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findPaymentMethod($id)
+    {
+        if (($model = PaymentMethod::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
 }

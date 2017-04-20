@@ -37,7 +37,7 @@ AppAsset::register($this);
        </div>";
 
        Modal::end();
-   ?>
+?>
 <body>
 <?php $this->beginBody() ?>
 

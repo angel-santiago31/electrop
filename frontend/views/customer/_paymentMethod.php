@@ -24,5 +24,5 @@ use yii\helpers\Url;
 
     <?= Html::button('<i class="glyphicon glyphicon-pencil"></i> Update',
                     ['value' => Url::to(['update']),
-                     'class' => 'btn btn-danger pull-right redCss', 'id' => 'updateInfo']); ?>
+                     'class' => 'btn btn-danger pull-right redCss', 'id' => 'updatePaymentMethod']); ?>
 <?php Pjax::end(); ?>

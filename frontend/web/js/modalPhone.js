@@ -1,6 +1,6 @@
 $(function() {
    // get the click for updating personal data
-   $('#updateInfo').click(function() {
+   $('#updatePhoneNumber').click(function() {
        $('#modal').modal('show')
            .find('#modalContent')
            .load($(this).attr('value'));

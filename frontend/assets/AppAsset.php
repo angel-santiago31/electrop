@@ -18,7 +18,8 @@ class AppAsset extends AssetBundle
     public $js = [
         'js/script.js',
         'js/quantity_selection.js',
-        'js/modal.js'
+        'js/modal.js',
+        'js/modalPhone.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',

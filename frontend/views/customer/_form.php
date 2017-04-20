@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\date\DatePicker;
+use yii\widgets\MaskedInput;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Customer */
@@ -23,7 +25,13 @@ use yii\widgets\ActiveForm;
 
               <?= $form->field($model, 'mothers_last_name')->textInput() ?>
 
-              <?= $form->field($model, 'date_of_birth')->textInput() ?>
+              <?= $form->field($model, 'date_of_birth')->widget(DatePicker::classname(), [
+                      'options' => ['placeholder' => 'Enter End Date ...'],
+                      'pluginOptions' => [
+                      'autoclose'=>true,
+                      'format' => 'yyyy-mm-dd'
+                      ]
+                      ]) ?>
           </div>
       </div>
 

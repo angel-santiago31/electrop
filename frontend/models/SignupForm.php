@@ -44,21 +44,21 @@ class SignupForm extends Model
             ['password', 'required'],
             ['password', 'string', 'min' => 6],
 
-            [['firstName', 'middleName', 'fathersLastName', 'mothersLastName', 'dateOfBirth'], 'required'],
+            [['firstName', 'fathersLastName', 'mothersLastName', 'dateOfBirth'], 'required'],
             [['firstName', 'middleName', 'fathersLastName', 'mothersLastName'], 'string', 'max' => 18],
             [['dateOfBirth'], 'string'],
 
             [['cardLastDigits', 'expDate', 'cardType'], 'required'],
             [['cardLastDigits'], 'integer', 'min' => 4],
-            [['expDate'], 'integer'],
+            [['expDate'], 'string'],
             [['cardType'], 'string', 'max' => 32],
 
             [['streetName', 'aptNumber', 'zipcode', 'state'], 'required'],
             [['streetName'], 'string', 'max' => 32],
-            [['aptNumber', 'zipcode'], 'integer'],
-            [['state'], 'string'],
+            [['aptNumber'], 'integer'],
+            [['state', 'zipcode'], 'string'],
 
-            [['number'], 'string', 'max' => 15],
+            [['number'], 'string', 'min' => 12],
         ];
     }
     /**

@@ -32,8 +32,9 @@ class PaymentMethod extends \yii\db\ActiveRecord
     {
         return [
             [['customer_id', 'card_last_digits', 'exp_date', 'card_type'], 'required'],
-            [['customer_id', 'card_last_digits'], 'integer'],
-            [['card_type', 'exp_date'], 'string', 'max' => 32],
+            [['customer_id', 'card_last_digits', 'exp_date'], 'integer'],
+            [['exp_date'], 'string'],            
+            [['card_type'], 'string', 'max' => 32],
             [['customer_id'], 'exist', 'skipOnError' => true, 'targetClass' => Customer::className(), 'targetAttribute' => ['customer_id' => 'id']],
         ];
     }

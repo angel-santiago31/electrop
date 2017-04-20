@@ -33,7 +33,8 @@ class ShippingAddress extends \yii\db\ActiveRecord
     {
         return [
             [['customer_id', 'street_name', 'apt_number', 'zipcode', 'state'], 'required'],
-            [['customer_id', 'apt_number', 'zipcode'], 'integer'],
+            [['customer_id', 'apt_number'], 'integer'],
+            [['zipcode'], 'string'],
             [['street_name'], 'string', 'max' => 32],
             [['state'], 'string', 'max' => 2],
             [['customer_id'], 'exist', 'skipOnError' => true, 'targetClass' => Customer::className(), 'targetAttribute' => ['customer_id' => 'id']],

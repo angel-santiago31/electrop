@@ -24,6 +24,7 @@ $this->title = 'Reports';
                     <p>
                         <?= Html::a('<i class="glyphicon glyphicon-plus"></i> Create Report', ['create'], ['class' => 'btn btn-success']) ?>
                     </p>
+                    <div class="panel-body">
                     <?= GridView::widget([
                         'dataProvider' => $dataProvider,
                         'columns' => [
@@ -39,11 +40,20 @@ $this->title = 'Reports';
                                 'label' => 'View PDF',
                                 'format' => 'raw',
                                 'value' => function ($model) {
-                                    return Html::a('<i class="glyphicon glyphicon-file"></i> PDF', ['pdf', 'id' => $model->id, 'fromDate' => $model->from_date, 'toDate' => $model->to_date, 'groupedBy' => $model->refers_to], ['class' => 'btn btn-xs btn-danger', 'target' => '_blank']);
+                                    if($model->item_selected == NULL)
+                                    {
+                                        $model->item_selected = 'No Specific Item';
+                                        return Html::a('<i class="glyphicon glyphicon-file"></i> PDF', ['pdf', 'id' => $model->id, 'fromDate' => $model->from_date, 'toDate' => $model->to_date, 'groupedBy' => $model->refers_to, 'itemSelected' => $model->item_selected], ['class' => 'btn btn-xs btn-danger', 'target' => '_blank']);
+                                    } 
+                                    else 
+                                    {
+                                        return Html::a('<i class="glyphicon glyphicon-file"></i> PDF', ['pdf', 'id' => $model->id, 'fromDate' => $model->from_date, 'toDate' => $model->to_date, 'groupedBy' => $model->refers_to, 'itemSelected' => $model->item_selected], ['class' => 'btn btn-xs btn-danger', 'target' => '_blank']);
+                                    }
                                 }
                             ],
                         ],
                     ]); ?>
-        </dvi>
+                    </div>
+        </div>
     </div>
 </div>

@@ -6,11 +6,11 @@ use kartik\growl\Growl;
 
 	<div style="text-align: center;, margin-left: 50%;, margin-right: 50%;">
         <div style = "float: left;, width: 15%;">
-            <img src="http://scene7.zumiez.com/is/image/zumiez/pdp_hero/Married-To-The-Mob-Birdie-Sticker-_261461-front.jpg"  width="200px" height="200px">
+            <img src="/electrop/backend/web/uploads/electrop.png"  width="200px" height="200px">
         </div>
         <div style = "float: left;, margin-left: 0%;, width: 75%;">
             <h3><?= 'Electrop ' . $model->type . ' Report'; ?></h3>
-            <p style = "text-align: center;">PO Box 1234-Arecibo, P.R 00614 Tel. (787) 999-9999 Ext. 9999</p>
+            <p style = "text-align: center;">P.O. Box 4010 Arecibo P.R. 00614 || Tel. (787) 815-0000 Ext. 9999</p>
             <h3></h3>
         </div>
     </div>
@@ -43,10 +43,15 @@ use kartik\growl\Growl;
 
         //total sum of the revenue.
         $sumRevenue = 0;
+        //Iterable for the foreach.
+        $i = 0;
+        //Boolean 
+        $passedOnce = false;
+        $sameOrder = false;
 
                 if($allOrders && $ordersInfo != null)
                     {                            ?>
-                        <div style="margin-left: 25%;">
+                        <div style="margin-left: 15%; margin-top: 15%;">
                             <table style="font-family: "Helvetica Neue", Helvetica, sans-serif">
                             <caption style="text-align: left;
                             color: silver;
@@ -63,52 +68,88 @@ use kartik\growl\Growl;
                                 <th style="text-align: center; color: white; padding: 5px 10px;"><?= 'Total ' . $model->type; ?></th>
                                 </tr>
                             </thead>
-                            <?php foreach($ordersInfo as $order): 
+                            <?php foreach($ordersInfo as $order):
+
+                               if(sizeof($order->contains) > 1 && $passedOnce && $orderNum == $order->order_number)
+                               {
+                                   $i += 1;
+                               }
+                               else 
+                               {
+                                   $i = 0;
+                               }
+
+                               if($groupedBy && $model->item_selected != '')
+                               {
+                                  if($order->contains[$i]->item_id != $model->item_selected)
+                                  {
+                                     $i += 1;
+                                  }
+                               }
+                               else if($groupedBy != 'All' && $groupedBy != 4)
+                               {
+                                   if($order->contains[$i]->item->item_category_id != $groupedBy)
+                                  {
+                                     $i += 1;
+                                  }
+                               }
                             ?>
                             <tbody>
                                 <tr style="background: WhiteSmoke; text-align:center;">
-                                <td style="padding: 5px 10px;"> <?= $order->contains[0]->item_id; ?></td>
-                                <th style="padding: 5px 10px;"><?= '$' . $order->contains[0]->item->production_cost; ?></th>
-                                <th style="padding: 5px 10px;"><?= "$" . $order->contains[0]->item->gross_price;
+                                <td style="padding: 5px 10px;"> <?= $order->contains[$i]->item_id; ?></td>
+                                <th style="padding: 5px 10px;"><?= '$' . $order->contains[$i]->item->production_cost; ?></th>
+                                <th style="padding: 5px 10px;"><?= "$" . $order->contains[$i]->item->gross_price;
                                 ?></th>            
-                                <td style="padding: 5px 10px;"><?= $order->contains[0]->quantity_in_order; ?></td>
+                                <td style="padding: 5px 10px;"><?= $order->contains[$i]->quantity_in_order; ?></td>
                                 <td style="padding: 5px 10px;"><?php
                                 
-                                if($model->type == 'Sales')
-                                {
-                                    echo '$' . ($order->contains[0]->quantity_in_order * $order->contains[0]->item->gross_price);
-                                } 
-                                else 
-                                {
-                                    echo '$' . (($order->contains[0]->quantity_in_order * $order->contains[0]->item->gross_price) - ($order->contains[0]->quantity_in_order * $order->contains[0]->item->production_cost));
-                                    $sumRevenue += (($order->contains[0]->quantity_in_order * $order->contains[0]->item->gross_price) - ($order->contains[0]->quantity_in_order * $order->contains[0]->item->production_cost));
-                                }
+                                    if($model->type == 'Sales')
+                                    {
+                                        echo '$' . ($order->contains[$i]->quantity_in_order * $order->contains[$i]->item->gross_price);
+                                    } 
+                                    else 
+                                    {
+                                        echo '$' . (($order->contains[$i]->quantity_in_order * $order->contains[$i]->item->gross_price) - ($order->contains[0]->quantity_in_order * $order->contains[0]->item->production_cost));
+                                        $sumRevenue += (($order->contains[$i]->quantity_in_order * $order->contains[$i]->item->gross_price) - ($order->contains[0]->quantity_in_order * $order->contains[0]->item->production_cost));
+                                    }
                                 
                                 ?></td>
                                 </tr>
                             </tbody>
-                            <?php endforeach;  ?>
+                            <?php 
+                                if(sizeof($order->contains) > 1)
+                                {
+                                    $passedOnce = true;
+                                    $orderNum = $order->order_number;
+                                    $i += 1;
+                                }
+                                else
+                                {
+                                    $i = 0;
+                                }
+                            
+                            endforeach;  ?>
                             <tfoot>
-                                <tr style="background: #54FF9F;
+                                <tr style="background: #e50000;
                                     color: white;
                                     text-align: right;">
-                                <th style="padding: 5px 10px;" colspan="3">Grand Total</th>
-                                <th style="padding: 5px 10px; font-family: monospace;"><?php 
+                                <th style="padding: 5px 10px; color: white;" colspan="3">Grand Total</th>
+                                <th style="padding: 5px 10px; font-family: monospace; color: white;"><?php 
                                 
-                                if($allOrders && $groupedBy == 'No Group')
+                                if($allOrders && $groupedBy == 'All')
                                 {
-                                    echo $sumQty;
+                                    echo $sumQty[0]->amount_sum;
                                 }
                                 else
                                 {
                                     echo $sumQty[0]->amount_sum;
                                 }
                                 ?></th>
-                                <th style="padding: 5px 10px; font-family: monospace;"><?php 
+                                <th style="padding: 5px 10px; font-family: monospace; color: white;"><?php 
                                 
                                 if($model->type == 'Sales')
                                 {
-                                    if($allOrders && $groupedBy == 'No Group')
+                                    if($allOrders && $groupedBy == 'All')
                                     {
                                         echo "$" . $sumSales;
                                     }

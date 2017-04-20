@@ -5,6 +5,7 @@ namespace backend\models;
 use Yii;
 use yii\db\ActiveRecord;
 use \yz\shoppingcart\CartPositionTrait;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "item".
@@ -147,8 +148,17 @@ class Item extends ActiveRecord implements \yz\shoppingcart\CartPositionInterfac
       return ($this->active === self::ACTIVE)? 'btn btn-danger' : 'btn btn-danger disabled';
     }
 
-    public function getQuantityNotEmpty()
+    public function getItems()
     {
-      return ($this->quantity_remaining == NULL)? true : false;
+        $sql = 'SELECT * FROM `item`';
+        $items = Item::findBySql($sql)->all();
+
+        $itemsList = ArrayHelper::map($items, 'id', 'name');
+
+        return $itemsList;
     }
-}
+  
+    public function getQuantityNotEmpty()
+        {
+          return ($this->quantity_remaining == NULL)? true : false;
+        }

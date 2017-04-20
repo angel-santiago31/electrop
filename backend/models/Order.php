@@ -126,4 +126,9 @@ class Order extends ActiveRecord
     {
         return $this->hasOne(Shipper::className(), ['shipper_name' => 'shipper_company_name']);
     }
+
+    public function isCartEmpty()
+    {
+        return (Yii::$app->cart->getCount() == NULL) ? 'btn btn-default disabled pull-right' : 'btn btn-default pull-right';
+    }
 }

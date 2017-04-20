@@ -3,6 +3,7 @@
 /* @var $this yii\web\View */
 
 use yii\helpers\Html;
+use backend\models\Order;
 
 $this->title = 'Shopping Cart';
 //$this->params['breadcrumbs'][] = $this->title;
@@ -38,7 +39,7 @@ $this->title = 'Shopping Cart';
                     <br>
                     <hr>
                     <h4 class="pull-right">Subtotal (<?= $itemsCount?> items): $ <?= $total?> </h4> <br><br>
-                    <?= Html::a('<i class="glyphicon glyphicon-send"></i> Proceed to checkout', ['item/checkout'], ['class' => 'btn btn-default pull-right ']) ?>
+                    <?= Html::a('<i class="glyphicon glyphicon-send"></i> Proceed to checkout', ['item/checkout'], ['class' => Order::isCartEmpty()]) ?>
               </div>
           </div>
       </div>

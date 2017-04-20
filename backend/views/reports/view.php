@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'from_date',
             'to_date',
             'refers_to',
-            'itemId'
+            'item_selected'
         ],
     ]) ?>
 

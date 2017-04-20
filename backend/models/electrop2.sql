@@ -195,7 +195,7 @@ DROP TABLE IF EXISTS `payment_method`;
 CREATE TABLE `payment_method` (
   `customer_id` int(11) NOT NULL,
   `card_last_digits` int(4) NOT NULL,
-  `exp_date` int(10) NOT NULL,
+  `exp_date` varchar(5) NOT NULL,
   `card_type` varchar(32) NOT NULL,
   PRIMARY KEY (`customer_id`),
   CONSTRAINT `payment_method_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -241,14 +241,17 @@ CREATE TABLE `reports` (
   `from_date` timestamp NULL DEFAULT NULL,
   `to_date` timestamp NULL DEFAULT NULL,
   `refers_to` varchar(58) DEFAULT NULL,
+  `item_selected` varchar(150) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 /*Data for the table `reports` */
 
-insert  into `reports`(`id`,`title`,`description`,`type`,`from_date`,`to_date`,`refers_to`) values 
-(1,'Reporte 1','Hola Reporte','0','2017-01-01 00:00:00','2018-01-01 00:00:00','No Group'),
-(2,'Reporte 2','Reporte segundo.','Revenue','2017-02-01 00:00:00','2017-09-29 00:00:00','No Group');
+insert  into `reports`(`id`,`title`,`description`,`type`,`from_date`,`to_date`,`refers_to`,`item_selected`) values 
+(1,'Reporte 1','Hola Reporte','0','2017-01-01 00:00:00','2018-01-01 00:00:00','No Group',NULL),
+(2,'Reporte 2','Reporte segundo.','Revenue','2017-02-01 00:00:00','2017-09-29 00:00:00','No Group',NULL),
+(3,'Reporte de Ventas \"Firebreathing King\"','Esta es importante.','Sales','2017-01-27 00:00:00','2018-01-05 00:00:00','4','4'),
+(4,'Reporte de Ganancias \"Wall\"','Los de pared, cuanto me gane por ellos :D','Revenue','2017-02-18 00:00:00','2018-01-06 00:00:00','2','');
 
 /*Table structure for table `shipper` */
 

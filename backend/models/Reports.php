@@ -17,7 +17,6 @@ use Yii;
  */
 class Reports extends \yii\db\ActiveRecord
 {
-    public $itemId;
     
     /**
      * @inheritdoc
@@ -39,7 +38,7 @@ class Reports extends \yii\db\ActiveRecord
             [['from_date', 'to_date'], 'date'],
             [['title'], 'string', 'max' => 250],
             [['refers_to'], 'string', 'max' => 58],
-            [['itemId'], 'string']
+            [['item_selected'], 'string', 'max' => 150]
         ];
     }
 
@@ -56,27 +55,7 @@ class Reports extends \yii\db\ActiveRecord
             'from_date' => 'From Date',
             'to_date' => 'To Date',
             'refers_to' => 'Refers To',
+            'item_selected' => 'Item ID'
         ];
-    }
-
-    /**
-
-    ** Set ITEM_ID Attribute.
-
-    **/
-    public function setItemId($value)
-    {
-        echo "Entre";
-        $this->itemId = $value;
-    }
-
-    /**
-
-    ** Get ITEM_ID Attribute.
-
-    **/
-    public function getItemId($value)
-    {
-        return $this->itemId;
     }
 }

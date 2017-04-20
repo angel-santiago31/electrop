@@ -19,8 +19,9 @@ $this->title = $model->email;
         <div class="panel-body">
             <p>
                 <?= Html::a('<span class="glyphicon glyphicon-pencil"></span> Update', ['update', 'id' => $model->id], ['class' => 'btn btn-warning']) ?>
+                <?= Html::a('<span class="glyphicon glyphicon-ok"></span> Restore', ['restore', 'id' => $model->id], ['class' => $model->isActive]) ?>
                 <?= Html::a('<span class="glyphicon glyphicon-floppy-remove"></span> Delete', ['delete', 'id' => $model->id], [
-                    'class' => 'btn btn-danger',
+                    'class' => $model->isInactive,
                     'data' => [
                         'confirm' => 'Are you sure you want to delete this item?',
                         'method' => 'post',

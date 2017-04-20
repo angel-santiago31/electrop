@@ -31,7 +31,7 @@ $this->title = 'Admins';
                     </p>
                 </div>
             </div>
-            
+
 
 
             <?= GridView::widget([
@@ -48,8 +48,7 @@ $this->title = 'Admins';
                     [
                         'attribute' => 'Status',
                         'value' => function ($model) {
-                            return ($model->status === Admin::STATUS_ACTIVE)?
-                                'Active' : 'Inactive';
+                            return ($model->status === Admin::STATUS_ACTIVE) ? 'Active' : 'Inactive';
                         },
                     ],
                     //'status',

@@ -136,7 +136,7 @@ class ItemController extends Controller
     public function actionDelete($id)
     {
         $model = $this->findModel($id);
-        $model->active = 0;
+        $model->active = Item::DELETED;
         $model->save(false);
 
         return $this->redirect(['index']);
@@ -151,7 +151,7 @@ class ItemController extends Controller
     public function actionRestore($id)
     {
         $model = $this->findModel($id);
-        $model->active = 1;
+        $model->active = Item::ACTIVE;
         $model->save(false);
 
         return $this->redirect(['index']);

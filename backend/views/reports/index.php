@@ -24,6 +24,7 @@ $this->title = 'Reports';
                     <p>
                         <?= Html::a('<i class="glyphicon glyphicon-plus"></i> Create Report', ['create'], ['class' => 'btn btn-success']) ?>
                     </p>
+                    <div class="panel-body">
                     <?= GridView::widget([
                         'dataProvider' => $dataProvider,
                         'columns' => [
@@ -52,6 +53,7 @@ $this->title = 'Reports';
                             ],
                         ],
                     ]); ?>
-        </dvi>
+                    </div>
+        </div>
     </div>
 </div>

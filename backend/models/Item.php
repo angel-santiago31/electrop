@@ -59,9 +59,9 @@ class Item extends ActiveRecord implements \yz\shoppingcart\CartPositionInterfac
     {
         return [
             [['name', 'picture', 'quantity_remaining', 'size', 'gross_price', 'production_cost', 'description', 'item_category_id', 'item_sub_category_id'], 'required'],
-            [['item_id', 'quantity_remaining', 'item_category_id', 'item_sub_category_id', 'active'], 'integer'],
+            [['item_id', 'quantity_remaining', 'item_category_id', 'item_sub_category_id', 'active', 'size'], 'integer'],
             [['gross_price', 'production_cost'], 'number'],
-            [['name', 'size'], 'string', 'max' => 32],
+            [['name'], 'string', 'max' => 32],
             [['picture', 'description'], 'string', 'max' => 256],
             [['item_category_id'], 'exist', 'skipOnError' => true, 'targetClass' => ItemCategory::className(), 'targetAttribute' => ['item_category_id' => 'id']],
             [['item_sub_category_id'], 'exist', 'skipOnError' => true, 'targetClass' => ItemSubCategory::className(), 'targetAttribute' => ['item_sub_category_id' => 'id']],

@@ -5,6 +5,7 @@ use yii\helpers\Url;
 use yii\widgets\DetailView;
 use yii\widgets\ActiveForm;
 use backend\models\Item;
+use backend\models\StickerSize;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Item */
@@ -52,7 +53,20 @@ $this->title = 'Product Details';
                               return $model->quantity_remaining;
                           },
                       ],
-                      'size',
+                      [
+                          'attribute' => 'size',
+                          'value' => function ($model) {
+                              if ($model->size == StickerSize::SMALL) {
+                                  return 'Small (2.7" x 4.0")';
+                              } else if ($model->size == StickerSize::MEDIUM) {
+                                  return 'Medium (3.7" x 5.5")';
+                              } else if ($model->size == StickerSize::LARGE) {
+                                  return 'Large (5.7" x 8.5")';
+                              }
+
+                              return 'Extra Large (9.4" x 14.0")';
+                          },
+                      ],
                       [
                           'label' => 'Price',
                           'value' => function ($model) {

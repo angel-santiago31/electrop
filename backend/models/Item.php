@@ -146,4 +146,9 @@ class Item extends ActiveRecord implements \yz\shoppingcart\CartPositionInterfac
     {
       return ($this->active === self::ACTIVE)? 'btn btn-danger' : 'btn btn-danger disabled';
     }
+
+    public function getQuantityNotEmpty()
+    {
+      return ($this->quantity_remaining == NULL)? true : false;
+    }
 }

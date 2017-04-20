@@ -76,7 +76,7 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $stickerList = Item::find()->limit(6)->offset(0)->where(['active' => Item::ACTIVE])->all();
-        
+
         return $this->render('index', [
             'stickerList' => $stickerList,
         ]);
@@ -89,8 +89,8 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post()) && $category == NULL && $subcategory == NULL) {
             $stickerList = Item::find()->where(['item_category_id' => $model->item_category_id,
                                                 'item_sub_category_id' => $model->item_sub_category_id,
-                                                'active' => Item::ACTIVE])->all();
-            
+                                                'active' => Item::ACTIVE])->andWhere(['>=', 'quantity_remaining', 1])->all();
+
              return $this->render('stickers', [
                  'model' => $model,
                  'stickerList' => $stickerList,
@@ -98,7 +98,7 @@ class SiteController extends Controller
         } else if ($category != NULL && $subcategory != NULL) {
             $stickerList = Item::find()->where(['item_category_id' => $category,
                                                 'item_sub_category_id' => $subcategory,
-                                                'active' => Item::ACTIVE])->all();
+                                                'active' => Item::ACTIVE])->andWhere(['>=', 'quantity_remaining', 1])->all();
             $sql ="SELECT * FROM item WHERE item_category_id = '$category' and item_sub_category_id = '$subcategory' and active = '1'";
             echo Growl::widget([
                     'type' => Growl::TYPE_SUCCESS,
@@ -120,8 +120,8 @@ class SiteController extends Controller
              ]);
         }
 
-        
-        $stickerList = Item::findAll(['active' => Item::ACTIVE]);
+
+        $stickerList = Item::find()->where(['active' => Item::ACTIVE])->andWhere(['>=', 'quantity_remaining', 1])->all();;
         $sqlQuery = "SELECT * FROM item WHERE active = 1";
         //$stickerList = Yii::$app->db->createCommand($sqlQuery)->queryAll();
          echo Growl::widget([
@@ -281,5 +281,5 @@ class SiteController extends Controller
             'model' => $model,
         ]);
     }
-    
+
 }

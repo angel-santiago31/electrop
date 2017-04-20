@@ -50,7 +50,7 @@ $this->title = 'Product Details';
                       [
                           'label' => 'Qty. Available',
                           'value' => function ($model) {
-                              return $model->quantity_remaining;
+                              return ($model->quantity_remaining == NULL) ? 'Out of stock' : $model->quantity_remaining;
                           },
                       ],
                       [
@@ -106,7 +106,7 @@ $this->title = 'Product Details';
                       <?= $form->field($model, 'quantity')->hiddenInput()->label(false) ?>
                       <?= $form->field($model, 'gross_price')->hiddenInput()->label(false) ?>
                       <?= Html::a('View More', ['site/stickers'], ['class' => 'btn btn-default']) ?>
-                      <?= Html::submitButton('<i class="glyphicon glyphicon-shopping-cart"></i> Add to Cart', ['class' => 'btn btn-danger redCss']) ?>
+                      <?= Html::submitButton('<i class="glyphicon glyphicon-shopping-cart"></i> Add to Cart', ['class' => 'btn btn-danger redCss', 'disabled' => $model->quantityNotEmpty]) ?>
                   <?php ActiveForm::end(); ?>
               </div>
           </div>

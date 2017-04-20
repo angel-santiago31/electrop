@@ -159,6 +159,8 @@ class Item extends ActiveRecord implements \yz\shoppingcart\CartPositionInterfac
     }
   
     public function getQuantityNotEmpty()
-        {
+    {
           return ($this->quantity_remaining == NULL)? true : false;
-        }
+    }
+
+}

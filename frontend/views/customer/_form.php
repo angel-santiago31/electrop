@@ -29,7 +29,7 @@ use yii\widgets\MaskedInput;
                       'options' => ['placeholder' => 'Enter End Date ...'],
                       'pluginOptions' => [
                       'autoclose'=>true,
-                      'format' => 'yyyy-mm-dd'
+                      'format' => 'dd-mm-yyyy'
                       ]
                       ]) ?>
           </div>

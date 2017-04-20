@@ -9,6 +9,8 @@ use common\widgets\Alert;
 use yii\widgets\DetailView;
 use yii\bootstrap\ActiveForm;
 use kartik\tabs\TabsX;
+use yii\grid\GridView;
+use backend\models\Order;
 
 $this->title = 'My Account';
 $this->params['breadcrumbs'][] = $this->title;
@@ -75,7 +77,45 @@ $this->params['breadcrumbs'][] = $this->title;
               Order History
           </div>
           <div class="panel-body">
-              You currently have have no orders in your history.
+            <br>
+                  <?= GridView::widget([
+                      'dataProvider' => $orders,
+                      'columns' => [
+                          'order_date:date',
+                          [
+                              'label' => 'Status',
+                              'attribute' => 'order_status',
+                              'value' => function ($model) {
+                                  if ($model->order_status == Order::CANCELED) {
+                                      return 'Canceled';
+                                  } else if ($model->order_status == Order::PENDING) {
+                                      return 'Pending';
+                                  } else if ($model->order_status == Order::VERIFIED) {
+                                      return 'Verified';
+                                  } else if ($model->order_status == Order::SHIPPED) {
+                                      return 'Shipped';
+                                  }
+
+                                  return 'Delivered';
+                              },
+                          ],
+                          [
+                            'label' => 'Shipper',
+                            'attribute' => 'shipper_company_name'
+                          ],
+                          [
+                            'label' => 'Tracking #',
+                            'attribute' => 'tracking_number'
+                          ],
+                          [
+                            'label' => 'More',
+                            'format' => 'html',
+                            'value' => function ($model) {
+                                return Html::a('<i class="glyphicon glyphicon-eye-open"></i> View Details', ['view-order', 'id' => $model->order_number, 'user' => $model->customer_id], ['class' => 'btn btn-xs btn-danger redCss']);
+                            }
+                          ],
+                      ],
+                  ]); ?>
           </div>
       </div>
   </div>

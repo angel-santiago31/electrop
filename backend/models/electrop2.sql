@@ -57,6 +57,19 @@ CREATE TABLE `contains` (
 
 /*Data for the table `contains` */
 
+insert  into `contains`(`order_number`,`item_id`,`price_sold`,`quantity_in_order`) values 
+(7,4,1.35,1),
+(7,5,2.00,1),
+(7,7,3.25,1),
+(9,7,3.25,1),
+(10,4,1.35,1),
+(11,9,3.45,1),
+(12,10,3.00,1),
+(13,8,6.78,1),
+(14,7,3.25,1),
+(15,8,6.78,1),
+(16,5,2.00,1);
+
 /*Table structure for table `customer` */
 
 DROP TABLE IF EXISTS `customer`;
@@ -69,7 +82,7 @@ CREATE TABLE `customer` (
   `middle_name` varchar(18) COLLATE utf8_unicode_ci DEFAULT NULL,
   `fathers_last_name` varchar(18) COLLATE utf8_unicode_ci NOT NULL,
   `mothers_last_name` varchar(18) COLLATE utf8_unicode_ci NOT NULL,
-  `date_of_birth` date NOT NULL,
+  `date_of_birth` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   `age` int(2) DEFAULT NULL,
   `auth_key` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
   `password_reset_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -80,12 +93,12 @@ CREATE TABLE `customer` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `password_reset_token` (`password_reset_token`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `customer` */
 
 insert  into `customer`(`id`,`email`,`password_hash`,`first_name`,`middle_name`,`fathers_last_name`,`mothers_last_name`,`date_of_birth`,`age`,`auth_key`,`password_reset_token`,`status`,`created_at`,`updated_at`,`active`) values 
-(17,'elliot.lopez1@upr.edu','$2y$13$bAWKXcpOd.SJU2E7fz7YCOcUpZ/dXxsmsE.weq/gbUK9i7ECbZ2P6','qwer',NULL,'eqrwte','wqer','2017-04-25',NULL,'Cd1gmOoaEbhsNj5P1SzzOEctAWs9F191',NULL,10,1492467071,1492467071,0);
+(19,'angel.santiago31@upr.edu','$2y$13$nt0zcmBLbAFn598NDRCOauOcpQGb5VYA6NJXeh7djbRibrF54oS7C','Angel','Eduardo','Santiago','González','10-10-1996',NULL,'aXIqfWWFf17tuvpdcFfxoslLUXZWIZaI',NULL,10,1492660565,1492660951,0);
 
 /*Table structure for table `item` */
 
@@ -156,13 +169,31 @@ insert  into `item_sub_category`(`id`,`sub_category_name`) values
 (3,'Animals'),
 (4,'Random');
 
+/*Table structure for table `migration` */
+
+DROP TABLE IF EXISTS `migration`;
+
+CREATE TABLE `migration` (
+  `version` varchar(180) NOT NULL,
+  `apply_time` int(11) DEFAULT NULL,
+  PRIMARY KEY (`version`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `migration` */
+
+insert  into `migration`(`version`,`apply_time`) values 
+('m000000_000000_base',1491936124),
+('m160516_095943_init',1491936142),
+('m161109_124936_rename_cart_table',1491936142),
+('m161119_153348_alter_cart_data',1491936142);
+
 /*Table structure for table `order` */
 
 DROP TABLE IF EXISTS `order`;
 
 CREATE TABLE `order` (
   `order_number` int(11) NOT NULL AUTO_INCREMENT,
-  `order_date` date DEFAULT NULL,
+  `order_date` int(11) DEFAULT NULL,
   `amount_stickers` int(11) NOT NULL,
   `total_price` decimal(4,2) DEFAULT NULL,
   `order_status` int(1) DEFAULT NULL,
@@ -174,9 +205,20 @@ CREATE TABLE `order` (
   KEY `shipper_company_name` (`shipper_company_name`),
   CONSTRAINT `order_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `order_ibfk_2` FOREIGN KEY (`shipper_company_name`) REFERENCES `shipper` (`shipper_name`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
 /*Data for the table `order` */
+
+insert  into `order`(`order_number`,`order_date`,`amount_stickers`,`total_price`,`order_status`,`customer_id`,`shipper_company_name`,`tracking_number`) values 
+(7,1492661373,3,6.60,1,19,'UPS',8624),
+(9,1492661644,1,3.25,1,19,'UPS',1665),
+(10,1492661648,1,1.35,1,19,'UPS',8650),
+(11,1492661651,1,3.45,1,19,'UPS',8445),
+(12,1492661654,1,3.00,1,19,'UPS',3733),
+(13,1492661657,1,6.78,1,19,'UPS',6995),
+(14,1492661683,1,3.25,1,19,'UPS',3103),
+(15,1492661687,1,6.78,1,19,'UPS',4701),
+(16,1492661689,1,2.00,1,19,'UPS',7953);
 
 /*Table structure for table `payment_method` */
 
@@ -194,7 +236,7 @@ CREATE TABLE `payment_method` (
 /*Data for the table `payment_method` */
 
 insert  into `payment_method`(`customer_id`,`card_last_digits`,`exp_date`,`card_type`) values 
-(17,1213,'43/12','American Exppress');
+(19,1234,'11/11','Visa');
 
 /*Table structure for table `phone_number` */
 
@@ -210,7 +252,7 @@ CREATE TABLE `phone_number` (
 /*Data for the table `phone_number` */
 
 insert  into `phone_number`(`customer_id`,`number`) values 
-(17,'324-14_-____');
+(19,'939-246-8676');
 
 /*Table structure for table `report_type` */
 
@@ -279,7 +321,7 @@ CREATE TABLE `shipping_address` (
 /*Data for the table `shipping_address` */
 
 insert  into `shipping_address`(`customer_id`,`street_name`,`apt_number`,`zipcode`,`state`) values 
-(17,'41324124',123441,'23344','IN');
+(19,'Example Name',123,'00669','PR');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

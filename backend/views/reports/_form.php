@@ -26,7 +26,7 @@ use yii\widgets\ActiveForm;
         'autoclose'=>true,
         'startView'=>'year',
         'minViewMode'=>'days',
-        'format' => 'yyyy-mm-dd'
+        'format' => 'dd-mm-yyyy'
     ]
 ]) ?>
 
@@ -34,7 +34,7 @@ use yii\widgets\ActiveForm;
     'options' => ['placeholder' => 'Enter End Date ...'],
     'pluginOptions' => [
         'autoclose'=>true,
-        'format' => 'yyyy-mm-dd'
+        'format' => 'dd-mm-yyyy'
     ]
 ]) ?>
 

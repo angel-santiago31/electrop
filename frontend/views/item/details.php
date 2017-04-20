@@ -91,7 +91,7 @@ $this->title = 'Product Details';
                   <?php $form = ActiveForm::begin(); ?>
                       <?= $form->field($model, 'quantity')->hiddenInput()->label(false) ?>
                       <?= $form->field($model, 'gross_price')->hiddenInput()->label(false) ?>
-                      <?= Html::a('View More', Yii::$app->request->referrer, ['class' => 'btn btn-default']) ?>
+                      <?= Html::a('View More', ['site/stickers'], ['class' => 'btn btn-default']) ?>
                       <?= Html::submitButton('<i class="glyphicon glyphicon-shopping-cart"></i> Add to Cart', ['class' => 'btn btn-danger redCss']) ?>
                   <?php ActiveForm::end(); ?>
               </div>

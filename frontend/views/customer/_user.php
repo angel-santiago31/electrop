@@ -21,7 +21,7 @@ use yii\helpers\Url;
             'middle_name',
             'fathers_last_name',
             'mothers_last_name',
-            'date_of_birth',
+            'date_of_birth:date',
         ],
     ]) ?>
 

@@ -48,7 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'options' => ['placeholder' => 'Enter End Date ...'],
                                 'pluginOptions' => [
                                 'autoclose'=>true,
-                                'format' => 'yyyy-mm-dd'
+                                'format' => 'dd-mm-yyyy'
                                 ]
                                 ]) ?>
                     </div>
@@ -97,7 +97,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="col-sm-4">
                         <?= $form->field($model, 'state')->dropDownList([
                                                                             '' => '--Choose Option--',
-                                                                            'AK' => 'AK',                                                                
+                                                                            'AK' => 'AK',
                                                                             'AL' => 'AL',
                                                                             'AR' => 'AR',
                                                                             'AZ' => 'AZ',

@@ -18,11 +18,15 @@ class AppAsset extends AssetBundle
     public $js = [
         'js/script.js',
         'js/quantity_selection.js',
-        'js/modal.js'
+        'js/modal.js',
+        'js/modalPhone.js',
+        'js/modalPayment.js',
+        'js/modalAddress.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
-        'yii\web\JqueryAsset'
+        'yii\web\JqueryAsset',
+        'rmrevin\yii\fontawesome\AssetBundle'
     ];
 }

@@ -202,4 +202,14 @@ class Customer extends ActiveRecord implements IdentityInterface
     {
         return $this->hasOne(PaymentMethod::className(), ['customer_id' => $this->id]);
     }
+
+    public function getIsActive()
+    {
+      return ($this->status === self::STATUS_DELETED)? 'btn btn-success' : 'btn btn-success disabled';
+    }
+
+    public function getIsInactive()
+    {
+      return ($this->status === self::STATUS_ACTIVE)? 'btn btn-danger' : 'btn btn-danger disabled';
+    }
 }

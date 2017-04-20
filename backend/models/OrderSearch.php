@@ -40,9 +40,13 @@ class OrderSearch extends Order
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($params, $c_id = NULL)
     {
-        $query = Order::find()->orderBy(['order_date' => SORT_DESC]);
+        if ($c_id !== NULL) {
+            $query = Order::find()->where(['customer_id' => $c_id])->orderBy(['order_date' => SORT_DESC]);
+        } else {
+            $query = Order::find()->orderBy(['order_date' => SORT_DESC]);
+        }
 
         // add conditions that should always apply here
 

@@ -8,6 +8,12 @@ use common\models\CustomerSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use backend\models\PhoneNumber;
+use backend\models\ShippingAddress;
+use backend\models\PaymentMethod;
+use backend\models\Order;
+use backend\models\OrderSearch;
+use backend\models\ContainsSearch;
 
 /**
  * CustomerController implements the CRUD actions for Customer model.
@@ -63,8 +69,40 @@ class CustomerController extends Controller
      */
     public function actionAccount($id)
     {
+        $customer = $this->findModel($id);
+        $customer_phone = $this->findPhone($customer->id);
+        $customer_shipping_address = $this->findShippingAddress($customer->id);
+        $customer_payment_method = $this->findPaymentMethod($customer->id);
+
+        $searchModel = new OrderSearch();
+        $orders = $searchModel->search(Yii::$app->request->queryParams, $customer->id);
+        $orders->pagination->pageSize = 4;
+
         return $this->render('account', [
-            'model' => $this->findModel($id),
+            'model' => $customer,
+            'phone' => $customer_phone,
+            'shipping_address' => $customer_shipping_address,
+            'payment_method' => $customer_payment_method,
+            'orders' => $orders,
+        ]);
+    }
+
+    /**
+     * Displays a single Order model.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionViewOrder($id, $user)
+    {
+        $order = $this->findOrder($id);
+
+        $searchModel = new ContainsSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $order->order_number);
+
+        return $this->render('order', [
+            'model' => $order,
+            'order_items' => $dataProvider,
+            'user' => $user,
         ]);
     }
 
@@ -82,6 +120,63 @@ class CustomerController extends Controller
             return $this->redirect(['account', 'id' => $model->id]);
         } else {
             return $this->renderAjax('update', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+    /**
+     * Updates an existing Customer Phone Number model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionUpdatePhone($id)
+    {
+        $model = $this->findPhone($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['account', 'id' => $model->customer_id]);
+        } else {
+            return $this->renderAjax('_updatePhone', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+    /**
+     * Updates an existing Customer Payment Method model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionUpdatePayment($id)
+    {
+        $model = $this->findPaymentMethod($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['account', 'id' => $model->customer_id]);
+        } else {
+            return $this->renderAjax('_updatePayment', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+    /**
+     * Updates an existing Customer Shipping Address model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionUpdateAddress($id)
+    {
+        $model = $this->findShippingAddress($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['account', 'id' => $model->customer_id]);
+        } else {
+            return $this->renderAjax('_updateAdress', [
                 'model' => $model,
             ]);
         }
@@ -116,4 +211,67 @@ class CustomerController extends Controller
         }
     }
 
+    /**
+     * Finds the Customer's phone number model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return Customer's phone number the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findPhone($id)
+    {
+        if (($model = PhoneNumber::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+    /**
+     * Finds the Customer's payment method model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return Customer's phone number the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findShippingAddress($id)
+    {
+        if (($model = ShippingAddress::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+    /**
+     * Finds the Customer's payment method model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return Customer's phone number the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findPaymentMethod($id)
+    {
+        if (($model = PaymentMethod::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+    /**
+     * Finds the Customer's ordermodel based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return Customer's phone number the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findOrder($id)
+    {
+        if (($model = Order::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
 }

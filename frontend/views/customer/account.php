@@ -8,10 +8,44 @@ use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
 use yii\widgets\DetailView;
 use yii\bootstrap\ActiveForm;
+use kartik\tabs\TabsX;
+use yii\grid\GridView;
+use backend\models\Order;
 
 $this->title = 'My Account';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
+<?php
+    $items = [
+        [
+           'label'=>'<i class="glyphicon glyphicon-user"></i> User',
+           'content'=> $this->render('_user', ['model' => $model,]),
+           'active'=>true,
+           //'linkOptions'=>['data-url'=>\yii\helpers\Url::to(['/default/solicitar-transcripcion'])],
+        ],
+        [
+           'label'=>'<i class="fa fa-phone"></i> Phone',
+           'content'=> $this->render('_phone', ['phone' => $phone, 'id' => $model->id]),
+           'active'=>false,
+           //'linkOptions'=>['data-url'=>\yii\helpers\Url::to(['/default/solicitar-transcripcion'])],
+        ],
+        [
+           'label'=>'<i class="fa fa-credit-card"></i> Payment',
+           'content'=> $this->render('_paymentMethod', ['payment_method' => $payment_method, 'id' => $model->id]),
+           'active'=>false,
+           //'linkOptions'=>['data-url'=>\yii\helpers\Url::to(['/default/solicitar-transcripcion'])],
+        ],
+        [
+           'label'=>'<i class="fa fa-plane"></i> Shipping',
+           'content'=> $this->render('_shippingAddress', ['shipping_address' => $shipping_address, 'id' => $model->id]),
+           'active'=>false,
+           //'linkOptions'=>['data-url'=>\yii\helpers\Url::to(['/default/solicitar-transcripcion'])],
+        ],
+    ];
+
+?>
+
 <div class="container">
   <div class="col-sm-12">
       <div class="panel panel-default">
@@ -23,23 +57,17 @@ $this->params['breadcrumbs'][] = $this->title;
   </div>
   <div class="col-sm-6">
       <div class="panel panel-default">
-          <div class="panel-heading" style="text-align:center">
+          <div class="panel-heading text-center">
               Account Details
           </div>
           <div class="panel-body">
-                  <?= DetailView::widget([
-                      'model' => $model,
-                      'attributes' => [
-                          'email:email',
-                          'first_name',
-                          'middle_name',
-                          'fathers_last_name',
-                          'mothers_last_name',
-                          'date_of_birth',
-                      ],
-                  ]) ?>
-
-                  <?= Html::button('<i class="glyphicon glyphicon-pencil"></i> Update', [ 'value' => Url::to(['update', 'id' => $model->id]), 'class' => 'btn btn-danger pull-right redCss', 'id' => 'updateInfo']); ?>
+              <?php
+                  echo TabsX::widget([
+                      'items'=>$items,
+                      'position'=>TabsX::POS_ABOVE,
+                      'encodeLabels'=>false
+                  ]);
+              ?>
           </div>
       </div>
   </div>
@@ -49,7 +77,45 @@ $this->params['breadcrumbs'][] = $this->title;
               Order History
           </div>
           <div class="panel-body">
-              You currently have have no orders in your history.
+            <br>
+                  <?= GridView::widget([
+                      'dataProvider' => $orders,
+                      'columns' => [
+                          'order_date:date',
+                          [
+                              'label' => 'Status',
+                              'attribute' => 'order_status',
+                              'value' => function ($model) {
+                                  if ($model->order_status == Order::CANCELED) {
+                                      return 'Canceled';
+                                  } else if ($model->order_status == Order::PENDING) {
+                                      return 'Pending';
+                                  } else if ($model->order_status == Order::VERIFIED) {
+                                      return 'Verified';
+                                  } else if ($model->order_status == Order::SHIPPED) {
+                                      return 'Shipped';
+                                  }
+
+                                  return 'Delivered';
+                              },
+                          ],
+                          [
+                            'label' => 'Shipper',
+                            'attribute' => 'shipper_company_name'
+                          ],
+                          [
+                            'label' => 'Tracking #',
+                            'attribute' => 'tracking_number'
+                          ],
+                          [
+                            'label' => 'More',
+                            'format' => 'html',
+                            'value' => function ($model) {
+                                return Html::a('<i class="glyphicon glyphicon-eye-open"></i> View Details', ['view-order', 'id' => $model->order_number, 'user' => $model->customer_id], ['class' => 'btn btn-xs btn-danger redCss']);
+                            }
+                          ],
+                      ],
+                  ]); ?>
           </div>
       </div>
   </div>

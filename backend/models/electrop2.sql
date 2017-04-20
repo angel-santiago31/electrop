@@ -80,7 +80,7 @@ CREATE TABLE `customer` (
   `middle_name` varchar(18) COLLATE utf8_unicode_ci NOT NULL,
   `fathers_last_name` varchar(18) COLLATE utf8_unicode_ci NOT NULL,
   `mothers_last_name` varchar(18) COLLATE utf8_unicode_ci NOT NULL,
-  `date_of_birth` int(8) NOT NULL,
+  `date_of_birth` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   `age` int(2) DEFAULT NULL,
   `auth_key` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
   `password_reset_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -91,15 +91,15 @@ CREATE TABLE `customer` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `password_reset_token` (`password_reset_token`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `customer` */
 
 insert  into `customer`(`id`,`email`,`password_hash`,`first_name`,`middle_name`,`fathers_last_name`,`mothers_last_name`,`date_of_birth`,`age`,`auth_key`,`password_reset_token`,`status`,`created_at`,`updated_at`,`active`) values 
-(11,'angel.santiago31@upr.edu','$2y$13$FRoVVuY51PeOSprQgXqxyOoT3a6uZdODj4uqmsAd0Y9WFzWrHnU/O','Angel','Eduardo','Santiago','González',10,NULL,'i76U4HtSj5hRm19MRcV3zpXw9I0uFRhM',NULL,10,1491411798,1491411798,0),
 (12,'erick.rivera6@upr.edu','$2y$13$M5UpksDkDlvgt/lUm1m/lOaQ7R97gkbNEZW.zl7ZGEhjSD0BNfPY.','Erick','','Rivera','Cruz',12,NULL,'DdZQQZEetFOXZcoL5LVzhOwOByIW07Xa',NULL,10,1491695547,1491695547,0),
 (13,'huelga@upra.com','$2y$13$Qqdd5SXlZpcVuL1sCrVgXuyraBjHDI/l4IyG0fhiv/Ccvd2iTnBTa','Once','Recintos','Una','Upr',12,NULL,'CFnXDz1i7Xdu29AkGMAxcPAaVgRdN0qD',NULL,10,1491842106,1491842106,0),
-(14,'bryan.hernandez5@upr.edu','$2y$13$kotQzJ5P/uEh.XOfM8dGpO9jt5cYkmbin6VfzpG96bbp1gfUdRsZu','Bryan','Yomar','Hernandez','Cuevas',1996,NULL,'1aJSZBWbJs6pp6ny1Q33-OeAKlSAZRO_',NULL,10,1492651670,1492651670,0);
+(14,'bryan.hernandez5@upr.edu','$2y$13$kotQzJ5P/uEh.XOfM8dGpO9jt5cYkmbin6VfzpG96bbp1gfUdRsZu','Bryan','Yomar','Hernandez','Cuevas',1996,NULL,'1aJSZBWbJs6pp6ny1Q33-OeAKlSAZRO_',NULL,10,1492651670,1492651670,0),
+(19,'angel.santiago31@upr.edu','$2y$13$nt0zcmBLbAFn598NDRCOauOcpQGb5VYA6NJXeh7djbRibrF54oS7C','Angel','Eduardo','Santiago','González','10-10-1996',NULL,'aXIqfWWFf17tuvpdcFfxoslLUXZWIZaI',NULL,10,1492660565,1492660951,0);
 
 /*Table structure for table `item` */
 
@@ -110,10 +110,10 @@ CREATE TABLE `item` (
   `name` varchar(32) NOT NULL,
   `picture` varchar(256) NOT NULL,
   `quantity_remaining` int(11) NOT NULL,
-  `size` varchar(32) NOT NULL,
+  `size` int(11) NOT NULL,
   `gross_price` decimal(4,2) NOT NULL,
   `production_cost` decimal(4,2) NOT NULL,
-  `description` varchar(32) NOT NULL,
+  `description` varchar(256) NOT NULL,
   `item_category_id` int(11) NOT NULL,
   `item_sub_category_id` int(11) NOT NULL,
   `active` int(1) NOT NULL DEFAULT '1',
@@ -122,18 +122,66 @@ CREATE TABLE `item` (
   KEY `item_sub_category_id` (`item_sub_category_id`),
   CONSTRAINT `item_ibfk_1` FOREIGN KEY (`item_category_id`) REFERENCES `item_category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `item_ibfk_2` FOREIGN KEY (`item_sub_category_id`) REFERENCES `item_sub_category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8;
 
 /*Data for the table `item` */
 
 insert  into `item`(`item_id`,`name`,`picture`,`quantity_remaining`,`size`,`gross_price`,`production_cost`,`description`,`item_category_id`,`item_sub_category_id`,`active`) values 
-(4,'Firebreathing King','uploads/Firebreathing King.jpg',10,'3 Inches',1.35,0.20,'A king with an unusual human app',1,4,1),
-(5,'To Breakfast!','uploads/To Breakfast!.jpg',10,'4 Inches',2.00,0.50,'Breakfast is a blast!',2,1,1),
-(6,'Blocked','uploads/Blocked.jpg',30,'10 Inches',7.00,2.67,'A beautiful labyrinth to admire.',2,4,0),
-(7,'Tree Love','uploads/Tree Love.jpg',12,'5 Inches',3.25,1.25,'Just hanging around.',2,3,1),
-(8,'High 5!','uploads/High 5!.jpg',17,'7 Inches',6.78,1.69,'Missing a finger there..',3,4,1),
-(9,'Pizza Lover\'s','uploads/Pizza Lover\'s.jpg',24,'6 Inches',3.45,0.78,'Pizza written in pizza.',1,4,1),
-(10,'Shady Owl','uploads/Shady Owl.jpg',15,'4 Inches',3.00,1.28,'An owl who loves to be in the pr',2,3,1);
+(12,'Romaine Calm','uploads/Romaine Calm.jpg',30,3,10.00,1.75,'Romaine calm everybody!',1,1,1),
+(13,'I Yam What I Yam','uploads/I Yam What I Yam.jpg',34,2,6.00,0.75,'I yam happy!',1,1,1),
+(14,'Sarcasm','uploads/Sarcasm.jpg',17,1,2.56,0.11,'\"can i interest you in a sarcastic comment?\" Graphic',1,1,1),
+(15,'[laughs microscopically]','uploads/[laughs microscopically].jpg',45,3,10.41,1.84,'Tiny laughs for all you\'ve got!',1,1,1),
+(16,'Coach Logo','uploads/Coach Logo.jpg',36,1,4.64,0.45,'Original Coach Logo',1,2,1),
+(17,'Samurai Cereal','uploads/Samurai Cereal.jpg',47,1,2.53,0.25,'Eat \'em with chopsticks or spoon!',1,2,1),
+(18,'Volcom','uploads/Volcom.jpg',45,1,3.17,0.67,'Volcom Logo',1,2,1),
+(19,'Sundrop - Sun drop','uploads/Sundrop - Sun drop.jpg',34,2,10.28,1.67,'Drop it like it\'s hot!',1,2,1),
+(20,'Twinkies','uploads/Twinkies.jpg',17,1,2.32,0.21,'The favorite yellowish cream filled sponge!',1,2,1),
+(21,'Friends Not Food - Animals','uploads/Friends Not Food - Animals.jpg',37,2,7.50,1.11,'We don\'t eat each other. We spread love.',1,3,1),
+(22,'Sloth Life','uploads/Sloth Life.jpg',38,1,2.68,0.45,'Just hanging around!',1,3,1),
+(23,'Desert animals','uploads/Desert animals.jpg',53,3,10.00,1.75,'Camel toe.',1,3,1),
+(24,'Cat in Lotus Tattoo','uploads/Cat in Lotus Tattoo.jpg',25,1,2.53,0.55,'Pretty Kitty',1,3,1),
+(25,'Nugget Dino','uploads/Nugget Dino.jpg',26,1,3.44,0.34,'It\'s you eating him! Mmmm...',1,4,1),
+(26,'Shaggy This Isn\'t Weed','uploads/Shaggy This Isn\'t Weed.jpg',36,1,5.93,1.00,'Why Fred, why!?',1,4,1),
+(27,'Issa Knife','uploads/Issa Knife.jpg',47,4,14.59,2.33,'Nigga gon get stabbed yo\'!',1,4,1),
+(28,'Happy Pepe, The Frog','uploads/Happy Pepe, The Frog.jpg',26,1,6.00,0.67,'A happy Pepe is a good Pepe.',1,4,1),
+(29,'Astro Sloth','uploads/Astro Sloth.jpg',26,3,10.00,1.75,'Captain Sloth reporting for duty.',1,4,1),
+(30,'Heisenberg','uploads/Heisenberg.jpg',63,1,2.64,0.33,'Shades on, hat on.',1,4,1),
+(31,'Geometric Rick Sanchez','uploads/Geometric Rick Sanchez.jpg',23,1,6.00,0.45,'Hey Morty.',1,4,1),
+(32,'Fatty Acid','uploads/Fatty Acid.jpg',26,1,3.06,0.23,'I think I\'m fat too..',2,1,1),
+(33,'Drop the Bass Chemistry Base','uploads/Drop the Bass Chemistry Base.jpg',64,2,5.74,1.21,'*Dubstep music plays*',2,1,1),
+(34,'Keepin\' It Real','uploads/Keepin\' It Real.jpg',38,1,2.42,0.68,'Let\'s just be honest, let\'s just be real~',2,1,1),
+(35,'Geek Tee - CSS Jokes - Ninja','uploads/Geek Tee - CSS Jokes - Ninja.jpg',47,1,6.00,1.28,'Ninja.css',2,1,1),
+(36,'Anime Is Now Illegal ','uploads/Anime Is Now Illegal .jpg',38,1,2.32,0.34,'Otakus unite!',2,1,1),
+(37,'Old Spice','uploads/Old Spice.jpg',27,1,6.00,1.28,'Yeahhh! Gimme sum!',2,2,1),
+(38,'Chick-fil-A Cup','uploads/Chick-fil-A Cup.jpg',32,1,2.74,0.56,'Chicken n\' grillin\'!',2,2,1),
+(39,'WTF Panda','uploads/WTF Panda.jpg',62,3,15.83,2.99,'WTF!?',2,2,1),
+(40,'New Google Logo','uploads/New Google Logo.jpg',12,1,5.75,0.67,'Everyday I\'m Googlin\'!',2,2,1),
+(41,'Starbuck\'s Coffee','uploads/Starbuck\'s Coffee.jpg',35,1,2.67,0.33,'An all hipster favorite!',2,2,1),
+(42,'Vaping ','uploads/Vaping .jpg',25,1,2.67,0.88,'Since 2013',2,2,1),
+(43,'Fk You Cat','uploads/Fk You Cat.jpg',53,1,2.53,0.33,'Fk off!',2,3,1),
+(44,'Catlove','uploads/Catlove.jpg',27,1,6.00,0.99,'Love for every cat in the world!',2,3,1),
+(45,'Peekaboo','uploads/Peekaboo.jpg',53,1,2.53,0.33,'Peekaboo cat.',2,3,1),
+(46,'American Shorthair happy','uploads/American Shorthair happy.jpg',52,1,10.41,1.28,'Smile!',2,3,1),
+(47,'Significant Otters ','uploads/Significant Otters .jpg',63,2,6.50,1.22,'Otters hold.',2,3,1),
+(48,'Grandmother Using an Inhaler','uploads/Grandmother Using an Inhaler.jpg',25,1,2.53,0.33,'Inhale deep mamaw!',2,4,1),
+(49,'Rainbow Dash Cutie Mark','uploads/Rainbow Dash Cutie Mark.jpg',56,1,2.53,0.56,'Bronnies will like.',2,4,1),
+(50,'Yeah Boy','uploads/Yeah Boy.jpg',25,1,2.53,0.45,'*Shooting Stars Starts Playing* ',2,4,1),
+(51,'GOAT','uploads/GOAT.jpg',65,1,7.00,1.45,'Goat milk?',2,4,1),
+(52,'They Let Me Play with Chemicals','uploads/They Let Me Play with Chemicals.jpg',25,1,2.42,0.44,'Don\'t try this at home kids!',3,1,1),
+(53,'You Are Being Monitored','uploads/You Are Being Monitored.jpg',42,2,5.74,1.11,'Be careful of what you do at work.',3,1,1),
+(54,'Practice Safe Sax','uploads/Practice Safe Sax.jpg',15,1,9.56,3.11,'Remember, always use a saxophone.',3,1,1),
+(55,'Yellow Banana Periodic Table','uploads/Yellow Banana Periodic Table.jpg',25,1,8.40,1.67,'Ba-na-na!',3,1,1),
+(56,'Beats','uploads/Beats.jpg',36,1,3.38,0.67,'By Dr. Dre',3,2,1),
+(57,'NVIDIA','uploads/NVIDIA.jpg',15,3,13.33,2.65,'For gaming.',3,2,1),
+(58,'Gesture of Billabong','uploads/Gesture of Billabong.jpg',25,1,3.69,0.44,'Rock on.',3,2,1),
+(59,'Seal of Approval','uploads/Seal of Approval.jpg',15,3,10.00,1.75,'I approve!',3,3,1),
+(60,'Unicorn power','uploads/Unicorn power.jpg',26,4,14.00,3.00,'I am the unicorn wizard!~',3,3,1),
+(63,'FK ANIMAL TESTING','uploads/FK ANIMAL TESTING.jpg',26,2,6.00,0.78,'It\'s a no no.',3,3,1),
+(64,'Cosmocat','uploads/Cosmocat.jpg',36,1,2.53,0.33,'May the cosmos be with you.',3,3,1),
+(65,'Code With Me Senpai','uploads/Code With Me Senpai.jpg',25,1,2.15,0.23,'Senpai notice me!',3,4,1),
+(66,'Fk Her Right In The P','uploads/Fk Her Right In The P.jpg',11,1,2.74,0.45,'You\'ve seen it before..',3,4,1),
+(67,'Pug Life','uploads/Pug Life.jpg',22,3,10.00,1.75,'Don\'t pug with me and I won\'t pug with you.',3,4,1),
+(68,'Trippy Felix','uploads/Trippy Felix.jpg',13,1,2.85,0.34,'Felix be trippin\'',3,4,1);
 
 /*Table structure for table `item_category` */
 
@@ -170,13 +218,31 @@ insert  into `item_sub_category`(`id`,`sub_category_name`) values
 (3,'Animals'),
 (4,'Random');
 
+/*Table structure for table `migration` */
+
+DROP TABLE IF EXISTS `migration`;
+
+CREATE TABLE `migration` (
+  `version` varchar(180) NOT NULL,
+  `apply_time` int(11) DEFAULT NULL,
+  PRIMARY KEY (`version`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `migration` */
+
+insert  into `migration`(`version`,`apply_time`) values 
+('m000000_000000_base',1491936124),
+('m160516_095943_init',1491936142),
+('m161109_124936_rename_cart_table',1491936142),
+('m161119_153348_alter_cart_data',1491936142);
+
 /*Table structure for table `order` */
 
 DROP TABLE IF EXISTS `order`;
 
 CREATE TABLE `order` (
   `order_number` int(11) NOT NULL AUTO_INCREMENT,
-  `order_date` date DEFAULT NULL,
+  `order_date` int(11) DEFAULT NULL,
   `amount_stickers` int(11) NOT NULL,
   `total_price` decimal(4,2) DEFAULT NULL,
   `order_status` int(1) DEFAULT NULL,
@@ -188,7 +254,7 @@ CREATE TABLE `order` (
   KEY `shipper_company_name` (`shipper_company_name`),
   CONSTRAINT `order_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `order_ibfk_2` FOREIGN KEY (`shipper_company_name`) REFERENCES `shipper` (`shipper_name`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=143438 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
 /*Data for the table `order` */
 
@@ -199,7 +265,16 @@ insert  into `order`(`order_number`,`order_date`,`amount_stickers`,`total_price`
 (143434,'0000-00-00',5,17.05,1,14,'UPS',3669),
 (143435,'0000-00-00',1,6.78,1,14,'UPS',4304),
 (143436,'0000-00-00',3,9.90,1,14,'UPS',6566),
-(143437,'0000-00-00',2,8.78,1,14,'UPS',4394);
+(143437,'0000-00-00',2,8.78,1,14,'UPS',4394),
+(7,1492661373,3,6.60,1,19,'UPS',8624),
+(9,1492661644,1,3.25,1,19,'UPS',1665),
+(10,1492661648,1,1.35,1,19,'UPS',8650),
+(11,1492661651,1,3.45,1,19,'UPS',8445),
+(12,1492661654,1,3.00,1,19,'UPS',3733),
+(13,1492661657,1,6.78,1,19,'UPS',6995),
+(14,1492661683,1,3.25,1,19,'UPS',3103),
+(15,1492661687,1,6.78,1,19,'UPS',4701),
+(16,1492661689,1,2.00,1,19,'UPS',7953);
 
 /*Table structure for table `payment_method` */
 
@@ -217,7 +292,8 @@ CREATE TABLE `payment_method` (
 /*Data for the table `payment_method` */
 
 insert  into `payment_method`(`customer_id`,`card_last_digits`,`exp_date`,`card_type`) values 
-(14,1111,'20/20','Visa');
+(14,1111,'20/20','Visa'),
+(19,1234,'11/11','Visa');
 
 /*Table structure for table `phone_number` */
 
@@ -233,7 +309,8 @@ CREATE TABLE `phone_number` (
 /*Data for the table `phone_number` */
 
 insert  into `phone_number`(`customer_id`,`number`) values 
-(14,787);
+(14,787),
+(19,'939-246-8676');
 
 /*Table structure for table `report_type` */
 
@@ -311,7 +388,26 @@ CREATE TABLE `shipping_address` (
 /*Data for the table `shipping_address` */
 
 insert  into `shipping_address`(`customer_id`,`street_name`,`apt_number`,`zipcode`,`state`) values 
-(14,'Quebradillas',12,678,'PR');
+
+(19,'Example Name',123,'00669','PR');
+
+/*Table structure for table `sticker_size` */
+
+DROP TABLE IF EXISTS `sticker_size`;
+
+CREATE TABLE `sticker_size` (
+  `id` int(11) NOT NULL,
+  `size` varchar(32) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `sticker_size` */
+
+insert  into `sticker_size`(`id`,`size`) values 
+(1,'Small (2.7\" x 4.0\")'),
+(2,'Medium (3.7\" x 5.5\")'),
+(3,'Large (5.7\" x 8.5\")'),
+(4,'Extra Large (9.4\" x 14.0\")');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

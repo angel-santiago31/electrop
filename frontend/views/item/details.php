@@ -5,6 +5,7 @@ use yii\helpers\Url;
 use yii\widgets\DetailView;
 use yii\widgets\ActiveForm;
 use backend\models\Item;
+use backend\models\StickerSize;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Item */
@@ -49,10 +50,23 @@ $this->title = 'Product Details';
                       [
                           'label' => 'Qty. Available',
                           'value' => function ($model) {
-                              return $model->quantity_remaining;
+                              return ($model->quantity_remaining == NULL) ? 'Out of stock' : $model->quantity_remaining;
                           },
                       ],
-                      'size',
+                      [
+                          'attribute' => 'size',
+                          'value' => function ($model) {
+                              if ($model->size == StickerSize::SMALL) {
+                                  return 'Small (2.7" x 4.0")';
+                              } else if ($model->size == StickerSize::MEDIUM) {
+                                  return 'Medium (3.7" x 5.5")';
+                              } else if ($model->size == StickerSize::LARGE) {
+                                  return 'Large (5.7" x 8.5")';
+                              }
+
+                              return 'Extra Large (9.4" x 14.0")';
+                          },
+                      ],
                       [
                           'label' => 'Price',
                           'value' => function ($model) {
@@ -91,8 +105,8 @@ $this->title = 'Product Details';
                   <?php $form = ActiveForm::begin(); ?>
                       <?= $form->field($model, 'quantity')->hiddenInput()->label(false) ?>
                       <?= $form->field($model, 'gross_price')->hiddenInput()->label(false) ?>
-                      <?= Html::a('View More', Yii::$app->request->referrer, ['class' => 'btn btn-default']) ?>
-                      <?= Html::submitButton('<i class="glyphicon glyphicon-shopping-cart"></i> Add to Cart', ['class' => 'btn btn-danger redCss']) ?>
+                      <?= Html::a('View More', ['site/stickers'], ['class' => 'btn btn-default']) ?>
+                      <?= Html::submitButton('<i class="glyphicon glyphicon-shopping-cart"></i> Add to Cart', ['class' => 'btn btn-danger redCss', 'disabled' => $model->quantityNotEmpty]) ?>
                   <?php ActiveForm::end(); ?>
               </div>
           </div>

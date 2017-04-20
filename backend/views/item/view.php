@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use backend\models\Item;
+use backend\models\StickerSize;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Item */
@@ -43,7 +44,20 @@ $this->title = $model->name;
                       'name',
                       //'picture',
                       'quantity_remaining',
-                      'size',
+                      [
+                          'attribute' => 'size',
+                          'value' => function ($model) {
+                              if ($model->size == StickerSize::SMALL) {
+                                  return 'Small (2.7" x 4.0")';
+                              } else if ($model->size == StickerSize::MEDIUM) {
+                                  return 'Medium (3.7" x 5.5")';
+                              } else if ($model->size == StickerSize::LARGE) {
+                                  return 'Large (5.7" x 8.5")';
+                              }
+
+                              return 'Extra Large (9.4" x 14.0")';
+                          },
+                      ],
                       [
                           'attribute' => 'Gross Price',
                           'value' => function ($model) {

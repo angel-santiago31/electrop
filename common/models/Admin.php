@@ -192,4 +192,14 @@ class Admin extends ActiveRecord implements IdentityInterface
     {
         $this->password_reset_token = null;
     }
+
+    public function getIsActive()
+    {
+      return ($this->status === self::STATUS_DELETED)? 'btn btn-success' : 'btn btn-success disabled';
+    }
+
+    public function getIsInactive()
+    {
+      return ($this->status === self::STATUS_ACTIVE)? 'btn btn-danger' : 'btn btn-danger disabled';
+    }
 }

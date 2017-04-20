@@ -110,6 +110,21 @@ class CustomerController extends Controller
     }
 
     /**
+     * Restores an existing Customer model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionRestore($id)
+    {
+        $model = $this->findModel($id);
+        $model->status = Customer::STATUS_ACTIVE;
+        $model->save(false);
+
+        return $this->redirect(['index']);
+    }
+
+    /**
      * Finds the Customer model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id

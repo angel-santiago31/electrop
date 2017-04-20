@@ -111,6 +111,12 @@ class ItemController extends Controller
                   $sticker->item_id = $position->id;
                   $sticker->price_sold = $position->gross_price;
                   $sticker->quantity_in_order = $position->quantity;
+
+                  //decrease inventory quantity
+                  $item = $this->findModel($sticker->item_id);
+                  $item->quantity_remaining -= $sticker->quantity_in_order;
+                  $item->save();
+
                   $sticker->save();
               }
 

@@ -13,12 +13,17 @@ use yii\widgets\MaskedInput;
     <?php $form = ActiveForm::begin(); ?>
       <div class="row">
           <div class="col-sm-6">
-              <?= $form->field($model, 'card_last_digits')->textInput() ?>
+              <?= $form->field($model, 'card_last_digits')->widget(MaskedInput::className(),['mask' => '9999', 'clientOptions' =>['removeMaskOnSubmit']]) ?>
 
-              <?= $form->field($model, 'card_type')->textInput() ?>
+              <?= $form->field($model, 'card_type')->dropDownList([
+                                                                  '' => '--Choose Option--',
+                                                                  'Visa' => 'Visa',
+                                                                  'Master card' => 'Master Card',
+                                                                  'American Exppress' => 'American Exppress',
+                                                                  ]) ?> 
           </div>
           <div class="col-sm-6">
-              <?= $form->field($model, 'exp_date')->textInput() ?>
+              <?= $form->field($model, 'exp_date')->widget(MaskedInput::className(),['mask' => '99/99', 'clientOptions' =>['removeMaskOnSubmit']])->textInput(['placeholder' => "MM/YY"]) ?>
           </div>
       </div>
 

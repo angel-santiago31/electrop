@@ -32,8 +32,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'title',
             'description:ntext',
             'type',
-            'from_date',
-            'to_date',
+            'from_date:dateTime',
+            'to_date:dateTime',
             'refers_to',
             'item_selected'
         ],

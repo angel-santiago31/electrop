@@ -92,7 +92,10 @@ class OrderController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->order_number]);
+            $searchModel = new ContainsSearch();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $model->order_number);
+
+            return $this->render('view', ['model' => $model, 'order_items' => $dataProvider]);
         } else {
             return $this->renderAjax('update', [
                 'model' => $model,

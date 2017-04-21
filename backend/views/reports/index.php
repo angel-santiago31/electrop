@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\grid\ActionColumn;
+use kartik\datecontrol\DateControl;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\ReportsSearch */
@@ -28,12 +29,12 @@ $this->title = 'Reports';
                     <?= GridView::widget([
                         'dataProvider' => $dataProvider,
                         'columns' => [
-                            'id',
+                            //'id',
                             'title',
-                            'description:ntext',
+                            //'description:ntext',
                             'type',
-                            'from_date',
-                            'to_date',
+                            'from_date:date',
+                            'to_date:date',
                             // 'refers_to',
 
                             [
@@ -44,8 +45,8 @@ $this->title = 'Reports';
                                     {
                                         $model->item_selected = 'No Specific Item';
                                         return Html::a('<i class="glyphicon glyphicon-file"></i> PDF', ['pdf', 'id' => $model->id, 'fromDate' => $model->from_date, 'toDate' => $model->to_date, 'groupedBy' => $model->refers_to, 'itemSelected' => $model->item_selected], ['class' => 'btn btn-xs btn-danger', 'target' => '_blank']);
-                                    } 
-                                    else 
+                                    }
+                                    else
                                     {
                                         return Html::a('<i class="glyphicon glyphicon-file"></i> PDF', ['pdf', 'id' => $model->id, 'fromDate' => $model->from_date, 'toDate' => $model->to_date, 'groupedBy' => $model->refers_to, 'itemSelected' => $model->item_selected], ['class' => 'btn btn-xs btn-danger', 'target' => '_blank']);
                                     }

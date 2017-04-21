@@ -7,17 +7,17 @@ use Yii;
 /**
  * This is the model class for table "reports".
  *
- * @property integer $id
+ * @property string $id
  * @property string $title
  * @property string $description
- * @property integer $type
- * @property string $from_date
- * @property string $to_date
+ * @property string $type
+ * @property integer $from_date
+ * @property integer $to_date
  * @property string $refers_to
+ * @property string $item_selected
  */
 class Reports extends \yii\db\ActiveRecord
 {
-    
     /**
      * @inheritdoc
      */
@@ -32,13 +32,13 @@ class Reports extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['title', 'description', 'type', 'from_date', 'to_date', 'refers_to'], 'required'],
             [['description'], 'string'],
-            [['type'], 'required'],
-            [['type'], 'string', 'max' => 250],
-            [['from_date', 'to_date'], 'date'],
+            [['from_date', 'to_date'], 'integer'],
             [['title'], 'string', 'max' => 250],
+            [['type'], 'string', 'max' => 11],
             [['refers_to'], 'string', 'max' => 58],
-            [['item_selected'], 'string', 'max' => 150]
+            [['item_selected'], 'string', 'max' => 150],
         ];
     }
 
@@ -55,7 +55,21 @@ class Reports extends \yii\db\ActiveRecord
             'from_date' => 'From Date',
             'to_date' => 'To Date',
             'refers_to' => 'Refers To',
-            'item_selected' => 'Item ID'
+            'item_selected' => 'Item Selected',
         ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+
+
+            return true;
+        } else {
+            return false;
+        }
     }
 }

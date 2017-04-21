@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use common\models\Customer;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\CustomerSearch */
@@ -15,9 +16,9 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    
+
     <div class="col-sm-3">
-        <?= $form->field($model, 'status')->dropDownList([10 => 'Active', 0 => 'Inactive']) ?>
+        <?= $form->field($model, 'status')->dropDownList([Customer::STATUS_ACTIVE => 'Active', Customer::STATUS_DELETED => 'Inactive']) ?>
     </div>
      <div class="col-sm-9">
          <br>
@@ -26,7 +27,7 @@ use yii\widgets\ActiveForm;
             <?= Html::a('<span class="glyphicon glyphicon-refresh"></span> Reset', ['customer/index'],['class' => 'btn btn-default']) ?>
         </div>
     </div>
-    
+
     <?php //$form->field($model, 'id') ?>
 
     <?php //$form->field($model, 'email') ?>

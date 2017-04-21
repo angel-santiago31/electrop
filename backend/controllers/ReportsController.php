@@ -43,6 +43,21 @@ class ReportsController extends Controller
         $searchModel = new ReportsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        $sql ="SELECT * FROM reports";
+        echo Growl::widget([
+                'type' => Growl::TYPE_SUCCESS,
+                'icon' => 'glyphicon glyphicon-ok-sign',
+                'title' => 'Query',
+                'showSeparator' => true,
+                'body' => $sql,
+                'pluginOptions' => [
+                        'placement' => [
+                            'from' => 'top',
+                            'align' => 'right',
+                        ]
+                    ]
+             ]);
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -56,6 +71,17 @@ class ReportsController extends Controller
      */
     public function actionView($id)
     {
+        $sql ="SELECT * FROM reports WHERE id = $id";
+        Yii::$app->getSession()->setFlash('success', [
+            'type' => 'success',
+            'duration' => 5000,
+            'icon' => 'glyphicon glyphicon-ok-sign',
+            'title' => 'Query',
+            'message' => $sql,
+            'positonY' => 'top',
+            'positonX' => 'right'
+            ]);
+
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -73,6 +99,17 @@ class ReportsController extends Controller
         $itemsList = Item::getItems();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $sql ="INSERT INTO reports (id,title,description,\ntype,from_date,\nto_date,refers_to,item_selected) VALUES \n($model->id, \n$model->title, \n$model->description, \n$model->type, \n$model->from_date, \n$model->to_date, \n$model->refers_to, \n$model->item_selected)";
+            Yii::$app->getSession()->setFlash('success', [
+                'type' => 'success',
+                'duration' => 5000,
+                'icon' => 'glyphicon glyphicon-ok-sign',
+                'title' => 'Query',
+                'showSeparator' => true,
+                'message' => $sql,
+                'positonY' => 'top',
+                'positonX' => 'right'
+                ]);
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [

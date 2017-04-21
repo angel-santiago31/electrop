@@ -12,7 +12,7 @@ use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
 use kartik\sidenav\SideNav;
 use yii\bootstrap\Modal;
-
+use kartik\growl\Growl;
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -39,7 +39,26 @@ AppAsset::register($this);
    ?>
 <body>
 <?php $this->beginBody() ?>
-
+//Get all flash messages and loop through them
+<?php foreach (Yii::$app->session->getAllFlashes() as $message):; ?>
+            <?php
+            echo Growl::widget([
+                'type' => (!empty($message['type'])) ? $message['type'] : 'danger',
+                'title' => (!empty($message['title'])) ? Html::encode($message['title']) : 'Title Not Set!',
+                'icon' => (!empty($message['icon'])) ? $message['icon'] : 'fa fa-info',
+                'body' => (!empty($message['message'])) ? Html::encode($message['message']) : 'Message Not Set!',
+                'showSeparator' => true,
+                'delay' => 1, //This delay is how long before the message shows
+                'pluginOptions' => [
+                    'delay' => (!empty($message['duration'])) ? $message['duration'] : 3000, //This delay is how long the message shows for
+                    'placement' => [
+                        'from' => (!empty($message['positonY'])) ? $message['positonY'] : 'top',
+                        'align' => (!empty($message['positonX'])) ? $message['positonX'] : 'right',
+                    ]
+                ]
+            ]);
+            ?>
+        <?php endforeach; ?>
 <div class="wrap">
     <?php
     NavBar::begin([
@@ -126,7 +145,7 @@ AppAsset::register($this);
             <?= Breadcrumbs::widget([
                 'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
             ]) ?>
-            <?= Alert::widget() ?>
+            <!--<?= Alert::widget() ?>-->
             <?= $content ?>
         </div>
     </div>
@@ -134,7 +153,7 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
+        <p class="pull-left">&copy; Electrop <?= date('Y') ?></p>
 
         <p class="pull-right"><?= Yii::powered() ?></p>
     </div>

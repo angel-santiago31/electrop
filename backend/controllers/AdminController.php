@@ -178,24 +178,25 @@ class AdminController extends Controller
                     'positonY' => 'top',
                     'positonX' => 'right'
                 ]);
+        
                 
         if ($model->load(Yii::$app->request->post())) {
             $model->setPassword($model->password_hash);
-
-            if ($model->validate()) {
-                $model->save();
-            }
-            $sql ="UPDATE admin SET password_hash = $model->password_hash,\npassword_reset_token = $model->password_reset_token,\n email = $model->email\n,updated_at= $model->updated_at \n WHERE id = $model->id";
-                 Yii::$app->getSession()->setFlash('success', [
+            $query ="UPDATE admin SET password_hash = $model->password_hash,\npassword_reset_token = $model->password_reset_token,\n email = $model->email\n,updated_at= $model->updated_at\n WHERE id = $model->id";
+                 Yii::$app->getSession()->setFlash('updated', [
                     'type' => 'success',
                     'duration' => 5000,
                     'icon' => 'glyphicon glyphicon-ok-sign',
                     'title' => 'Query',
                     'showSeparator' => true,
-                    'message' => $sql,
+                    'message' => $query,
                     'positonY' => 'top',
                     'positonX' => 'right'
                 ]);
+            if ($model->validate()) {
+                $model->save();
+            }
+             
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [

@@ -20,9 +20,10 @@ class CustomerCreate extends Model
     public function rules()
     {
             return [
-                [['email', 'password_hash'], 'required'],
-                [['password_hash'], 'string'],
-                [['email'], 'string'],
+                [['password_hash'], 'required', 'message' => 'Password cannot be blank.'],
+                [['email'], 'trim'],
+                ['email', 'email'],
+                [['email'], 'required', 'message' => 'Email cannot be blank.'],
                 ['email', 'unique', 'targetClass' => '\common\models\Customer', 'message' => 'This email address has already been taken.'],
             ];
     }

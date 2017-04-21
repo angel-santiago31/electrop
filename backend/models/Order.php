@@ -56,7 +56,6 @@ class Order extends ActiveRecord
                  'class' => TimestampBehavior::className(),
                  'attributes' => [
                     ActiveRecord::EVENT_BEFORE_INSERT => ['order_date'],
-                    ActiveRecord::EVENT_BEFORE_UPDATE => ['order_date'],
                  ],
              ],
          ];

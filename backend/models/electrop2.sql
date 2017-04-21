@@ -90,9 +90,9 @@ CREATE TABLE `customer` (
 
 insert  into `customer`(`id`,`email`,`password_hash`,`first_name`,`middle_name`,`fathers_last_name`,`mothers_last_name`,`date_of_birth`,`age`,`auth_key`,`password_reset_token`,`status`,`created_at`,`updated_at`,`active`) values 
 (12,'erick.rivera6@upr.edu','$2y$13$M5UpksDkDlvgt/lUm1m/lOaQ7R97gkbNEZW.zl7ZGEhjSD0BNfPY.','Erick','','Rivera','Cruz','12',NULL,'DdZQQZEetFOXZcoL5LVzhOwOByIW07Xa',NULL,10,1491695547,1491695547,0),
-(13,'huelga@upra.com','$2y$13$Qqdd5SXlZpcVuL1sCrVgXuyraBjHDI/l4IyG0fhiv/Ccvd2iTnBTa','Once','Recintos','Una','Upr','12',NULL,'CFnXDz1i7Xdu29AkGMAxcPAaVgRdN0qD',NULL,10,1491842106,1491842106,0),
+(13,'huelga@upra.com','$2y$13$Qqdd5SXlZpcVuL1sCrVgXuyraBjHDI/l4IyG0fhiv/Ccvd2iTnBTa','Once','Recintos','Una','Upr','12',NULL,'CFnXDz1i7Xdu29AkGMAxcPAaVgRdN0qD',NULL,0,1491842106,1492805842,0),
 (14,'bryan.hernandez5@upr.edu','$2y$13$kotQzJ5P/uEh.XOfM8dGpO9jt5cYkmbin6VfzpG96bbp1gfUdRsZu','Bryan','Yomar','Hernandez','Cuevas','1996',NULL,'1aJSZBWbJs6pp6ny1Q33-OeAKlSAZRO_',NULL,10,1492651670,1492651670,0),
-(19,'angel.santiago31@upr.edu','$2y$13$nt0zcmBLbAFn598NDRCOauOcpQGb5VYA6NJXeh7djbRibrF54oS7C','Angel','Eduardo','Santiago','González','10-10-1996',NULL,'aXIqfWWFf17tuvpdcFfxoslLUXZWIZaI',NULL,10,1492660565,1492660951,0),
+(19,'angel.santiago31@upr.edu','$2y$13$nt0zcmBLbAFn598NDRCOauOcpQGb5VYA6NJXeh7djbRibrF54oS7C','Angel','Eduardo','Santiago','González','10-10-1996',NULL,'aXIqfWWFf17tuvpdcFfxoslLUXZWIZaI',NULL,10,1492660565,1492808636,0),
 (20,'test@test.com','$2y$13$uQax1jJ7LTc7v5Fd4qBT6OEryM/89/Lt3.9Jk5MDeHhOYMrQaErk6','Test','Test','Test','Test','23-03-2017',NULL,'okRwZ_rAxhW9rGTXNIxeeVQvrhPhWndh',NULL,10,1492797446,1492797446,0);
 
 /*Table structure for table `item` */
@@ -253,7 +253,7 @@ CREATE TABLE `order` (
 /*Data for the table `order` */
 
 insert  into `order`(`order_number`,`order_date`,`amount_stickers`,`total_price`,`order_status`,`customer_id`,`shipper_company_name`,`tracking_number`) values 
-(143438,1492733047,2,12.94,1,19,'UPS',4733);
+(143438,1492811733,2,12.94,1,19,'UPS',4733);
 
 /*Table structure for table `payment_method` */
 
@@ -313,29 +313,20 @@ DROP TABLE IF EXISTS `reports`;
 CREATE TABLE `reports` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(250) NOT NULL DEFAULT '',
-  `description` text,
+  `description` text NOT NULL,
   `type` varchar(11) NOT NULL,
-  `from_date` varchar(128) DEFAULT NULL,
-  `to_date` varchar(128) DEFAULT NULL,
-  `refers_to` varchar(58) DEFAULT NULL,
+  `from_date` int(32) NOT NULL,
+  `to_date` int(32) NOT NULL,
+  `refers_to` varchar(58) NOT NULL,
   `item_selected` varchar(150) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`id`,`from_date`)
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
 
 /*Data for the table `reports` */
 
 insert  into `reports`(`id`,`title`,`description`,`type`,`from_date`,`to_date`,`refers_to`,`item_selected`) values 
-(6,'Reporte de todas las ventas en abril','Solo abril.','Sales','2017-04-01 00:00:00','2017-04-30 00:00:00','No Group',''),
-(8,'Reporte de multiples cosas','Multiples cosas... si.','Sales','2017-04-01 00:00:00','2017-04-30 00:00:00','All',''),
-(11,'Reporte de prueba dura','Die Hard.','Sales','2017-04-01 00:00:00','2017-04-30 00:00:00','4','9'),
-(13,'Reporte de la tercera categoria','mjm','Sales','2017-04-01 00:00:00','2017-04-27 00:00:00','3',''),
-(14,'Reporte de Pisos','Pisos.','Revenue','2017-03-15 00:00:00','2017-04-27 00:00:00','3',''),
-(16,'Reporte de todas las ventas','Todas las ventas','Sales','2017-03-15 00:00:00','2017-04-27 00:00:00','All',''),
-(17,'Reporte del Item ID 10','Solo eso.','Revenue','2017-03-16 00:00:00','2017-04-27 00:00:00','4','10'),
-(18,'Item ID 4 Report','Para probar.','Revenue','2017-03-16 00:00:00','2017-04-27 00:00:00','4','4'),
-(19,'Reporte por ID 8','Por ID 8','Sales','2017-03-03 00:00:00','2017-05-05 00:00:00','4','8'),
-(20,'Reporte por ID 5','ID 5','Revenue','2017-03-23 00:00:00','2017-05-04 00:00:00','4','5'),
-(21,'Test (Angel)','Test.','Revenue','16-11-2017','20-04-2017','1','');
+(26,'Test','vugbjk','Sales',1483329338,1485914138,'All',''),
+(27,'Test 2 ','xcbxcbcx','Sales',1486004406,1488337206,'All','');
 
 /*Table structure for table `shipper` */
 

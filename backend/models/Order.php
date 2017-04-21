@@ -68,8 +68,7 @@ class Order extends ActiveRecord
     public function rules()
     {
         return [
-            [['amount_stickers', 'order_status', 'customer_id', 'tracking_number'], 'integer'],
-            [['order_date'], 'date'],
+            [['order_date', 'amount_stickers', 'order_status', 'customer_id', 'tracking_number'], 'integer'],
             [['amount_stickers'], 'required'],
             [['total_price'], 'number'],
             [['shipper_company_name'], 'string', 'max' => 18],

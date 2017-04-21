@@ -58,15 +58,8 @@ CREATE TABLE `contains` (
 /*Data for the table `contains` */
 
 insert  into `contains`(`order_number`,`item_id`,`price_sold`,`quantity_in_order`) values 
-(123,4,1.35,3),
-(143432,5,2.00,10),
-(143433,4,1.35,3),
-(143434,9,3.45,4),
-(143435,8,6.78,1),
-(143436,9,3.45,2),
-(143436,10,3.00,1),
-(143437,5,2.00,1),
-(143437,8,6.78,1);
+(143438,15,10.41,1),
+(143438,17,2.53,1);
 
 /*Table structure for table `customer` */
 
@@ -91,15 +84,16 @@ CREATE TABLE `customer` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `password_reset_token` (`password_reset_token`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `customer` */
 
 insert  into `customer`(`id`,`email`,`password_hash`,`first_name`,`middle_name`,`fathers_last_name`,`mothers_last_name`,`date_of_birth`,`age`,`auth_key`,`password_reset_token`,`status`,`created_at`,`updated_at`,`active`) values 
-(12,'erick.rivera6@upr.edu','$2y$13$M5UpksDkDlvgt/lUm1m/lOaQ7R97gkbNEZW.zl7ZGEhjSD0BNfPY.','Erick','','Rivera','Cruz',12,NULL,'DdZQQZEetFOXZcoL5LVzhOwOByIW07Xa',NULL,10,1491695547,1491695547,0),
-(13,'huelga@upra.com','$2y$13$Qqdd5SXlZpcVuL1sCrVgXuyraBjHDI/l4IyG0fhiv/Ccvd2iTnBTa','Once','Recintos','Una','Upr',12,NULL,'CFnXDz1i7Xdu29AkGMAxcPAaVgRdN0qD',NULL,10,1491842106,1491842106,0),
-(14,'bryan.hernandez5@upr.edu','$2y$13$kotQzJ5P/uEh.XOfM8dGpO9jt5cYkmbin6VfzpG96bbp1gfUdRsZu','Bryan','Yomar','Hernandez','Cuevas',1996,NULL,'1aJSZBWbJs6pp6ny1Q33-OeAKlSAZRO_',NULL,10,1492651670,1492651670,0),
-(19,'angel.santiago31@upr.edu','$2y$13$nt0zcmBLbAFn598NDRCOauOcpQGb5VYA6NJXeh7djbRibrF54oS7C','Angel','Eduardo','Santiago','González','10-10-1996',NULL,'aXIqfWWFf17tuvpdcFfxoslLUXZWIZaI',NULL,10,1492660565,1492660951,0);
+(12,'erick.rivera6@upr.edu','$2y$13$M5UpksDkDlvgt/lUm1m/lOaQ7R97gkbNEZW.zl7ZGEhjSD0BNfPY.','Erick','','Rivera','Cruz','12',NULL,'DdZQQZEetFOXZcoL5LVzhOwOByIW07Xa',NULL,10,1491695547,1491695547,0),
+(13,'huelga@upra.com','$2y$13$Qqdd5SXlZpcVuL1sCrVgXuyraBjHDI/l4IyG0fhiv/Ccvd2iTnBTa','Once','Recintos','Una','Upr','12',NULL,'CFnXDz1i7Xdu29AkGMAxcPAaVgRdN0qD',NULL,10,1491842106,1491842106,0),
+(14,'bryan.hernandez5@upr.edu','$2y$13$kotQzJ5P/uEh.XOfM8dGpO9jt5cYkmbin6VfzpG96bbp1gfUdRsZu','Bryan','Yomar','Hernandez','Cuevas','1996',NULL,'1aJSZBWbJs6pp6ny1Q33-OeAKlSAZRO_',NULL,10,1492651670,1492651670,0),
+(19,'angel.santiago31@upr.edu','$2y$13$nt0zcmBLbAFn598NDRCOauOcpQGb5VYA6NJXeh7djbRibrF54oS7C','Angel','Eduardo','Santiago','González','10-10-1996',NULL,'aXIqfWWFf17tuvpdcFfxoslLUXZWIZaI',NULL,10,1492660565,1492660951,0),
+(20,'test@test.com','$2y$13$uQax1jJ7LTc7v5Fd4qBT6OEryM/89/Lt3.9Jk5MDeHhOYMrQaErk6','Test','Test','Test','Test','23-03-2017',NULL,'okRwZ_rAxhW9rGTXNIxeeVQvrhPhWndh',NULL,10,1492797446,1492797446,0);
 
 /*Table structure for table `item` */
 
@@ -130,9 +124,9 @@ insert  into `item`(`item_id`,`name`,`picture`,`quantity_remaining`,`size`,`gros
 (12,'Romaine Calm','uploads/Romaine Calm.jpg',30,3,10.00,1.75,'Romaine calm everybody!',1,1,1),
 (13,'I Yam What I Yam','uploads/I Yam What I Yam.jpg',34,2,6.00,0.75,'I yam happy!',1,1,1),
 (14,'Sarcasm','uploads/Sarcasm.jpg',17,1,2.56,0.11,'\"can i interest you in a sarcastic comment?\" Graphic',1,1,1),
-(15,'[laughs microscopically]','uploads/[laughs microscopically].jpg',45,3,10.41,1.84,'Tiny laughs for all you\'ve got!',1,1,1),
+(15,'[laughs microscopically]','uploads/[laughs microscopically].jpg',44,3,10.41,1.84,'Tiny laughs for all you\'ve got!',1,1,1),
 (16,'Coach Logo','uploads/Coach Logo.jpg',36,1,4.64,0.45,'Original Coach Logo',1,2,1),
-(17,'Samurai Cereal','uploads/Samurai Cereal.jpg',47,1,2.53,0.25,'Eat \'em with chopsticks or spoon!',1,2,1),
+(17,'Samurai Cereal','uploads/Samurai Cereal.jpg',46,1,2.53,0.25,'Eat \'em with chopsticks or spoon!',1,2,1),
 (18,'Volcom','uploads/Volcom.jpg',45,1,3.17,0.67,'Volcom Logo',1,2,1),
 (19,'Sundrop - Sun drop','uploads/Sundrop - Sun drop.jpg',34,2,10.28,1.67,'Drop it like it\'s hot!',1,2,1),
 (20,'Twinkies','uploads/Twinkies.jpg',17,1,2.32,0.21,'The favorite yellowish cream filled sponge!',1,2,1),
@@ -254,27 +248,12 @@ CREATE TABLE `order` (
   KEY `shipper_company_name` (`shipper_company_name`),
   CONSTRAINT `order_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `order_ibfk_2` FOREIGN KEY (`shipper_company_name`) REFERENCES `shipper` (`shipper_name`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=143439 DEFAULT CHARSET=utf8;
 
 /*Data for the table `order` */
 
 insert  into `order`(`order_number`,`order_date`,`amount_stickers`,`total_price`,`order_status`,`customer_id`,`shipper_company_name`,`tracking_number`) values 
-(123,'2017-04-06',3,4.05,1,11,'UPS',2147483647),
-(143432,'2017-06-04',10,20.00,0,11,'UPS',12345),
-(143433,'0000-00-00',3,4.05,1,14,'UPS',3965),
-(143434,'0000-00-00',5,17.05,1,14,'UPS',3669),
-(143435,'0000-00-00',1,6.78,1,14,'UPS',4304),
-(143436,'0000-00-00',3,9.90,1,14,'UPS',6566),
-(143437,'0000-00-00',2,8.78,1,14,'UPS',4394),
-(7,1492661373,3,6.60,1,19,'UPS',8624),
-(9,1492661644,1,3.25,1,19,'UPS',1665),
-(10,1492661648,1,1.35,1,19,'UPS',8650),
-(11,1492661651,1,3.45,1,19,'UPS',8445),
-(12,1492661654,1,3.00,1,19,'UPS',3733),
-(13,1492661657,1,6.78,1,19,'UPS',6995),
-(14,1492661683,1,3.25,1,19,'UPS',3103),
-(15,1492661687,1,6.78,1,19,'UPS',4701),
-(16,1492661689,1,2.00,1,19,'UPS',7953);
+(143438,1492733047,2,12.94,1,19,'UPS',4733);
 
 /*Table structure for table `payment_method` */
 
@@ -282,7 +261,7 @@ DROP TABLE IF EXISTS `payment_method`;
 
 CREATE TABLE `payment_method` (
   `customer_id` int(11) NOT NULL,
-  `card_last_digits` int(4) NOT NULL,
+  `card_last_digits` varchar(4) NOT NULL,
   `exp_date` varchar(5) NOT NULL,
   `card_type` varchar(32) NOT NULL,
   PRIMARY KEY (`customer_id`),
@@ -292,8 +271,9 @@ CREATE TABLE `payment_method` (
 /*Data for the table `payment_method` */
 
 insert  into `payment_method`(`customer_id`,`card_last_digits`,`exp_date`,`card_type`) values 
-(14,1111,'20/20','Visa'),
-(19,1234,'11/11','Visa');
+(14,'1111','20/20','Visa'),
+(19,'1234','12/12','Visa'),
+(20,'1234','11/11','American Exppress');
 
 /*Table structure for table `phone_number` */
 
@@ -301,7 +281,7 @@ DROP TABLE IF EXISTS `phone_number`;
 
 CREATE TABLE `phone_number` (
   `customer_id` int(11) NOT NULL,
-  `number` int(11) NOT NULL,
+  `number` varchar(12) NOT NULL,
   PRIMARY KEY (`customer_id`),
   CONSTRAINT `phone_number_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -309,8 +289,9 @@ CREATE TABLE `phone_number` (
 /*Data for the table `phone_number` */
 
 insert  into `phone_number`(`customer_id`,`number`) values 
-(14,787),
-(19,'939-246-8676');
+(14,'787'),
+(19,'939-246-8676'),
+(20,'787-897-3922');
 
 /*Table structure for table `report_type` */
 
@@ -334,12 +315,12 @@ CREATE TABLE `reports` (
   `title` varchar(250) NOT NULL DEFAULT '',
   `description` text,
   `type` varchar(11) NOT NULL,
-  `from_date` timestamp NULL DEFAULT NULL,
-  `to_date` timestamp NULL DEFAULT NULL,
+  `from_date` varchar(128) DEFAULT NULL,
+  `to_date` varchar(128) DEFAULT NULL,
   `refers_to` varchar(58) DEFAULT NULL,
   `item_selected` varchar(150) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 
 /*Data for the table `reports` */
 
@@ -353,7 +334,8 @@ insert  into `reports`(`id`,`title`,`description`,`type`,`from_date`,`to_date`,`
 (17,'Reporte del Item ID 10','Solo eso.','Revenue','2017-03-16 00:00:00','2017-04-27 00:00:00','4','10'),
 (18,'Item ID 4 Report','Para probar.','Revenue','2017-03-16 00:00:00','2017-04-27 00:00:00','4','4'),
 (19,'Reporte por ID 8','Por ID 8','Sales','2017-03-03 00:00:00','2017-05-05 00:00:00','4','8'),
-(20,'Reporte por ID 5','ID 5','Revenue','2017-03-23 00:00:00','2017-05-04 00:00:00','4','5');
+(20,'Reporte por ID 5','ID 5','Revenue','2017-03-23 00:00:00','2017-05-04 00:00:00','4','5'),
+(21,'Test (Angel)','Test.','Revenue','16-11-2017','20-04-2017','1','');
 
 /*Table structure for table `shipper` */
 
@@ -379,7 +361,7 @@ CREATE TABLE `shipping_address` (
   `customer_id` int(11) NOT NULL,
   `street_name` varchar(32) NOT NULL,
   `apt_number` int(11) NOT NULL,
-  `zipcode` int(5) NOT NULL,
+  `zipcode` varchar(5) NOT NULL,
   `state` varchar(2) NOT NULL,
   PRIMARY KEY (`customer_id`),
   CONSTRAINT `shipping_address_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -388,8 +370,8 @@ CREATE TABLE `shipping_address` (
 /*Data for the table `shipping_address` */
 
 insert  into `shipping_address`(`customer_id`,`street_name`,`apt_number`,`zipcode`,`state`) values 
-
-(19,'Example Name',123,'00669','PR');
+(19,'Example Name',123,'00669','PR'),
+(20,'wewg',234324,'00669','IL');
 
 /*Table structure for table `sticker_size` */
 

@@ -91,6 +91,22 @@ class SiteController extends Controller
                                                 'item_sub_category_id' => $model->item_sub_category_id,
                                                 'active' => Item::ACTIVE])->andWhere(['>=', 'quantity_remaining', 1])->all();
 
+             $sql ="SELECT * FROM item WHERE item_category_id = '$category' and item_sub_category_id = '$subcategory' and active = 1 and quantity_remaining >= 1";
+            echo Growl::widget([
+                    'type' => Growl::TYPE_SUCCESS,
+                    'icon' => 'glyphicon glyphicon-ok-sign',
+                    'title' => 'Query',
+                    'showSeparator' => true,
+                    'body' => $sql,
+                    'pluginOptions' => [
+                            'showProgressbar' => true,
+                            'placement' => [
+                                'from' => 'top',
+                                'align' => 'right',
+                            ]
+                        ]
+                ]);
+
              return $this->render('stickers', [
                  'model' => $model,
                  'stickerList' => $stickerList,

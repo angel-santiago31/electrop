@@ -9,6 +9,7 @@ use backend\models\ContainsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use kartik\growl\Growl;
 
 /**
  * OrderController implements the CRUD actions for Order model.
@@ -39,6 +40,20 @@ class OrderController extends Controller
         $searchModel = new OrderSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        $sql ="SELECT * FROM order";
+            echo Growl::widget([
+                    'type' => Growl::TYPE_SUCCESS,
+                    'icon' => 'glyphicon glyphicon-ok-sign',
+                    'title' => 'Query',
+                    'showSeparator' => true,
+                    'body' => $sql,
+                    'pluginOptions' => [
+                            'placement' => [
+                                'from' => 'top',
+                                'align' => 'right',
+                            ]
+                        ]
+                ]);
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -56,6 +71,18 @@ class OrderController extends Controller
 
         $searchModel = new ContainsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $order->order_number);
+        
+        $sql ="SELECT * FROM order WHERE id = $id\n\nSELECT * FROM contains WHERE order_number = $id";
+                 Yii::$app->getSession()->setFlash('success', [
+                    'type' => 'success',
+                    'duration' => 5000,
+                    'icon' => 'glyphicon glyphicon-ok-sign',
+                    'title' => 'Query',
+                    'showSeparator' => true,
+                    'message' => $sql,
+                    'positonY' => 'top',
+                    'positonX' => 'right'
+                ]);
 
         return $this->render('view', [
             'model' => $order,
@@ -92,6 +119,19 @@ class OrderController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            
+            $sql ="UPDATE order SET \norder_status = $model->order_status\n WHERE id = $model->id";
+                 Yii::$app->getSession()->setFlash('success', [
+                    'type' => 'success',
+                    'duration' => 5000,
+                    'icon' => 'glyphicon glyphicon-ok-sign',
+                    'title' => 'Query',
+                    'showSeparator' => true,
+                    'message' => $sql,
+                    'positonY' => 'top',
+                    'positonX' => 'right'
+                ]);
+
             return $this->redirect(['view', 'id' => $model->order_number]);
         } else {
             return $this->renderAjax('update', [

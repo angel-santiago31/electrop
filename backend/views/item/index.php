@@ -11,11 +11,13 @@ use backend\models\Item;
 $this->title = 'Inventory';
 //$this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="container">
-    <div class="panel panel-primary">
-        <div class="panel-heading">
-            <div class="jumbotron">
-                <h1><?= '<span class="glyphicon glyphicon-inbox"></span> ' . Html::encode($this->title)?></h1>
+<div class="col-sm-12">
+    <div class"container">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="jumbotron">
+                    <h1><?= '<span class="glyphicon glyphicon-inbox"></span> ' . Html::encode($this->title)?></h1>
+                </div>
             </div>
         </div>
         <div class="panel-body">
@@ -31,11 +33,11 @@ $this->title = 'Inventory';
                   </div>
               </div>
 
-              <?= GridView::widget([
-                  'dataProvider' => $dataProvider,
-                  //'filterModel' => $searchModel,
-                  'columns' => [
-                      //['class' => 'yii\grid\SerialColumn'],
+                <?= GridView::widget([
+                    'dataProvider' => $dataProvider,
+                    //'filterModel' => $searchModel,
+                    'columns' => [
+                        //['class' => 'yii\grid\SerialColumn'],
 
                       //'id',
                       'name',
@@ -55,31 +57,32 @@ $this->title = 'Inventory';
                           'value' => function ($model) {
                               $priceToShow = '$ ' . $model->gross_price;
 
-                              return $priceToShow;
-                          },
-                      ],
-                      [
-                          'attribute' => 'Gross Price',
-                          'value' => function ($model) {
-                              $priceToShow = '$ ' . $model->production_cost;
+                                return $priceToShow;
+                            },
+                        ],
+                        [
+                            'attribute' => 'Gross Price',
+                            'value' => function ($model) {
+                                $priceToShow = '$ ' . $model->production_cost;
 
-                              return $priceToShow;
-                          },
-                      ],
-                       //'gross_price',
-                       //'production_cost',
-                      // 'description:ntext',
+                                return $priceToShow;
+                            },
+                        ],
+                        //'gross_price',
+                        //'production_cost',
+                        // 'description:ntext',
 
-                      //['class' => 'yii\grid\ActionColumn'],
-                      [
-                        'label' => 'More',
-                        'format' => 'html',
-                        'value' => function ($model) {
-                            return Html::a('<i class="glyphicon glyphicon-eye-open"></i> View Details', ['view', 'id' => $model->item_id], ['class' => 'btn btn-xs btn-info']);
-                        }
-                      ],
-                  ],
-              ]); ?>
+                        //['class' => 'yii\grid\ActionColumn'],
+                        [
+                            'label' => 'More',
+                            'format' => 'html',
+                            'value' => function ($model) {
+                                return Html::a('<i class="glyphicon glyphicon-eye-open"></i> View Details', ['view', 'id' => $model->item_id], ['class' => 'btn btn-xs btn-info']);
+                            }
+                        ],
+                    ],
+                ]); ?>
+            </div>
         </div>
-    </div>
+    </div>    
 </div>

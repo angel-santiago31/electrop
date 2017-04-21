@@ -8,6 +8,7 @@ use common\models\AdminSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use kartik\growl\Growl;
 
 /**
  * AdminController implements the CRUD actions for Admin model.
@@ -38,6 +39,54 @@ class AdminController extends Controller
         $searchModel = new AdminSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        if ($searchModel->status == 10){
+           $sql ="SELECT * FROM admin WHERE status = $searchModel->status";
+           echo Growl::widget([
+                    'type' => Growl::TYPE_SUCCESS,
+                    'icon' => 'glyphicon glyphicon-ok-sign',
+                    'title' => 'Query',
+                    'showSeparator' => true,
+                    'body' => $sql,
+                    'pluginOptions' => [
+                            'placement' => [
+                                'from' => 'top',
+                                'align' => 'right',
+                            ]
+                        ]
+                ]);  
+        } else if ($searchModel->status == "") {
+            $sql ="SELECT * FROM admin";
+            echo Growl::widget([
+                    'type' => Growl::TYPE_SUCCESS,
+                    'icon' => 'glyphicon glyphicon-ok-sign',
+                    'title' => 'Query',
+                    'showSeparator' => true,
+                    'body' => $sql,
+                    'pluginOptions' => [
+                            'placement' => [
+                                'from' => 'top',
+                                'align' => 'right',
+                            ]
+                        ]
+                ]);
+        } else {
+            $sql ="SELECT * FROM admin WHERE status = $searchModel->status";
+            echo Growl::widget([
+                    'type' => Growl::TYPE_SUCCESS,
+                    'icon' => 'glyphicon glyphicon-ok-sign',
+                    'title' => 'Query',
+                    'showSeparator' => true,
+                    'body' => $sql,
+                    'pluginOptions' => [
+                            'placement' => [
+                                'from' => 'top',
+                                'align' => 'right',
+                            ]
+                        ]
+                ]);
+        }
+         
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -51,6 +100,17 @@ class AdminController extends Controller
      */
     public function actionView($id)
     {
+        $sql ="SELECT * FROM admin WHERE id = $id";
+        Yii::$app->getSession()->setFlash('success', [
+            'type' => 'success',
+            'duration' => 5000,
+            'icon' => 'glyphicon glyphicon-ok-sign',
+            'title' => 'Query',
+            'message' => $sql,
+            'positonY' => 'top',
+            'positonX' => 'right'
+            ]);
+                
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -69,9 +129,21 @@ class AdminController extends Controller
             $model->setPassword($model->password_hash);
             $model->generateAuthKey();
             $model->generatePasswordResetToken();
-
+            
             if ($model->save()) {
                 //print_r($model->errors);
+            $sql ="INSERT INTO admin(id,auth_key,password_hash,\npassword_reset_token,\nemail,status,created_at,updated_at) VALUES \n($model->id, \n$model->auth_key, \n$model->password_hash, \n$model->password_reset_token, \n$model->email, \n$model->status, \n$model->created_at, \n$model->updated_at)";
+                 Yii::$app->getSession()->setFlash('success', [
+                    'type' => 'success',
+                    'duration' => 5000,
+                    'icon' => 'glyphicon glyphicon-ok-sign',
+                    'title' => 'Query',
+                    'showSeparator' => true,
+                    'message' => $sql,
+                    'positonY' => 'top',
+                    'positonX' => 'right'
+                ]);
+                //die('Viendo si pasa');
                 return $this->redirect(['index']);
             } else {
                 return $this->render('create', [
@@ -95,13 +167,35 @@ class AdminController extends Controller
     {
         $model = $this->findModel($id);
 
+        $sql ="SELECT * FROM admin WHERE id = $model->id";
+                 Yii::$app->getSession()->setFlash('success', [
+                    'type' => 'success',
+                    'duration' => 5000,
+                    'icon' => 'glyphicon glyphicon-ok-sign',
+                    'title' => 'Query',
+                    'showSeparator' => true,
+                    'message' => $sql,
+                    'positonY' => 'top',
+                    'positonX' => 'right'
+                ]);
+                
         if ($model->load(Yii::$app->request->post())) {
             $model->setPassword($model->password_hash);
 
             if ($model->validate()) {
                 $model->save();
             }
-
+            $sql ="UPDATE admin SET password_hash = $model->password_hash,\npassword_reset_token = $model->password_reset_token,\n email = $model->email\n,updated_at= $model->updated_at \n WHERE id = $model->id";
+                 Yii::$app->getSession()->setFlash('success', [
+                    'type' => 'success',
+                    'duration' => 5000,
+                    'icon' => 'glyphicon glyphicon-ok-sign',
+                    'title' => 'Query',
+                    'showSeparator' => true,
+                    'message' => $sql,
+                    'positonY' => 'top',
+                    'positonX' => 'right'
+                ]);
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
@@ -122,6 +216,18 @@ class AdminController extends Controller
         $model->status = Admin::STATUS_DELETED;
         $model->save(false);
 
+        $sql ="UPDATE admin SET status = $model->status WHERE id = $model->id";
+                 Yii::$app->getSession()->setFlash('success', [
+                    'type' => 'success',
+                    'duration' => 5000,
+                    'icon' => 'glyphicon glyphicon-ok-sign',
+                    'title' => 'Query',
+                    'showSeparator' => true,
+                    'message' => $sql,
+                    'positonY' => 'top',
+                    'positonX' => 'right'
+                ]);
+
         return $this->redirect(['index']);
     }
 
@@ -137,6 +243,17 @@ class AdminController extends Controller
         $model->status = Admin::STATUS_ACTIVE;
         $model->save(false);
 
+        $sql ="UPDATE admin SET status = $model->status WHERE id = $model->id";
+                 Yii::$app->getSession()->setFlash('success', [
+                    'type' => 'success',
+                    'duration' => 5000,
+                    'icon' => 'glyphicon glyphicon-ok-sign',
+                    'title' => 'Query',
+                    'showSeparator' => true,
+                    'message' => $sql,
+                    'positonY' => 'top',
+                    'positonX' => 'right'
+                ]);
         return $this->redirect(['index']);
     }
 

@@ -132,14 +132,14 @@ class CustomerController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->customerCreate()) {
             // Falta modificar query para que sea legitimo a lo que se está haciendo, pero hay que arreglar base de datos antes de 
-             $sql ="INSERT INTO customer(id,email,password_hash,first_name,\nmiddle_name,fathers_last_name,mothers_last_name,\ndate_of_birth,\nauth_key,status,created_at,updated_at) VALUES \n($model->id,\n$model->email, \n$model->password_hash, \n$model->first_name, \n$model->middle_name, \n$model->fathers_last_name, \n$model->mothers_last_name,\n$model->date_of_birth, \n$model->auth_key,\n$model->created_at, \n$model->updated_at)";
-                 Yii::$app->getSession()->setFlash('success', [
+             $query_sql ="INSERT INTO customer(email,password_hash) VALUES($model->email, \n$model->password_hash)";
+                 Yii::$app->getSession()->setFlash('created', [
                     'type' => 'success',
                     'duration' => 5000,
                     'icon' => 'glyphicon glyphicon-ok-sign',
                     'title' => 'Query',
                     'showSeparator' => true,
-                    'message' => $sql,
+                    'message' => $query_sql,
                     'positonY' => 'top',
                     'positonX' => 'right'
                 ]);

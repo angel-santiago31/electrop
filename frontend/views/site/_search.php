@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use backend\models\Item;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\ItemSearch */
@@ -9,24 +10,23 @@ use yii\widgets\ActiveForm;
 ?>
 
 <div class="item-search">
-
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['action' =>['site/stickers'], 'method' => 'post',]); ?>
         <div class="row">
             <div class="col-sm-12">
                 <?= $form->field($model, 'item_category_id')->dropDownList([
-                                                                          1 => 'Decals',
-                                                                          2 => 'Wall',
-                                                                          3 => 'Floor',
+                                                                          Item::DECALS => 'Decals',
+                                                                          Item::WALL => 'Wall',
+                                                                          Item::FLOOR => 'Floor',
                                                                         ]) ?>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-12">
                 <?= $form->field($model, 'item_sub_category_id')->dropDownList([
-                                                                          1 => 'Jokes',
-                                                                          2 => 'Brands',
-                                                                          3 => 'Animals',
-                                                                          4 => 'Random',
+                                                                          Item::JOKES => 'Jokes',
+                                                                          Item::BRANDS => 'Brands',
+                                                                          Item::ANIMALS => 'Animals',
+                                                                          Item::RANDOM => 'Random',
                                                                         ]) ?>
             </div>
         </div>

@@ -24,8 +24,8 @@ $this->title = 'Inventory';
                       <?= $this->render('_search', ['model' => $searchModel]); ?>
                   </div>
                   <div class="col-sm-3">
+                    <br>
                       <p>
-                        <br>
                           <?= Html::a('<span class="glyphicon glyphicon-plus"></span> Create Item', ['create'], ['class' => 'btn btn-success pull-right']) ?>
                       </p>
                   </div>
@@ -40,6 +40,7 @@ $this->title = 'Inventory';
                       //'id',
                       'name',
                       [
+                         'label' => 'Status',
                          'attribute' => 'Active',
                          'value' => function ($model) {
                                  return ($model->active === Item::ACTIVE)?

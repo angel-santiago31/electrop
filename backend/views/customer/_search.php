@@ -16,19 +16,17 @@ use common\models\Customer;
         'method' => 'get',
     ]); ?>
 
-
-    <div class="col-sm-3">
-        <?= $form->field($model, 'status')->dropDownList([Customer::STATUS_ACTIVE => 'Active', Customer::STATUS_DELETED => 'Inactive']) ?>
+    <div class="col-sm-2">
+        <?= $form->field($model, 'id') ?>
     </div>
-     <div class="col-sm-9">
-         <br>
-        <div class="btn-group">
-            <?= Html::submitButton('<span class="glyphicon glyphicon-search"></span> Search', ['class' => 'btn btn-primary']) ?>
-            <?= Html::a('<span class="glyphicon glyphicon-refresh"></span> Reset', ['customer/index'],['class' => 'btn btn-default']) ?>
-        </div>
+    <div class="col-sm-2">
+        <?= $form->field($model, 'status')->dropDownList([Customer::STATUS_ACTIVE => 'Active', Customer::STATUS_DELETED => 'Inactive'], ['prompt'=>'--Select--']) ?>
     </div>
-
-    <?php //$form->field($model, 'id') ?>
+        <br>
+    <div class="btn btn-group">
+        <?= Html::submitButton('<span class="glyphicon glyphicon-search"></span> Search', ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('<span class="glyphicon glyphicon-refresh"></span> Reset', ['customer/index'],['class' => 'btn btn-default']) ?>
+    </div>
 
     <?php //$form->field($model, 'email') ?>
 

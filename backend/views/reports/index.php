@@ -20,11 +20,18 @@ $this->title = 'Reports';
             </div>
         </div>
         <div class="panel-body">
-                    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+              <div class="row">
+                  <div class="col-sm-9">
+                      <?= $this->render('_search', ['model' => $searchModel]); ?>
+                  </div>
+                  <div class="col-sm-3">
+                    <br>
+                      <p>
+                          <?= Html::a('<i class="glyphicon glyphicon-plus"></i> Create Report', ['create'], ['class' => 'btn btn-success pull-right']) ?>
+                      </p>
+                  </div>
+              </div>
 
-                    <p>
-                        <?= Html::a('<i class="glyphicon glyphicon-plus"></i> Create Report', ['create'], ['class' => 'btn btn-success']) ?>
-                    </p>
                     <div class="panel-body">
                     <?= GridView::widget([
                         'dataProvider' => $dataProvider,

@@ -15,24 +15,27 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
+    <div class="col-sm-3">
+        <?= $form->field($model, 'title') ?>
+    </div>
+    <div class="col-sm-3">
+        <?= $form->field($model, 'type')->dropDownList(['Sales' => 'Sales', 'Revenue' => 'Revenue'], ['prompt'=>'--Select--']) ?>
+    </div>
+      <br>
+    <div class="btn btn-group">
+        <?= Html::submitButton('<i class="glyphicon glyphicon-search"></i> Search', ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('<span class="glyphicon glyphicon-refresh"></span> Reset', ['reports/index'],['class' => 'btn btn-default']) ?>
+    </div>
 
-    <?= $form->field($model, 'title') ?>
+    <?php // $form->field($model, 'from_date') ?>
 
-    <?= $form->field($model, 'description') ?>
+    <!-- <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'type') ?>
-
-    <?= $form->field($model, 'from_date') ?>
+    <?= $form->field($model, 'description') ?> -->
 
     <?php // echo $form->field($model, 'to_date') ?>
 
     <?php // echo $form->field($model, 'refers_to') ?>
-
-    <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
-    </div>
 
     <?php ActiveForm::end(); ?>
 

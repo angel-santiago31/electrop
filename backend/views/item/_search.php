@@ -22,14 +22,12 @@ use yii\widgets\ActiveForm;
         <?= $form->field($model, 'active')->dropDownList([
                                                             1 => 'Active',
                                                             0 => 'Inactive'
-                                                        ]) ?>
+                                                        ], ['prompt'=>'--Select--'])->label('Status') ?>
     </div>
-    <div class="form-group">
-        <br>
-        <div class="btn-group">
-            <?= Html::submitButton('<span class="glyphicon glyphicon-search"></span> Search', ['class' => 'btn btn-primary']) ?>
-            <?= Html::a('<span class="glyphicon glyphicon-refresh"></span> Reset', ['item/index'],['class' => 'btn btn-default']) ?>
-        </div>
+    <br>
+    <div class="btn btn-group">
+        <?= Html::submitButton('<span class="glyphicon glyphicon-search"></span> Search', ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('<span class="glyphicon glyphicon-refresh"></span> Reset', ['item/index'],['class' => 'btn btn-default']) ?>
     </div>
 
     <?php //$form->field($model, 'picture') ?>

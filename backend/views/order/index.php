@@ -19,7 +19,10 @@ $this->title = 'Orders';
             </div>
         </div>
         <div class="panel-body">
-              <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+            <div class="row">
+                <?= $this->render('_search', ['model' => $searchModel]); ?>
+            </div>
+
 
               <!-- <p>
                   <?= Html::a('Create Order', ['create'], ['class' => 'btn btn-success']) ?>

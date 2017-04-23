@@ -18,7 +18,8 @@ class ReportsSearch extends Reports
     public function rules()
     {
         return [
-            [['id', 'type'], 'integer'],
+            [['id'], 'integer'],
+            [['type'], 'string'],
             [['title', 'description', 'from_date', 'to_date', 'refers_to'], 'safe'],
         ];
     }

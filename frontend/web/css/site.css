@@ -8,6 +8,10 @@ body {
   width: 100%
 }
 
+.alignC {
+    align: center;
+}
+
 #hov:hover {
   color: #ff0000;
   text-decoration: none;
@@ -145,5 +149,3 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
-
-

@@ -3,13 +3,31 @@
 /* @var $this yii\web\View */
 
 use yii\helpers\Url;
-// use kartik\date\DatePicker;
+use yii\helpers\Html;
+use yii\bootstrap\Carousel;
 
 $this->title = 'Home';
 ?>
-<?php $images=['<img align:center src="/electrop/backend/web/uploads/cr1.jpg""/>','<img src="/electrop/backend/web/uploads/cr2.jpg">',];
- echo yii\bootstrap\Carousel::widget(['items'=>$images]); ?>
-<hr>
+<?php
+
+    $images = [];
+
+    foreach ($carousel as $sticker) {
+        $path = Url::to('/electrop/backend/web/' . $sticker->picture);
+        $image = [
+                    'content' => '<p style="text-align:center"><img src="' . $path . '"/></p>',
+                    'caption' => '<h2>' . $sticker->name . '</h2><p>' . $sticker->description . '</p>',
+                    'options' => [],
+                ];
+        // $image = Html::img('/electrop/backend/web/' . $sticker->picture, ['class' => 'alignC']);
+        array_push($images, $image);
+    }
+
+
+
+    echo Carousel::widget(['items' => $images]);
+?>
+
 <div class="container">
     <div class="panel panel-default">
         <div class="panel-body text-center">

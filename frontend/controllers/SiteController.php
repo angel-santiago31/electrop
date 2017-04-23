@@ -76,9 +76,11 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $stickerList = Item::find()->limit(6)->offset(0)->where(['active' => Item::ACTIVE])->all();
+        $carousel = Item::find()->limit(5)->offset(10)->where(['active' => Item::ACTIVE])->all();
 
         return $this->render('index', [
             'stickerList' => $stickerList,
+            'carousel' => $carousel,
         ]);
     }
 

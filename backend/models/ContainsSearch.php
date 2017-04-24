@@ -43,6 +43,18 @@ class ContainsSearch extends Contains
     {
         if ($orderNum != NULL) {
             $query = Contains::find()->where(['order_number' => $orderNum]);
+
+            $sql ="SELECT * FROM contains WHERE order_number = $orderNum";
+                 Yii::$app->getSession()->setFlash('success', [
+                    'type' => 'success',
+                    'duration' => 5000,
+                    'icon' => 'glyphicon glyphicon-ok-sign',
+                    'title' => 'Query',
+                    'showSeparator' => true,
+                    'message' => $sql,
+                    'positonY' => 'top',
+                    'positonX' => 'right'
+                ]);
         } else {
             $query = Contains::find();
         }

@@ -9,7 +9,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
-
+use kartik\growl\Growl;
 
 /**
  * ItemController implements the CRUD actions for Item model.
@@ -40,6 +40,87 @@ class ItemController extends Controller
         $searchModel = new ItemSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        // echo '<pre>';
+        // var_dump($searchModel);
+        // die(1);
+
+        if ($searchModel->name == "" && $searchModel->active == 1){
+           $sql ="SELECT * FROM item WHERE status = $searchModel->active";
+           echo Growl::widget([
+                    'type' => Growl::TYPE_SUCCESS,
+                    'icon' => 'glyphicon glyphicon-ok-sign',
+                    'title' => 'Query',
+                    'showSeparator' => true,
+                    'body' => $sql,
+                    'pluginOptions' => [
+                            'placement' => [
+                                'from' => 'top',
+                                'align' => 'right',
+                            ]
+                        ]
+                ]);  
+        } else if ($searchModel->name == "" && $searchModel->active == "") {
+            $sql ="SELECT * FROM item";
+            echo Growl::widget([
+                    'type' => Growl::TYPE_SUCCESS,
+                    'icon' => 'glyphicon glyphicon-ok-sign',
+                    'title' => 'Query',
+                    'showSeparator' => true,
+                    'body' => $sql,
+                    'pluginOptions' => [
+                            'placement' => [
+                                'from' => 'top',
+                                'align' => 'right',
+                            ]
+                        ]
+                ]);
+        } else if ($searchModel->name == "" && $searchModel->active == 0){
+            $sql ="SELECT * FROM item WHERE status = $searchModel->active";
+            echo Growl::widget([
+                    'type' => Growl::TYPE_SUCCESS,
+                    'icon' => 'glyphicon glyphicon-ok-sign',
+                    'title' => 'Query',
+                    'showSeparator' => true,
+                    'body' => $sql,
+                    'pluginOptions' => [
+                            'placement' => [
+                                'from' => 'top',
+                                'align' => 'right',
+                            ]
+                        ]
+                ]);
+        } else  if ($searchModel->id == $searchModel->id  && $searchModel->active == "") {
+            $sql ="SELECT * FROM item WHERE name = $searchModel->name";
+            echo Growl::widget([
+                    'type' => Growl::TYPE_SUCCESS,
+                    'icon' => 'glyphicon glyphicon-ok-sign',
+                    'title' => 'Query',
+                    'showSeparator' => true,
+                    'body' => $sql,
+                    'pluginOptions' => [
+                            'placement' => [
+                                'from' => 'top',
+                                'align' => 'right',
+                            ]
+                        ]
+                ]);
+        } else {
+            $sql ="SELECT * FROM item WHERE status = $searchModel->active AND name = $searchModel->name";
+            echo Growl::widget([
+                    'type' => Growl::TYPE_SUCCESS,
+                    'icon' => 'glyphicon glyphicon-ok-sign',
+                    'title' => 'Query',
+                    'showSeparator' => true,
+                    'body' => $sql,
+                    'pluginOptions' => [
+                            'placement' => [
+                                'from' => 'top',
+                                'align' => 'right',
+                            ]
+                        ]
+                ]);
+        }
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -53,6 +134,18 @@ class ItemController extends Controller
      */
     public function actionView($id)
     {
+        $sql ="SELECT * FROM item WHERE id = $id";
+                 Yii::$app->getSession()->setFlash('success', [
+                    'type' => 'success',
+                    'duration' => 5000,
+                    'icon' => 'glyphicon glyphicon-ok-sign',
+                    'title' => 'Query',
+                    'showSeparator' => true,
+                    'message' => $sql,
+                    'positonY' => 'top',
+                    'positonX' => 'right'
+                ]);
+
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -78,6 +171,18 @@ class ItemController extends Controller
 
             if ($model->save()) {
                 $model->file->saveAs('uploads/'. $imageName . '.' . $model->file->extension);
+                
+                $sql ="INSERT INTO item(id,name,\npicture,quantity_remaining,\nsize,gross_price,\nproduction_cost,description,\nitem_category_id,\nitem_sub_category_id,\nactive) VALUES \n($model->id,$model->name, \n$model->picture, \n$model->quantity_remaining,$model->size, \n$model->gross_price,$model->production_cost, \n$model->description,\n$model->item_category_id, $model->item_sub_category_id, $model->active)";
+                Yii::$app->getSession()->setFlash('success', [
+                    'type' => 'success',
+                    'duration' => 5000,
+                    'icon' => 'glyphicon glyphicon-ok-sign',
+                    'title' => 'Query',
+                    'showSeparator' => true,
+                    'message' => $sql,
+                    'positonY' => 'top',
+                    'positonX' => 'right'
+                ]);
 
                 return $this->redirect(['index']);
             } else {
@@ -102,6 +207,18 @@ class ItemController extends Controller
     {
         $model = $this->findModel($id);
 
+        $sql ="SELECT * FROM item WHERE id = $model->id";
+                 Yii::$app->getSession()->setFlash('success', [
+                    'type' => 'success',
+                    'duration' => 5000,
+                    'icon' => 'glyphicon glyphicon-ok-sign',
+                    'title' => 'Query',
+                    'showSeparator' => true,
+                    'message' => $sql,
+                    'positonY' => 'top',
+                    'positonX' => 'right'
+                ]);
+
         if ($model->load(Yii::$app->request->post())) {
 
             //get the instance of the uploaded file
@@ -113,6 +230,18 @@ class ItemController extends Controller
 
             if ($model->save()) {
                 $model->file->saveAs('uploads/'. $imageName . '.' . $model->file->extension);
+
+                $sql ="UPDATE item SET name = $model->name,\nsize = $model->size,\n quantity_remaining = $model->quantity_remaining, \ngross_price = $model->gross_price, \nproduction_cost = $model->production_cost, \nitem_category_id = $model->item_category_id,\nitem_sub_category_id = $model->item_sub_category_id,\npicture = $model->picture,\ndescription = $model->description,\n WHERE id = $model->id";
+                 Yii::$app->getSession()->setFlash('success', [
+                    'type' => 'success',
+                    'duration' => 5000,
+                    'icon' => 'glyphicon glyphicon-ok-sign',
+                    'title' => 'Query',
+                    'showSeparator' => true,
+                    'message' => $sql,
+                    'positonY' => 'top',
+                    'positonX' => 'right'
+                ]);
 
                 return $this->redirect(['index']);
             } else {
@@ -139,6 +268,18 @@ class ItemController extends Controller
         $model->active = Item::DELETED;
         $model->save(false);
 
+        $sql ="UPDATE item SET active = $model->active WHERE id = $model->id";
+                 Yii::$app->getSession()->setFlash('success', [
+                    'type' => 'success',
+                    'duration' => 5000,
+                    'icon' => 'glyphicon glyphicon-ok-sign',
+                    'title' => 'Query',
+                    'showSeparator' => true,
+                    'message' => $sql,
+                    'positonY' => 'top',
+                    'positonX' => 'right'
+                ]);
+
         return $this->redirect(['index']);
     }
 
@@ -153,6 +294,18 @@ class ItemController extends Controller
         $model = $this->findModel($id);
         $model->active = Item::ACTIVE;
         $model->save(false);
+
+         $sql ="UPDATE item SET active = $model->active WHERE id = $model->id";
+                 Yii::$app->getSession()->setFlash('success', [
+                    'type' => 'success',
+                    'duration' => 5000,
+                    'icon' => 'glyphicon glyphicon-ok-sign',
+                    'title' => 'Query',
+                    'showSeparator' => true,
+                    'message' => $sql,
+                    'positonY' => 'top',
+                    'positonX' => 'right'
+                ]);
 
         return $this->redirect(['index']);
     }

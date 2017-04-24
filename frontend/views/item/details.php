@@ -90,8 +90,8 @@ $this->title = 'Product Details';
               <div class="col-sm-6">
                   <br>
                   <div class="btn-group">
-                      <?= Html::a('<i class="glyphicon glyphicon-minus"></i>', '#', ['class' => 'btn btn-default', 'id' => 'decrementar']) ?>
-                      <?= Html::a('<i class="glyphicon glyphicon-plus"></i>', '#', ['class' => 'btn btn-danger redCss', 'id' => 'incrementar']) ?>
+                      <?= Html::button('<i class="glyphicon glyphicon-minus"></i>', ['class' => 'btn btn-default', 'id' => 'decrementar']) ?>
+                      <?= Html::button('<i class="glyphicon glyphicon-plus"></i>', ['class' => 'btn btn-danger redCss', 'id' => 'incrementar']) ?>
                   </div>
               </div>
               <div class="col-sm-6">
@@ -99,6 +99,7 @@ $this->title = 'Product Details';
               </div>
           </div>
       </div>
+      <div hidden="true"> <span id="qtyRemaining"><?= $model->quantity_remaining; ?></span></div>
       <div class="panel panel-default text-center">
           <div class="panel-body">
               <div class="btn-group">

@@ -14,6 +14,7 @@ use backend\models\PaymentMethod;
 use backend\models\Order;
 use backend\models\OrderSearch;
 use backend\models\ContainsSearch;
+use kartik\growl\Growl;
 
 /**
  * CustomerController implements the CRUD actions for Customer model.
@@ -70,12 +71,71 @@ class CustomerController extends Controller
     public function actionAccount($id)
     {
         $customer = $this->findModel($id);
+        
+        $sql ="SELECT * FROM customer WHERE id = $id";
+        Yii::$app->getSession()->setFlash('success', [
+            'type' => 'success',
+            'duration' => 5000,
+            'icon' => 'glyphicon glyphicon-ok-sign',
+            'title' => 'Query',
+            'message' => $sql,
+            'positonY' => 'top',
+            'positonX' => 'right'
+            ]);
+
         $customer_phone = $this->findPhone($customer->id);
+
+        $statement ="SELECT * FROM phone_number WHERE customer_id = $customer->id";
+        Yii::$app->getSession()->setFlash('phone_success', [
+            'type' => 'success',
+            'duration' => 5000,
+            'icon' => 'glyphicon glyphicon-ok-sign',
+            'title' => 'Query',
+            'message' => $statement,
+            'positonY' => 'top',
+            'positonX' => 'right'
+            ]);
+
         $customer_shipping_address = $this->findShippingAddress($customer->id);
+        
+        $sql_statement ="SELECT * FROM shipping_address WHERE customer_id = $customer->id";
+        Yii::$app->getSession()->setFlash('shipping_success', [
+            'type' => 'success',
+            'duration' => 5000,
+            'icon' => 'glyphicon glyphicon-ok-sign',
+            'title' => 'Query',
+            'message' => $sql_statement,
+            'positonY' => 'top',
+            'positonX' => 'right'
+            ]);
         $customer_payment_method = $this->findPaymentMethod($customer->id);
 
+        $query_statement ="SELECT * FROM payment_method WHERE customer_id = $customer->id";
+        Yii::$app->getSession()->setFlash('payment_success', [
+            'type' => 'success',
+            'duration' => 5000,
+            'icon' => 'glyphicon glyphicon-ok-sign',
+            'title' => 'Query',
+            'message' => $query_statement,
+            'positonY' => 'top',
+            'positonX' => 'right'
+            ]);
+
         $searchModel = new OrderSearch();
+
         $orders = $searchModel->search(Yii::$app->request->queryParams, $customer->id);
+
+        $another_query ="SELECT * FROM order WHERE customer_id = $customer->id";
+        Yii::$app->getSession()->setFlash('order_success', [
+            'type' => 'success',
+            'duration' => 5000,
+            'icon' => 'glyphicon glyphicon-ok-sign',
+            'title' => 'Query',
+            'message' => $another_query,
+            'positonY' => 'top',
+            'positonX' => 'right'
+            ]);
+
         $orders->pagination->pageSize = 4;
 
         return $this->render('account', [
@@ -116,7 +176,32 @@ class CustomerController extends Controller
     {
         $model = $this->findModel($id);
 
+        $sql ="SELECT * FROM customer WHERE id = $id";
+                 Yii::$app->getSession()->setFlash('updating', [
+                    'type' => 'success',
+                    'duration' => 5000,
+                    'icon' => 'glyphicon glyphicon-ok-sign',
+                    'title' => 'Query',
+                    'showSeparator' => true,
+                    'message' => $sql,
+                    'positonY' => 'top',
+                    'positonX' => 'right'
+                ]);
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            $query ="UPDATE customer SET email = $model->email,\nfirst_name = $model->first_name,\n middle_name = $model->middle_name,\nfathers_last_name= $model->fathers_last_name, \nmothers_last_name= $model->mothers_last_name, \ndate_of_birth = $model->date_of_birth\n WHERE id = $id";
+                 Yii::$app->getSession()->setFlash('updated_success', [
+                    'type' => 'success',
+                    'duration' => 5000,
+                    'icon' => 'glyphicon glyphicon-ok-sign',
+                    'title' => 'Query',
+                    'showSeparator' => true,
+                    'message' => $query,
+                    'positonY' => 'top',
+                    'positonX' => 'right'
+                ]);
+
             return $this->redirect(['account', 'id' => $model->id]);
         } else {
             return $this->renderAjax('update', [
@@ -135,7 +220,32 @@ class CustomerController extends Controller
     {
         $model = $this->findPhone($id);
 
+         $sql ="SELECT number FROM phone_number WHERE customer_id = $id";
+         Yii::$app->getSession()->setFlash('updating', [
+                'type' => 'success',
+                'duration' => 5000,
+                'icon' => 'glyphicon glyphicon-ok-sign',
+                'title' => 'Query',
+                'showSeparator' => true,
+                'message' => $sql,
+                'positonY' => 'top',
+                'positonX' => 'right'
+            ]);
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+             
+             $que ="UPDATE phone_number SET number = $model->number\n WHERE customer_id = $id";
+                 Yii::$app->getSession()->setFlash('phone', [
+                    'type' => 'success',
+                    'duration' => 5005,
+                    'icon' => 'glyphicon glyphicon-ok-sign',
+                    'title' => 'Query',
+                    'showSeparator' => true,
+                    'message' => $que,
+                    'positonY' => 'top',
+                    'positonX' => 'right'
+                ]);
+
             return $this->redirect(['account', 'id' => $model->customer_id]);
         } else {
             return $this->renderAjax('_updatePhone', [
@@ -154,9 +264,35 @@ class CustomerController extends Controller
     {
         $model = $this->findPaymentMethod($id);
 
+        $sql ="SELECT * FROM payment_method WHERE customer_id = $id";
+         Yii::$app->getSession()->setFlash('searching', [
+                'type' => 'success',
+                'duration' => 5000,
+                'icon' => 'glyphicon glyphicon-ok-sign',
+                'title' => 'Query',
+                'showSeparator' => true,
+                'message' => $sql,
+                'positonY' => 'top',
+                'positonX' => 'right'
+            ]);
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            $que ="UPDATE payment_method SET card_last_digits = $model->card_last_digits, \nexp_date = $model->exp_date, \ncard_type = $model->card_type\n WHERE customer_id = $id";
+                 Yii::$app->getSession()->setFlash('payment', [
+                    'type' => 'success',
+                    'duration' => 5005,
+                    'icon' => 'glyphicon glyphicon-ok-sign',
+                    'title' => 'Query',
+                    'showSeparator' => true,
+                    'message' => $que,
+                    'positonY' => 'top',
+                    'positonX' => 'right'
+                ]);
+
             return $this->redirect(['account', 'id' => $model->customer_id]);
         } else {
+
             return $this->renderAjax('_updatePayment', [
                 'model' => $model,
             ]);
@@ -173,7 +309,32 @@ class CustomerController extends Controller
     {
         $model = $this->findShippingAddress($id);
 
+        $sql ="SELECT * FROM shipping_address WHERE customer_id = $id";
+         Yii::$app->getSession()->setFlash('searching', [
+                'type' => 'success',
+                'duration' => 5000,
+                'icon' => 'glyphicon glyphicon-ok-sign',
+                'title' => 'Query',
+                'showSeparator' => true,
+                'message' => $sql,
+                'positonY' => 'top',
+                'positonX' => 'right'
+            ]);
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            $que ="UPDATE shipping_address SET street_name = $model->street_name, \napt_number = $model->apt_number, \nzipcode = $model->zipcode, \nstate = $model->state\n WHERE customer_id = $id";
+            Yii::$app->getSession()->setFlash('address', [
+                'type' => 'success',
+                'duration' => 5005,
+                'icon' => 'glyphicon glyphicon-ok-sign',
+                'title' => 'Query',
+                'showSeparator' => true,
+                'message' => $que,
+                'positonY' => 'top',
+                'positonX' => 'right'
+            ]);
+
             return $this->redirect(['account', 'id' => $model->customer_id]);
         } else {
             return $this->renderAjax('_updateAdress', [
@@ -269,6 +430,19 @@ class CustomerController extends Controller
     protected function findOrder($id)
     {
         if (($model = Order::findOne($id)) !== null) {
+
+            $sql ="SELECT * FROM order WHERE order_number = $id";
+            Yii::$app->getSession()->setFlash('searching', [
+                    'type' => 'success',
+                    'duration' => 5000,
+                    'icon' => 'glyphicon glyphicon-ok-sign',
+                    'title' => 'Query',
+                    'showSeparator' => true,
+                    'message' => $sql,
+                    'positonY' => 'top',
+                    'positonX' => 'right'
+                ]);
+
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

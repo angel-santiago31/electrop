@@ -76,6 +76,22 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $stickerList = Item::find()->limit(6)->offset(0)->where(['active' => Item::ACTIVE])->all();
+      
+         $sql ="SELECT * FROM item WHERE active = 1 LIMIT 6";
+           echo Growl::widget([
+                    'type' => Growl::TYPE_SUCCESS,
+                    'icon' => 'glyphicon glyphicon-ok-sign',
+                    'title' => 'Query',
+                    'showSeparator' => true,
+                    'body' => $sql,
+                    'pluginOptions' => [
+                            'placement' => [
+                                'from' => 'top',
+                                'align' => 'right',
+                            ]
+                        ]
+                ]);  
+
         $carousel = Item::find()->limit(5)->offset(10)->where(['active' => Item::ACTIVE])->all();
 
         return $this->render('index', [
@@ -89,9 +105,26 @@ class SiteController extends Controller
         $model = new Item();
 
         if ($model->load(Yii::$app->request->post()) && $category == NULL && $subcategory == NULL) {
+            
             $stickerList = Item::find()->where(['item_category_id' => $model->item_category_id,
                                                 'item_sub_category_id' => $model->item_sub_category_id,
                                                 'active' => Item::ACTIVE])->andWhere(['>=', 'quantity_remaining', 1])->all();
+
+             $sql ="SELECT * FROM item WHERE item_category_id = '$model->item_category_id' and item_sub_category_id = '$model->item_sub_category_id' and active = 1 and quantity_remaining >= 1";
+            echo Growl::widget([
+                    'type' => Growl::TYPE_SUCCESS,
+                    'icon' => 'glyphicon glyphicon-ok-sign',
+                    'title' => 'Query',
+                    'showSeparator' => true,
+                    'body' => $sql,
+                    'pluginOptions' => [
+                            'showProgressbar' => true,
+                            'placement' => [
+                                'from' => 'top',
+                                'align' => 'right',
+                            ]
+                        ]
+                ]);
 
              return $this->render('stickers', [
                  'model' => $model,
@@ -123,8 +156,8 @@ class SiteController extends Controller
         }
 
 
-        $stickerList = Item::find()->where(['active' => Item::ACTIVE])->andWhere(['>=', 'quantity_remaining', 1])->all();;
-        $sqlQuery = "SELECT * FROM item WHERE active = 1";
+        $stickerList = Item::find()->where(['active' => Item::ACTIVE])->andWhere(['>=', 'quantity_remaining', 1])->all();
+        $sqlQuery = "SELECT * FROM item WHERE active = 1 AND quantity_remaining >= 1";
         //$stickerList = Yii::$app->db->createCommand($sqlQuery)->queryAll();
          echo Growl::widget([
                 'type' => Growl::TYPE_SUCCESS,
@@ -191,9 +224,26 @@ class SiteController extends Controller
         $model = new ContactForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail(Yii::$app->params['adminEmail'])) {
-                Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
+            
+                Yii::$app->getSession()->setFlash('success', [
+                    'type' => 'success',
+                    'duration' => 5000,
+                    'icon' => 'glyphicon glyphicon-ok-sign',
+                    'title' => 'MADE IT',
+                    'message' => 'Thank you for contacting us. We will respond to you as soon as possible.',
+                    'positonY' => 'top',
+                    'positonX' => 'right'
+                    ]);
             } else {
-                Yii::$app->session->setFlash('error', 'There was an error sending your message.');
+                Yii::$app->getSession()->setFlash('error', [
+                    'type' => 'error',
+                    'duration' => 5000,
+                    'icon' => 'glyphicon glyphicon-ok-sign',
+                    'title' => 'Oh Oh...',
+                    'message' => 'There was an error sending your message.',
+                    'positonY' => 'top',
+                    'positonX' => 'right'
+                    ]);
             }
 
             return $this->refresh();
@@ -245,11 +295,27 @@ class SiteController extends Controller
         $model = new PasswordResetRequestForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail()) {
-                Yii::$app->session->setFlash('success', 'Check your email for further instructions.');
+                Yii::$app->getSession()->setFlash('success', [
+                    'type' => 'success',
+                    'duration' => 5000,
+                    'icon' => 'glyphicon glyphicon-ok-sign',
+                    'title' => 'MADE IT',
+                    'message' => 'Check your email for further instructions.',
+                    'positonY' => 'top',
+                    'positonX' => 'right'
+                    ]);
 
                 return $this->goHome();
             } else {
-                Yii::$app->session->setFlash('error', 'Sorry, we are unable to reset password for the provided email address.');
+                Yii::$app->getSession()->setFlash('error', [
+                    'type' => 'error',
+                    'duration' => 5000,
+                    'icon' => 'glyphicon glyphicon-ok-sign',
+                    'title' => 'Oh Oh...',
+                    'message' => 'Sorry, we are unable to reset password for the provided email address.',
+                    'positonY' => 'top',
+                    'positonX' => 'right'
+                    ]);
             }
         }
 
@@ -274,7 +340,15 @@ class SiteController extends Controller
         }
 
         if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->resetPassword()) {
-            Yii::$app->session->setFlash('success', 'New password saved.');
+            Yii::$app->getSession()->setFlash('success', [
+                    'type' => 'success',
+                    'duration' => 5000,
+                    'icon' => 'glyphicon glyphicon-ok-sign',
+                    'title' => 'MADE IT',
+                    'message' => 'New password saved.',
+                    'positonY' => 'top',
+                    'positonX' => 'right'
+                    ]);
 
             return $this->goHome();
         }

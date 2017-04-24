@@ -43,7 +43,7 @@ class CustomerController extends Controller
         // echo '<pre>';
         // var_dump($searchModel);
         // die(1);
-        if ($searchModel->status == 10){
+        if ($searchModel->id == "" && $searchModel->status == 10){
            $sql ="SELECT * FROM customer WHERE status = $searchModel->status";
            echo Growl::widget([
                     'type' => Growl::TYPE_SUCCESS,
@@ -58,7 +58,7 @@ class CustomerController extends Controller
                             ]
                         ]
                 ]);  
-        } else if ($searchModel->status == "") {
+        } else if ($searchModel->id == "" && $searchModel->status == "") {
             $sql ="SELECT * FROM customer";
             echo Growl::widget([
                     'type' => Growl::TYPE_SUCCESS,
@@ -73,8 +73,38 @@ class CustomerController extends Controller
                             ]
                         ]
                 ]);
-        } else {
+        } else if ($searchModel->id == "" && $searchModel->status == 0)  {
             $sql ="SELECT * FROM customer WHERE status = $searchModel->status";
+            echo Growl::widget([
+                    'type' => Growl::TYPE_SUCCESS,
+                    'icon' => 'glyphicon glyphicon-ok-sign',
+                    'title' => 'Query',
+                    'showSeparator' => true,
+                    'body' => $sql,
+                    'pluginOptions' => [
+                            'placement' => [
+                                'from' => 'top',
+                                'align' => 'right',
+                            ]
+                        ]
+                ]);
+        } else if ($searchModel->id == $searchModel->id  && $searchModel->status == "") {
+            $sql ="SELECT * FROM customer WHERE id = $searchModel->id";
+            echo Growl::widget([
+                    'type' => Growl::TYPE_SUCCESS,
+                    'icon' => 'glyphicon glyphicon-ok-sign',
+                    'title' => 'Query',
+                    'showSeparator' => true,
+                    'body' => $sql,
+                    'pluginOptions' => [
+                            'placement' => [
+                                'from' => 'top',
+                                'align' => 'right',
+                            ]
+                        ]
+                ]);
+        } else {
+            $sql ="SELECT * FROM customer WHERE status = $searchModel->status AND id = $searchModel->id";
             echo Growl::widget([
                     'type' => Growl::TYPE_SUCCESS,
                     'icon' => 'glyphicon glyphicon-ok-sign',

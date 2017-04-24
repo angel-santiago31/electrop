@@ -38,8 +38,10 @@ class AdminController extends Controller
     {
         $searchModel = new AdminSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        if ($searchModel->status == 10){
+        // echo '<pre>';
+        // var_dump($searchModel);
+        // die(1);
+        if ($searchModel->id == "" && $searchModel->status == 10){
            $sql ="SELECT * FROM admin WHERE status = $searchModel->status";
            echo Growl::widget([
                     'type' => Growl::TYPE_SUCCESS,
@@ -54,7 +56,7 @@ class AdminController extends Controller
                             ]
                         ]
                 ]);  
-        } else if ($searchModel->status == "") {
+        } else if ($searchModel->id == "" && $searchModel->status == "") {
             $sql ="SELECT * FROM admin";
             echo Growl::widget([
                     'type' => Growl::TYPE_SUCCESS,
@@ -69,7 +71,7 @@ class AdminController extends Controller
                             ]
                         ]
                 ]);
-        } else {
+        } else if ($searchModel->id == "" && $searchModel->status == 0)  {
             $sql ="SELECT * FROM admin WHERE status = $searchModel->status";
             echo Growl::widget([
                     'type' => Growl::TYPE_SUCCESS,
@@ -84,7 +86,38 @@ class AdminController extends Controller
                             ]
                         ]
                 ]);
+        } else if ($searchModel->id == $searchModel->id  && $searchModel->status == "") {
+            $sql ="SELECT * FROM admin WHERE id = $searchModel->id";
+            echo Growl::widget([
+                    'type' => Growl::TYPE_SUCCESS,
+                    'icon' => 'glyphicon glyphicon-ok-sign',
+                    'title' => 'Query',
+                    'showSeparator' => true,
+                    'body' => $sql,
+                    'pluginOptions' => [
+                            'placement' => [
+                                'from' => 'top',
+                                'align' => 'right',
+                            ]
+                        ]
+                ]);
+        } else {
+            $sql ="SELECT * FROM admin WHERE status = $searchModel->status AND id = $searchModel->id";
+            echo Growl::widget([
+                    'type' => Growl::TYPE_SUCCESS,
+                    'icon' => 'glyphicon glyphicon-ok-sign',
+                    'title' => 'Query',
+                    'showSeparator' => true,
+                    'body' => $sql,
+                    'pluginOptions' => [
+                            'placement' => [
+                                'from' => 'top',
+                                'align' => 'right',
+                            ]
+                        ]
+                ]);
         }
+        
          
 
         return $this->render('index', [

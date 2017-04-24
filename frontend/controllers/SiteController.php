@@ -100,11 +100,12 @@ class SiteController extends Controller
         $model = new Item();
 
         if ($model->load(Yii::$app->request->post()) && $category == NULL && $subcategory == NULL) {
+            
             $stickerList = Item::find()->where(['item_category_id' => $model->item_category_id,
                                                 'item_sub_category_id' => $model->item_sub_category_id,
                                                 'active' => Item::ACTIVE])->andWhere(['>=', 'quantity_remaining', 1])->all();
 
-             $sql ="SELECT * FROM item WHERE item_category_id = '$category' and item_sub_category_id = '$subcategory' and active = 1 and quantity_remaining >= 1";
+             $sql ="SELECT * FROM item WHERE item_category_id = '$model->item_category_id' and item_sub_category_id = '$model->item_sub_category_id' and active = 1 and quantity_remaining >= 1";
             echo Growl::widget([
                     'type' => Growl::TYPE_SUCCESS,
                     'icon' => 'glyphicon glyphicon-ok-sign',

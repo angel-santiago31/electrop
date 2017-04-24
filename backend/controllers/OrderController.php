@@ -40,8 +40,13 @@ class OrderController extends Controller
         $searchModel = new OrderSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        $sql ="SELECT * FROM order";
-            echo Growl::widget([
+        // echo '<pre>';
+        // var_dump($searchModel);
+        // die(1);
+
+        if($searchModel->order_number == "" && !$searchModel->order_status == ""){
+            $sql ="SELECT * FROM order WHERE order_status = $searchModel->order_status";
+           echo Growl::widget([
                     'type' => Growl::TYPE_SUCCESS,
                     'icon' => 'glyphicon glyphicon-ok-sign',
                     'title' => 'Query',
@@ -54,6 +59,85 @@ class OrderController extends Controller
                             ]
                         ]
                 ]);
+        } else if( $searchModel->order_number == "" && $searchModel->order_status == ""){
+            $sql ="SELECT * FROM order";
+            echo Growl::widget([
+                        'type' => Growl::TYPE_SUCCESS,
+                        'icon' => 'glyphicon glyphicon-ok-sign',
+                        'title' => 'Query',
+                        'showSeparator' => true,
+                        'body' => $sql,
+                        'pluginOptions' => [
+                                'placement' => [
+                                    'from' => 'top',
+                                    'align' => 'right',
+                                ]
+                            ]
+                    ]);
+        } else if(!$searchModel->order_number == "" && $searchModel->order_status == ""){
+           $sql ="SELECT * FROM order WHERE order_number = $searchModel->order_number";
+           echo Growl::widget([
+                    'type' => Growl::TYPE_SUCCESS,
+                    'icon' => 'glyphicon glyphicon-ok-sign',
+                    'title' => 'Query',
+                    'showSeparator' => true,
+                    'body' => $sql,
+                    'pluginOptions' => [
+                            'placement' => [
+                                'from' => 'top',
+                                'align' => 'right',
+                            ]
+                        ]
+                ]);
+        } else if($searchModel->order_number == "" && $searchModel->order_status == 0){
+            $sql ="SELECT * FROM order WHERE order_status = $searchModel->order_status";
+           echo Growl::widget([
+                    'type' => Growl::TYPE_SUCCESS,
+                    'icon' => 'glyphicon glyphicon-ok-sign',
+                    'title' => 'Query',
+                    'showSeparator' => true,
+                    'body' => $sql,
+                    'pluginOptions' => [
+                            'placement' => [
+                                'from' => 'top',
+                                'align' => 'right',
+                            ]
+                        ]
+                ]);
+        } else if(!$searchModel->order_number == "" && $searchModel->order_status == 0){
+            $sql ="SELECT * FROM order WHERE order_number = $searchModel->order_number AND order_status = $searchModel->order_status";
+           echo Growl::widget([
+                    'type' => Growl::TYPE_SUCCESS,
+                    'icon' => 'glyphicon glyphicon-ok-sign',
+                    'title' => 'Query',
+                    'showSeparator' => true,
+                    'body' => $sql,
+                    'pluginOptions' => [
+                            'placement' => [
+                                'from' => 'top',
+                                'align' => 'right',
+                            ]
+                        ]
+                ]);
+        } else if(!$searchModel->order_number == "" && !$searchModel->order_status =="" ){
+            $sql ="SELECT * FROM order WHERE order_number = $searchModel->order_number AND order_status = $searchModel->order_status";
+           echo Growl::widget([
+                    'type' => Growl::TYPE_SUCCESS,
+                    'icon' => 'glyphicon glyphicon-ok-sign',
+                    'title' => 'Query',
+                    'showSeparator' => true,
+                    'body' => $sql,
+                    'pluginOptions' => [
+                            'placement' => [
+                                'from' => 'top',
+                                'align' => 'right',
+                            ]
+                        ]
+                ]);
+        } 
+
+        
+        
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,

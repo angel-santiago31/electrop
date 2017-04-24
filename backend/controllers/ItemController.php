@@ -89,6 +89,21 @@ class ItemController extends Controller
                             ]
                         ]
                 ]);
+        } else  if ($searchModel->id == $searchModel->id  && $searchModel->active == "") {
+            $sql ="SELECT * FROM item WHERE name = $searchModel->name";
+            echo Growl::widget([
+                    'type' => Growl::TYPE_SUCCESS,
+                    'icon' => 'glyphicon glyphicon-ok-sign',
+                    'title' => 'Query',
+                    'showSeparator' => true,
+                    'body' => $sql,
+                    'pluginOptions' => [
+                            'placement' => [
+                                'from' => 'top',
+                                'align' => 'right',
+                            ]
+                        ]
+                ]);
         } else {
             $sql ="SELECT * FROM item WHERE status = $searchModel->active AND name = $searchModel->name";
             echo Growl::widget([

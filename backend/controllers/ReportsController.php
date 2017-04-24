@@ -43,7 +43,27 @@ class ReportsController extends Controller
         $searchModel = new ReportsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        $sql ="SELECT * FROM reports";
+        // echo '<pre>';
+        // var_dump($searchModel);
+        // die(1);
+
+        if($searchModel->title == "" && !$searchModel->type == ""){
+            $sql ="SELECT * FROM reports WHERE type = $searchModel->type";
+           echo Growl::widget([
+                    'type' => Growl::TYPE_SUCCESS,
+                    'icon' => 'glyphicon glyphicon-ok-sign',
+                    'title' => 'Query',
+                    'showSeparator' => true,
+                    'body' => $sql,
+                    'pluginOptions' => [
+                            'placement' => [
+                                'from' => 'top',
+                                'align' => 'right',
+                            ]
+                        ]
+                ]);
+        } else if( $searchModel->title == "" && $searchModel->type == ""){
+            $sql ="SELECT * FROM reports";
         echo Growl::widget([
                 'type' => Growl::TYPE_SUCCESS,
                 'icon' => 'glyphicon glyphicon-ok-sign',
@@ -57,6 +77,37 @@ class ReportsController extends Controller
                         ]
                     ]
              ]);
+        } else if(!$searchModel->title == "" && $searchModel->type == ""){
+           $sql ="SELECT * FROM reports WHERE title = $searchModel->title";
+           echo Growl::widget([
+                    'type' => Growl::TYPE_SUCCESS,
+                    'icon' => 'glyphicon glyphicon-ok-sign',
+                    'title' => 'Query',
+                    'showSeparator' => true,
+                    'body' => $sql,
+                    'pluginOptions' => [
+                            'placement' => [
+                                'from' => 'top',
+                                'align' => 'right',
+                            ]
+                        ]
+                ]);
+        } else if(!$searchModel->title == "" && !$searchModel->type =="" ){
+            $sql ="SELECT * FROM reports WHERE title = $searchModel->title AND type = $searchModel->type";
+           echo Growl::widget([
+                    'type' => Growl::TYPE_SUCCESS,
+                    'icon' => 'glyphicon glyphicon-ok-sign',
+                    'title' => 'Query',
+                    'showSeparator' => true,
+                    'body' => $sql,
+                    'pluginOptions' => [
+                            'placement' => [
+                                'from' => 'top',
+                                'align' => 'right',
+                            ]
+                        ]
+                ]);
+        } 
 
         return $this->render('index', [
             'searchModel' => $searchModel,

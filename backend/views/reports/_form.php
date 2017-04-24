@@ -5,6 +5,8 @@ use yii\widgets\ActiveForm;
 use kartik\datecontrol\Module;
 use kartik\datecontrol\DateControl;
 use kartik\datetime\DateTimePicker;
+use backend\models\Item;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Reports */
@@ -57,7 +59,8 @@ use kartik\datetime\DateTimePicker;
           </div>
           <div class="col-sm-2">
               <div id="itemIdField">
-                  <?= $form->field($model, 'item_selected')->textInput()->dropDownList([$itemsList], ['prompt'=>'--Select--']); ?>
+                  <?= $form->field($model, 'item_selected')->dropDownList(ArrayHelper::map(Item::find()
+                                                           ->select(['item_id','name'])->asArray()->all(),'item_id','name'));?>
               </div>
           </div>
       </div>

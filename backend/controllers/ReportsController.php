@@ -70,14 +70,11 @@ class ReportsController extends Controller
     {
         $model = new Reports();
 
-        $itemsList = Item::getItems();
-
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
-                'itemsList' => $itemsList
             ]);
         }
     }
@@ -95,7 +92,7 @@ class ReportsController extends Controller
           $orders = new Order();
           $allOrders = Order::find()->where([ '>', 'order_date', $fromDate])->andWhere(['<', 'order_date', $toDate])->all();
 
-          if($allOrders && $groupedBy == 'All') 
+          if($allOrders && $groupedBy == 'All')
           {
             $sql = 'SELECT *
                         FROM `order` INNER JOIN `contains` INNER JOIN `item` INNER JOIN `item_category`
@@ -112,8 +109,8 @@ class ReportsController extends Controller
             //Sum of Total Sales
             $sumSales = $ordersInfo[0]->find()->sum('total_price');
 
-            
-    
+
+
             $pdf = new Pdf(['mode' => Pdf::MODE_CORE,
                             'format' => Pdf::FORMAT_A4,
                             'orientation' => Pdf::ORIENT_PORTRAIT,
@@ -131,7 +128,7 @@ class ReportsController extends Controller
                             ]);
 
                 return $pdf->render();
-          } 
+          }
           else if($allOrders && $groupedBy == 4)
           {
               $sql = 'SELECT *
@@ -156,7 +153,7 @@ class ReportsController extends Controller
                             WHERE `contains`.item_id = `item`.item_id AND `order`.order_number = `contains`.order_number AND `item`.item_category_id = `item_category`.id
                             AND `item`.item_id = ' .  $itemSelected;
                 $sumSales = $ordersInfo[0]->findBySql($sqlGroupByPrice)->all();
-        
+
                 $pdf = new Pdf(['mode' => Pdf::MODE_CORE,
                                 'format' => Pdf::FORMAT_A4,
                                 'orientation' => Pdf::ORIENT_PORTRAIT,
@@ -174,7 +171,7 @@ class ReportsController extends Controller
                                 ]);
 
                     return $pdf->render();
-            } else 
+            } else
               {
                   $pdf = new Pdf(['mode' => Pdf::MODE_CORE,
                             'format' => Pdf::FORMAT_A4,
@@ -218,7 +215,7 @@ class ReportsController extends Controller
                             GROUP BY item_category_id
                             HAVING item_category_id = ' . $groupedBy;
                 $sumSales = $ordersInfo[0]->findBySql($sqlGroupByPrice)->all();
-        
+
                 $pdf = new Pdf(['mode' => Pdf::MODE_CORE,
                                 'format' => Pdf::FORMAT_A4,
                                 'orientation' => Pdf::ORIENT_PORTRAIT,
@@ -237,7 +234,7 @@ class ReportsController extends Controller
 
                     return $pdf->render();
               }
-              else 
+              else
               {
                   $pdf = new Pdf(['mode' => Pdf::MODE_CORE,
                             'format' => Pdf::FORMAT_A4,

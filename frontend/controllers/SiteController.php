@@ -81,7 +81,7 @@ class SiteController extends Controller
            echo Growl::widget([
                     'type' => Growl::TYPE_SUCCESS,
                     'icon' => 'glyphicon glyphicon-ok-sign',
-                    'title' => 'Query',
+                    'title' => 'Query Featured',
                     'showSeparator' => true,
                     'body' => $sql,
                     'pluginOptions' => [
@@ -93,6 +93,16 @@ class SiteController extends Controller
                 ]);  
 
         $carousel = Item::find()->limit(5)->offset(10)->where(['active' => Item::ACTIVE])->all();
+        $sql_query = "SELECT * FROM item WHERE active = 1 LIMIT 5 OFFSET 10";
+         Yii::$app->getSession()->setFlash('carousel', [
+                    'type' => 'success',
+                    'duration' => 5000,
+                    'icon' => 'glyphicon glyphicon-ok-sign',
+                    'title' => 'Query Carousel',
+                    'message' => $sql_query,
+                    'positonY' => 'top',
+                    'positonX' => 'right'
+                    ]);
 
         return $this->render('index', [
             'stickerList' => $stickerList,

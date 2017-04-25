@@ -330,7 +330,8 @@ class ReportsController extends Controller
                             'content' => $this->renderPartial('pdf', [
                             'model' => $model,
                             'allOrders' => $allOrders,
-                            'ordersInfo' => $ordersInfo
+                            'ordersInfo' => $ordersInfo,
+                            'groupedBy' => $groupedBy
                             ]),
                             'methods' => [
                                     'SetHeader' => ['Report Name: ' . $model->title],

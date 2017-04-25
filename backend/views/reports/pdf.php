@@ -27,7 +27,20 @@ use kartik\growl\Growl;
             </tr>
             <tr>
                 <th style = "text-align: right;, font-weight: bold;">Product:</th>
-                <th style = "padding-left: 3%;, height: 30px;"><?= $model->refers_to ?></th>
+                <th style = "padding-left: 3%;, height: 30px;"><?php 
+                if($groupedBy != 'All' && $groupedBy != 4)
+                {
+                  echo $model->findCategoryId($model->refers_to);
+                }
+                else if($groupedBy == 4)
+                {
+                  echo $model->findItemName($model->item_selected);
+                }
+                else 
+                {
+                    echo $model->refers_to;
+                }
+                 ?></th>
             </tr>
 						<tr>
 								<th style = "text-align: right;, font-weight: bold;">Title:</th>
@@ -38,7 +51,8 @@ use kartik\growl\Growl;
                 <td style = "padding-left: 3%;, height: 30px;"><?= $model->description; ?></td>
             </tr>
         </table>
-
+        <br>
+        <br>
         <?php 
 
         //total sum of the revenue.
@@ -72,7 +86,13 @@ use kartik\growl\Growl;
 
                                if(sizeof($order->contains) > 1 && $passedOnce && $orderNum == $order->order_number)
                                {
-                                   $i += 1;
+                                   if($i != 1){
+                                       $i += 1;
+                                   }
+                                   else 
+                                   {
+                                       $i = 1;
+                                   }
                                }
                                else 
                                {
@@ -168,10 +188,11 @@ use kartik\growl\Growl;
                             </tfoot>
                             </table>
                     </div>
+                    
             <?php   } 
                     else 
                     {
-                        echo "No orders were made in this time frame.";
+                        echo "No orders were made in this time frame or there aren't any with stickers in this category.";
                     }
                   
                    ?>

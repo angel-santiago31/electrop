@@ -3,6 +3,8 @@
 namespace backend\models;
 
 use Yii;
+use backend\models\ItemCategory;
+use backend\models\Item;
 
 /**
  * This is the model class for table "reports".
@@ -71,5 +73,29 @@ class Reports extends \yii\db\ActiveRecord
         } else {
             return false;
         }
+    }
+
+    /**
+    *   Find a Category name for a groupBy.
+    **/
+    public function findCategoryId($id)
+    {
+        $sql = 'SELECT category_name
+                FROM `item_category`
+                WHERE id = ' . $id;
+        $result = ItemCategory::findBySql($sql)->all();
+        return $result[0]->category_name;
+    }
+
+    /**
+    *   Find the item name for a specific Item being grouped by.
+    **/
+    public function findItemName($id)
+    {
+        $sql = 'SELECT name
+                FROM `item`
+                WHERE item_id = ' . $id;
+        $result = Item::findBySql($sql)->all();
+        return $result[0]->name;
     }
 }

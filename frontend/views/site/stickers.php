@@ -14,6 +14,7 @@ use backend\models\Item;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 $this->title = 'Stickers';
 $this->params['breadcrumbs'][] = $this->title;
+$this->registerLinkTag(['rel' => 'icon', 'type' => 'image/png', 'href' => '/electrop/backend/web/uploads/icon.png']);
 ?>
 
 <div class="container">

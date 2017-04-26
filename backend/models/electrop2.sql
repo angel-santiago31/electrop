@@ -84,7 +84,7 @@ CREATE TABLE `customer` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `password_reset_token` (`password_reset_token`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `customer` */
 
@@ -93,7 +93,13 @@ insert  into `customer`(`id`,`email`,`password_hash`,`first_name`,`middle_name`,
 (13,'huelga@upra.com','$2y$13$Qqdd5SXlZpcVuL1sCrVgXuyraBjHDI/l4IyG0fhiv/Ccvd2iTnBTa','Once','Recintos','Una','Upr','12',NULL,'CFnXDz1i7Xdu29AkGMAxcPAaVgRdN0qD',NULL,0,1491842106,1492805842,0),
 (14,'bryan.hernandez5@upr.edu','$2y$13$kotQzJ5P/uEh.XOfM8dGpO9jt5cYkmbin6VfzpG96bbp1gfUdRsZu','Bryan','Yomar','Hernandez','Cuevas','1996',NULL,'1aJSZBWbJs6pp6ny1Q33-OeAKlSAZRO_',NULL,10,1492651670,1492651670,0),
 (19,'angel.santiago31@upr.edu','$2y$13$nt0zcmBLbAFn598NDRCOauOcpQGb5VYA6NJXeh7djbRibrF54oS7C','Angel','Eduardo','Santiago','González','10-10-1996',NULL,'aXIqfWWFf17tuvpdcFfxoslLUXZWIZaI',NULL,10,1492660565,1492808636,0),
-(20,'test@test.com','$2y$13$uQax1jJ7LTc7v5Fd4qBT6OEryM/89/Lt3.9Jk5MDeHhOYMrQaErk6','Test','Test','Test','Test','23-03-2017',NULL,'okRwZ_rAxhW9rGTXNIxeeVQvrhPhWndh',NULL,10,1492797446,1492797446,0);
+(20,'test@test.com','$2y$13$uQax1jJ7LTc7v5Fd4qBT6OEryM/89/Lt3.9Jk5MDeHhOYMrQaErk6','Test','Test','Test','Test','23-03-2017',NULL,'okRwZ_rAxhW9rGTXNIxeeVQvrhPhWndh',NULL,10,1492797446,1492797446,0),
+(21,'elliot.lopez1@upr.edu','$2y$13$M.4xvaOC/veupnEInzWzneYA7ZDdUCJs1KzuZfCOaNlBkMX25ts36','Elliot','asdfasf','Test','sdafasdfasf','03-05-2017',NULL,'-FA1ABmp-WyQdcAOf-cPuPiLb_p7NxOo',NULL,10,1493176957,1493176957,0),
+(22,'elliot.lopez1@uprfd.edu','$2y$13$4ofyA94eAnIJz3Vd3h/vHeT6WBF5fu4KuszOs/aeWsO41b8QrChD6','765447','4765745','65474567','456745674567','03-05-2017',NULL,'GXEVl-FSTsymqeuA2--QdEev3Nrw5zCm',NULL,10,1493177147,1493177147,0),
+(23,'elliot.tyropez1@upr.edu','$2y$13$1wxNCs/d8PchkECjatgQ/OOq6NSB/LBAsHM.o11mAR7LNib.O79Qq','rty','rtyr','yrtyrty','65467','25-04-2017',NULL,'G_UN2gsJnGBIsnblnr2nCavsGan7qIxU',NULL,10,1493177207,1493177207,0),
+(24,'elliot.ladfaopez1@upr.edu','$2y$13$eE4oYy3nBOsj49y7tqWK0uJPmmTsJgAPXHpJx/ln3xmWP8Y5MqVje','asfasfa','sfsf','asfsfdsfd','dfdfasd','25-04-2017',NULL,'pgNh13Gn8XJySrkEpnA5DG3CVUna8bg5',NULL,10,1493177291,1493177291,0),
+(25,'elliot.lop3333333333ez1@upr.edu','$2y$13$pDovrObiL7qUPJ9peA/hX.urYVMLlIoU42RvHHigFFQkdQh1tXDAq','erwqw','erqwrewqr','wqrqwrqwer','erwerwerr','25-04-2017',NULL,'v0YMWMoDc8W7RdrmM6XR3OS2qhJhwVuP',NULL,10,1493177343,1493177343,0),
+(26,'elliot.lope3412432z1@upr.edu','$2y$13$ZJgyQxZMERIH2Q7VaJGODuHaWBikXxcDJo6qqfOC7TQi9RlDTHQcC','1234123413412341','41212434','1234124','12341243','27-04-2017',NULL,'7PIx_gk7Yupyawhv5g7LIYxP_9Qqv7ON',NULL,10,1493181304,1493181304,0);
 
 /*Table structure for table `item` */
 
@@ -273,7 +279,13 @@ CREATE TABLE `payment_method` (
 insert  into `payment_method`(`customer_id`,`card_last_digits`,`exp_date`,`card_type`) values 
 (14,'1111','20/20','Visa'),
 (19,'1234','12/12','Visa'),
-(20,'1234','11/11','American Exppress');
+(20,'1234','11/11','American Exppress'),
+(21,'1241','42/31','American Exppress'),
+(22,'7645','67/54','Visa'),
+(23,'7757','75/77','Master card'),
+(24,'5234','23/45','Visa'),
+(25,'3333','33/33','Visa'),
+(26,'1243','43/13','American Exppress');
 
 /*Table structure for table `phone_number` */
 
@@ -281,7 +293,7 @@ DROP TABLE IF EXISTS `phone_number`;
 
 CREATE TABLE `phone_number` (
   `customer_id` int(11) NOT NULL,
-  `number` varchar(12) NOT NULL,
+  `number` int(12) NOT NULL,
   PRIMARY KEY (`customer_id`),
   CONSTRAINT `phone_number_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -289,9 +301,15 @@ CREATE TABLE `phone_number` (
 /*Data for the table `phone_number` */
 
 insert  into `phone_number`(`customer_id`,`number`) values 
-(14,'787'),
-(19,'939-246-8676'),
-(20,'787-897-3922');
+(14,787),
+(19,939),
+(20,787),
+(21,543),
+(22,764),
+(23,765),
+(24,245),
+(25,333),
+(26,2147483647);
 
 /*Table structure for table `report_type` */
 
@@ -362,7 +380,13 @@ CREATE TABLE `shipping_address` (
 
 insert  into `shipping_address`(`customer_id`,`street_name`,`apt_number`,`zipcode`,`state`) values 
 (19,'Example Name',123,'00669','PR'),
-(20,'wewg',234324,'00669','IL');
+(20,'wewg',234324,'00669','IL'),
+(21,'Altamira',324,'43242','LA'),
+(22,'67567',465776,'45675','IN'),
+(23,'75675',7567,'56756','ID'),
+(24,'4532234',2147483647,'43255','KS'),
+(25,'3333333333333333',2147483647,'33333','KS'),
+(26,'213442312314',2147483647,'12431','KS');
 
 /*Table structure for table `sticker_size` */
 

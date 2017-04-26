@@ -6,6 +6,7 @@ use yii\helpers\Html;
 
 $this->title = 'About';
 $this->params['breadcrumbs'][] = $this->title;
+$this->registerLinkTag(['rel' => 'icon', 'type' => 'image/png', 'href' => '/electrop/backend/web/uploads/icon.png']);
 ?>
 <div class="site-about">
     <h1><?= Html::encode($this->title) ?></h1>

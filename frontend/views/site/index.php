@@ -6,7 +6,8 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\bootstrap\Carousel;
 
-$this->title = 'Home';
+$this->title = 'Electrop';
+$this->registerLinkTag(['rel' => 'icon', 'type' => 'image/png', 'href' => '/electrop/backend/web/uploads/icon.png']);
 ?>
 <?php
 
@@ -22,11 +23,10 @@ $this->title = 'Home';
         // $image = Html::img('/electrop/backend/web/' . $sticker->picture, ['class' => 'alignC']);
         array_push($images, $image);
     }
-
-
-
     echo Carousel::widget(['items' => $images]);
 ?>
+<link rel="icon" href="/electrop/backend/web/uploads/icon.png">
+
 
 <div class="container">
     <div class="panel panel-default">

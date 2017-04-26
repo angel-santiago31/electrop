@@ -9,12 +9,12 @@ use yii\helpers\Url;
 /* @var $this yii\web\View */
 /* @var $model backend\models\Order */
 
-$this->title = 'Order Details';
-$this->params['breadcrumbs'][] = ['label' => 'My Account', 'url' => Url::to(['customer/account', 'id' => $user])];
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Order Invoice';
+//$this->params['breadcrumbs'][] = ['label' => 'My Account', 'url' => Url::to(['customer/account', 'id' => $user])];
+//$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="container">
-    <div class="panel panel-info">
+    <div class="panel panel-default">
         <div class="panel-heading">
               <h1><i class="glyphicon glyphicon-list-alt"></i> <?= Html::encode($this->title) ?></h1>
         </div>
@@ -22,6 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
               <?= DetailView::widget([
                   'model' => $model,
                   'attributes' => [
+                      'order_number',
                       'order_date:dateTime',
                       'amount_stickers',
                       'total_price',
@@ -48,7 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
               <?= GridView::widget([
                   'dataProvider' => $order_items,
-                  'summary'=>'<h3>Order Items:</h3>',
+                  'summary'=>'<h3>Items in Order:</h3>',
                   'columns' => [
                       'item_id',
                       'price_sold',
@@ -57,7 +58,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'label' => 'More',
                         'format' => 'html',
                         'value' => function ($order_items) {
-                            return Html::a('<i class="glyphicon glyphicon-eye-open"></i> View Details', ['item/details', 'id' => $order_items->item_id], ['class' => 'btn btn-xs btn-danger redCss']);
+                            return Html::a('<i class="glyphicon glyphicon-eye-open"></i> View Item Details', ['item/details', 'id' => $order_items->item_id], ['class' => 'btn btn-xs btn-danger redCss']);
                         }
                       ],
                   ],

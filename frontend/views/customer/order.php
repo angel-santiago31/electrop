@@ -4,12 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 use yii\grid\GridView;
 use backend\models\Order;
+use backend\models\Item;
 use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Order */
 
-$this->title = 'Order Invoice';
+$this->title = 'Order Receipt';
 //$this->params['breadcrumbs'][] = ['label' => 'My Account', 'url' => Url::to(['customer/account', 'id' => $user])];
 //$this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -51,7 +52,28 @@ $this->title = 'Order Invoice';
                   'dataProvider' => $order_items,
                   'summary'=>'<h3>Items in Order:</h3>',
                   'columns' => [
-                      'item_id',
+                       [
+                        'label' => 'Picture',
+                        'format' => 'html',
+                        'value' => function ($order_items) {
+                            $post = Yii::$app->db->createCommand("SELECT picture FROM item WHERE item_id = '$order_items->item_id'")->queryOne();
+                            $path = Url::to('/electrop/backend/web/' . $post["picture"]);
+                            //  echo $path;
+                            //  die(1);
+                            return '<p style="text-align:center"><img src="' . $path . '" height="100" width="100"/></p>';
+                        }
+                      ],
+                      [
+                        'label' => 'Name',
+                        'format' => 'html',
+                        'value' => function ($order_items) {
+                            $post = Yii::$app->db->createCommand("SELECT name FROM item WHERE item_id = '$order_items->item_id'")->queryOne();
+                            // var_dump($post);
+                            // die(2);
+                            return $post["name"];
+                        }
+                      ],
+                      //'item_id',
                       'price_sold',
                       'quantity_in_order',
                       [

@@ -8,7 +8,6 @@ $(document).ready(function() {
 
         if (quantity <= 1) {
             quantity = 1;
-            $('#decrementar').attr('disabled', true);
         }
 
         $('#item-quantity').val(quantity);
@@ -25,7 +24,7 @@ $(document).ready(function() {
     });
 
     $("#incrementar").click(function() {
-                
+
         quantity++;
 
         $('#item-quantity').val(quantity);
@@ -36,13 +35,8 @@ $(document).ready(function() {
 
         $("#qtyD").text(quantity.toString());
 
-        if(quantity === (qtyRemaining + 1)){
+        if(quantity === qtyRemaining){
             $(this).prop('disabled', true);
         }
-
-        if (quantity > 1) {
-            $('#decrementar').attr('disabled', false);
-        }
-        
     });
 });

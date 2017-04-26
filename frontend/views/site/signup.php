@@ -53,16 +53,16 @@ $this->params['breadcrumbs'][] = $this->title;
                                 ]) ?>
                     </div>
                     <div class="col-sm-4">
-                        <?= $form->field($model, 'number')->widget(MaskedInput::className(),['mask' => '999-999-9999', 'clientOptions' =>['removeMaskOnSubmit']])->textInput(['placeholder' => "999-999-9999"]) ?>
+                        <?= $form->field($model, 'number')->widget(MaskedInput::className(),['mask' => '999-999-9999', 'clientOptions' =>['removeMaskOnSubmit => true']])->textInput(['placeholder' => "999-999-9999"]) ?>
                     </div>
                 </div>
                  <h2><i class="glyphicon glyphicon-credit-card"></i> Payment Information</h2>
                 <div class="row">
                     <div class="col-sm-4">
-                    <?= $form->field($model, 'cardLastDigits')->widget(MaskedInput::className(),['mask' => '9999', 'clientOptions' =>['removeMaskOnSubmit']])  ?>
+                    <?= $form->field($model, 'cardLastDigits')->widget(MaskedInput::className(),['mask' => '9999', 'clientOptions' =>['removeMaskOnSubmit  => true']])->textInput(['placeholder' => "1234"])  ?>
                     </div>
                     <div class="col-sm-4">
-                        <?= $form->field($model, 'expDate')->widget(MaskedInput::className(),['mask' => '99/99', 'clientOptions' =>['removeMaskOnSubmit']])->textInput(['placeholder' => "MM/YY"]) ?>
+                        <?= $form->field($model, 'expDate')->widget(MaskedInput::className(),['mask' => '99/99', 'clientOptions' =>['removeMaskOnSubmit  => true']])->textInput(['placeholder' => "MM/YY"]) ?>
                     </div>
                     <div class="col-sm-4">
                         <?= $form->field($model, 'cardType')->dropDownList([
@@ -84,7 +84,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <?= $form->field($model, 'aptNumber')->textInput() ?>
                    </div>
                     <div class="col-sm-4">
-                        <?= $form->field($model, 'zipcode')->widget(MaskedInput::className(),['mask' => '99999', 'clientOptions' =>['removeMaskOnSubmit']]) ?>
+                        <?= $form->field($model, 'zipcode')->widget(MaskedInput::className(),['mask' => '99999', 'clientOptions' =>['removeMaskOnSubmit => true']])->textInput(['placeholder' => "12345"]) ?>
                     </div>
                 </div>
                 <div class="row">

@@ -18,6 +18,15 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/png', 'href' => '/elec
 ?>
 
 <div class="container">
+    <div class="col-sm-6">
+        
+    </div>
+    <div class="col-sm-6">
+       <?= $this->render('_searchbar', ['model' => $model]); ?>
+    </div>
+</div>
+    
+<div class="container">
       <div class="col-sm-3">
           <div class="panel panel-default">
               <div class="panel-heading">
@@ -79,6 +88,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/png', 'href' => '/elec
               </div>
           </div>
       </div>
+    
     <div class="col-sm-9">
         <div class="panel panel-default text-center">
             <div class="panel-body">

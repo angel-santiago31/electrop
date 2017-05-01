@@ -191,6 +191,61 @@ class SiteController extends Controller
     }
 
     /**
+     * Search items by name.
+     */
+
+    public function actionStickersSearch() 
+    {
+        $model = new Item();
+
+        // echo '<pre>';
+        // var_dump($searchModel);
+        // die(1);
+
+        if ($model->load(Yii::$app->request->post())) 
+        {
+            if ($model->name == ""){
+
+            $stickerList = Item::find()->where(['>=', 'quantity_remaining', 1])->all();
+            $sql ="SELECT * FROM item WHERE quantity_remaining >= 1";
+            echo Growl::widget([
+                        'type' => Growl::TYPE_SUCCESS,
+                        'icon' => 'glyphicon glyphicon-ok-sign',
+                        'title' => 'Query',
+                        'showSeparator' => true,
+                        'body' => $sql,
+                        'pluginOptions' => [
+                                'placement' => [
+                                    'from' => 'top',
+                                    'align' => 'right',
+                                ]
+                            ]
+                    ]);  
+            } else {
+                $stickerList = Item::find()->where([ 'like', 'name', $model->name])->andWhere(['>=', 'quantity_remaining', 1])->all();
+                $sql ="SELECT * FROM item WHERE name LIKE $model->name AND quantity_remaining >= 1";
+                echo Growl::widget([
+                        'type' => Growl::TYPE_SUCCESS,
+                        'icon' => 'glyphicon glyphicon-ok-sign',
+                        'title' => 'Query',
+                        'showSeparator' => true,
+                        'body' => $sql,
+                        'pluginOptions' => [
+                                'placement' => [
+                                    'from' => 'top',
+                                    'align' => 'right',
+                                ]
+                            ]
+                    ]);
+            }
+        }
+        
+        return $this->render('stickers', [
+                 'model' => $model,
+                 'stickerList' => $stickerList,
+             ]);
+    }
+    /**
      * Logs in a user.
      *
      * @return mixed

@@ -208,7 +208,11 @@ class ReportsController extends Controller
                             'sumQty' => $sumQty,
                             'sumSales' => $sumSales,
                             'allOrders' => $allOrders,
-                            'groupedBy' => $groupedBy
+                            'groupedBy' => $groupedBy,
+                            'sql' => $sql,
+                            'sumAllQty' => $sumAllQty,
+                            'fromDate' => $fromDate,
+                            'toDate' => $toDate
                             ]),
                             'methods' => [
                                     'SetHeader' => ['Report Name: ' . $model->title],
@@ -251,7 +255,12 @@ class ReportsController extends Controller
                                 'sumQty' => $sumQty,
                                 'sumSales' => $sumSales,
                                 'allOrders' => $allOrders,
-                                'groupedBy' => $groupedBy
+                                'groupedBy' => $groupedBy,
+                                'sql' => $sql,
+                                'sqlGroupByQty' => $sqlGroupByQty,
+                                'sqlGroupByPrice' => $sqlGroupByPrice,
+                                'fromDate' => $fromDate,
+                                'toDate' => $toDate
                                 ]),
                                 'methods' => [
                                         'SetHeader' => ['Report Name: ' . $model->title],
@@ -267,7 +276,9 @@ class ReportsController extends Controller
                             'content' => $this->renderPartial('pdf', [
                             'model' => $model,
                             'allOrders' => $allOrders,
-                            'ordersInfo' => $ordersInfo
+                            'ordersInfo' => $ordersInfo,
+                            'fromDate' => $fromDate,
+                            'toDate' => $toDate
                             ]),
                             'methods' => [
                                     'SetHeader' => ['Report Name: ' . $model->title],
@@ -313,7 +324,12 @@ class ReportsController extends Controller
                                 'sumQty' => $sumQty,
                                 'sumSales' => $sumSales,
                                 'allOrders' => $allOrders,
-                                'groupedBy' => $groupedBy
+                                'groupedBy' => $groupedBy,
+                                'sql' => $sql,
+                                'sqlGroupByQty' => $sqlGroupByQty,
+                                'sqlGroupByPrice' => $sqlGroupByPrice,
+                                'fromDate' => $fromDate,
+                                'toDate' => $toDate
                                 ]),
                                 'methods' => [
                                         'SetHeader' => ['Report Name: ' . $model->title],
@@ -331,7 +347,9 @@ class ReportsController extends Controller
                             'model' => $model,
                             'allOrders' => $allOrders,
                             'ordersInfo' => $ordersInfo,
-                            'groupedBy' => $groupedBy
+                            'groupedBy' => $groupedBy,
+                            'fromDate' => $fromDate,
+                            'toDate' => $toDate
                             ]),
                             'methods' => [
                                     'SetHeader' => ['Report Name: ' . $model->title],
@@ -348,7 +366,9 @@ class ReportsController extends Controller
                             'content' => $this->renderPartial('pdf', [
                             'model' => $model,
                             'allOrders' => $allOrders,
-                            'groupedBy' => $groupedBy
+                            'groupedBy' => $groupedBy,
+                            'fromDate' => $fromDate,
+                            'toDate' => $toDate
                             ]),
                             'methods' => [
                                     'SetHeader' => ['Report Name: ' . $model->title],

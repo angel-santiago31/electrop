@@ -50,6 +50,14 @@ use kartik\growl\Growl;
                 <th style = "text-align: right;, font-weight: bold;">Description:</th>
                 <td style = "padding-left: 3%;, height: 30px;"><?= $model->description; ?></td>
             </tr>
+            <tr>
+                <th style = "text-align: right;, font-weight: bold;">From:</th>
+                <td style = "padding-left: 3%;, height: 30px;"><?= $fromDate; ?></td>
+            </tr>
+            <tr>
+                <th style = "text-align: right;, font-weight: bold;">To:</th>
+                <td style = "padding-left: 3%;, height: 30px;"><?= $toDate; ?></td>
+            </tr>
         </table>
         <br>
         <br>
@@ -187,6 +195,37 @@ use kartik\growl\Growl;
                                 </tr>
                             </tfoot>
                             </table>
+                    </div>
+                        <br>
+                        <br>
+                        <br>
+                    <div class="panel">
+                        <h2>Queries Executed: </h2>
+                        <div class="panel-body">
+                            <div> <span style="font-size: 16px;"><?= 'Search Query: ' . $sql;  ?></span> </div>
+                            <br>
+                            <div> <span><?php 
+                            if($groupedBy == 'All')
+                            {
+                                echo 'Sum Quantity Query: ' . $sumAllQty;
+                            }
+                            else 
+                            {
+                                echo 'Sum Quantity Query: ' . $sqlGroupByQty;
+                            }
+                            ?></span> </div> 
+                            <br>
+                            <div> <span><?php 
+                            if($groupedBy == 'All')
+                            {
+                                echo 'Sum Total Price Query: ' . $sumAllQty;
+                            }
+                            else 
+                            {
+                                echo 'Sum Total Price Query: ' . $sqlGroupByPrice;
+                            } 
+                            ?></span> </div>
+                        </div> 
                     </div>
                     
             <?php   } 

@@ -51,7 +51,7 @@ $this->params['breadcrumbs'][] = $this->title;
       <div class="panel panel-default">
           <div class="panel-heading">
             <h1 class="text-center"><?php echo 'Welcome ' . Yii::$app->user->identity->first_name . '!'; ?> </h1>
-            <h4 class="text-center">Here you can view and update your account information.</h4>
+            <h4 class="text-center">Here you can view and update your account information and see all your orders histories.</h4>
           </div>
       </div>
   </div>
@@ -111,7 +111,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'label' => 'More',
                             'format' => 'html',
                             'value' => function ($model) {
-                                return Html::a('<i class="glyphicon glyphicon-eye-open"></i> View Details', ['view-order', 'id' => $model->order_number, 'user' => $model->customer_id], ['class' => 'btn btn-xs btn-danger redCss']);
+                                return Html::a('<i class="fa fa-sticky-note"></i> Invoice', ['view-order', 'id' => $model->order_number, 'user' => $model->customer_id], ['class' => 'btn btn-xs btn-danger redCss']);
                             }
                           ],
                       ],

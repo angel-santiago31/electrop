@@ -84,7 +84,7 @@ class Order extends ActiveRecord
         return [
             'order_number' => 'Order Number',
             'order_date' => 'Order Date',
-            'amount_stickers' => 'Amount Stickers',
+            'amount_stickers' => 'Amount of Stickers',
             'total_price' => 'Total Price',
             'order_status' => 'Order Status',
             'customer_id' => 'Customer ID',

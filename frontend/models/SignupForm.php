@@ -92,6 +92,7 @@ class SignupForm extends Model
         $user->mothers_last_name = $this->mothersLastName;
         $user->date_of_birth = $this->dateOfBirth;
         $user->generateAuthKey();
+        $user->calculateAge($this->dateOfBirth);
 
         if ($user->save()) {
             $payment = new PaymentMethod();

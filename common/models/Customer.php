@@ -8,6 +8,7 @@ use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 use backend\models\PaymentMethod;
 
+
 /**
  * User model
  *
@@ -18,6 +19,7 @@ use backend\models\PaymentMethod;
  * @property string $email
  * @property string $auth_key
  * @property integer $status
+ * @property integer $age
  * @property integer $created_at
  * @property integer $updated_at
  * @property string $password write-only password
@@ -60,7 +62,8 @@ class Customer extends ActiveRecord implements IdentityInterface
             ['middle_name', 'default'],
             ['fathers_last_name', 'default'],
             ['mothers_last_name', 'default'],
-            ['date_of_birth', 'date']
+            ['date_of_birth', 'date'],
+            ['age', 'integer']
         ];
     }
 
@@ -180,6 +183,19 @@ class Customer extends ActiveRecord implements IdentityInterface
         $this->auth_key = Yii::$app->security->generateRandomString();
     }
 
+    /**
+     * Calculates the age of the user with their date of birth 
+     */
+    public function calculateAge($bdate)
+	{
+        
+        $userdatetime = new \DateTime($bdate);
+        $currentdatetime = new \DateTime();
+        $diff = $userdatetime->diff($currentdatetime);
+        
+        $this->age = $diff->y;
+        
+    }		
     /**
      * Generates new password reset token
      */

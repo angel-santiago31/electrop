@@ -92,7 +92,7 @@ insert  into `customer`(`id`,`email`,`password_hash`,`first_name`,`middle_name`,
 (12,'erick.rivera6@upr.edu','$2y$13$M5UpksDkDlvgt/lUm1m/lOaQ7R97gkbNEZW.zl7ZGEhjSD0BNfPY.','Erick','','Rivera','Cruz','12',NULL,'DdZQQZEetFOXZcoL5LVzhOwOByIW07Xa',NULL,10,1491695547,1491695547,0),
 (13,'huelga@upra.com','$2y$13$Qqdd5SXlZpcVuL1sCrVgXuyraBjHDI/l4IyG0fhiv/Ccvd2iTnBTa','Once','Recintos','Una','Upr','12',NULL,'CFnXDz1i7Xdu29AkGMAxcPAaVgRdN0qD',NULL,0,1491842106,1492805842,0),
 (14,'bryan.hernandez5@upr.edu','$2y$13$kotQzJ5P/uEh.XOfM8dGpO9jt5cYkmbin6VfzpG96bbp1gfUdRsZu','Bryan','Yomar','Hernandez','Cuevas','1996',NULL,'1aJSZBWbJs6pp6ny1Q33-OeAKlSAZRO_',NULL,10,1492651670,1492651670,0),
-(19,'angel.santiago31@upr.edu','$2y$13$nt0zcmBLbAFn598NDRCOauOcpQGb5VYA6NJXeh7djbRibrF54oS7C','Angel','Eduardo','Santiago','González','10-10-1996',NULL,'aXIqfWWFf17tuvpdcFfxoslLUXZWIZaI',NULL,10,1492660565,1492808636,0),
+(19,'angel.santiago31@upr.edu','$2y$13$nt0zcmBLbAFn598NDRCOauOcpQGb5VYA6NJXeh7djbRibrF54oS7C','Angel','Eduardo','Santiago','González','10-10-1996',NULL,'aXIqfWWFf17tuvpdcFfxoslLUXZWIZaI',NULL,10,1492660565,1494004947,0),
 (20,'test@test.com','$2y$13$uQax1jJ7LTc7v5Fd4qBT6OEryM/89/Lt3.9Jk5MDeHhOYMrQaErk6','Test','Test','Test','Test','23-03-2017',NULL,'okRwZ_rAxhW9rGTXNIxeeVQvrhPhWndh',NULL,10,1492797446,1492797446,0),
 (21,'elliot.lopez1@upr.edu','$2y$13$M.4xvaOC/veupnEInzWzneYA7ZDdUCJs1KzuZfCOaNlBkMX25ts36','Elliot','asdfasf','Test','sdafasdfasf','03-05-2017',NULL,'-FA1ABmp-WyQdcAOf-cPuPiLb_p7NxOo',NULL,10,1493176957,1493176957,0),
 (22,'elliot.lopez1@uprfd.edu','$2y$13$4ofyA94eAnIJz3Vd3h/vHeT6WBF5fu4KuszOs/aeWsO41b8QrChD6','765447','4765745','65474567','456745674567','03-05-2017',NULL,'GXEVl-FSTsymqeuA2--QdEev3Nrw5zCm',NULL,10,1493177147,1493177147,0),
@@ -293,7 +293,7 @@ DROP TABLE IF EXISTS `phone_number`;
 
 CREATE TABLE `phone_number` (
   `customer_id` int(11) NOT NULL,
-  `number` int(12) NOT NULL,
+  `number` varchar(12) NOT NULL,
   PRIMARY KEY (`customer_id`),
   CONSTRAINT `phone_number_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -301,15 +301,15 @@ CREATE TABLE `phone_number` (
 /*Data for the table `phone_number` */
 
 insert  into `phone_number`(`customer_id`,`number`) values 
-(14,787),
-(19,939),
-(20,787),
-(21,543),
-(22,764),
-(23,765),
-(24,245),
-(25,333),
-(26,2147483647);
+(14,'787'),
+(19,'939-246-8676'),
+(20,'787'),
+(21,'543'),
+(22,'764'),
+(23,'765'),
+(24,'245'),
+(25,'333'),
+(26,'2147483647');
 
 /*Table structure for table `report_type` */
 

@@ -14,6 +14,7 @@ $this->title = 'Order Details';
 // $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="container">
+  <div class="col-sm-10">
     <div class="panel panel-info">
         <div class="panel-heading">
               <h1><i class="glyphicon glyphicon-list-alt"></i> <?= Html::encode($this->title) ?></h1>
@@ -78,4 +79,5 @@ $this->title = 'Order Details';
               ]); ?>
         </div>
     </div>
+  </div>
 </div>

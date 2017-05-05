@@ -13,6 +13,7 @@ $this->title = $model->name;
 //$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="container">
+  <div class="col-sm-10">
     <div class="panel panel-info">
         <div class="panel-heading">
             <h1><?= '<span class="glyphicon glyphicon-inbox"></span> ' . Html::encode($this->title) ?></h1>
@@ -87,4 +88,5 @@ $this->title = $model->name;
               ]) ?>
         </div>
     </div>
+  </div>
 </div>

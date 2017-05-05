@@ -20,7 +20,7 @@ $this->title = ' Users';
                     <h1><i class="glyphicon glyphicon-user"></i><?= Html::encode($this->title) ?></h1>
                 </div>
             </div>
-            
+
             <div class="panel-body">
                 <div class="row">
                     <div class="col-sm-9">
@@ -34,7 +34,7 @@ $this->title = ' Users';
                         </p>
                     </div>
                 </div>
-                
+
                     <?= GridView::widget([
                             'dataProvider' => $dataProvider,
                             //'filterModel' => $searchModel,
@@ -77,10 +77,4 @@ $this->title = ' Users';
         </div>
       </div>
   </div>
-
-
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    
-    
 </div>

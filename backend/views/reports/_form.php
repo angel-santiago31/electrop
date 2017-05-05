@@ -57,7 +57,7 @@ use yii\helpers\ArrayHelper;
                                ]);
                 ?>
           </div>
-          <div class="col-sm-2">
+          <div class="col-sm-3">
               <div id="itemIdField">
                   <?= $form->field($model, 'item_selected')->dropDownList(ArrayHelper::map(Item::find()
                                                            ->select(['item_id','name'])->asArray()->all(),'item_id','name'), ['prompt'=>'--Select--']);?>

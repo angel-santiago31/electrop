@@ -11,7 +11,7 @@ $this->title = 'Add Item';
 //$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="container">
-    <div class="col-sm-11">
+    <div class="col-sm-10">
         <div class="panel panel-success">
             <div class="panel-heading">
                 <h1><?= '<span class="glyphicon glyphicon-inbox"></span> ' . Html::encode($this->title)?></h1>

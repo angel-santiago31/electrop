@@ -11,6 +11,7 @@ $this->title = 'Create Report';
 // $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="container">
+  <div class="col-sm-10">
     <div class="panel panel-success">
         <div class="panel-heading">
             <h1> <i class="glyphicon glyphicon-file"></i> <?= Html::encode($this->title) ?></h1>
@@ -21,4 +22,5 @@ $this->title = 'Create Report';
                 ]) ?>
         </div>
     </div>
+  </div>
 </div>

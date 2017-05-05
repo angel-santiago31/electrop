@@ -11,12 +11,11 @@ use backend\models\StickerSize;
 
 // print_r($model->errors);
 ?>
-
 <div class="item-form">
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]) ?>
 
         <div class="row">
-            <div class="col-sm-3">
+            <div class="col-sm-4">
                 <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
             </div>
             <div class="col-sm-3">
@@ -28,6 +27,23 @@ use backend\models\StickerSize;
                                                                 ]) ?>
             </div>
             <div class="col-sm-2">
+                <?= $form->field($model, 'item_category_id')->dropDownList([
+                                                                                1 => 'Decals',
+                                                                                2 => 'Wall',
+                                                                                3 => 'Floor'
+                                                                            ])->label("Category") ?>
+            </div>
+            <div class="col-sm-2">
+                <?= $form->field($model, 'item_sub_category_id')->dropDownList([
+                                                                                    1 => 'Jokes',
+                                                                                    2 => 'Brands',
+                                                                                    3 => 'Animals',
+                                                                                    4 => 'Random'
+                                                                                ])->label("Sub Category") ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-2">
                 <?= $form->field($model, 'quantity_remaining')->textInput()->label("Quantity Available") ?>
             </div>
             <div class="col-sm-2">
@@ -38,29 +54,12 @@ use backend\models\StickerSize;
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-3">
-                <?= $form->field($model, 'item_category_id')->dropDownList([
-                                                                                1 => 'Decals',
-                                                                                2 => 'Wall',
-                                                                                3 => 'Floor'
-                                                                            ]) ?>
-            </div>
-            <div class="col-sm-2">
-                <?= $form->field($model, 'item_sub_category_id')->dropDownList([
-                                                                                    1 => 'Jokes',
-                                                                                    2 => 'Brands',
-                                                                                    3 => 'Animals',
-                                                                                    4 => 'Random'
-                                                                                ]) ?>
-            </div>
-        </div>
-        <div class="row">
             <div class="col-sm-8">
                 <?= $form->field($model, 'file')->fileInput()->label('Picture') ?>
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-7">
                 <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
             </div>
         </div>
@@ -70,5 +69,4 @@ use backend\models\StickerSize;
         </div>
 
     <?php ActiveForm::end(); ?>
-
 </div>

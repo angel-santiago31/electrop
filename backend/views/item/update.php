@@ -11,6 +11,7 @@ $this->title = 'Update Item: ' . $model->name;
 //$this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="container">
+  <div class="col-sm-10">
     <div class="panel panel-warning">
         <div class="panel-heading">
               <h1><?= '<span class="glyphicon glyphicon-file"></span> ' . Html::encode($this->title)?></h1>
@@ -21,4 +22,5 @@ $this->title = 'Update Item: ' . $model->name;
             ]) ?>
         </div>
     </div>
+  </div>
 </div>

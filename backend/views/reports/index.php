@@ -12,7 +12,8 @@ use kartik\datecontrol\DateControl;
 $this->title = 'Reports';
 // $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="contains">
+<div class="container">
+  <div class="col-sm-10">
     <div class="panel panel-primary">
         <div class="panel-heading">
             <div class="jumbotron text-center">
@@ -64,4 +65,5 @@ $this->title = 'Reports';
                     </div>
         </div>
     </div>
+  </div>
 </div>

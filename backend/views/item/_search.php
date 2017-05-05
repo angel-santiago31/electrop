@@ -15,10 +15,10 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <div class="col-sm-2">
+    <div class="col-sm-4">
         <?= $form->field($model, 'name') ?>
     </div>
-    <div class="col-sm-2">
+    <div class="col-sm-3">
         <?= $form->field($model, 'active')->dropDownList([
                                                             1 => 'Active',
                                                             0 => 'Inactive'

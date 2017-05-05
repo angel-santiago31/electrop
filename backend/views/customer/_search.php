@@ -19,7 +19,7 @@ use common\models\Customer;
     <div class="col-sm-2">
         <?= $form->field($model, 'id') ?>
     </div>
-    <div class="col-sm-2">
+    <div class="col-sm-3">
         <?= $form->field($model, 'status')->dropDownList([Customer::STATUS_ACTIVE => 'Active', Customer::STATUS_DELETED => 'Inactive'], ['prompt'=>'--Select--']) ?>
     </div>
         <br>

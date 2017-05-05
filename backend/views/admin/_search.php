@@ -19,7 +19,7 @@ use common\models\Admin;
     <div class="col-sm-2">
         <?= $form->field($model, 'id') ?>
     </div>
-    <div class="col-sm-2">
+    <div class="col-sm-3">
         <?= $form->field($model, 'status')->dropDownList([Admin::STATUS_ACTIVE => 'Active', Admin::STATUS_DELETED => 'Inactive'], ['prompt'=>'--Select--']) ?>
     </div>
       <br>

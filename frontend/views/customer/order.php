@@ -48,43 +48,39 @@ $this->params['breadcrumbs'][] = $this->title;
                   ],
               ]) ?>
 
-              <?= GridView::widget([
-                  'dataProvider' => $order_items,
-                  'summary'=>'<h3>Items in Order:</h3>',
-                  'columns' => [
-                       [
-                        'label' => 'Picture',
-                        'format' => 'html',
-                        'value' => function ($order_items) {
-                            $post = Yii::$app->db->createCommand("SELECT picture FROM item WHERE item_id = '$order_items->item_id'")->queryOne();
-                            $path = Url::to('/electrop/backend/web/' . $post["picture"]);
-                            //  echo $path;
-                            //  die(1);
-                            return '<p style="text-align:center"><img src="' . $path . '" height="100" width="100"/></p>';
-                        }
-                      ],
-                      [
-                        'label' => 'Name',
-                        'format' => 'html',
-                        'value' => function ($order_items) {
-                            $post = Yii::$app->db->createCommand("SELECT name FROM item WHERE item_id = '$order_items->item_id'")->queryOne();
-                            // var_dump($post);
-                            // die(2);
-                            return $post["name"];
-                        }
-                      ],
-                      //'item_id',
-                      'price_sold',
-                      'quantity_in_order',
-                      [
-                        'label' => 'More',
-                        'format' => 'html',
-                        'value' => function ($order_items) {
-                            return Html::a('<i class="glyphicon glyphicon-eye-open"></i> View Item Details', ['item/details', 'id' => $order_items->item_id], ['class' => 'btn btn-xs btn-danger redCss']);
-                        }
-                      ],
-                  ],
-              ]); ?>
+              <div class="container">
+                <h4><label>Items in order:</label></h4>
+              </div>
+
+              <?php foreach($order_items as $sticker): ?>
+                  <div class="col-sm-3">
+                      <div class="panel panel-default">
+                            <div class="panel-body">
+                                <?php
+                                    $post = Yii::$app->db->createCommand("SELECT picture FROM item WHERE item_id = '$sticker->item_id'")->queryOne();
+                                    $path = Url::to('/electrop/backend/web/' . $post["picture"]);
+                                ?>
+                                <img src="<?= $path?>" class="stickerImg" />
+                            </div>
+                            <div class="panel-footer text-center">
+                                <?php
+                                    $post = Yii::$app->db->createCommand("SELECT name FROM item WHERE item_id = '$sticker->item_id'")->queryOne();
+                                    $name = $post["name"];
+                                ?>
+
+                                Name: <?= Html::encode($name) ?>
+                                <br><br>
+                                Price Sold: $<?= Html::encode($sticker->price_sold)?>
+                                <br><br>
+                                Quantity in Order: <?= Html::encode($sticker->quantity_in_order) ?>
+                                <br><br>
+                                <div class="btn-group">
+                                    <?= Html::a('<i class="glyphicon glyphicon-eye-open"></i> View details', ['/item/details', 'id' => $sticker->item_id], ['class' => 'btn btn-default align-center']) ?>
+                                </div>
+                            </div>
+                      </div>
+                  </div>
+              <?php endforeach; ?>
         </div>
     </div>
 </div>

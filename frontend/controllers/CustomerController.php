@@ -13,6 +13,7 @@ use backend\models\ShippingAddress;
 use backend\models\PaymentMethod;
 use backend\models\Order;
 use backend\models\OrderSearch;
+use backend\models\Contains;
 use backend\models\ContainsSearch;
 use kartik\growl\Growl;
 
@@ -71,7 +72,7 @@ class CustomerController extends Controller
     public function actionAccount($id)
     {
         $customer = $this->findModel($id);
-        
+
         $sql ="SELECT * FROM customer WHERE id = $id";
         Yii::$app->getSession()->setFlash('success', [
             'type' => 'success',
@@ -97,7 +98,7 @@ class CustomerController extends Controller
             ]);
 
         $customer_shipping_address = $this->findShippingAddress($customer->id);
-        
+
         $sql_statement ="SELECT * FROM shipping_address WHERE customer_id = $customer->id";
         Yii::$app->getSession()->setFlash('shipping_success', [
             'type' => 'success',
@@ -155,9 +156,19 @@ class CustomerController extends Controller
     public function actionViewOrder($id, $user)
     {
         $order = $this->findOrder($id);
+        $dataProvider = Contains::find()->where(['order_number' => $order->order_number])->all();
 
-        $searchModel = new ContainsSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $order->order_number);
+        $sql ="SELECT * FROM contains WHERE order_number = $order->order_number";
+             Yii::$app->getSession()->setFlash('success', [
+                'type' => 'success',
+                'duration' => 5000,
+                'icon' => 'glyphicon glyphicon-ok-sign',
+                'title' => 'Query',
+                'showSeparator' => true,
+                'message' => $sql,
+                'positonY' => 'top',
+                'positonX' => 'right'
+            ]);
 
         return $this->render('order', [
             'model' => $order,
@@ -233,7 +244,7 @@ class CustomerController extends Controller
             ]);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-             
+
              $que ="UPDATE phone_number SET number = $model->number\n WHERE customer_id = $id";
                  Yii::$app->getSession()->setFlash('phone', [
                     'type' => 'success',

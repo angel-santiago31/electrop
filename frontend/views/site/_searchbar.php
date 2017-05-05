@@ -13,7 +13,7 @@ use backend\models\Item;
     <?php $form = ActiveForm::begin(['action' =>['site/stickers-search'], 'method' => 'post',]); ?>
         <div class="row">
             <div class="col-sm-10">
-                <?= $form->field($model, 'nameSearch')->label(false) ?>
+                <?= $form->field($model, 'nameSearch', ['inputOptions' => ['placeholder' => 'Search By Name', 'class' => 'form-control']])->label(false) ?>
             </div>
             <div class="col-sm-2">
                 <?= Html::submitButton('<i class="glyphicon glyphicon-search"></i> Search', ['class' => 'btn btn-danger redCss', 'name' => 'search-button']) ?>

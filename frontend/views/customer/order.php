@@ -11,8 +11,8 @@ use yii\helpers\Url;
 /* @var $model backend\models\Order */
 
 $this->title = 'Order Receipt';
-//$this->params['breadcrumbs'][] = ['label' => 'My Account', 'url' => Url::to(['customer/account', 'id' => $user])];
-//$this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = ['label' => 'My Account', 'url' => Url::to(['customer/account', 'id' => $user])];
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="container">
     <div class="panel panel-default">

@@ -17,15 +17,8 @@ $this->params['breadcrumbs'][] = $this->title;
 $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/png', 'href' => '/electrop/backend/web/uploads/icon.png']);
 ?>
 
-<div class="container">
-    <div class="col-sm-6">
-        
-    </div>
-    <div class="col-sm-6">
-       <?= $this->render('_searchbar', ['model' => $model]); ?>
-    </div>
-</div>
-    
+
+
 <div class="container">
       <div class="col-sm-3">
           <div class="panel panel-default">
@@ -88,7 +81,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/png', 'href' => '/elec
               </div>
           </div>
       </div>
-    
+
     <div class="col-sm-9">
         <div class="panel panel-default text-center">
             <div class="panel-body">
@@ -96,6 +89,9 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/png', 'href' => '/elec
                 <br>
                 <h5>We have the best stickers in design, quality and variety worldwide!</h5>
             </div>
+        </div>
+        <div class="col-xs-push-3">
+            <?= $this->render('_searchbar', ['model' => $model]); ?>
         </div>
         <?= $this->render('_stickerList', ['stickerList' => $stickerList]); ?>
     </div>

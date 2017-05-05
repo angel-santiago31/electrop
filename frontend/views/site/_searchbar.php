@@ -12,11 +12,10 @@ use backend\models\Item;
 <div class="item-search">
     <?php $form = ActiveForm::begin(['action' =>['site/stickers-search'], 'method' => 'post',]); ?>
         <div class="row">
-            <div class="col-sm-8">
-                <?= $form->field($model, 'name')->label("") ?>
+            <div class="col-sm-10">
+                <?= $form->field($model, 'nameSearch')->label(false) ?>
             </div>
-            <div class="col-sm-4">
-            <br>
+            <div class="col-sm-2">
                 <?= Html::submitButton('<i class="glyphicon glyphicon-search"></i> Search', ['class' => 'btn btn-danger redCss', 'name' => 'search-button']) ?>
             </div>
         </div>

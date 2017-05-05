@@ -76,7 +76,7 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $stickerList = Item::find()->limit(6)->offset(0)->where(['active' => Item::ACTIVE])->all();
-      
+
          $sql ="SELECT * FROM item WHERE active = 1 LIMIT 6";
            echo Growl::widget([
                     'type' => Growl::TYPE_SUCCESS,
@@ -90,7 +90,7 @@ class SiteController extends Controller
                                 'align' => 'right',
                             ]
                         ]
-                ]);  
+                ]);
 
         $carousel = Item::find()->limit(5)->offset(10)->where(['active' => Item::ACTIVE])->all();
         $sql_query = "SELECT * FROM item WHERE active = 1 LIMIT 5 OFFSET 10";
@@ -115,7 +115,7 @@ class SiteController extends Controller
         $model = new Item();
 
         if ($model->load(Yii::$app->request->post()) && $category == NULL && $subcategory == NULL) {
-            
+
             $stickerList = Item::find()->where(['item_category_id' => $model->item_category_id,
                                                 'item_sub_category_id' => $model->item_sub_category_id,
                                                 'active' => Item::ACTIVE])->andWhere(['>=', 'quantity_remaining', 1])->all();
@@ -194,7 +194,7 @@ class SiteController extends Controller
      * Search items by name.
      */
 
-    public function actionStickersSearch() 
+    public function actionStickersSearch()
     {
         $model = new Item();
 
@@ -202,9 +202,9 @@ class SiteController extends Controller
         // var_dump($searchModel);
         // die(1);
 
-        if ($model->load(Yii::$app->request->post())) 
+        if ($model->load(Yii::$app->request->post()))
         {
-            if ($model->name == ""){
+            if ($model->nameSearch == ""){
 
             $stickerList = Item::find()->where(['>=', 'quantity_remaining', 1])->all();
             $sql ="SELECT * FROM item WHERE quantity_remaining >= 1";
@@ -220,10 +220,10 @@ class SiteController extends Controller
                                     'align' => 'right',
                                 ]
                             ]
-                    ]);  
+                    ]);
             } else {
-                $stickerList = Item::find()->where([ 'like', 'name', $model->name])->andWhere(['>=', 'quantity_remaining', 1])->all();
-                $sql ="SELECT * FROM item WHERE name LIKE $model->name AND quantity_remaining >= 1";
+                $stickerList = Item::find()->where([ 'like', 'name', $model->nameSearch])->andWhere(['>=', 'quantity_remaining', 1])->all();
+                $sql ="SELECT * FROM item WHERE name LIKE %$model->nameSearch% AND quantity_remaining >= 1";
                 echo Growl::widget([
                         'type' => Growl::TYPE_SUCCESS,
                         'icon' => 'glyphicon glyphicon-ok-sign',
@@ -239,7 +239,7 @@ class SiteController extends Controller
                     ]);
             }
         }
-        
+
         return $this->render('stickers', [
                  'model' => $model,
                  'stickerList' => $stickerList,
@@ -289,7 +289,7 @@ class SiteController extends Controller
         $model = new ContactForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail(Yii::$app->params['adminEmail'])) {
-            
+
                 Yii::$app->getSession()->setFlash('success', [
                     'type' => 'success',
                     'duration' => 5000,

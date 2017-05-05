@@ -35,6 +35,7 @@ class Item extends ActiveRecord implements \yz\shoppingcart\CartPositionInterfac
     public const DELETED = 0;
     public $file;
     public $quota;
+    public $nameSearch;
 
     public const DECALS = 1;
     public const WALL = 2;
@@ -62,7 +63,7 @@ class Item extends ActiveRecord implements \yz\shoppingcart\CartPositionInterfac
             [['name', 'picture', 'quantity_remaining', 'size', 'gross_price', 'production_cost', 'description', 'item_category_id', 'item_sub_category_id'], 'required'],
             [['item_id', 'quantity_remaining', 'item_category_id', 'item_sub_category_id', 'active', 'size'], 'integer'],
             [['gross_price', 'production_cost'], 'number'],
-            [['name'], 'string', 'max' => 32],
+            [['name', 'nameSearch'], 'string', 'max' => 32],
             [['picture', 'description'], 'string', 'max' => 256],
             [['item_category_id'], 'exist', 'skipOnError' => true, 'targetClass' => ItemCategory::className(), 'targetAttribute' => ['item_category_id' => 'id']],
             [['item_sub_category_id'], 'exist', 'skipOnError' => true, 'targetClass' => ItemSubCategory::className(), 'targetAttribute' => ['item_sub_category_id' => 'id']],
@@ -88,6 +89,7 @@ class Item extends ActiveRecord implements \yz\shoppingcart\CartPositionInterfac
             'item_category_id' => 'Item Category ID',
             'item_sub_category_id' => 'Item Sub Category ID',
             'active' => 'Active',
+            'nameSearch' => 'Search by name',
         ];
     }
 
@@ -157,7 +159,7 @@ class Item extends ActiveRecord implements \yz\shoppingcart\CartPositionInterfac
 
         return $itemsList;
     }
-  
+
     public function getQuantityNotEmpty()
     {
           return ($this->quantity_remaining == NULL)? true : false;

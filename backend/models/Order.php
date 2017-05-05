@@ -135,9 +135,4 @@ class Order extends ActiveRecord
     {
         return ($this->order_status == self::SHIPPED) ? 'btn btn-warning disabled' : 'btn btn-warning';
     }
-
-    public function isStatusShippedV()
-    {
-        return ($this->order_status == self::SHIPPED) ? 'x' : Url::to(['update', 'id' => $this->order_number]);
-    }
 }

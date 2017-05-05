@@ -7,6 +7,7 @@ use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use common\models\Customer;
 use backend\models\Shipper;
+use yii\helpers\Url;
 
 /**
  * This is the model class for table "order".
@@ -128,5 +129,15 @@ class Order extends ActiveRecord
     public function isCartEmpty()
     {
         return (Yii::$app->cart->getCount() == NULL) ? 'btn btn-default disabled pull-right' : 'btn btn-default pull-right';
+    }
+
+    public function isStatusShipped()
+    {
+        return ($this->order_status == self::SHIPPED) ? 'btn btn-warning disabled' : 'btn btn-warning';
+    }
+
+    public function isStatusShippedV()
+    {
+        return ($this->order_status == self::SHIPPED) ? 'x' : Url::to(['update', 'id' => $this->order_number]);
     }
 }

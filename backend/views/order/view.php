@@ -22,7 +22,7 @@ $this->title = 'Order Details';
         <div class="panel-body">
               <p>
                   <!-- <?= Html::a('<i class="glyphicon glyphicon-pencil"></i> Update Status', ['update', 'id' => $model->order_number], ['class' => 'btn btn-warning']) ?> -->
-                  <?= Html::button('<i class="glyphicon glyphicon-pencil"></i> Update Status', [ 'value' => Url::to(['update', 'id' => $model->order_number]), 'class' => 'btn btn-warning', 'id' => 'updateOrderStatus']); ?>
+                  <?= Html::button('<i class="glyphicon glyphicon-pencil"></i> Update Status', [ 'value' => $model->isStatusShippedV(), 'class' => $model->isStatusShipped(), 'id' => 'updateOrderStatus']); ?>
                   <!-- <?= Html::a('Delete', ['delete', 'id' => $model->order_number], [
                       'class' => 'btn btn-danger',
                       'data' => [

@@ -144,21 +144,21 @@ class ItemController extends Controller
                   ]);
 
                   //decrease inventory quantity
-                  $item = $this->findModel($sticker->item_id);
-                  $item->quantity_remaining -= $sticker->quantity_in_order;
-                  $item->save();
+                  // $item = $this->findModel($sticker->item_id);
+                  // $item->quantity_remaining -= $sticker->quantity_in_order;
+                  // $item->save();
 
-                  $query ="UPDATE item SET quantity_remaining = $item->quantity_remaining WHERE id = $sticker->item_id";
-                  Yii::$app->getSession()->setFlash('updated', [
-                     'type' => 'success',
-                     'duration' => 5000,
-                     'icon' => 'glyphicon glyphicon-ok-sign',
-                     'title' => 'Query',
-                     'showSeparator' => true,
-                     'message' => $query,
-                     'positonY' => 'top',
-                     'positonX' => 'right'
-                 ]);
+                //   $query ="UPDATE item SET quantity_remaining = $item->quantity_remaining WHERE id = $sticker->item_id";
+                //   Yii::$app->getSession()->setFlash('updated', [
+                //      'type' => 'success',
+                //      'duration' => 5000,
+                //      'icon' => 'glyphicon glyphicon-ok-sign',
+                //      'title' => 'Query',
+                //      'showSeparator' => true,
+                //      'message' => $query,
+                //      'positonY' => 'top',
+                //      'positonX' => 'right'
+                //  ]);
 
                   $sticker->save();
               }
@@ -267,7 +267,7 @@ class ItemController extends Controller
             'positonY' => 'top',
             'positonX' => 'right'
             ]);
-                
+
 
         if ($model->load(Yii::$app->request->post())) {
             $cart = Yii::$app->cart;

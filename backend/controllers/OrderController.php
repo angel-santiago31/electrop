@@ -3,8 +3,10 @@
 namespace backend\controllers;
 
 use Yii;
+use backend\models\Item;
 use backend\models\Order;
 use backend\models\OrderSearch;
+use backend\models\Contains;
 use backend\models\ContainsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -134,10 +136,10 @@ class OrderController extends Controller
                             ]
                         ]
                 ]);
-        } 
+        }
 
-        
-        
+
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -155,7 +157,7 @@ class OrderController extends Controller
 
         $searchModel = new ContainsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $order->order_number);
-        
+
         $sql ="SELECT * FROM order WHERE id = $id\n\nSELECT * FROM contains WHERE order_number = $id";
                  Yii::$app->getSession()->setFlash('success', [
                     'type' => 'success',
@@ -203,8 +205,8 @@ class OrderController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            
-            $sql ="UPDATE order SET \norder_status = $model->order_status\n WHERE id = $model->id";
+
+            $sql ="UPDATE order SET \norder_status = $model->order_status\n WHERE id = $model->order_number";
                  Yii::$app->getSession()->setFlash('success', [
                     'type' => 'success',
                     'duration' => 5000,
@@ -215,6 +217,28 @@ class OrderController extends Controller
                     'positonY' => 'top',
                     'positonX' => 'right'
                 ]);
+
+            if ($model->order_status == Order::SHIPPED) {
+                $orderItems = Contains::find(['order_number' => $model->order_number])->all();
+                foreach($orderItems as $sticker) {
+                    //decrease inventory quantity
+                    $item = Item::findOne($sticker->item_id);
+                    $item->quantity_remaining -= $sticker->quantity_in_order;
+                    $item->save();
+
+                    $query ="UPDATE item SET quantity_remaining = $item->quantity_remaining WHERE id = $sticker->item_id";
+                    Yii::$app->getSession()->setFlash('updated', [
+                       'type' => 'success',
+                       'duration' => 5000,
+                       'icon' => 'glyphicon glyphicon-ok-sign',
+                       'title' => 'Query',
+                       'showSeparator' => true,
+                       'message' => $query,
+                       'positonY' => 'top',
+                       'positonX' => 'right'
+                   ]);
+                }
+            }
 
             return $this->redirect(['view', 'id' => $model->order_number]);
         } else {

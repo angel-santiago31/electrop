@@ -98,7 +98,7 @@ AppAsset::register($this);
                         //'heading' => 'Options',
                         'items' => [
                             [
-                                'url' => ['#'],
+                                'url' => ['customer/index'],
                                 'label' => 'Users',
                                 'icon' => 'user',
                                 'items' => [
@@ -107,7 +107,7 @@ AppAsset::register($this);
                                 ],
                             ],
                             [
-                                'url' => ['#'],
+                                'url' => ['admin/index'],
                                 'label' => 'Admins',
                                 'icon' => 'user',
                                 'items' => [
@@ -116,7 +116,7 @@ AppAsset::register($this);
                                 ],
                             ],
                             [
-                                'url' => ['product/index'],
+                                'url' => ['item/index'],
                                 'label' => 'Inventory',
                                 'icon' => 'inbox',
                                 'items' => [
@@ -131,6 +131,7 @@ AppAsset::register($this);
                             ],
                             [
                                 'label' => 'Reports',
+                                'url' => ['reports/index'],
                                 'icon' => 'file',
                                 'items' => [
                                     ['label' => 'View All', 'url'=> Url::to(['reports/index'])],

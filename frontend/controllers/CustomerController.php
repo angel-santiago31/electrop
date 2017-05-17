@@ -72,7 +72,9 @@ class CustomerController extends Controller
     public function actionAccount($id)
     {
         $customer = $this->findModel($id);
-
+        echo '<pre>';
+        var_dump($customer);
+        //die(1);
         $sql ="SELECT * FROM customer WHERE id = $id";
         Yii::$app->getSession()->setFlash('success', [
             'type' => 'success',
@@ -85,7 +87,9 @@ class CustomerController extends Controller
             ]);
 
         $customer_phone = $this->findPhone($customer->id);
-
+        echo '<pre>';
+        var_dump($customer_phone);
+        //die(2);
         $statement ="SELECT * FROM phone_number WHERE customer_id = $customer->id";
         Yii::$app->getSession()->setFlash('phone_success', [
             'type' => 'success',
@@ -98,6 +102,9 @@ class CustomerController extends Controller
             ]);
 
         $customer_shipping_address = $this->findShippingAddress($customer->id);
+        echo '<pre>';
+        var_dump($customer_shipping_address);
+        //die(3);
 
         $sql_statement ="SELECT * FROM shipping_address WHERE customer_id = $customer->id";
         Yii::$app->getSession()->setFlash('shipping_success', [
@@ -109,7 +116,11 @@ class CustomerController extends Controller
             'positonY' => 'top',
             'positonX' => 'right'
             ]);
+
         $customer_payment_method = $this->findPaymentMethod($customer->id);
+        echo '<pre>';
+        var_dump($customer_payment_method);
+        die(4);
 
         $query_statement ="SELECT * FROM payment_method WHERE customer_id = $customer->id";
         Yii::$app->getSession()->setFlash('payment_success', [
@@ -146,6 +157,7 @@ class CustomerController extends Controller
             'payment_method' => $customer_payment_method,
             'orders' => $orders,
         ]);
+       
     }
 
     /**
@@ -424,7 +436,10 @@ class CustomerController extends Controller
      */
     protected function findPaymentMethod($id)
     {
+        echo ("inside");
         if (($model = PaymentMethod::findOne($id)) !== null) {
+            var_dump($model);
+            die("f i n d i n g  . . . ");
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

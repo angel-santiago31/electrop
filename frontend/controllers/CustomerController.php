@@ -71,9 +71,9 @@ class CustomerController extends Controller
      */
     public function actionAccount($id)
     {
-        $customer = $this->findModel($id);
-        echo '<pre>';
-        var_dump($customer);
+        // $customer = $this->findModel($id);
+        // echo '<pre>';
+        // var_dump($customer);
         //die(1);
         $sql ="SELECT * FROM customer WHERE id = $id";
         Yii::$app->getSession()->setFlash('success', [
@@ -87,8 +87,8 @@ class CustomerController extends Controller
             ]);
 
         $customer_phone = $this->findPhone($customer->id);
-        echo '<pre>';
-        var_dump($customer_phone);
+        // echo '<pre>';
+        // var_dump($customer_phone);
         //die(2);
         $statement ="SELECT * FROM phone_number WHERE customer_id = $customer->id";
         Yii::$app->getSession()->setFlash('phone_success', [
@@ -101,9 +101,9 @@ class CustomerController extends Controller
             'positonX' => 'right'
             ]);
 
-        $customer_shipping_address = $this->findShippingAddress($customer->id);
-        echo '<pre>';
-        var_dump($customer_shipping_address);
+        // $customer_shipping_address = $this->findShippingAddress($customer->id);
+        // echo '<pre>';
+        // var_dump($customer_shipping_address);
         //die(3);
 
         $sql_statement ="SELECT * FROM shipping_address WHERE customer_id = $customer->id";
@@ -117,10 +117,10 @@ class CustomerController extends Controller
             'positonX' => 'right'
             ]);
 
-        $customer_payment_method = $this->findPaymentMethod($customer->id);
-        echo '<pre>';
-        var_dump($customer_payment_method);
-        die(4);
+        // $customer_payment_method = $this->findPaymentMethod($customer->id);
+        // echo '<pre>';
+        // var_dump($customer_payment_method);
+        // die(4);
 
         $query_statement ="SELECT * FROM payment_method WHERE customer_id = $customer->id";
         Yii::$app->getSession()->setFlash('payment_success', [

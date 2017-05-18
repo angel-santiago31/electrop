@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
         [
            'label'=>'<i class="fa fa-credit-card"></i> Payment',
-           'content'=> $this->render('_paymentMethod', ['payment_method' => $payment_method, 'id' => $model->id]),
+           'content'=> $this->render('_paymentMethod', ['payment_method' => $payment_method, 'cards' => $cards,'model' => $model, 'id' => $model->id]),
            'active'=>false,
            //'linkOptions'=>['data-url'=>\yii\helpers\Url::to(['/default/solicitar-transcripcion'])],
         ],

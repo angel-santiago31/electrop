@@ -21,6 +21,7 @@ class AppAsset extends AssetBundle
         'js/modal.js',
         'js/modalPhone.js',
         'js/modalPayment.js',
+        'js/modalNewPayment.js',
         'js/modalAddress.js'
     ];
     public $depends = [

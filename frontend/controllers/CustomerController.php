@@ -11,6 +11,7 @@ use yii\filters\VerbFilter;
 use backend\models\PhoneNumber;
 use backend\models\ShippingAddress;
 use backend\models\PaymentMethod;
+use backend\models\PaymentMethodSearch;
 use backend\models\Order;
 use backend\models\OrderSearch;
 use backend\models\Contains;
@@ -71,7 +72,7 @@ class CustomerController extends Controller
      */
     public function actionAccount($id)
     {
-        // $customer = $this->findModel($id);
+        $customer = $this->findModel($id);
         // echo '<pre>';
         // var_dump($customer);
         //die(1);
@@ -101,7 +102,7 @@ class CustomerController extends Controller
             'positonX' => 'right'
             ]);
 
-        // $customer_shipping_address = $this->findShippingAddress($customer->id);
+        $customer_shipping_address = $this->findShippingAddress($customer->id);
         // echo '<pre>';
         // var_dump($customer_shipping_address);
         //die(3);
@@ -117,10 +118,13 @@ class CustomerController extends Controller
             'positonX' => 'right'
             ]);
 
-        // $customer_payment_method = $this->findPaymentMethod($customer->id);
+        $customer_payment_method = $this->findPaymentMethod($customer->id);
         // echo '<pre>';
         // var_dump($customer_payment_method);
         // die(4);
+        $searchModelPay = new PaymentMethodSearch();
+
+        $cards = $searchModelPay->search(Yii::$app->request->queryParams, $customer->id);
 
         $query_statement ="SELECT * FROM payment_method WHERE customer_id = $customer->id";
         Yii::$app->getSession()->setFlash('payment_success', [
@@ -150,12 +154,14 @@ class CustomerController extends Controller
 
         $orders->pagination->pageSize = 4;
 
+    
         return $this->render('account', [
             'model' => $customer,
             'phone' => $customer_phone,
             'shipping_address' => $customer_shipping_address,
             'payment_method' => $customer_payment_method,
             'orders' => $orders,
+            'cards' => $cards,
         ]);
        
     }
@@ -286,7 +292,9 @@ class CustomerController extends Controller
     public function actionUpdatePayment($id)
     {
         $model = $this->findPaymentMethod($id);
-
+        // echo '<pre>';
+        // var_dump($model);
+        // die("f i n d i n g  . . . ");
         $sql ="SELECT * FROM payment_method WHERE customer_id = $id";
          Yii::$app->getSession()->setFlash('searching', [
                 'type' => 'success',
@@ -299,7 +307,7 @@ class CustomerController extends Controller
                 'positonX' => 'right'
             ]);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+       if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
             $que ="UPDATE payment_method SET card_last_digits = $model->card_last_digits, \nexp_date = $model->exp_date, \ncard_type = $model->card_type\n WHERE customer_id = $id";
                  Yii::$app->getSession()->setFlash('payment', [
@@ -318,6 +326,40 @@ class CustomerController extends Controller
 
             return $this->renderAjax('_updatePayment', [
                 'model' => $model,
+            ]);
+        }
+    }
+    /**
+     * Updates an existing Customer Payment Method model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionAddPayment()
+    {
+        // $customer = $this->findModel($id);
+        $newCard = new PaymentMethod();
+
+        if ($newCard->load(Yii::$app->request->post()) && $newCard->save()) {
+
+            // $que ="UPDATE payment_method SET card_last_digits = $model->card_last_digits, \nexp_date = $model->exp_date, \ncard_type = $model->card_type\n WHERE customer_id = $id";
+            // $sql ="INSERT INTO item(id,name,\npicture,quantity_remaining,\nsize,gross_price,\nproduction_cost,description,\nitem_category_id,\nitem_sub_category_id,\nactive) VALUES \n($model->id,$model->name, \n$model->picture, \n$model->quantity_remaining,$model->size, \n$model->gross_price,$model->production_cost, \n$model->description,\n$model->item_category_id, $model->item_sub_category_id, $model->active)";
+            //      Yii::$app->getSession()->setFlash('payment', [
+            //         'type' => 'success',
+            //         'duration' => 5005,
+            //         'icon' => 'glyphicon glyphicon-ok-sign',
+            //         'title' => 'Query',
+            //         'showSeparator' => true,
+            //         'message' => $que,
+            //         'positonY' => 'top',
+            //         'positonX' => 'right'
+            //     ]);
+
+            return $this->redirect(['account', 'id' => $newCard->customer_id]);
+        } else {
+
+            return $this->renderAjax('_addPayment', [
+                'newCard' => $newCard,
             ]);
         }
     }
@@ -436,10 +478,12 @@ class CustomerController extends Controller
      */
     protected function findPaymentMethod($id)
     {
-        echo ("inside");
+        // $sql = PaymentMethod::find()->where([ '>', 'order_date', $fromDate])->One();
+        // echo '<pre>';
+        // var_dump($id);
+        // die("f i n d i n g  . . . ");
         if (($model = PaymentMethod::findOne($id)) !== null) {
-            var_dump($model);
-            die("f i n d i n g  . . . ");
+            
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

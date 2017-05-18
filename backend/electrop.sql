@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.5.5-10.1.21-MariaDB)
 # Database: electrop
-# Generation Time: 2017-05-17 21:38:40 +0000
+# Generation Time: 2017-05-18 23:39:33 +0000
 # ************************************************************
 
 
@@ -127,7 +127,8 @@ VALUES
 	(21,'erick@123.com','$2y$13$sRfmqs5.7yaA7pm9nK/rLutYBq5sDv.LLBtL0VRqV0hLx8Phtj9He','Erick',NULL,'Rivera','Cruz','12-06-1995',NULL,'Py8Esw4z4o9OzJWu_84RXsGM00OvWPbL',NULL,10,1492808315,1492808315,0),
 	(22,'juanito@piringo.com','$2y$13$iwfZlKFJ/o0isMBZysl2auFbpFBxqQQVUCQinZtxe3i1pbeJipDaW','Juanito',NULL,'Piringo','Piringa','01-01-2000',17,'YxJ7Qol0RePieA_PgVfUke0ApKxzaTmp',NULL,10,1493771198,1493771198,0),
 	(23,'ceratin@gustavin.tech','$2y$13$pKn4r0VI5hDdsagW3chJxOMVKVkUc73EsG03lqFVBSnnbZnn/TN9.','Benjamin',NULL,'Frankiln','Rivera','01-05-2015',2,'iM1pKHAz8WAKxvoO-TYo-1jxCuZHWmnm',NULL,10,1493771402,1493771402,0),
-	(24,'testing@email.com','$2y$13$LnGOFk4auchB023OAWlFXOuztuHPdsJt4PFwo3M40pJkbTUWPuUwy','Usuario','de','Prueba','erick','14-05-1990',26,'bk7pmLvrT6kq8T40gENUgxHW-2Mb0sxZ',NULL,10,1494537734,1494537734,0);
+	(24,'testing@email.com','$2y$13$LnGOFk4auchB023OAWlFXOuztuHPdsJt4PFwo3M40pJkbTUWPuUwy','Usuario','de','Prueba','erick','14-05-1990',26,'bk7pmLvrT6kq8T40gENUgxHW-2Mb0sxZ',NULL,10,1494537734,1494537734,0),
+	(25,'pepo@pepo.com','$2y$13$cwFjrfAd7iw/qY7h7XaiJOYUfCULRdI2q2YIJcfxfoMFaNDkJGkOC','pepo','pepito','pepin','pepote','30-03-2000',17,'_9JxShzB_fR7x6LvumgpYn1FZkADEhUZ',NULL,10,1495058533,1495058533,0);
 
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -340,12 +341,10 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `payment_method`;
 
 CREATE TABLE `payment_method` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `customer_id` int(11) NOT NULL,
   `card_last_digits` varchar(4) NOT NULL DEFAULT '',
   `exp_date` varchar(5) NOT NULL DEFAULT '',
   `card_type` varchar(32) NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`),
   KEY `customer_id` (`customer_id`),
   CONSTRAINT `payment_method_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -353,15 +352,17 @@ CREATE TABLE `payment_method` (
 LOCK TABLES `payment_method` WRITE;
 /*!40000 ALTER TABLE `payment_method` DISABLE KEYS */;
 
-INSERT INTO `payment_method` (`id`, `customer_id`, `card_last_digits`, `exp_date`, `card_type`)
+INSERT INTO `payment_method` (`customer_id`, `card_last_digits`, `exp_date`, `card_type`)
 VALUES
-	(1,14,'1111','20/20','Visa'),
-	(2,14,'1234','20/21','Visa'),
-	(3,19,'1234','05/18','Visa'),
-	(4,20,'2345','08/19','American Express'),
-	(5,21,'5322','07/22','Visa'),
-	(6,21,'3223','12/22','American Express'),
-	(7,24,'1234','0222','Master card');
+	(14,'1111','20/20','Visa'),
+	(14,'1234','20/21','Visa'),
+	(19,'1234','05/18','Visa'),
+	(20,'2345','08/19','American Express'),
+	(21,'5322','07/22','Visa'),
+	(21,'3223','12/22','American Express'),
+	(24,'1234','0222','Master card'),
+	(25,'1212','1212','Visa'),
+	(25,'1234','1244','Master Card');
 
 /*!40000 ALTER TABLE `payment_method` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -421,7 +422,8 @@ VALUES
 	(21,'123-123-1123'),
 	(22,'8778878788'),
 	(23,'1111111111'),
-	(24,'0000000000');
+	(24,'0000000000'),
+	(25,'1212121212');
 
 /*!40000 ALTER TABLE `phone_number` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -530,7 +532,8 @@ VALUES
 	(21,'Barrio Loiza ',123,'00123','AL'),
 	(22,'La esquinita Famosa',69,'00234','AR'),
 	(23,'Uno dos',12,'12121','AK'),
-	(24,'jejejeje',123,'12345','PR');
+	(24,'jejejeje',123,'12345','PR'),
+	(25,'prrrraaaa',23,'99883','AL');
 
 /*!40000 ALTER TABLE `shipping_address` ENABLE KEYS */;
 UNLOCK TABLES;

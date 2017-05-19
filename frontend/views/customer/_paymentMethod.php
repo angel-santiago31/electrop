@@ -14,10 +14,10 @@ use yii\grid\GridView;
 
 ?>
 <?php Pjax::begin(); ?>
-    <?php 
-        echo '<pre>';
-        var_dump($cards);
-        die(4);
+    <!--<?php 
+        // echo '<pre>';
+        // var_dump($cards);
+        // die(4);
     //     if(!empty($payment_method))
     // {
     //     foreach ($payment_method as $payment)
@@ -29,7 +29,7 @@ use yii\grid\GridView;
     //     }
         
     // }
-     ?>
+     ?>-->
      <?= Html::button('<i class="glyphicon glyphicon-plus"></i> Add a Card',
                     ['value' => Url::to(['add-payment']),
                      'class' => 'btn btn-default pull-right', 'id' => 'addPayment']); ?>
@@ -45,7 +45,7 @@ use yii\grid\GridView;
             'label' => 'More',
             'format' => 'html',
             'value' => function ($cards) {
-                return Html::a('<i class="glyphicon glyphicon-pencil"></i> Update', ['update-payment', 'id' => $cards->customer_id], ['class' => 'btn btn-xs btn-danger redCss', 'id' => 'updatePayment']);
+                return Html::a('<i class="glyphicon glyphicon-pencil"></i> Update', ['update-payment', 'id' => $cards->customer_id, 'numbers' => $cards->card_last_digits], ['class' => 'btn btn-xs btn-danger redCss', 'id' => 'updatePayment']);
             }
         ],
     ],

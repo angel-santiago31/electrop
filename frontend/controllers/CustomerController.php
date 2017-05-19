@@ -289,12 +289,14 @@ class CustomerController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdatePayment($id)
+    public function actionUpdatePayment($id, $numbers)
     {
-        $model = $this->findPaymentMethod($id);
+        $model = $this->findPaymentMethod2($id, $numbers);
+
         // echo '<pre>';
         // var_dump($model);
         // die("f i n d i n g  . . . ");
+
         $sql ="SELECT * FROM payment_method WHERE customer_id = $id";
          Yii::$app->getSession()->setFlash('searching', [
                 'type' => 'success',
@@ -478,11 +480,32 @@ class CustomerController extends Controller
      */
     protected function findPaymentMethod($id)
     {
-        // $sql = PaymentMethod::find()->where([ '>', 'order_date', $fromDate])->One();
+        // $sql = PaymentMethod::find()->where([ '==', 'customer_id', $id])->andWhere([ '==', 'card_last_digits', $numbers])->One();
         // echo '<pre>';
         // var_dump($id);
         // die("f i n d i n g  . . . ");
         if (($model = PaymentMethod::findOne($id)) !== null) {
+            
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+    /**
+     * Finds the Customer's payment method model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return Customer's phone number the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findPaymentMethod2($id, $numbers)
+    {
+        //$sql = PaymentMethod::find()->where([ '==', 'customer_id', $id])->andWhere([ '==', 'card_last_digits', $numbers])->One();
+        // echo '<pre>';
+        // var_dump($id);
+        // die("f i n d i n g  . . . ");
+        if (($model = PaymentMethod::find()->where([ '=', 'customer_id', $id])->andWhere([ '=', 'card_last_digits', $numbers])->One()) !== null) {
             
             return $model;
         } else {

@@ -31,7 +31,7 @@ use yii\grid\GridView;
     // }
      ?>-->
      <?= Html::button('<i class="glyphicon glyphicon-plus"></i> Add a Card',
-                    ['value' => Url::to(['add-payment']),
+                    ['value' => Url::to(['add-payment', 'id' => $id]),
                      'class' => 'btn btn-default pull-right', 'id' => 'addPayment']); ?>
     <br>
     <br>

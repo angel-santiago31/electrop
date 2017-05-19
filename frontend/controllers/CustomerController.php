@@ -337,12 +337,23 @@ class CustomerController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionAddPayment()
+    public function actionAddPayment($id)
     {
-        // $customer = $this->findModel($id);
+        $customer = $this->findModel($id);
         $newCard = new PaymentMethod();
 
-        if ($newCard->load(Yii::$app->request->post()) && $newCard->save()) {
+        // echo '<pre>';
+        // var_dump($customer);
+        // die("f i n d i n g  . . . ");
+
+        if ($newCard->load(Yii::$app->request->post())) {
+            $newCard->customer_id = $customer->id;
+            // echo '<pre>';
+            // var_dump($newCard);
+            // die("f i n d i n g  . . . ");
+            if($newCard->save()) {
+                return $this->redirect(['account', 'id' => $newCard->customer_id]);
+            } 
 
             // $que ="UPDATE payment_method SET card_last_digits = $model->card_last_digits, \nexp_date = $model->exp_date, \ncard_type = $model->card_type\n WHERE customer_id = $id";
             // $sql ="INSERT INTO item(id,name,\npicture,quantity_remaining,\nsize,gross_price,\nproduction_cost,description,\nitem_category_id,\nitem_sub_category_id,\nactive) VALUES \n($model->id,$model->name, \n$model->picture, \n$model->quantity_remaining,$model->size, \n$model->gross_price,$model->production_cost, \n$model->description,\n$model->item_category_id, $model->item_sub_category_id, $model->active)";

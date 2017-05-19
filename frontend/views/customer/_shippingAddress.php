@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 use yii\widgets\Pjax;
 use yii\helpers\Url;
+use yii\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\modules\registraduria\models\TranscripcionSearch */
@@ -13,17 +14,28 @@ use yii\helpers\Url;
 
 ?>
 <?php Pjax::begin(); ?>
-    <?= DetailView::widget([
-        'model' => $shipping_address,
-        'attributes' => [
-            'street_name',
-            'apt_number',
-            'zipcode',
-            'state',
-        ],
-    ]) ?>
 
-    <?= Html::button('<i class="glyphicon glyphicon-pencil"></i> Update',
-                    ['value' => Url::to(['update-address', 'id' => $id]),
-                     'class' => 'btn btn-danger pull-right redCss', 'id' => 'updateAdress']); ?>
+    <?= Html::button('<i class="glyphicon glyphicon-plus"></i> Add new Address',
+                    ['value' => Url::to(['add-address', 'id' => $id]),
+                     'class' => 'btn btn-default pull-right', 'id' => 'addAddress']); ?>
+    <br>
+    <br>
+   <?= GridView::widget([
+    'dataProvider' => $address,
+    'columns' => [
+        'street_name',
+        'apt_number',
+        'zipcode',
+        'state',
+        [
+            'label' => 'More',
+            'format' => 'html',
+            'value' => function ($address) {
+                return Html::a('<i class="glyphicon glyphicon-pencil"></i> Update', ['update-address', 'id' => $address->customer_id, 'street' => $address->street_name], ['class' => 'btn btn-xs btn-danger redCss', 'id' => 'updateAdress']);
+            }
+        ],
+    ],
+]) ?>
+
+   
 <?php Pjax::end(); ?>

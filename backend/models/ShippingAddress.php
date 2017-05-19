@@ -56,6 +56,15 @@ class ShippingAddress extends \yii\db\ActiveRecord
     }
 
     /**
+     * @return primary key for the table (hace que corra aún cuando en la tabla no tenemos un PK)
+     */
+    public static function primaryKey()
+    {
+        return ['customer_id'];
+    }
+
+
+    /**
      * @return \yii\db\ActiveQuery
      */
     public function getCustomer()

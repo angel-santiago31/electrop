@@ -50,8 +50,6 @@ use yii\grid\GridView;
         ],
     ],
 ]) ?>
-<!--<?= Html::button('<i class="glyphicon glyphicon-pencil"></i> Update',
-                    ['value' => Url::to(['update-payment', 'id' => $id]),
-                     'class' => 'btn btn-danger pull-right redCss', 'id' => 'updatePayment']); ?>-->
+
  
 <?php Pjax::end(); ?>

@@ -22,7 +22,8 @@ class AppAsset extends AssetBundle
         'js/modalPhone.js',
         'js/modalPayment.js',
         'js/modalNewPayment.js',
-        'js/modalAddress.js'
+        'js/modalAddress.js',
+        'js/modalNewAddress.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',

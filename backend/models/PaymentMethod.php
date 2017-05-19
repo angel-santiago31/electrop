@@ -59,7 +59,9 @@ class PaymentMethod extends \yii\db\ActiveRecord
     {
         return ['customer_id'];
     }
-
+    /**
+     * @return counting of the amount of cards the customer haves 
+     */
      public function getQuantity()
     {
         return $this->find()->all()->count();

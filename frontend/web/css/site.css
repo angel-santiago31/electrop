@@ -18,8 +18,12 @@ body {
 }
 
 .redCss {
-  margin-top: 20px;
   background-color: #ff1100;
+}
+
+.redCssConfirmButton {
+    margin-top: 20px;
+    background-color: #ff1100;
 }
 
 #hov {

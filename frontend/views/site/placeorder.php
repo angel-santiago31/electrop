@@ -69,7 +69,7 @@ $this->title = 'Checkout';
                                         ['prompt'=>' -- Select --'])->label(false); ?>
                 <?php echo $form->field($model, 'payment_method')->hiddenInput(['id' => 'payment_field'])->label(false); ?>
             <div class="form-group">
-                <?= Html::submitButton('<i class="fa fa-check-circle"></i> Confirm Order', ['class' => 'btn btn-primary btn-danger redCss center-block', 'id' => 'submit-order', 'name' => 'Submit Order']) ?>
+                <?= Html::submitButton('<i class="fa fa-check-circle"></i> Confirm Order', ['class' => 'btn btn-primary btn-danger redCssConfirmButton center-block', 'id' => 'submit-order', 'name' => 'Submit Order']) ?>
             </div>
             <?php $form = ActiveForm::end(); ?>
         </div>

@@ -19,7 +19,11 @@ use backend\models\PaymentMethod;
 use backend\models\PaymentMethodSearch;
 use common\models\Customer;
 use backend\models\ShippingAddress;
-
+use backend\models\ShippingAddressSearch;
+use yii\helpers\ArrayHelper;
+use backend\models\Order;
+use backend\models\Contains;
+use backend\models\Shipper;
 
 /**
  * Site controller
@@ -121,11 +125,18 @@ class SiteController extends Controller
 
     public function actionPlaceorder() 
     {
+
+        $card = '';
+
+        /*
+            Get the current customer.
+        */
         $customer = $this->findModel(Yii::$app->user->identity->getId());
+
+        /*
+            Get the current customer's payment methods (credit cards).
+        */
         $customer_payment_method = $this->findPaymentMethod($customer->id);
-        // echo '<pre>';
-        // var_dump($customer_payment_method);
-        // die(4);
         $searchModelPay = new PaymentMethodSearch();
 
         $cards = $searchModelPay->search(Yii::$app->request->queryParams, $customer->id);
@@ -141,10 +152,18 @@ class SiteController extends Controller
             'positonX' => 'right'
             ]);
 
+         /*
+            Get the current customer's shipping addresses.
+        */
+
         $customer_shipping_address = $this->findShippingAddress($customer->id);
-        // echo '<pre>';
-        // var_dump($customer_shipping_address);
-        //die(3);
+        $sql = "SELECT *
+                FROM `shipping_address`
+                WHERE customer_id = " . $customer->id;
+
+        $address = ShippingAddress::findBySql($sql)->all();
+
+        $value = ArrayHelper::map($address, 'street_name', 'street_name');
 
         $sql_statement ="SELECT * FROM shipping_address WHERE customer_id = $customer->id";
         Yii::$app->getSession()->setFlash('shipping_success', [
@@ -157,7 +176,87 @@ class SiteController extends Controller
             'positonX' => 'right'
             ]);
 
-        return $this->render('placeorder', ['payment_method' => $customer_payment_method, 'cards' => $cards, 'model' => $customer, 'customer_shipping_address' => $customer_shipping_address ]);
+         /*
+            Create a new Order.
+        */
+
+        //create order
+          $order = new Order();
+
+        if($order->load(Yii::$app->request->post())) 
+        {
+            
+            $order->amount_stickers = Yii::$app->cart->getCount();
+            $order->total_price = Yii::$app->cart->getCost();
+            $order->order_status = Order::PENDING;
+            $order->customer_id = Yii::$app->user->identity->id;
+            $order->shipper_company_name = Shipper::UPS;
+            $order->tracking_number = rand(1000,9000);
+
+            $sql_statement ="INSERT INTO order(order_number, order_date, \namount_stickers, total_price, \norder_status, customer_id, \nshipper_company_name, tracking_number, \npayment_method, shipping_address) VALUES($order->order_number, $order->order_date, \n$order->amount_stickers, $order->total_price, \n$order->order_status, $order->customer_id, \n$order->shipper_company_name, $order->tracking_number, $order->payment_method, $order->shipping_address)";
+                 Yii::$app->getSession()->setFlash('creating', [
+                    'type' => 'success',
+                    'duration' => 5000,
+                    'icon' => 'glyphicon glyphicon-ok-sign',
+                    'title' => 'Query',
+                    'showSeparator' => true,
+                    'message' => $sql_statement,
+                    'positonY' => 'top',
+                    'positonX' => 'right'
+                ]);
+
+            if ($order->save()) {
+              //asociate items to created order
+              $positions = Yii::$app->cart->positions;
+
+              foreach($positions as $position) {
+                  $sticker = new Contains();
+                  $sticker->order_number = $order->order_number;
+                  $sticker->item_id = $position->id;
+                  $sticker->price_sold = $position->gross_price;
+                  $sticker->quantity_in_order = $position->quantity;
+
+                  $sql_query ="INSERT INTO contains(order_number, item_id, \nprice_sold, quantity_in_order) VALUES($sticker->order_number, $sticker->item_id , \n$sticker->price_sold , $sticker->quantity_in_order)";
+                  Yii::$app->getSession()->setFlash('created', [
+                     'type' => 'success',
+                     'duration' => 5000,
+                     'icon' => 'glyphicon glyphicon-ok-sign',
+                     'title' => 'Query',
+                     'showSeparator' => true,
+                     'message' => $sql_query,
+                     'positonY' => 'top',
+                     'positonX' => 'right'
+                  ]);
+                  $sticker->save();
+              }
+
+              Yii::$app->cart->removeAll();
+              Yii::$app->getSession()->setFlash('success', [
+                    'type' => 'success',
+                    'duration' => 5000,
+                    'icon' => 'glyphicon glyphicon-ok-sign',
+                    'title' => 'YASS!',
+                    'message' => 'Your order was placed successfully!',
+                    'positonY' => 'top',
+                    'positonX' => 'right'
+                    ]);
+              return $this->redirect(['customer/view-order', 'id' => $order->order_number, 'user' => $customer->id]);
+          }
+
+          Yii::$app->getSession()->setFlash('warning', [
+                    'type' => 'warning',
+                    'duration' => 5000,
+                    'icon' => 'glyphicon glyphicon-ok-sign',
+                    'title' => 'WARNING',
+                    'message' => 'Your order could not be placed. Please try again or contact our administrators.',
+                    'positonY' => 'top',
+                    'positonX' => 'right'
+                    ]);
+            return $this->redirect(['placeorder']);
+        }
+
+
+        return $this->render('placeorder', ['payment_method' => $customer_payment_method, 'cards' => $cards, 'model' => $order, 'shipping_address' => $customer_shipping_address, 'address' => $address, 'value' => $value]);
     }
 
     public function actionStickers($category = NULL, $subcategory = NULL)

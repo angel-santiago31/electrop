@@ -1,8 +1,13 @@
 $(document).ready(function(){
+    var chk;
     $("#grid input[type=radio]").click(function(){
-        var keys = $('#grid').yiiGridView('getSelectedRows');
-        var chk = this.child;
-        console.log(keys);
-        console.log(chk);
+        chk = this.value;
     });
+
+    $("#submit-order").click(function(){
+        var data = { checked: chk };
+
+        $("#payment_field").val(chk);
+    });
+
 });

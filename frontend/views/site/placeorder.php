@@ -12,21 +12,13 @@ use kartik\tabs\TabsX;
 use yii\grid\GridView;
 use backend\models\Order;
 
+$select;
+
 $this->title = 'Checkout';
 ?>
 
 <?php 
-    $payment_method_items = [
-        ['label'=>'<i class="fa fa-credit-card"></i> Payment Method',
-        'content'=> $this->render('_paymentMethod', ['payment_method' => $payment_method, 'cards' => $cards,'model' => $model, 'id' => $model->id]),
-        'active'=>false]
-    ];
-
-    $shipping_address_items = [
-        ['label'=>'<i class="fa fa-credit-card"></i> Shipping Address',
-        'content'=> $this->render('_shippingAddress', ['customer_shipping_address' => $customer_shipping_address]),
-        'active'=>false]
-    ];
+    $card_selected = '';
 ?>
 
 <div class="container">
@@ -40,22 +32,50 @@ $this->title = 'Checkout';
   </div>
   <div class="col-sm-6">
     <div class="panel panel-default">
-          <?php echo TabsX::widget([
-                      'items'=>$payment_method_items,
-                      'position'=>TabsX::POS_ABOVE,
-                      'encodeLabels'=>false
-                  ]);
-            ?>
+        <div class="panel-heading">
+            <h3>Select your payment method</h3>
+        </div>
+        <div class="panel-body">
+            <?= GridView::widget([
+                    'dataProvider' => $cards,
+                    'id' => 'grid',
+                    'columns' => [
+                        'card_last_digits',
+                        'exp_date',
+                        'card_type',
+                        [
+                            'header' => 'Select',
+                            'class' => 'yii\grid\RadioButtonColumn',
+                            'radioOptions' => function($model, $key, $index, $column) {
+                                return [ 'value' => $model->card_last_digits ];
+                            }
+                        ]
+                    ],
+                ]) 
+
+                ?>
+        </div>
     </div>
   </div>
   <div class="col-sm-6">
     <div class="panel panel-default">
-          <?php echo TabsX::widget([
-                      'items'=>$shipping_address_items,
-                      'position'=>TabsX::POS_ABOVE,
-                      'encodeLabels'=>false
-                  ]);
-            ?>
+        <div class="panel-heading">
+            <h3>Select the shipping address</h3>
+        </div>
+        <div class="panel-body">
+            <?php $form = ActiveForm::begin(); ?>
+                <?php echo $form->field($model, 'shipping_address')->dropDownList(
+                                        $value,
+                                        ['prompt'=>' -- Select --'])->label(false); ?>
+                <?php echo $form->field($model, 'payment_method')->hiddenInput(['id' => 'payment_field'])->label(false); ?>
+            <div class="form-group">
+                <?= Html::submitButton('<i class="fa fa-check-circle"></i> Confirm Order', ['class' => 'btn btn-primary btn-danger redCss center-block', 'id' => 'submit-order', 'name' => 'Submit Order']) ?>
+            </div>
+            <?php $form = ActiveForm::end(); ?>
+        </div>
     </div>
   </div>
+ 
 </div>
+
+

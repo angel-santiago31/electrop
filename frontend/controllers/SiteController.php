@@ -15,6 +15,11 @@ use frontend\models\ContactForm;
 use backend\models\Item;
 use backend\models\ItemSearch;
 use kartik\growl\Growl;
+use backend\models\PaymentMethod;
+use backend\models\PaymentMethodSearch;
+use common\models\Customer;
+use backend\models\ShippingAddress;
+
 
 /**
  * Site controller
@@ -108,6 +113,51 @@ class SiteController extends Controller
             'stickerList' => $stickerList,
             'carousel' => $carousel,
         ]);
+    }
+
+     /**
+     * Action to show the payment method and shipping address selection before placing order.
+     */
+
+    public function actionPlaceorder() 
+    {
+        $customer = $this->findModel(Yii::$app->user->identity->getId());
+        $customer_payment_method = $this->findPaymentMethod($customer->id);
+        // echo '<pre>';
+        // var_dump($customer_payment_method);
+        // die(4);
+        $searchModelPay = new PaymentMethodSearch();
+
+        $cards = $searchModelPay->search(Yii::$app->request->queryParams, $customer->id);
+
+        $query_statement ="SELECT * FROM payment_method WHERE customer_id = $customer->id";
+        Yii::$app->getSession()->setFlash('payment_success', [
+            'type' => 'success',
+            'duration' => 5000,
+            'icon' => 'glyphicon glyphicon-ok-sign',
+            'title' => 'Query',
+            'message' => $query_statement,
+            'positonY' => 'top',
+            'positonX' => 'right'
+            ]);
+
+        $customer_shipping_address = $this->findShippingAddress($customer->id);
+        // echo '<pre>';
+        // var_dump($customer_shipping_address);
+        //die(3);
+
+        $sql_statement ="SELECT * FROM shipping_address WHERE customer_id = $customer->id";
+        Yii::$app->getSession()->setFlash('shipping_success', [
+            'type' => 'success',
+            'duration' => 5000,
+            'icon' => 'glyphicon glyphicon-ok-sign',
+            'title' => 'Query',
+            'message' => $sql_statement,
+            'positonY' => 'top',
+            'positonX' => 'right'
+            ]);
+
+        return $this->render('placeorder', ['payment_method' => $customer_payment_method, 'cards' => $cards, 'model' => $customer, 'customer_shipping_address' => $customer_shipping_address ]);
     }
 
     public function actionStickers($category = NULL, $subcategory = NULL)
@@ -421,6 +471,59 @@ class SiteController extends Controller
         return $this->render('resetPassword', [
             'model' => $model,
         ]);
+    }
+
+    /**
+     * Finds the Customer model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return Customer the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModel($id)
+    {
+        if (($model = Customer::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+    /**
+     * Finds the Customer's payment method model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return Customer's phone number the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findPaymentMethod($id)
+    {
+        // $sql = PaymentMethod::find()->where([ '==', 'customer_id', $id])->andWhere([ '==', 'card_last_digits', $numbers])->One();
+        // echo '<pre>';
+        // var_dump($id);
+        // die("f i n d i n g  . . . ");
+        if (($model = PaymentMethod::findOne($id)) !== null) {
+            
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+    /**
+     * Finds the Customer's payment method model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return Customer's phone number the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findShippingAddress($id)
+    {
+        if (($model = ShippingAddress::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
     }
 
 }

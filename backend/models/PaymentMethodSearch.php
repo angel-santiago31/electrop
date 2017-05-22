@@ -17,9 +17,9 @@ class PaymentMethodSearch extends PaymentMethod
      */
     public function rules()
     {
-        return [
-            [['customer_id'], 'integer'],
-            [['card_last_digits', 'exp_date', 'card_type'], 'safe'],
+         return [
+            [['customer_id', 'active'], 'integer'],
+            [['card_last_digits', 'exp_date', 'card_type', 'name', 'address', 'state', 'zipcode'], 'safe'],
         ];
     }
 
@@ -59,16 +59,21 @@ class PaymentMethodSearch extends PaymentMethod
             // $query->where('0=1');
             return $dataProvider;
         }
-
         // grid filtering conditions
         $query->andFilterWhere([
             'customer_id' => $this->customer_id,
+            'active' => $this->active,
         ]);
 
         $query->andFilterWhere(['like', 'card_last_digits', $this->card_last_digits])
             ->andFilterWhere(['like', 'exp_date', $this->exp_date])
-            ->andFilterWhere(['like', 'card_type', $this->card_type]);
+            ->andFilterWhere(['like', 'card_type', $this->card_type])
+            ->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['like', 'address', $this->address])
+            ->andFilterWhere(['like', 'state', $this->state])
+            ->andFilterWhere(['like', 'zipcode', $this->zipcode]);
 
         return $dataProvider;
+    }
     }
 }

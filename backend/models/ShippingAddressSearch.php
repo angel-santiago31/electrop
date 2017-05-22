@@ -18,7 +18,7 @@ class ShippingAddressSearch extends ShippingAddress
     public function rules()
     {
         return [
-            [['customer_id', 'apt_number'], 'integer'],
+            [['customer_id', 'apt_number', 'active'], 'integer'],
             [['street_name', 'zipcode', 'state'], 'safe'],
         ];
     }
@@ -62,10 +62,11 @@ class ShippingAddressSearch extends ShippingAddress
             return $dataProvider;
         }
 
-        // grid filtering conditions
+         // grid filtering conditions
         $query->andFilterWhere([
             'customer_id' => $this->customer_id,
             'apt_number' => $this->apt_number,
+            'active' => $this->active,
         ]);
 
         $query->andFilterWhere(['like', 'street_name', $this->street_name])

@@ -20,7 +20,9 @@ use yii\helpers\Url;
         ],
     ]) ?>
 
-    <?= Html::button('<i class="glyphicon glyphicon-pencil"></i> Update',
+    <!-- <?= Html::button('<i class="glyphicon glyphicon-pencil"></i> Update',
                     ['value' => Url::to(['update-phone', 'id' => $id]),
-                     'class' => 'btn btn-danger pull-right redCss', 'id' => 'updatePhoneNumber']); ?>
+                     'class' => 'btn btn-danger pull-right redCss', 'id' => 'updatePhoneNumber']); ?> -->
+
+    <?= Html::a('<i class="glyphicon glyphicon-send"></i> Update', ['update-phone', 'id' => $id], ['class' => 'btn btn-danger pull-right redCss']); ?>
 <?php Pjax::end(); ?>

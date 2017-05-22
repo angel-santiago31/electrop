@@ -123,7 +123,7 @@ class SiteController extends Controller
      * Action to show the payment method and shipping address selection before placing order.
      */
 
-    public function actionPlaceorder() 
+    public function actionPlaceorder()
     {
 
         $card = '';
@@ -181,11 +181,10 @@ class SiteController extends Controller
         */
 
         //create order
-          $order = new Order();
+        $order = new Order();
 
-        if($order->load(Yii::$app->request->post())) 
+        if($order->load(Yii::$app->request->post()))
         {
-            
             $order->amount_stickers = Yii::$app->cart->getCount();
             $order->total_price = Yii::$app->cart->getCost();
             $order->order_status = Order::PENDING;
@@ -602,7 +601,7 @@ class SiteController extends Controller
         // var_dump($id);
         // die("f i n d i n g  . . . ");
         if (($model = PaymentMethod::findOne($id)) !== null) {
-            
+
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

@@ -20,7 +20,7 @@ use yii\widgets\MaskedInput;
                                                                   'Visa' => 'Visa',
                                                                   'Master card' => 'Master Card',
                                                                   'American Exppress' => 'American Exppress',
-                                                                  ]) ?> 
+                                                                  ]) ?>
           </div>
           <div class="col-sm-6">
               <?= $form->field($newCard, 'exp_date')->widget(MaskedInput::className(),['mask' => '99/99', 'clientOptions' =>['removeMaskOnSubmit']])->textInput(['placeholder' => "MM/YY"]) ?>
@@ -28,7 +28,7 @@ use yii\widgets\MaskedInput;
       </div>
 
     <div class="form-group">
-        <?= Html::submitButton('<i class="glyphicon glyphicon-send"></i> Create', ['class' => 'btn btn-success  pull-right']) ?>
+        <?= Html::submitButton('<i class="glyphicon glyphicon-send"></i> Add', ['class' => 'btn btn-warning  redCss pull-right']) ?>
         <br>
     </div>
 

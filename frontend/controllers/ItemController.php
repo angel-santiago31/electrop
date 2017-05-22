@@ -100,7 +100,6 @@ class ItemController extends Controller
           }
 
           return $this->redirect(['site/placeorder']);
-          
      }
 
      /**

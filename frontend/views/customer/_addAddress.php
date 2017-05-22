@@ -19,7 +19,7 @@ use yii\widgets\MaskedInput;
           </div>
           <div class="col-sm-6">
               <?= $form->field($newAddress, 'zipcode')->widget(MaskedInput::className(),['mask' => '99999', 'clientOptions' =>['removeMaskOnSubmit']]) ?>
-              
+
               <?= $form->field($newAddress, 'state')->dropDownList([
                                                                   '' => '--Choose Option--',
                                                                   'AK' => 'AK',
@@ -79,7 +79,7 @@ use yii\widgets\MaskedInput;
       </div>
 
     <div class="form-group">
-        <?= Html::submitButton('<i class="glyphicon glyphicon-send"></i> Create', ['class' => 'btn btn-success  pull-right']) ?>
+        <?= Html::submitButton('<i class="glyphicon glyphicon-send"></i> Add', ['class' => 'btn btn-warning redCss  pull-right']) ?>
         <br>
     </div>
 

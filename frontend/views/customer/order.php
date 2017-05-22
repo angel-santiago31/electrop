@@ -45,8 +45,11 @@ $this->params['breadcrumbs'][] = $this->title;
                       ],
                       'shipper_company_name',
                       'tracking_number',
-                      'payment_method',
-                      'shipping_address'
+                      [
+                          'label' => 'Card Number',
+                          'attribute' => 'payment_method',
+                      ],
+                      'shipping_address',
                   ],
               ]) ?>
 

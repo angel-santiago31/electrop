@@ -33,7 +33,7 @@ class ShippingAddress extends \yii\db\ActiveRecord
     {
         return [
             [['customer_id', 'street_name', 'apt_number', 'zipcode', 'state'], 'required'],
-            [['customer_id', 'apt_number'], 'integer'],
+            [['customer_id', 'apt_number', 'active'], 'integer'],
             [['zipcode'], 'string'],
             [['street_name'], 'string', 'max' => 32],
             [['state'], 'string', 'max' => 2],
@@ -52,6 +52,7 @@ class ShippingAddress extends \yii\db\ActiveRecord
             'apt_number' => 'Apt Number',
             'zipcode' => 'Zipcode',
             'state' => 'State',
+            'active' => 'Active',
         ];
     }
 

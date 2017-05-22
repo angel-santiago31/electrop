@@ -13,7 +13,7 @@ use yii\grid\GridView;
 use backend\models\Order;
 
 $this->title = 'My Account';
-$this->params['breadcrumbs'][] = $this->title;
+//$this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <?php

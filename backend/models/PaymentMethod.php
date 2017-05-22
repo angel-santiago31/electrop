@@ -24,7 +24,7 @@ class PaymentMethod extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%payment_method}}';
+        return 'payment_method';
     }
 
     /**

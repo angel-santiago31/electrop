@@ -349,12 +349,17 @@ class CustomerController extends Controller
      */
     public function actionDeleteCard($id, $numbers)
     {
-        $model = $this->findPaymentMethod2($id, $numbers);
-        $model->active = PaymentMethod::STATUS_DELETED;
-        // echo '<pre>';
-        // var_dump($model);
-        // die("f i n d i n g  . . . ");
-        $model->save();
+        // $model = $this->findPaymentMethod2($id, $numbers);
+        $model = PaymentMethod::find()->where(['customer_id' => $id])->andWhere(['card_last_digits' => $numbers])->one();
+        //$model->active = PaymentMethod::STATUS_DELETED;
+            // echo '<pre>';
+            // var_dump($model);
+            // die("f i n d i n g  . . . ");
+        //$model->save(false);
+
+        $sql = "UPDATE payment_method SET active = 0  WHERE customer_id ='$id' AND card_last_digits = '$numbers'";
+        \Yii::$app->db->createCommand($sql)->execute();
+        
 
         $sql ="UPDATE paymet_method SET active = $model->active WHERE customer_id = $id AND WHERE card_last_digits = $numbers";
                  Yii::$app->getSession()->setFlash('success', [
@@ -477,10 +482,13 @@ class CustomerController extends Controller
      */
     public function actionDeleteAddress($id, $street)
     {
-        $model = $this->findShippingAddress2($id, $street);
+         $model = $this->findShippingAddress2($id, $street);
         
-        $model->active = ShippingAddress::STATUS_DELETED;
-        $model->save(false);
+        // $model->active = ShippingAddress::STATUS_DELETED;
+        // $model->save(false);
+
+        $sql = "UPDATE shipping_address SET active = 0  WHERE customer_id ='$id' AND street_name = '$street'";
+        \Yii::$app->db->createCommand($sql)->execute();
 
         $sql ="UPDATE shipping_address SET active = $model->active WHERE customer_id = $id AND WHERE street_name = $street";
                  Yii::$app->getSession()->setFlash('success', [

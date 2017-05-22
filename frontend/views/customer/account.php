@@ -32,13 +32,13 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
         [
            'label'=>'<i class="fa fa-credit-card"></i> Payment',
-           'content'=> $this->render('_paymentMethod', ['payment_method' => $payment_method, 'id' => $model->id]),
+           'content'=> $this->render('_paymentMethod', ['payment_method' => $payment_method, 'cards' => $cards,'model' => $model, 'id' => $model->id]),
            'active'=>false,
            //'linkOptions'=>['data-url'=>\yii\helpers\Url::to(['/default/solicitar-transcripcion'])],
         ],
         [
            'label'=>'<i class="fa fa-plane"></i> Shipping',
-           'content'=> $this->render('_shippingAddress', ['shipping_address' => $shipping_address, 'id' => $model->id]),
+           'content'=> $this->render('_shippingAddress', ['shipping_address' => $shipping_address,'address' => $address, 'id' => $model->id]),
            'active'=>false,
            //'linkOptions'=>['data-url'=>\yii\helpers\Url::to(['/default/solicitar-transcripcion'])],
         ],

@@ -53,6 +53,21 @@ class PaymentMethod extends \yii\db\ActiveRecord
     }
 
     /**
+     * @return primary key for the table (hace que corra aún cuando en la tabla no tenemos un PK)
+     */
+    public static function primaryKey()
+    {
+        return ['customer_id'];
+    }
+    /**
+     * @return counting of the amount of cards the customer haves 
+     */
+     public function getQuantity()
+    {
+        return $this->find()->all()->count();
+    } 
+
+    /**
      * @return \yii\db\ActiveQuery
      */
     public function getCustomer()

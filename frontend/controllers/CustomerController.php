@@ -10,7 +10,9 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use backend\models\PhoneNumber;
 use backend\models\ShippingAddress;
+use backend\models\ShippingAddressSearch;
 use backend\models\PaymentMethod;
+use backend\models\PaymentMethodSearch;
 use backend\models\Order;
 use backend\models\OrderSearch;
 use backend\models\Contains;
@@ -72,7 +74,9 @@ class CustomerController extends Controller
     public function actionAccount($id)
     {
         $customer = $this->findModel($id);
-
+        // echo '<pre>';
+        // var_dump($customer);
+        //die(1);
         $sql ="SELECT * FROM customer WHERE id = $id";
         Yii::$app->getSession()->setFlash('success', [
             'type' => 'success',
@@ -85,7 +89,9 @@ class CustomerController extends Controller
             ]);
 
         $customer_phone = $this->findPhone($customer->id);
-
+        // echo '<pre>';
+        // var_dump($customer_phone);
+        //die(2);
         $statement ="SELECT * FROM phone_number WHERE customer_id = $customer->id";
         Yii::$app->getSession()->setFlash('phone_success', [
             'type' => 'success',
@@ -98,6 +104,13 @@ class CustomerController extends Controller
             ]);
 
         $customer_shipping_address = $this->findShippingAddress($customer->id);
+        // echo '<pre>';
+        // var_dump($customer_shipping_address);
+        //die(3);
+
+        $searchModelAddress = new ShippingAddressSearch();
+
+        $address = $searchModelAddress->search(Yii::$app->request->queryParams, $customer->id);
 
         $sql_statement ="SELECT * FROM shipping_address WHERE customer_id = $customer->id";
         Yii::$app->getSession()->setFlash('shipping_success', [
@@ -109,7 +122,14 @@ class CustomerController extends Controller
             'positonY' => 'top',
             'positonX' => 'right'
             ]);
+
         $customer_payment_method = $this->findPaymentMethod($customer->id);
+        // echo '<pre>';
+        // var_dump($customer_payment_method);
+        // die(4);
+        $searchModelPay = new PaymentMethodSearch();
+
+        $cards = $searchModelPay->search(Yii::$app->request->queryParams, $customer->id);
 
         $query_statement ="SELECT * FROM payment_method WHERE customer_id = $customer->id";
         Yii::$app->getSession()->setFlash('payment_success', [
@@ -139,13 +159,17 @@ class CustomerController extends Controller
 
         $orders->pagination->pageSize = 4;
 
+    
         return $this->render('account', [
             'model' => $customer,
             'phone' => $customer_phone,
             'shipping_address' => $customer_shipping_address,
             'payment_method' => $customer_payment_method,
             'orders' => $orders,
+            'cards' => $cards,
+            'address' => $address,
         ]);
+       
     }
 
     /**
@@ -267,15 +291,16 @@ class CustomerController extends Controller
 
     /**
      * Updates an existing Customer Payment Method model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * If update is successful, the browser will be redirected to the 'account' page.
+     * @param integer $id, $numbers
      * @return mixed
      */
-    public function actionUpdatePayment($id)
+    public function actionUpdatePayment($id, $numbers)
     {
-        $model = $this->findPaymentMethod($id);
+        $model = $this->findPaymentMethod2($id, $numbers);
 
-        $sql ="SELECT * FROM payment_method WHERE customer_id = $id";
+
+        $sql ="SELECT * FROM payment_method WHERE customer_id = $id AND WHERE card_last_digits = $numbers";
          Yii::$app->getSession()->setFlash('searching', [
                 'type' => 'success',
                 'duration' => 5000,
@@ -287,7 +312,7 @@ class CustomerController extends Controller
                 'positonX' => 'right'
             ]);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+       if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
             $que ="UPDATE payment_method SET card_last_digits = $model->card_last_digits, \nexp_date = $model->exp_date, \ncard_type = $model->card_type\n WHERE customer_id = $id";
                  Yii::$app->getSession()->setFlash('payment', [
@@ -311,16 +336,69 @@ class CustomerController extends Controller
     }
 
     /**
-     * Updates an existing Customer Shipping Address model.
-     * If update is successful, the browser will be redirected to the 'view' page.
+     * Creates a new Customer Payment Method model.
+     * If create is successful, the browser will be redirected to the 'account' page.
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdateAddress($id)
+    public function actionAddPayment($id)
     {
-        $model = $this->findShippingAddress($id);
+        $customer = $this->findModel($id);
 
-        $sql ="SELECT * FROM shipping_address WHERE customer_id = $id";
+        $sql ="SELECT * FROM customer WHERE id = $id";
+         Yii::$app->getSession()->setFlash('searching', [
+                'type' => 'success',
+                'duration' => 5000,
+                'icon' => 'glyphicon glyphicon-ok-sign',
+                'title' => 'Query',
+                'showSeparator' => true,
+                'message' => $sql,
+                'positonY' => 'top',
+                'positonX' => 'right'
+            ]);
+
+        $newCard = new PaymentMethod();
+
+
+        if ($newCard->load(Yii::$app->request->post())) {
+            $newCard->customer_id = $customer->id;
+
+            if($newCard->save()) {
+                return $this->redirect(['account', 'id' => $newCard->customer_id]);
+            } 
+
+            $que ="INSERT INTO payment_method(customer_id,card_last_digits,\nexp_date,\ncard_type) VALUES \n($newCard->customer_id,$newCard->card_last_digits, \n$newCard->exp_date, \n$newCard->card_type)";
+                 Yii::$app->getSession()->setFlash('payment', [
+                    'type' => 'success',
+                    'duration' => 5005,
+                    'icon' => 'glyphicon glyphicon-ok-sign',
+                    'title' => 'Query',
+                    'showSeparator' => true,
+                    'message' => $que,
+                    'positonY' => 'top',
+                    'positonX' => 'right'
+                ]);
+
+            return $this->redirect(['account', 'id' => $newCard->customer_id]);
+        } else {
+
+            return $this->renderAjax('_addPayment', [
+                'newCard' => $newCard,
+            ]);
+        }
+    }
+
+    /**
+     * Updates an existing Customer Shipping Address model.
+     * If update is successful, the browser will be redirected to the 'account' page.
+     * @param integer $id, $street
+     * @return mixed
+     */
+    public function actionUpdateAddress($id, $street)
+    {
+        $model = $this->findShippingAddress2($id, $street);
+
+        $sql ="SELECT * FROM shipping_address WHERE customer_id = $id AND WHERE street_name = $street";
          Yii::$app->getSession()->setFlash('searching', [
                 'type' => 'success',
                 'duration' => 5000,
@@ -350,6 +428,59 @@ class CustomerController extends Controller
         } else {
             return $this->renderAjax('_updateAdress', [
                 'model' => $model,
+            ]);
+        }
+    }
+
+    /**
+     * Creates a new Shipping Address Method model.
+     * If create is successful, the browser will be redirected to the 'account' page.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionAddAddress($id)
+    {
+        $customer = $this->findModel($id);
+
+        $sql ="SELECT * FROM customer WHERE id = $id";
+         Yii::$app->getSession()->setFlash('searching', [
+                'type' => 'success',
+                'duration' => 5000,
+                'icon' => 'glyphicon glyphicon-ok-sign',
+                'title' => 'Query',
+                'showSeparator' => true,
+                'message' => $sql,
+                'positonY' => 'top',
+                'positonX' => 'right'
+            ]);
+            
+        $newAddress = new ShippingAddress();
+
+
+        if ($newAddress->load(Yii::$app->request->post())) {
+            $newAddress->customer_id = $customer->id;
+
+            if($newAddress->save()) {
+                return $this->redirect(['account', 'id' => $newAddress->customer_id]);
+            } 
+
+            $que ="INSERT INTO shipping_address(customer_id,street_name,\napt_number,\nzipcode,\nstate) VALUES \n($newAddress->customer_id,$newAddress->street_name, \n$newAddress->apt_number, \n$newAddress->zipcode, \n$newAddress->state)";
+                 Yii::$app->getSession()->setFlash('payment', [
+                    'type' => 'success',
+                    'duration' => 5005,
+                    'icon' => 'glyphicon glyphicon-ok-sign',
+                    'title' => 'Query',
+                    'showSeparator' => true,
+                    'message' => $que,
+                    'positonY' => 'top',
+                    'positonX' => 'right'
+                ]);
+
+            return $this->redirect(['account', 'id' => $newAddress->customer_id]);
+        } else {
+
+            return $this->renderAjax('_addAddress', [
+                'newAddress' => $newAddress,
             ]);
         }
     }
@@ -422,9 +553,50 @@ class CustomerController extends Controller
      * @return Customer's phone number the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
+    protected function findShippingAddress2($id, $street)
+    {
+        if (($model = ShippingAddress::find()->where([ '=', 'customer_id', $id])->andWhere([ '=', 'street_name', $street])->One()) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+    /**
+     * Finds the Customer's payment method model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return Customer's phone number the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
     protected function findPaymentMethod($id)
     {
+        // $sql = PaymentMethod::find()->where([ '==', 'customer_id', $id])->andWhere([ '==', 'card_last_digits', $numbers])->One();
+        // echo '<pre>';
+        // var_dump($id);
+        // die("f i n d i n g  . . . ");
         if (($model = PaymentMethod::findOne($id)) !== null) {
+            
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+    /**
+     * Finds the Customer's payment method model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return Customer's phone number the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findPaymentMethod2($id, $numbers)
+    {
+        //$sql = PaymentMethod::find()->where([ '==', 'customer_id', $id])->andWhere([ '==', 'card_last_digits', $numbers])->One();
+        // echo '<pre>';
+        // var_dump($id);
+        // die("f i n d i n g  . . . ");
+        if (($model = PaymentMethod::find()->where([ '=', 'customer_id', $id])->andWhere([ '=', 'card_last_digits', $numbers])->One()) !== null) {
+            
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

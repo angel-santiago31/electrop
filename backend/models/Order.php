@@ -69,8 +69,10 @@ class Order extends ActiveRecord
     {
         return [
             [['order_date', 'amount_stickers', 'order_status', 'customer_id', 'tracking_number'], 'integer'],
-            [['amount_stickers'], 'required'],
+            [['amount_stickers', 'payment_method', 'shipping_address'], 'required'],
             [['total_price'], 'number'],
+            [['payment_method'], 'integer' ],
+            [['shipping_address'], 'string', 'max' => 32],            
             [['shipper_company_name'], 'string', 'max' => 18],
             [['customer_id'], 'exist', 'skipOnError' => true, 'targetClass' => Customer::className(), 'targetAttribute' => ['customer_id' => 'id']],
             [['shipper_company_name'], 'exist', 'skipOnError' => true, 'targetClass' => Shipper::className(), 'targetAttribute' => ['shipper_company_name' => 'shipper_name']],
@@ -91,6 +93,8 @@ class Order extends ActiveRecord
             'customer_id' => 'Customer ID',
             'shipper_company_name' => 'Shipper Company Name',
             'tracking_number' => 'Tracking Number',
+            'payment_method' => 'Payment Method',
+            'shipping_address' => 'Shipping Address'
         ];
     }
 

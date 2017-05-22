@@ -41,6 +41,7 @@ use yii\grid\GridView;
         'card_last_digits',
         'exp_date',
         'card_type',
+        'name',
         [
             'label' => 'More',
             'format' => 'html',

@@ -22,6 +22,10 @@ class SignupForm extends Model
     public $cardLastDigits;
     public $expDate;
     public $cardType;
+    public $nameOnCard;
+    public $billingAddress;
+    public $billingState;
+    public $billingZipcode;
 
     public $streetName;
     public $aptNumber;
@@ -48,10 +52,11 @@ class SignupForm extends Model
             [['firstName', 'middleName', 'fathersLastName', 'mothersLastName'], 'string', 'max' => 18],
             [['dateOfBirth'], 'string'],
 
-            [['cardLastDigits', 'expDate', 'cardType'], 'required'],
+            [['cardLastDigits', 'expDate', 'cardType', 'nameOnCard', 'billingAddress', 'billingState', 'billingZipcode'], 'required'],
             [['cardLastDigits'], 'integer', 'min' => 4],
-            [['expDate'], 'string'],
-            [['cardType'], 'string', 'max' => 32],
+            [['expDate', 'billingZipcode'], 'string', 'max' => 5],
+            [['billingState'], 'string', 'max' => 2],
+            [['cardType', 'nameOnCard', 'billingAddress'], 'string', 'max' => 32],
 
             [['streetName', 'aptNumber', 'zipcode', 'state'], 'required'],
             [['streetName'], 'string', 'max' => 32],
@@ -100,6 +105,10 @@ class SignupForm extends Model
             $payment->card_last_digits = $this->cardLastDigits;
             $payment->exp_date = $this->expDate;
             $payment->card_type = $this->cardType;
+            $payment->name = $this->nameOnCard;
+            $payment->address = $this->billingAddress;
+            $payment->state = $this->billingState;
+            $payment->zipcode = $this->billingZipcode;
             $payment->save(false);
 
             $shipping = new ShippingAddress();

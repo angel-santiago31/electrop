@@ -34,6 +34,13 @@ use yii\grid\GridView;
                 return Html::a('<i class="glyphicon glyphicon-pencil"></i> Update', ['update-address', 'id' => $address->customer_id, 'street' => $address->street_name], ['class' => 'btn btn-xs btn-danger redCss', 'id' => 'updateAdress']);
             }
         ],
+        [
+            'label' => '',
+            'format' => 'html',
+            'value' => function ($address) {
+                return Html::a('<i class="glyphicon glyphicon-pencil"></i> Remove', ['delete-address', 'id' => $address->customer_id, 'street' => $address->street_name], ['class' => 'btn btn-xs btn-danger redCss', 'id' => 'updateAdress']);
+            }
+        ],
     ],
 ]) ?>
 

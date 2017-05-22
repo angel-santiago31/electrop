@@ -24,6 +24,8 @@ use kartik\growl\Growl;
  */
 class CustomerController extends Controller
 {
+    const STATUS_DELETED = 0;
+    const STATUS_ACTIVE = 1;
     /**
      * @inheritdoc
      */
@@ -111,6 +113,7 @@ class CustomerController extends Controller
         $searchModelAddress = new ShippingAddressSearch();
 
         $address = $searchModelAddress->search(Yii::$app->request->queryParams, $customer->id);
+        $address->query->andWhere(['active' => ShippingAddress::STATUS_ACTIVE]);
 
         $sql_statement ="SELECT * FROM shipping_address WHERE customer_id = $customer->id";
         Yii::$app->getSession()->setFlash('shipping_success', [
@@ -130,6 +133,7 @@ class CustomerController extends Controller
         $searchModelPay = new PaymentMethodSearch();
 
         $cards = $searchModelPay->search(Yii::$app->request->queryParams, $customer->id);
+        $cards->query->andWhere(['active' => PaymentMethod::STATUS_ACTIVE]);
 
         $query_statement ="SELECT * FROM payment_method WHERE customer_id = $customer->id";
         Yii::$app->getSession()->setFlash('payment_success', [
@@ -298,7 +302,9 @@ class CustomerController extends Controller
     public function actionUpdatePayment($id, $numbers)
     {
         $model = $this->findPaymentMethod2($id, $numbers);
-
+        // echo '<pre>';
+        // var_dump($model);
+        // die("f i n d i n g  . . . ");
 
         $sql ="SELECT * FROM payment_method WHERE customer_id = $id AND WHERE card_last_digits = $numbers";
          Yii::$app->getSession()->setFlash('searching', [
@@ -312,9 +318,9 @@ class CustomerController extends Controller
                 'positonX' => 'right'
             ]);
 
-       if ($model->load(Yii::$app->request->post()) && $model->save()) {
+       if ($model->load(Yii::$app->request->post())&& $model->save()) {
 
-            $que ="UPDATE payment_method SET card_last_digits = $model->card_last_digits, \nexp_date = $model->exp_date, \ncard_type = $model->card_type\n WHERE customer_id = $id";
+                $que ="UPDATE payment_method SET card_last_digits = $model->card_last_digits, \nexp_date = $model->exp_date, \ncard_type = $model->card_type\n WHERE customer_id = $id";
                  Yii::$app->getSession()->setFlash('payment', [
                     'type' => 'success',
                     'duration' => 5005,
@@ -326,7 +332,7 @@ class CustomerController extends Controller
                     'positonX' => 'right'
                 ]);
 
-            return $this->redirect(['account', 'id' => $model->customer_id]);
+                return $this->redirect(['account', 'id' => $model->customer_id]);
         } else {
 
             return $this->renderAjax('_updatePayment', [
@@ -334,6 +340,37 @@ class CustomerController extends Controller
             ]);
         }
     }
+
+    /**
+     * Inactives an existing Payment Method model.
+     * If deletion is successful, the browser will be redirected to the 'account' page.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionDeleteCard($id, $numbers)
+    {
+        $model = $this->findPaymentMethod2($id, $numbers);
+        $model->active = PaymentMethod::STATUS_DELETED;
+        // echo '<pre>';
+        // var_dump($model);
+        // die("f i n d i n g  . . . ");
+        $model->save();
+
+        $sql ="UPDATE paymet_method SET active = $model->active WHERE customer_id = $id AND WHERE card_last_digits = $numbers";
+                 Yii::$app->getSession()->setFlash('success', [
+                    'type' => 'success',
+                    'duration' => 5000,
+                    'icon' => 'glyphicon glyphicon-ok-sign',
+                    'title' => 'Query',
+                    'showSeparator' => true,
+                    'message' => $sql,
+                    'positonY' => 'top',
+                    'positonX' => 'right'
+                ]);
+
+        return $this->redirect(['account', 'id' => $model->customer_id]);
+    }
+
 
     /**
      * Creates a new Customer Payment Method model.
@@ -430,6 +467,34 @@ class CustomerController extends Controller
                 'model' => $model,
             ]);
         }
+    }
+
+    /**
+     * Inactives an existing Shipping Address model.
+     * If deletion is successful, the browser will be redirected to the 'account' page.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionDeleteAddress($id, $street)
+    {
+        $model = $this->findShippingAddress2($id, $street);
+        
+        $model->active = ShippingAddress::STATUS_DELETED;
+        $model->save(false);
+
+        $sql ="UPDATE shipping_address SET active = $model->active WHERE customer_id = $id AND WHERE street_name = $street";
+                 Yii::$app->getSession()->setFlash('success', [
+                    'type' => 'success',
+                    'duration' => 5000,
+                    'icon' => 'glyphicon glyphicon-ok-sign',
+                    'title' => 'Query',
+                    'showSeparator' => true,
+                    'message' => $sql,
+                    'positonY' => 'top',
+                    'positonX' => 'right'
+                ]);
+
+        return $this->redirect(['account', 'id' => $model->customer_id]);
     }
 
     /**
@@ -555,7 +620,7 @@ class CustomerController extends Controller
      */
     protected function findShippingAddress2($id, $street)
     {
-        if (($model = ShippingAddress::find()->where([ '=', 'customer_id', $id])->andWhere([ '=', 'street_name', $street])->One()) !== null) {
+        if (($model = ShippingAddress::find()->where([ '=', 'customer_id', $id])->andWhere([ '=', 'street_name', $street])->andWhere([ '=', 'active', ShippingAddress::STATUS_ACTIVE])->One()) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
@@ -591,12 +656,11 @@ class CustomerController extends Controller
      */
     protected function findPaymentMethod2($id, $numbers)
     {
-        //$sql = PaymentMethod::find()->where([ '==', 'customer_id', $id])->andWhere([ '==', 'card_last_digits', $numbers])->One();
-        // echo '<pre>';
-        // var_dump($id);
-        // die("f i n d i n g  . . . ");
-        if (($model = PaymentMethod::find()->where([ '=', 'customer_id', $id])->andWhere([ '=', 'card_last_digits', $numbers])->One()) !== null) {
-            
+   
+        if (($model = PaymentMethod::find()->where([ '=', 'customer_id', $id])->andWhere([ '=', 'card_last_digits', $numbers])->andWhere([ '=', 'active', PaymentMethod::STATUS_ACTIVE])->One()) !== null) {
+            // echo '<pre>';
+            // var_dump($model);
+            // die("f i n d i n g  . . . ");
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

@@ -17,12 +17,14 @@ use common\models\Customer;
  */
 class PaymentMethod extends \yii\db\ActiveRecord
 {
+    const STATUS_DELETED = 0;
+    const STATUS_ACTIVE = 1;
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'payment_method';
+        return '{{%payment_method}}';
     }
 
     /**

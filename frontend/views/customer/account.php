@@ -55,7 +55,7 @@ $this->params['breadcrumbs'][] = $this->title;
           </div>
       </div>
   </div>
-  <div class="col-sm-6">
+  <div class="col-sm-7">
       <div class="panel panel-default">
           <div class="panel-heading text-center">
               Account Details
@@ -71,7 +71,7 @@ $this->params['breadcrumbs'][] = $this->title;
           </div>
       </div>
   </div>
-  <div class="col-sm-6">
+  <div class="col-sm-5">
       <div class="panel panel-default">
           <div class="panel-heading" style="text-align:center">
               Order History

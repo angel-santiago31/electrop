@@ -75,5 +75,5 @@ class PaymentMethodSearch extends PaymentMethod
 
         return $dataProvider;
     }
-    }
+    
 }

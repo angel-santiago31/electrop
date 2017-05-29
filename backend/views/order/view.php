@@ -56,6 +56,8 @@ $this->title = 'Order Details';
                           },
                       ],
                       'customer_id',
+                      'payment_method',
+                      'shipping_address',
                       'shipper_company_name',
                       'tracking_number',
                   ],

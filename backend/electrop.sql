@@ -1,27 +1,22 @@
-# ************************************************************
-# Sequel Pro SQL dump
-# Version 4541
-#
-# http://www.sequelpro.com/
-# https://github.com/sequelpro/sequelpro
-#
-# Host: 127.0.0.1 (MySQL 5.5.5-10.1.21-MariaDB)
-# Database: electrop
-# Generation Time: 2017-05-22 15:39:29 +0000
-# ************************************************************
+/*
+SQLyog Community v12.4.1 (64 bit)
+MySQL - 10.1.21-MariaDB : Database - electrop
+*********************************************************************
+*/
 
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
+
+/*!40101 SET SQL_MODE=''*/;
+
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`electrop` /*!40100 DEFAULT CHARACTER SET utf8 */;
 
+USE `electrop`;
 
-# Dump of table admin
-# ------------------------------------------------------------
+/*Table structure for table `admin` */
 
 DROP TABLE IF EXISTS `admin`;
 
@@ -37,22 +32,15 @@ CREATE TABLE `admin` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `password_reset_token` (`password_reset_token`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-LOCK TABLES `admin` WRITE;
-/*!40000 ALTER TABLE `admin` DISABLE KEYS */;
+/*Data for the table `admin` */
 
-INSERT INTO `admin` (`id`, `auth_key`, `password_hash`, `password_reset_token`, `email`, `status`, `created_at`, `updated_at`)
-VALUES
-	(7,'DxKkH2hGDkUj5L2LnB8qrMVLkGFAT82M','$2y$13$D92/maDAYUX2W.25sYURRecRl4TvGpEPvgzqzQosMwiHJO6jymLji','jGCqlkpYD0UQNSodS-yMSvIoqyA5aF_p_1489764767','admin@admin.com',10,17,17),
-	(11,'FHRGKaaqo4ZvDlZPPMmkIqxtdGZBziVF','$2y$13$c4TudIrJOXWkJ4xh57618OHd60g1CFcmv7f.iy8JCH4F2JJPPRfvi','NUHKloHkVlA29Y_xv5MQ0IVgu4Njkm7-_1491401476','mystery_Person@outlook.com',10,1491401476,1491401476);
+insert  into `admin`(`id`,`auth_key`,`password_hash`,`password_reset_token`,`email`,`status`,`created_at`,`updated_at`) values 
+(7,'DxKkH2hGDkUj5L2LnB8qrMVLkGFAT82M','$2y$13$D92/maDAYUX2W.25sYURRecRl4TvGpEPvgzqzQosMwiHJO6jymLji','jGCqlkpYD0UQNSodS-yMSvIoqyA5aF_p_1489764767','admin@admin.com',10,17,17),
+(11,'FHRGKaaqo4ZvDlZPPMmkIqxtdGZBziVF','$2y$13$c4TudIrJOXWkJ4xh57618OHd60g1CFcmv7f.iy8JCH4F2JJPPRfvi','NUHKloHkVlA29Y_xv5MQ0IVgu4Njkm7-_1491401476','mystery_Person@outlook.com',10,1491401476,1491401476);
 
-/*!40000 ALTER TABLE `admin` ENABLE KEYS */;
-UNLOCK TABLES;
-
-
-# Dump of table billing_address
-# ------------------------------------------------------------
+/*Table structure for table `billing_address` */
 
 DROP TABLE IF EXISTS `billing_address`;
 
@@ -65,10 +53,9 @@ CREATE TABLE `billing_address` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+/*Data for the table `billing_address` */
 
-
-# Dump of table contains
-# ------------------------------------------------------------
+/*Table structure for table `contains` */
 
 DROP TABLE IF EXISTS `contains`;
 
@@ -83,35 +70,31 @@ CREATE TABLE `contains` (
   CONSTRAINT `contains_ibfk_2` FOREIGN KEY (`item_id`) REFERENCES `item` (`item_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-LOCK TABLES `contains` WRITE;
-/*!40000 ALTER TABLE `contains` DISABLE KEYS */;
+/*Data for the table `contains` */
 
-INSERT INTO `contains` (`order_number`, `item_id`, `price_sold`, `quantity_in_order`)
-VALUES
-	(143438,15,10.41,1),
-	(143438,17,2.53,1),
-	(143439,12,10.00,1),
-	(143440,12,10.00,1),
-	(143440,13,6.00,1),
-	(143441,12,10.00,1),
-	(143441,14,2.56,1),
-	(143442,15,10.41,1),
-	(143442,16,4.64,1),
-	(143443,17,2.53,1),
-	(143444,13,6.00,1),
-	(143453,14,2.56,5),
-	(143454,22,2.68,1),
-	(143455,14,2.56,1),
-	(143455,16,4.64,1),
-	(143456,14,2.56,1),
-	(143457,13,6.00,1);
+insert  into `contains`(`order_number`,`item_id`,`price_sold`,`quantity_in_order`) values 
+(143438,15,10.41,1),
+(143438,17,2.53,1),
+(143439,12,10.00,1),
+(143440,12,10.00,1),
+(143440,13,6.00,1),
+(143441,12,10.00,1),
+(143441,14,2.56,1),
+(143442,15,10.41,1),
+(143442,16,4.64,1),
+(143443,17,2.53,1),
+(143444,13,6.00,1),
+(143453,14,2.56,5),
+(143454,22,2.68,1),
+(143455,14,2.56,1),
+(143455,16,4.64,1),
+(143456,14,2.56,1),
+(143457,13,6.00,1),
+(143458,27,14.59,1),
+(143459,13,6.00,1),
+(143460,17,2.53,1);
 
-/*!40000 ALTER TABLE `contains` ENABLE KEYS */;
-UNLOCK TABLES;
-
-
-# Dump of table customer
-# ------------------------------------------------------------
+/*Table structure for table `customer` */
 
 DROP TABLE IF EXISTS `customer`;
 
@@ -134,30 +117,25 @@ CREATE TABLE `customer` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `password_reset_token` (`password_reset_token`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-LOCK TABLES `customer` WRITE;
-/*!40000 ALTER TABLE `customer` DISABLE KEYS */;
+/*Data for the table `customer` */
 
-INSERT INTO `customer` (`id`, `email`, `password_hash`, `first_name`, `middle_name`, `fathers_last_name`, `mothers_last_name`, `date_of_birth`, `age`, `auth_key`, `password_reset_token`, `status`, `created_at`, `updated_at`, `active`)
-VALUES
-	(12,'erick.rivera6@upr.edu','$2y$13$M5UpksDkDlvgt/lUm1m/lOaQ7R97gkbNEZW.zl7ZGEhjSD0BNfPY.','Erick','','Rivera','Cruz','12',NULL,'DdZQQZEetFOXZcoL5LVzhOwOByIW07Xa',NULL,10,1491695547,1491695547,0),
-	(13,'huelga@upra.com','$2y$13$Qqdd5SXlZpcVuL1sCrVgXuyraBjHDI/l4IyG0fhiv/Ccvd2iTnBTa','Once','Recintos','Una','Upr','12',NULL,'CFnXDz1i7Xdu29AkGMAxcPAaVgRdN0qD',NULL,10,1491842106,1491842106,0),
-	(14,'bryan.hernandez5@upr.edu','$2y$13$kotQzJ5P/uEh.XOfM8dGpO9jt5cYkmbin6VfzpG96bbp1gfUdRsZu','Bryan','Yomar','Hernandez','Cuevas','1996',NULL,'1aJSZBWbJs6pp6ny1Q33-OeAKlSAZRO_',NULL,10,1492651670,1492651670,0),
-	(19,'angel.santiago31@upr.edu','$2y$13$nt0zcmBLbAFn598NDRCOauOcpQGb5VYA6NJXeh7djbRibrF54oS7C','Angel','Eduardo','Santiago','González','10-10-1996',NULL,'aXIqfWWFf17tuvpdcFfxoslLUXZWIZaI',NULL,10,1492660565,1492660951,0),
-	(20,'test@test.com','$2y$13$uQax1jJ7LTc7v5Fd4qBT6OEryM/89/Lt3.9Jk5MDeHhOYMrQaErk6','Test','Test','Test','Test','23-03-2017',NULL,'okRwZ_rAxhW9rGTXNIxeeVQvrhPhWndh',NULL,10,1492797446,1492797446,0),
-	(21,'erick@123.com','$2y$13$sRfmqs5.7yaA7pm9nK/rLutYBq5sDv.LLBtL0VRqV0hLx8Phtj9He','Erick',NULL,'Rivera','Cruz','12-06-1995',NULL,'Py8Esw4z4o9OzJWu_84RXsGM00OvWPbL',NULL,10,1492808315,1492808315,0),
-	(22,'juanito@piringo.com','$2y$13$iwfZlKFJ/o0isMBZysl2auFbpFBxqQQVUCQinZtxe3i1pbeJipDaW','Juanito',NULL,'Piringo','Piringa','01-01-2000',17,'YxJ7Qol0RePieA_PgVfUke0ApKxzaTmp',NULL,10,1493771198,1493771198,0),
-	(23,'ceratin@gustavin.tech','$2y$13$pKn4r0VI5hDdsagW3chJxOMVKVkUc73EsG03lqFVBSnnbZnn/TN9.','Benjamin',NULL,'Frankiln','Rivera','01-05-2015',2,'iM1pKHAz8WAKxvoO-TYo-1jxCuZHWmnm',NULL,10,1493771402,1493771402,0),
-	(24,'testing@email.com','$2y$13$LnGOFk4auchB023OAWlFXOuztuHPdsJt4PFwo3M40pJkbTUWPuUwy','Usuario','de','Prueba','erick','14-05-1990',26,'bk7pmLvrT6kq8T40gENUgxHW-2Mb0sxZ',NULL,10,1494537734,1494537734,0),
-	(25,'pepo@pepo.com','$2y$13$cwFjrfAd7iw/qY7h7XaiJOYUfCULRdI2q2YIJcfxfoMFaNDkJGkOC','pepo','pepito','pepin','pepote','30-03-2000',17,'_9JxShzB_fR7x6LvumgpYn1FZkADEhUZ',NULL,10,1495058533,1495058533,0);
+insert  into `customer`(`id`,`email`,`password_hash`,`first_name`,`middle_name`,`fathers_last_name`,`mothers_last_name`,`date_of_birth`,`age`,`auth_key`,`password_reset_token`,`status`,`created_at`,`updated_at`,`active`) values 
+(12,'erick.rivera6@upr.edu','$2y$13$M5UpksDkDlvgt/lUm1m/lOaQ7R97gkbNEZW.zl7ZGEhjSD0BNfPY.','Erick','','Rivera','Cruz','12',NULL,'DdZQQZEetFOXZcoL5LVzhOwOByIW07Xa',NULL,10,1491695547,1491695547,0),
+(13,'huelga@upra.com','$2y$13$Qqdd5SXlZpcVuL1sCrVgXuyraBjHDI/l4IyG0fhiv/Ccvd2iTnBTa','Once','Recintos','Una','Upr','12',NULL,'CFnXDz1i7Xdu29AkGMAxcPAaVgRdN0qD',NULL,10,1491842106,1491842106,0),
+(14,'bryan.hernandez5@upr.edu','$2y$13$kotQzJ5P/uEh.XOfM8dGpO9jt5cYkmbin6VfzpG96bbp1gfUdRsZu','Bryan','Yomar','Hernandez','Cuevas','1996',NULL,'1aJSZBWbJs6pp6ny1Q33-OeAKlSAZRO_',NULL,10,1492651670,1492651670,0),
+(19,'angel.santiago31@upr.edu','$2y$13$nt0zcmBLbAFn598NDRCOauOcpQGb5VYA6NJXeh7djbRibrF54oS7C','Angel','Eduardo','Santiago','González','10-10-1996',NULL,'aXIqfWWFf17tuvpdcFfxoslLUXZWIZaI',NULL,10,1492660565,1492660951,0),
+(20,'test@test.com','$2y$13$uQax1jJ7LTc7v5Fd4qBT6OEryM/89/Lt3.9Jk5MDeHhOYMrQaErk6','Test','Test','Test','Test','23-03-2017',NULL,'okRwZ_rAxhW9rGTXNIxeeVQvrhPhWndh',NULL,10,1492797446,1492797446,0),
+(21,'erick@123.com','$2y$13$sRfmqs5.7yaA7pm9nK/rLutYBq5sDv.LLBtL0VRqV0hLx8Phtj9He','Erick',NULL,'Rivera','Cruz','12-06-1995',NULL,'Py8Esw4z4o9OzJWu_84RXsGM00OvWPbL',NULL,10,1492808315,1492808315,0),
+(22,'juanito@piringo.com','$2y$13$iwfZlKFJ/o0isMBZysl2auFbpFBxqQQVUCQinZtxe3i1pbeJipDaW','Juanito',NULL,'Piringo','Piringa','01-01-2000',17,'YxJ7Qol0RePieA_PgVfUke0ApKxzaTmp',NULL,10,1493771198,1493771198,0),
+(23,'ceratin@gustavin.tech','$2y$13$pKn4r0VI5hDdsagW3chJxOMVKVkUc73EsG03lqFVBSnnbZnn/TN9.','Benjamin',NULL,'Frankiln','Rivera','01-05-2015',2,'iM1pKHAz8WAKxvoO-TYo-1jxCuZHWmnm',NULL,10,1493771402,1493771402,0),
+(24,'testing@email.com','$2y$13$LnGOFk4auchB023OAWlFXOuztuHPdsJt4PFwo3M40pJkbTUWPuUwy','Usuario','de','Prueba','erick','14-05-1990',26,'bk7pmLvrT6kq8T40gENUgxHW-2Mb0sxZ',NULL,10,1494537734,1494537734,0),
+(25,'pepo@pepo.com','$2y$13$cwFjrfAd7iw/qY7h7XaiJOYUfCULRdI2q2YIJcfxfoMFaNDkJGkOC','pepo','pepito','pepin','pepote','30-03-2000',17,'_9JxShzB_fR7x6LvumgpYn1FZkADEhUZ',NULL,10,1495058533,1495058533,0),
+(27,'carlosRivera@upr.edu','$2y$13$9Nsd5ouPMJ/arMpduO4Y8eknH2fm7TCaCUYsIEhIzHPtLQ5zzr7/S','Carlos','M.','Rivera','Santiago','01-02-1995',22,'0n4Tvi-7DhIoEXQp61hWeK-jFvAvBYQ-',NULL,10,1495476217,1495476217,0),
+(28,'santini4mas@sanjuan.com','$2y$13$VfMukfPylqEWiGCHnrSNbOCvDqpzgWau2gekcw6frsEuPyagSbFXO','Santini',NULL,'Lopez','Collazo','25-07-1968',48,'l25f1sTogfLj7xG0oeFObJGw3NeIFNcv',NULL,10,1495476369,1495476369,0);
 
-/*!40000 ALTER TABLE `customer` ENABLE KEYS */;
-UNLOCK TABLES;
-
-
-# Dump of table item
-# ------------------------------------------------------------
+/*Table structure for table `item` */
 
 DROP TABLE IF EXISTS `item`;
 
@@ -178,75 +156,68 @@ CREATE TABLE `item` (
   KEY `item_sub_category_id` (`item_sub_category_id`),
   CONSTRAINT `item_ibfk_1` FOREIGN KEY (`item_category_id`) REFERENCES `item_category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `item_ibfk_2` FOREIGN KEY (`item_sub_category_id`) REFERENCES `item_sub_category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8;
 
-LOCK TABLES `item` WRITE;
-/*!40000 ALTER TABLE `item` DISABLE KEYS */;
+/*Data for the table `item` */
 
-INSERT INTO `item` (`item_id`, `name`, `picture`, `quantity_remaining`, `size`, `gross_price`, `production_cost`, `description`, `item_category_id`, `item_sub_category_id`, `active`)
-VALUES
-	(12,'Romaine Calm','uploads/Romaine Calm.jpg',27,3,10.00,1.75,'Romaine calm everybody!',1,1,1),
-	(13,'I Yam What I Yam','uploads/I Yam What I Yam.jpg',32,2,6.00,0.75,'I yam happy!',1,1,1),
-	(14,'Sarcasm','uploads/Sarcasm.jpg',16,1,2.56,0.11,'\"can i interest you in a sarcastic comment?\" Graphic',1,1,1),
-	(15,'[laughs microscopically]','uploads/[laughs microscopically].jpg',43,3,10.41,1.84,'Tiny laughs for all you\'ve got!',1,1,1),
-	(16,'Coach Logo','uploads/Coach Logo.jpg',35,1,4.64,0.45,'Original Coach Logo',1,2,1),
-	(17,'Samurai Cereal','uploads/Samurai Cereal.jpg',45,1,2.53,0.25,'Eat \'em with chopsticks or spoon!',1,2,1),
-	(18,'Volcom','uploads/Volcom.jpg',45,1,3.17,0.67,'Volcom Logo',1,2,1),
-	(19,'Sundrop - Sun drop','uploads/Sundrop - Sun drop.jpg',34,2,10.28,1.67,'Drop it like it\'s hot!',1,2,1),
-	(20,'Twinkies','uploads/Twinkies.jpg',17,1,2.32,0.21,'The favorite yellowish cream filled sponge!',1,2,1),
-	(21,'Friends Not Food - Animals','uploads/Friends Not Food - Animals.jpg',37,2,7.50,1.11,'We don\'t eat each other. We spread love.',1,3,1),
-	(22,'Sloth Life','uploads/Sloth Life.jpg',38,1,2.68,0.45,'Just hanging around!',1,3,1),
-	(23,'Desert animals','uploads/Desert animals.jpg',53,3,10.00,1.75,'Camel toe.',1,3,1),
-	(24,'Cat in Lotus Tattoo','uploads/Cat in Lotus Tattoo.jpg',25,1,2.53,0.55,'Pretty Kitty',1,3,1),
-	(25,'Nugget Dino','uploads/Nugget Dino.jpg',26,1,3.44,0.34,'It\'s you eating him! Mmmm...',1,4,1),
-	(26,'Shaggy This Isn\'t Weed','uploads/Shaggy This Isn\'t Weed.jpg',36,1,5.93,1.00,'Why Fred, why!?',1,4,1),
-	(27,'Issa Knife','uploads/Issa Knife.jpg',47,4,14.59,2.33,'Nigga gon get stabbed yo\'!',1,4,1),
-	(28,'Happy Pepe, The Frog','uploads/Happy Pepe, The Frog.jpg',26,1,6.00,0.67,'A happy Pepe is a good Pepe.',1,4,1),
-	(29,'Astro Sloth','uploads/Astro Sloth.jpg',26,3,10.00,1.75,'Captain Sloth reporting for duty.',1,4,1),
-	(30,'Heisenberg','uploads/Heisenberg.jpg',63,1,2.64,0.33,'Shades on, hat on.',1,4,1),
-	(31,'Geometric Rick Sanchez','uploads/Geometric Rick Sanchez.jpg',23,1,6.00,0.45,'Hey Morty.',1,4,1),
-	(32,'Fatty Acid','uploads/Fatty Acid.jpg',26,1,3.06,0.23,'I think I\'m fat too..',2,1,1),
-	(33,'Drop the Bass Chemistry Base','uploads/Drop the Bass Chemistry Base.jpg',64,2,5.74,1.21,'*Dubstep music plays*',2,1,1),
-	(34,'Keepin\' It Real','uploads/Keepin\' It Real.jpg',38,1,2.42,0.68,'Let\'s just be honest, let\'s just be real~',2,1,1),
-	(35,'Geek Tee - CSS Jokes - Ninja','uploads/Geek Tee - CSS Jokes - Ninja.jpg',47,1,6.00,1.28,'Ninja.css',2,1,1),
-	(36,'Anime Is Now Illegal ','uploads/Anime Is Now Illegal .jpg',38,1,2.32,0.34,'Otakus unite!',2,1,1),
-	(37,'Old Spice','uploads/Old Spice.jpg',27,1,6.00,1.28,'Yeahhh! Gimme sum!',2,2,1),
-	(38,'Chick-fil-A Cup','uploads/Chick-fil-A Cup.jpg',32,1,2.74,0.56,'Chicken n\' grillin\'!',2,2,1),
-	(39,'WTF Panda','uploads/WTF Panda.jpg',62,3,15.83,2.99,'WTF!?',2,2,1),
-	(40,'New Google Logo','uploads/New Google Logo.jpg',12,1,5.75,0.67,'Everyday I\'m Googlin\'!',2,2,1),
-	(41,'Starbuck\'s Coffee','uploads/Starbuck\'s Coffee.jpg',35,1,2.67,0.33,'An all hipster favorite!',2,2,1),
-	(42,'Vaping ','uploads/Vaping .jpg',25,1,2.67,0.88,'Since 2013',2,2,1),
-	(43,'Fk You Cat','uploads/Fk You Cat.jpg',53,1,2.53,0.33,'Fk off!',2,3,1),
-	(44,'Catlove','uploads/Catlove.jpg',27,1,6.00,0.99,'Love for every cat in the world!',2,3,1),
-	(45,'Peekaboo','uploads/Peekaboo.jpg',53,1,2.53,0.33,'Peekaboo cat.',2,3,1),
-	(46,'American Shorthair happy','uploads/American Shorthair happy.jpg',52,1,10.41,1.28,'Smile!',2,3,1),
-	(47,'Significant Otters ','uploads/Significant Otters .jpg',63,2,6.50,1.22,'Otters hold.',2,3,1),
-	(48,'Grandmother Using an Inhaler','uploads/Grandmother Using an Inhaler.jpg',25,1,2.53,0.33,'Inhale deep mamaw!',2,4,1),
-	(49,'Rainbow Dash Cutie Mark','uploads/Rainbow Dash Cutie Mark.jpg',56,1,2.53,0.56,'Bronnies will like.',2,4,1),
-	(50,'Yeah Boy','uploads/Yeah Boy.jpg',25,1,2.53,0.45,'*Shooting Stars Starts Playing* ',2,4,1),
-	(51,'GOAT','uploads/GOAT.jpg',65,1,7.00,1.45,'Goat milk?',2,4,1),
-	(52,'They Let Me Play with Chemicals','uploads/They Let Me Play with Chemicals.jpg',25,1,2.42,0.44,'Don\'t try this at home kids!',3,1,1),
-	(53,'You Are Being Monitored','uploads/You Are Being Monitored.jpg',42,2,5.74,1.11,'Be careful of what you do at work.',3,1,1),
-	(54,'Practice Safe Sax','uploads/Practice Safe Sax.jpg',15,1,9.56,3.11,'Remember, always use a saxophone.',3,1,1),
-	(55,'Yellow Banana Periodic Table','uploads/Yellow Banana Periodic Table.jpg',25,1,8.40,1.67,'Ba-na-na!',3,1,1),
-	(56,'Beats','uploads/Beats.jpg',36,1,3.38,0.67,'By Dr. Dre',3,2,1),
-	(57,'NVIDIA','uploads/NVIDIA.jpg',15,3,13.33,2.65,'For gaming.',3,2,1),
-	(58,'Gesture of Billabong','uploads/Gesture of Billabong.jpg',25,1,3.69,0.44,'Rock on.',3,2,1),
-	(59,'Seal of Approval','uploads/Seal of Approval.jpg',15,3,10.00,1.75,'I approve!',3,3,1),
-	(60,'Unicorn power','uploads/Unicorn power.jpg',26,4,14.00,3.00,'I am the unicorn wizard!~',3,3,1),
-	(63,'FK ANIMAL TESTING','uploads/FK ANIMAL TESTING.jpg',26,2,6.00,0.78,'It\'s a no no.',3,3,1),
-	(64,'Cosmocat','uploads/Cosmocat.jpg',36,1,2.53,0.33,'May the cosmos be with you.',3,3,1),
-	(65,'Code With Me Senpai','uploads/Code With Me Senpai.jpg',25,1,2.15,0.23,'Senpai notice me!',3,4,1),
-	(66,'Fk Her Right In The P','uploads/Fk Her Right In The P.jpg',11,1,2.74,0.45,'You\'ve seen it before..',3,4,1),
-	(67,'Pug Life','uploads/Pug Life.jpg',22,3,10.00,1.75,'Don\'t pug with me and I won\'t pug with you.',3,4,1),
-	(68,'Trippy Felix','uploads/Trippy Felix.jpg',13,1,2.85,0.34,'Felix be trippin\'',3,4,1);
+insert  into `item`(`item_id`,`name`,`picture`,`quantity_remaining`,`size`,`gross_price`,`production_cost`,`description`,`item_category_id`,`item_sub_category_id`,`active`) values 
+(12,'Romaine Calm','uploads/Romaine Calm.jpg',24,3,10.00,1.75,'Romaine calm everybody!',1,1,1),
+(13,'I Yam What I Yam','uploads/I Yam What I Yam.jpg',28,2,6.00,0.75,'I yam happy!',1,1,1),
+(14,'Sarcasm','uploads/Sarcasm.jpg',8,1,2.56,0.11,'\"can i interest you in a sarcastic comment?\" Graphic',1,1,1),
+(15,'[laughs microscopically]','uploads/[laughs microscopically].jpg',41,3,10.41,1.84,'Tiny laughs for all you\'ve got!',1,1,1),
+(16,'Coach Logo','uploads/Coach Logo.jpg',33,1,4.64,0.45,'Original Coach Logo',1,2,1),
+(17,'Samurai Cereal','uploads/Samurai Cereal.jpg',43,1,2.53,0.25,'Eat \'em with chopsticks or spoon!',1,2,1),
+(18,'Volcom','uploads/Volcom.jpg',45,1,3.17,0.67,'Volcom Logo',1,2,1),
+(19,'Sundrop - Sun drop','uploads/Sundrop - Sun drop.jpg',34,2,10.28,1.67,'Drop it like it\'s hot!',1,2,1),
+(20,'Twinkies','uploads/Twinkies.jpg',17,1,2.32,0.21,'The favorite yellowish cream filled sponge!',1,2,1),
+(21,'Friends Not Food - Animals','uploads/Friends Not Food - Animals.jpg',37,2,7.50,1.11,'We don\'t eat each other. We spread love.',1,3,1),
+(22,'Sloth Life','uploads/Sloth Life.jpg',37,1,2.68,0.45,'Just hanging around!',1,3,1),
+(23,'Desert animals','uploads/Desert animals.jpg',53,3,10.00,1.75,'Camel toe.',1,3,1),
+(24,'Cat in Lotus Tattoo','uploads/Cat in Lotus Tattoo.jpg',25,1,2.53,0.55,'Pretty Kitty',1,3,1),
+(25,'Nugget Dino','uploads/Nugget Dino.jpg',26,1,3.44,0.34,'It\'s you eating him! Mmmm...',1,4,1),
+(26,'Shaggy This Isn\'t Weed','uploads/Shaggy This Isn\'t Weed.jpg',36,1,5.93,1.00,'Why Fred, why!?',1,4,1),
+(27,'Issa Knife','uploads/Issa Knife.jpg',46,4,14.59,2.33,'Nigga gon get stabbed yo\'!',1,4,1),
+(28,'Happy Pepe, The Frog','uploads/Happy Pepe, The Frog.jpg',26,1,6.00,0.67,'A happy Pepe is a good Pepe.',1,4,1),
+(29,'Astro Sloth','uploads/Astro Sloth.jpg',26,3,10.00,1.75,'Captain Sloth reporting for duty.',1,4,1),
+(30,'Heisenberg','uploads/Heisenberg.jpg',63,1,2.64,0.33,'Shades on, hat on.',1,4,1),
+(31,'Geometric Rick Sanchez','uploads/Geometric Rick Sanchez.jpg',23,1,6.00,0.45,'Hey Morty.',1,4,1),
+(32,'Fatty Acid','uploads/Fatty Acid.jpg',26,1,3.06,0.23,'I think I\'m fat too..',2,1,1),
+(33,'Drop the Bass Chemistry Base','uploads/Drop the Bass Chemistry Base.jpg',64,2,5.74,1.21,'*Dubstep music plays*',2,1,1),
+(34,'Keepin\' It Real','uploads/Keepin\' It Real.jpg',38,1,2.42,0.68,'Let\'s just be honest, let\'s just be real~',2,1,1),
+(35,'Geek Tee - CSS Jokes - Ninja','uploads/Geek Tee - CSS Jokes - Ninja.jpg',47,1,6.00,1.28,'Ninja.css',2,1,1),
+(36,'Anime Is Now Illegal ','uploads/Anime Is Now Illegal .jpg',38,1,2.32,0.34,'Otakus unite!',2,1,1),
+(37,'Old Spice','uploads/Old Spice.jpg',27,1,6.00,1.28,'Yeahhh! Gimme sum!',2,2,1),
+(38,'Chick-fil-A Cup','uploads/Chick-fil-A Cup.jpg',32,1,2.74,0.56,'Chicken n\' grillin\'!',2,2,1),
+(39,'WTF Panda','uploads/WTF Panda.jpg',62,3,15.83,2.99,'WTF!?',2,2,1),
+(40,'New Google Logo','uploads/New Google Logo.jpg',12,1,5.75,0.67,'Everyday I\'m Googlin\'!',2,2,1),
+(41,'Starbuck\'s Coffee','uploads/Starbuck\'s Coffee.jpg',35,1,2.67,0.33,'An all hipster favorite!',2,2,1),
+(42,'Vaping ','uploads/Vaping .jpg',25,1,2.67,0.88,'Since 2013',2,2,1),
+(43,'Fk You Cat','uploads/Fk You Cat.jpg',53,1,2.53,0.33,'Fk off!',2,3,1),
+(44,'Catlove','uploads/Catlove.jpg',27,1,6.00,0.99,'Love for every cat in the world!',2,3,1),
+(45,'Peekaboo','uploads/Peekaboo.jpg',53,1,2.53,0.33,'Peekaboo cat.',2,3,1),
+(46,'American Shorthair happy','uploads/American Shorthair happy.jpg',52,1,10.41,1.28,'Smile!',2,3,1),
+(47,'Significant Otters ','uploads/Significant Otters .jpg',63,2,6.50,1.22,'Otters hold.',2,3,1),
+(48,'Grandmother Using an Inhaler','uploads/Grandmother Using an Inhaler.jpg',25,1,2.53,0.33,'Inhale deep mamaw!',2,4,1),
+(49,'Rainbow Dash Cutie Mark','uploads/Rainbow Dash Cutie Mark.jpg',56,1,2.53,0.56,'Bronnies will like.',2,4,1),
+(50,'Yeah Boy','uploads/Yeah Boy.jpg',25,1,2.53,0.45,'*Shooting Stars Starts Playing* ',2,4,1),
+(51,'GOAT','uploads/GOAT.jpg',65,1,7.00,1.45,'Goat milk?',2,4,1),
+(52,'They Let Me Play with Chemicals','uploads/They Let Me Play with Chemicals.jpg',25,1,2.42,0.44,'Don\'t try this at home kids!',3,1,1),
+(53,'You Are Being Monitored','uploads/You Are Being Monitored.jpg',42,2,5.74,1.11,'Be careful of what you do at work.',3,1,1),
+(54,'Practice Safe Sax','uploads/Practice Safe Sax.jpg',15,1,9.56,3.11,'Remember, always use a saxophone.',3,1,1),
+(55,'Yellow Banana Periodic Table','uploads/Yellow Banana Periodic Table.jpg',25,1,8.40,1.67,'Ba-na-na!',3,1,1),
+(56,'Beats','uploads/Beats.jpg',36,1,3.38,0.67,'By Dr. Dre',3,2,1),
+(57,'NVIDIA','uploads/NVIDIA.jpg',15,3,13.33,2.65,'For gaming.',3,2,1),
+(58,'Gesture of Billabong','uploads/Gesture of Billabong.jpg',25,1,3.69,0.44,'Rock on.',3,2,1),
+(59,'Seal of Approval','uploads/Seal of Approval.jpg',15,3,10.00,1.75,'I approve!',3,3,1),
+(60,'Unicorn power','uploads/Unicorn power.jpg',26,4,14.00,3.00,'I am the unicorn wizard!~',3,3,1),
+(63,'FK ANIMAL TESTING','uploads/FK ANIMAL TESTING.jpg',26,2,6.00,0.78,'It\'s a no no.',3,3,1),
+(64,'Cosmocat','uploads/Cosmocat.jpg',36,1,2.53,0.33,'May the cosmos be with you.',3,3,1),
+(65,'Code With Me Senpai','uploads/Code With Me Senpai.jpg',25,1,2.15,0.23,'Senpai notice me!',3,4,1),
+(66,'Fk Her Right In The P','uploads/Fk Her Right In The P.jpg',11,1,2.74,0.45,'You\'ve seen it before..',3,4,1),
+(67,'Pug Life','uploads/Pug Life.jpg',22,3,10.00,1.75,'Don\'t pug with me and I won\'t pug with you.',3,4,1),
+(68,'Trippy Felix','uploads/Trippy Felix.jpg',13,1,2.85,0.34,'Felix be trippin\'',3,4,1);
 
-/*!40000 ALTER TABLE `item` ENABLE KEYS */;
-UNLOCK TABLES;
-
-
-# Dump of table item_category
-# ------------------------------------------------------------
+/*Table structure for table `item_category` */
 
 DROP TABLE IF EXISTS `item_category`;
 
@@ -254,23 +225,16 @@ CREATE TABLE `item_category` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `category_name` varchar(32) NOT NULL,
   PRIMARY KEY (`id`,`category_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
-LOCK TABLES `item_category` WRITE;
-/*!40000 ALTER TABLE `item_category` DISABLE KEYS */;
+/*Data for the table `item_category` */
 
-INSERT INTO `item_category` (`id`, `category_name`)
-VALUES
-	(1,'Decals'),
-	(2,'Wall'),
-	(3,'Floor');
+insert  into `item_category`(`id`,`category_name`) values 
+(1,'Decals'),
+(2,'Wall'),
+(3,'Floor');
 
-/*!40000 ALTER TABLE `item_category` ENABLE KEYS */;
-UNLOCK TABLES;
-
-
-# Dump of table item_sub_category
-# ------------------------------------------------------------
+/*Table structure for table `item_sub_category` */
 
 DROP TABLE IF EXISTS `item_sub_category`;
 
@@ -278,24 +242,17 @@ CREATE TABLE `item_sub_category` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `sub_category_name` varchar(32) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
-LOCK TABLES `item_sub_category` WRITE;
-/*!40000 ALTER TABLE `item_sub_category` DISABLE KEYS */;
+/*Data for the table `item_sub_category` */
 
-INSERT INTO `item_sub_category` (`id`, `sub_category_name`)
-VALUES
-	(1,'Jokes'),
-	(2,'Brands'),
-	(3,'Animals'),
-	(4,'Random');
+insert  into `item_sub_category`(`id`,`sub_category_name`) values 
+(1,'Jokes'),
+(2,'Brands'),
+(3,'Animals'),
+(4,'Random');
 
-/*!40000 ALTER TABLE `item_sub_category` ENABLE KEYS */;
-UNLOCK TABLES;
-
-
-# Dump of table migration
-# ------------------------------------------------------------
+/*Table structure for table `migration` */
 
 DROP TABLE IF EXISTS `migration`;
 
@@ -305,22 +262,15 @@ CREATE TABLE `migration` (
   PRIMARY KEY (`version`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-LOCK TABLES `migration` WRITE;
-/*!40000 ALTER TABLE `migration` DISABLE KEYS */;
+/*Data for the table `migration` */
 
-INSERT INTO `migration` (`version`, `apply_time`)
-VALUES
-	('m000000_000000_base',1491936124),
-	('m160516_095943_init',1491936142),
-	('m161109_124936_rename_cart_table',1491936142),
-	('m161119_153348_alter_cart_data',1491936142);
+insert  into `migration`(`version`,`apply_time`) values 
+('m000000_000000_base',1491936124),
+('m160516_095943_init',1491936142),
+('m161109_124936_rename_cart_table',1491936142),
+('m161119_153348_alter_cart_data',1491936142);
 
-/*!40000 ALTER TABLE `migration` ENABLE KEYS */;
-UNLOCK TABLES;
-
-
-# Dump of table order
-# ------------------------------------------------------------
+/*Table structure for table `order` */
 
 DROP TABLE IF EXISTS `order`;
 
@@ -340,32 +290,28 @@ CREATE TABLE `order` (
   KEY `shipper_company_name` (`shipper_company_name`),
   CONSTRAINT `order_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `order_ibfk_2` FOREIGN KEY (`shipper_company_name`) REFERENCES `shipper` (`shipper_name`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=143461 DEFAULT CHARSET=utf8;
 
-LOCK TABLES `order` WRITE;
-/*!40000 ALTER TABLE `order` DISABLE KEYS */;
+/*Data for the table `order` */
 
-INSERT INTO `order` (`order_number`, `order_date`, `amount_stickers`, `total_price`, `order_status`, `customer_id`, `shipper_company_name`, `tracking_number`, `payment_method`, `shipping_address`)
-VALUES
-	(143438,1492733047,2,12.94,1,19,'UPS',4733,NULL,NULL),
-	(143439,1492810521,1,10.00,1,21,'UPS',5516,NULL,NULL),
-	(143440,1492812312,2,16.00,1,21,'UPS',5858,NULL,NULL),
-	(143441,1492812328,2,12.56,1,21,'UPS',3617,NULL,NULL),
-	(143442,1492812371,2,15.05,1,21,'UPS',2813,NULL,NULL),
-	(143443,1492812439,1,2.53,1,21,'UPS',7344,NULL,NULL),
-	(143444,1492812485,1,6.00,1,21,'UPS',1141,NULL,NULL),
-	(143453,1495392214,5,12.80,1,21,'UPS',4921,3344,'Barrio Loiza '),
-	(143454,1495393633,1,2.68,1,21,'UPS',2777,5322,'Barrio Loiza '),
-	(143455,1495396101,2,7.20,1,21,'UPS',5969,3344,'Calle Ramoncillo Delgado'),
-	(143456,1495396242,1,2.56,1,21,'UPS',4433,3344,'Barrio Loiza '),
-	(143457,1495396403,1,6.00,1,21,'UPS',3629,5322,'Calle Ramoncillo Delgado');
+insert  into `order`(`order_number`,`order_date`,`amount_stickers`,`total_price`,`order_status`,`customer_id`,`shipper_company_name`,`tracking_number`,`payment_method`,`shipping_address`) values 
+(143438,1492733047,2,12.94,1,19,'UPS',4733,NULL,NULL),
+(143439,1492810521,1,10.00,1,21,'UPS',5516,NULL,NULL),
+(143440,1492812312,2,16.00,1,21,'UPS',5858,NULL,NULL),
+(143441,1492812328,2,12.56,1,21,'UPS',3617,NULL,NULL),
+(143442,1492812371,2,15.05,1,21,'UPS',2813,NULL,NULL),
+(143443,1492812439,1,2.53,1,21,'UPS',7344,NULL,NULL),
+(143444,1492812485,1,6.00,1,21,'UPS',1141,NULL,NULL),
+(143453,1495392214,5,12.80,1,21,'UPS',4921,3344,'Barrio Loiza '),
+(143454,1495393633,1,2.68,1,21,'UPS',2777,5322,'Barrio Loiza '),
+(143455,1495396101,2,7.20,1,21,'UPS',5969,3344,'Calle Ramoncillo Delgado'),
+(143456,1495396242,1,2.56,1,21,'UPS',4433,3344,'Barrio Loiza '),
+(143457,1495396403,1,6.00,4,21,'UPS',3629,5322,'Calle Ramoncillo Delgado'),
+(143458,1495503328,1,14.59,1,28,'UPS',4291,6284,'I\'m not insane.'),
+(143459,1495558372,1,6.00,3,28,'UPS',5624,6284,'San Sebastian'),
+(143460,1496032477,1,2.53,1,21,'UPS',8735,8819,'Calle Ramoncillo Delgado');
 
-/*!40000 ALTER TABLE `order` ENABLE KEYS */;
-UNLOCK TABLES;
-
-
-# Dump of table payment_method
-# ------------------------------------------------------------
+/*Table structure for table `payment_method` */
 
 DROP TABLE IF EXISTS `payment_method`;
 
@@ -383,59 +329,24 @@ CREATE TABLE `payment_method` (
   CONSTRAINT `payment_method_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-LOCK TABLES `payment_method` WRITE;
-/*!40000 ALTER TABLE `payment_method` DISABLE KEYS */;
+/*Data for the table `payment_method` */
 
-INSERT INTO `payment_method` (`customer_id`, `card_last_digits`, `exp_date`, `card_type`, `name`, `address`, `state`, `zipcode`, `active`)
-VALUES
-	(14,'1111','20/20','Visa','Juanito Rivera','Calle Perrera 183','PR','00673',1),
-	(14,'1234','20/21','Visa','','','','',1),
-	(19,'1234','05/18','Visa','','','','',1),
-	(20,'2345','08/19','American Express','','','','',1),
-	(21,'5322','07/22','Visa','','','','',1),
-	(21,'3223','12/22','American Express','','','','',1),
-	(24,'1234','0222','Master card','Bryan Hernandez','La Lareña','PR','00675',1),
-	(25,'1212','1212','Visa','Ana M. Polo','Barrio Loiza ','PR','00674',1),
-	(25,'1234','1244','Master Card','Pablo Roman','Urb. Socialicen','PR','00617',1),
-	(21,'3344','27/89','Visa','','','','',1);
+insert  into `payment_method`(`customer_id`,`card_last_digits`,`exp_date`,`card_type`,`name`,`address`,`state`,`zipcode`,`active`) values 
+(14,'1111','20/20','Visa','Juanito Rivera','Calle Perrera 183','PR','00673',1),
+(14,'1234','20/21','Visa','','','','',1),
+(19,'1234','05/18','Visa','','','','',1),
+(20,'2345','08/19','American Express','','','','',1),
+(21,'5322','07/22','Visa','','','','',1),
+(21,'3223','12/22','American Express','','','','',1),
+(24,'1234','0222','Master card','Bryan Hernandez','La Lareña','PR','00675',1),
+(25,'1212','1212','Visa','Ana M. Polo','Barrio Loiza ','PR','00674',1),
+(25,'1234','1244','Master Card','Pablo Roman','Urb. Socialicen','PR','00617',1),
+(21,'3344','27/89','Visa','','','','',1),
+(27,'8819','1120','American Exppress','Carlos Rivera Santiago','Calle 23 de Cleveland Jordan','PR','12311',1),
+(28,'6284','28/28','Visa','Santini López Collazo','Calle San Sebstian','PR','00690',1),
+(21,'8819','12/23','Master card','Elliot Lopez','Villa Huelga en Pro Acceso ','AL','11223',1);
 
-/*!40000 ALTER TABLE `payment_method` ENABLE KEYS */;
-UNLOCK TABLES;
-
-
-# Dump of table payment_method_old
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `payment_method_old`;
-
-CREATE TABLE `payment_method_old` (
-  `customer_id` int(11) NOT NULL,
-  `card_last_digits` varchar(4) NOT NULL,
-  `exp_date` varchar(5) NOT NULL,
-  `card_type` varchar(32) NOT NULL,
-  PRIMARY KEY (`customer_id`),
-  CONSTRAINT `payment_method_old_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-LOCK TABLES `payment_method_old` WRITE;
-/*!40000 ALTER TABLE `payment_method_old` DISABLE KEYS */;
-
-INSERT INTO `payment_method_old` (`customer_id`, `card_last_digits`, `exp_date`, `card_type`)
-VALUES
-	(14,'1111','20/20','Visa'),
-	(19,'1234','12/12','Visa'),
-	(20,'1234','11/11','American Exppress'),
-	(21,'2222','23/34','Visa'),
-	(22,'1234','1122','Visa'),
-	(23,'1111','1111','Master card'),
-	(24,'2131','2323','Master card');
-
-/*!40000 ALTER TABLE `payment_method_old` ENABLE KEYS */;
-UNLOCK TABLES;
-
-
-# Dump of table phone_number
-# ------------------------------------------------------------
+/*Table structure for table `phone_number` */
 
 DROP TABLE IF EXISTS `phone_number`;
 
@@ -446,26 +357,21 @@ CREATE TABLE `phone_number` (
   CONSTRAINT `phone_number_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-LOCK TABLES `phone_number` WRITE;
-/*!40000 ALTER TABLE `phone_number` DISABLE KEYS */;
+/*Data for the table `phone_number` */
 
-INSERT INTO `phone_number` (`customer_id`, `number`)
-VALUES
-	(14,'787'),
-	(19,'939-246-8676'),
-	(20,'787-897-3922'),
-	(21,'123-123-1123'),
-	(22,'8778878788'),
-	(23,'1111111111'),
-	(24,'0000000000'),
-	(25,'1212121212');
+insert  into `phone_number`(`customer_id`,`number`) values 
+(14,'787'),
+(19,'939-246-8676'),
+(20,'787-897-3922'),
+(21,'123-123-1123'),
+(22,'8778878788'),
+(23,'1111111111'),
+(24,'0000000000'),
+(25,'1212121212'),
+(27,'8889991111'),
+(28,'7879901221');
 
-/*!40000 ALTER TABLE `phone_number` ENABLE KEYS */;
-UNLOCK TABLES;
-
-
-# Dump of table report_type
-# ------------------------------------------------------------
+/*Table structure for table `report_type` */
 
 DROP TABLE IF EXISTS `report_type`;
 
@@ -476,10 +382,9 @@ CREATE TABLE `report_type` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+/*Data for the table `report_type` */
 
-
-# Dump of table reports
-# ------------------------------------------------------------
+/*Table structure for table `reports` */
 
 DROP TABLE IF EXISTS `reports`;
 
@@ -493,35 +398,31 @@ CREATE TABLE `reports` (
   `refers_to` varchar(58) DEFAULT NULL,
   `item_selected` varchar(150) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
 
-LOCK TABLES `reports` WRITE;
-/*!40000 ALTER TABLE `reports` DISABLE KEYS */;
+/*Data for the table `reports` */
 
-INSERT INTO `reports` (`id`, `title`, `description`, `type`, `from_date`, `to_date`, `refers_to`, `item_selected`)
-VALUES
-	(6,'Reporte de todas las ventas en abril','Solo abril.','Sales','2017-04-01 00:00:00','2017-04-30 00:00:00','No Group',''),
-	(8,'Reporte de multiples cosas','Multiples cosas... si.','Sales','2017-04-01 00:00:00','2017-04-30 00:00:00','All',''),
-	(11,'Reporte de prueba dura','Die Hard.','Sales','2017-04-01 00:00:00','2017-04-30 00:00:00','4','9'),
-	(13,'Reporte de la tercera categoria','mjm','Sales','2017-04-01 00:00:00','2017-04-27 00:00:00','3',''),
-	(14,'Reporte de Pisos','Pisos.','Revenue','2017-03-15 00:00:00','2017-04-27 00:00:00','3',''),
-	(16,'Reporte de todas las ventas','Todas las ventas','Sales','2017-03-15 00:00:00','2017-04-27 00:00:00','All',''),
-	(17,'Reporte del Item ID 10','Solo eso.','Revenue','2017-03-16 00:00:00','2017-04-27 00:00:00','4','10'),
-	(18,'Item ID 4 Report','Para probar.','Revenue','2017-03-16 00:00:00','2017-04-27 00:00:00','4','4'),
-	(19,'Reporte por ID 8','Por ID 8','Sales','2017-03-03 00:00:00','2017-05-05 00:00:00','4','8'),
-	(20,'Reporte por ID 5','ID 5','Revenue','2017-03-23 00:00:00','2017-05-04 00:00:00','4','5'),
-	(21,'Test (Angel)','Test.','Revenue','16-11-2017','20-04-2017','1',''),
-	(22,'Testing Queries','LOS DUROS','Sales','1488988200','1492617000','All',''),
-	(23,'Another TEST','JEJEJEJE','Sales','1483285841','1491061841','All',''),
-	(24,'UNO DOS ','TRES PROBANDO','Sales','1420645836','1493567736','All',''),
-	(25,'Revenue from this past month','Revenue from May 1st to today.','Revenue','1493611204','1495425904','All','');
+insert  into `reports`(`id`,`title`,`description`,`type`,`from_date`,`to_date`,`refers_to`,`item_selected`) values 
+(6,'Reporte de todas las ventas en abril','Solo abril.','Sales','2017-04-01 00:00:00','2017-04-30 00:00:00','No Group',''),
+(8,'Reporte de multiples cosas','Multiples cosas... si.','Sales','2017-04-01 00:00:00','2017-04-30 00:00:00','All',''),
+(11,'Reporte de prueba dura','Die Hard.','Sales','2017-04-01 00:00:00','2017-04-30 00:00:00','4','9'),
+(13,'Reporte de la tercera categoria','mjm','Sales','2017-04-01 00:00:00','2017-04-27 00:00:00','3',''),
+(14,'Reporte de Pisos','Pisos.','Revenue','2017-03-15 00:00:00','2017-04-27 00:00:00','3',''),
+(16,'Reporte de todas las ventas','Todas las ventas','Sales','2017-03-15 00:00:00','2017-04-27 00:00:00','All',''),
+(17,'Reporte del Item ID 10','Solo eso.','Revenue','2017-03-16 00:00:00','2017-04-27 00:00:00','4','10'),
+(18,'Item ID 4 Report','Para probar.','Revenue','2017-03-16 00:00:00','2017-04-27 00:00:00','4','4'),
+(19,'Reporte por ID 8','Por ID 8','Sales','2017-03-03 00:00:00','2017-05-05 00:00:00','4','8'),
+(20,'Reporte por ID 5','ID 5','Revenue','2017-03-23 00:00:00','2017-05-04 00:00:00','4','5'),
+(21,'Test (Angel)','Test.','Revenue','16-11-2017','20-04-2017','1',''),
+(22,'Testing Queries','LOS DUROS','Sales','1488988200','1492617000','All',''),
+(23,'Another TEST','JEJEJEJE','Sales','1483285841','1491061841','All',''),
+(24,'UNO DOS ','TRES PROBANDO','Sales','1420645836','1493567736','All',''),
+(25,'Revenue from this past month','Revenue from May 1st to today.','Revenue','1493611204','1495425904','All',''),
+(26,'Por ID','Aja','Sales','1493701533','1495561533','4','13'),
+(27,'Report for All Sales','Wdw','Sales','1483243253','1514779253','All',''),
+(29,'Reporte por ITEM ID 13','wswdef','Revenue','1493611258','1496271058','4','17');
 
-/*!40000 ALTER TABLE `reports` ENABLE KEYS */;
-UNLOCK TABLES;
-
-
-# Dump of table shipper
-# ------------------------------------------------------------
+/*Table structure for table `shipper` */
 
 DROP TABLE IF EXISTS `shipper`;
 
@@ -532,19 +433,12 @@ CREATE TABLE `shipper` (
   PRIMARY KEY (`shipper_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-LOCK TABLES `shipper` WRITE;
-/*!40000 ALTER TABLE `shipper` DISABLE KEYS */;
+/*Data for the table `shipper` */
 
-INSERT INTO `shipper` (`shipper_name`, `company_phone_num`, `company_address`)
-VALUES
-	('UPS',2147483647,'Sector Lopez, Lares');
+insert  into `shipper`(`shipper_name`,`company_phone_num`,`company_address`) values 
+('UPS',2147483647,'Sector Lopez, Lares');
 
-/*!40000 ALTER TABLE `shipper` ENABLE KEYS */;
-UNLOCK TABLES;
-
-
-# Dump of table shipping_address
-# ------------------------------------------------------------
+/*Table structure for table `shipping_address` */
 
 DROP TABLE IF EXISTS `shipping_address`;
 
@@ -559,88 +453,23 @@ CREATE TABLE `shipping_address` (
   CONSTRAINT `shipping_address_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-LOCK TABLES `shipping_address` WRITE;
-/*!40000 ALTER TABLE `shipping_address` DISABLE KEYS */;
+/*Data for the table `shipping_address` */
 
-INSERT INTO `shipping_address` (`customer_id`, `street_name`, `apt_number`, `zipcode`, `state`, `active`)
-VALUES
-	(19,'Example Name',123,'00669','PR',1),
-	(20,'wewg',234324,'00669','IL',1),
-	(21,'Barrio Loiza ',123,'00124','AL',1),
-	(22,'La esquinita Famosa',69,'00234','AR',1),
-	(23,'Uno dos',12,'12121','AK',1),
-	(24,'jejejeje',123,'12345','PR',1),
-	(25,'prrrraaaa',23,'99883','AL',1),
-	(21,'Calle Ramoncillo Delgado',123,'00678','AK',1);
+insert  into `shipping_address`(`customer_id`,`street_name`,`apt_number`,`zipcode`,`state`,`active`) values 
+(19,'Example Name',123,'00669','PR',1),
+(20,'wewg',234324,'00669','IL',1),
+(21,'Barrio Loiza ',123,'00124','AL',1),
+(22,'La esquinita Famosa',69,'00234','AR',1),
+(23,'Uno dos',12,'12121','AK',1),
+(24,'jejejeje',123,'12345','PR',1),
+(25,'prrrraaaa',23,'99883','AL',1),
+(21,'Calle Ramoncillo Delgado',123,'00678','AK',1),
+(27,'Calle 30 Curry Durant',991,'12211','PR',1),
+(28,'San Sebastian',1,'00678','PR',1),
+(28,'Calle Ramoncillo Delgado',1221,'00989','AK',1),
+(28,'I\'m not insane.',112,'10910','AR',1);
 
-/*!40000 ALTER TABLE `shipping_address` ENABLE KEYS */;
-UNLOCK TABLES;
-
-
-# Dump of table shipping_address_old
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `shipping_address_old`;
-
-CREATE TABLE `shipping_address_old` (
-  `customer_id` int(11) NOT NULL,
-  `street_name` varchar(32) NOT NULL,
-  `apt_number` int(11) NOT NULL,
-  `zipcode` varchar(5) NOT NULL,
-  `state` varchar(2) NOT NULL,
-  PRIMARY KEY (`customer_id`),
-  CONSTRAINT `shipping_address_old_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-LOCK TABLES `shipping_address_old` WRITE;
-/*!40000 ALTER TABLE `shipping_address_old` DISABLE KEYS */;
-
-INSERT INTO `shipping_address_old` (`customer_id`, `street_name`, `apt_number`, `zipcode`, `state`)
-VALUES
-	(19,'Example Name',123,'00669','PR'),
-	(20,'wewg',234324,'00669','IL'),
-	(21,'Barrio Loiza ',123,'00123','AL'),
-	(22,'La esquinita Famosa',69,'00234','AR'),
-	(23,'Uno dos',12,'12121','AK'),
-	(24,'jejejeje',123,'12345','PR'),
-	(25,'prrrraaaa',23,'99883','AL');
-
-/*!40000 ALTER TABLE `shipping_address_old` ENABLE KEYS */;
-UNLOCK TABLES;
-
-
-# Dump of table shipping_addressOLD
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `shipping_addressOLD`;
-
-CREATE TABLE `shipping_addressOLD` (
-  `customer_id` int(11) NOT NULL,
-  `street_name` varchar(32) NOT NULL,
-  `apt_number` int(11) NOT NULL,
-  `zipcode` varchar(5) NOT NULL,
-  `state` varchar(2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-LOCK TABLES `shipping_addressOLD` WRITE;
-/*!40000 ALTER TABLE `shipping_addressOLD` DISABLE KEYS */;
-
-INSERT INTO `shipping_addressOLD` (`customer_id`, `street_name`, `apt_number`, `zipcode`, `state`)
-VALUES
-	(0,'Example Name',123,'00669','PR'),
-	(0,'wewg',234324,'00669','IL'),
-	(0,'Barrio Loiza ',123,'00123','AL'),
-	(0,'La esquinita Famosa',69,'00234','AR'),
-	(0,'Uno dos',12,'12121','AK'),
-	(0,'jejejeje',123,'12345','PR'),
-	(0,'prrrraaaa',23,'99883','AL');
-
-/*!40000 ALTER TABLE `shipping_addressOLD` ENABLE KEYS */;
-UNLOCK TABLES;
-
-
-# Dump of table sticker_size
-# ------------------------------------------------------------
+/*Table structure for table `sticker_size` */
 
 DROP TABLE IF EXISTS `sticker_size`;
 
@@ -650,24 +479,15 @@ CREATE TABLE `sticker_size` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-LOCK TABLES `sticker_size` WRITE;
-/*!40000 ALTER TABLE `sticker_size` DISABLE KEYS */;
+/*Data for the table `sticker_size` */
 
-INSERT INTO `sticker_size` (`id`, `size`)
-VALUES
-	(1,'Small (2.7\" x 4.0\")'),
-	(2,'Medium (3.7\" x 5.5\")'),
-	(3,'Large (5.7\" x 8.5\")'),
-	(4,'Extra Large (9.4\" x 14.0\")');
+insert  into `sticker_size`(`id`,`size`) values 
+(1,'Small (2.7\" x 4.0\")'),
+(2,'Medium (3.7\" x 5.5\")'),
+(3,'Large (5.7\" x 8.5\")'),
+(4,'Extra Large (9.4\" x 14.0\")');
 
-/*!40000 ALTER TABLE `sticker_size` ENABLE KEYS */;
-UNLOCK TABLES;
-
-
-
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;

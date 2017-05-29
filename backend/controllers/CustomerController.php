@@ -40,9 +40,7 @@ class CustomerController extends Controller
     {
         $searchModel = new CustomerSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        // echo '<pre>';
-        // var_dump($searchModel);
-        // die(1);
+
         if ($searchModel->id == "" && $searchModel->status == 10){
            $sql ="SELECT * FROM customer WHERE status = $searchModel->status";
            echo Growl::widget([
@@ -119,7 +117,6 @@ class CustomerController extends Controller
                         ]
                 ]);
         }
-        
 
         return $this->render('index', [
             'searchModel' => $searchModel,

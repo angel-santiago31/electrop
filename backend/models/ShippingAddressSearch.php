@@ -12,6 +12,8 @@ use backend\models\ShippingAddress;
  */
 class ShippingAddressSearch extends ShippingAddress
 {
+    const STATUS_DELETED = 0;
+    const STATUS_ACTIVE = 1;
     /**
      * @inheritdoc
      */

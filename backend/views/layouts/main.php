@@ -62,7 +62,7 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'Electrop',
+        'brandLabel' => Html::img('/electrop/backend/web/uploads/pop.png', ['alt'=> 'Electrop logo']),
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',

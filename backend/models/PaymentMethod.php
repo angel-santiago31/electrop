@@ -17,6 +17,8 @@ use common\models\Customer;
  */
 class PaymentMethod extends \yii\db\ActiveRecord
 {
+    const STATUS_DELETED = 0;
+    const STATUS_ACTIVE = 1;
     /**
      * @inheritdoc
      */

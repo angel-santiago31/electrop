@@ -46,7 +46,14 @@ use yii\grid\GridView;
             'label' => 'More',
             'format' => 'html',
             'value' => function ($cards) {
-                return Html::a('<i class="glyphicon glyphicon-pencil"></i> Update', ['update-payment', 'id' => $cards->customer_id, 'numbers' => $cards->card_last_digits], ['class' => 'btn btn-xs btn-danger redCss', 'id' => 'updatePayment']);
+                return Html::a('<i class="glyphicon glyphicon-edit"></i> Update', ['update-payment', 'id' => $cards->customer_id, 'numbers' => $cards->card_last_digits], ['class' => 'btn btn-xs btn-danger redCss', 'id' => 'updatePayment']);
+            }
+        ],
+        [
+            'label' => '',
+            'format' => 'html',
+            'value' => function ($cards) {
+                return Html::a('<i class="glyphicon glyphicon-remove"></i> Remove', ['delete-card', 'id' => $cards->customer_id, 'numbers' => $cards->card_last_digits], ['class' => 'btn btn-xs btn-danger redCss', 'id' => 'updatePayment']);
             }
         ],
     ],

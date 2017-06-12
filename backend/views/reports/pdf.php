@@ -6,7 +6,7 @@ use kartik\growl\Growl;
 
 	<div style="text-align: center;, margin-left: 50%;, margin-right: 50%;">
         <div style = "float: left;, width: 15%;">
-            <img src="/electrop/backend/web/uploads/electrop.png"  width="200px" height="200px">
+            <img src="/electrop/backend/web/images/icon.png"  width="100px" height="100px">
         </div>
         <div style = "float: left;, margin-left: 0%;, width: 75%;">
             <h3><?= 'Electrop ' . $model->type . ' Report'; ?></h3>

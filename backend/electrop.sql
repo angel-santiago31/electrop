@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.5.5-10.1.21-MariaDB)
 # Database: electrop
-# Generation Time: 2017-06-12 02:52:39 +0000
+# Generation Time: 2017-06-12 03:06:10 +0000
 # ************************************************************
 
 
@@ -45,7 +45,9 @@ LOCK TABLES `admin` WRITE;
 INSERT INTO `admin` (`id`, `auth_key`, `password_hash`, `password_reset_token`, `email`, `status`, `created_at`, `updated_at`)
 VALUES
 	(7,'DxKkH2hGDkUj5L2LnB8qrMVLkGFAT82M','$2y$13$D92/maDAYUX2W.25sYURRecRl4TvGpEPvgzqzQosMwiHJO6jymLji','jGCqlkpYD0UQNSodS-yMSvIoqyA5aF_p_1489764767','admin@admin.com',10,17,17),
-	(11,'FHRGKaaqo4ZvDlZPPMmkIqxtdGZBziVF','$2y$13$c4TudIrJOXWkJ4xh57618OHd60g1CFcmv7f.iy8JCH4F2JJPPRfvi','NUHKloHkVlA29Y_xv5MQ0IVgu4Njkm7-_1491401476','mystery_Person@outlook.com',10,1491401476,1491401476);
+	(11,'FHRGKaaqo4ZvDlZPPMmkIqxtdGZBziVF','$2y$13$c4TudIrJOXWkJ4xh57618OHd60g1CFcmv7f.iy8JCH4F2JJPPRfvi','NUHKloHkVlA29Y_xv5MQ0IVgu4Njkm7-_1491401476','mystery_Person@outlook.com',10,1491401476,1491401476),
+	(12,'ZeXG0S1F251re78KxyliosbI0OiFdFgr','$2y$13$C0s/rPAUmZVa/w2zttnWo.hZTFeMrC61u4Q6aSJCrj1Ykg4e8Ma1q','4gKuCns0E92ZdJR6GBc8Ok5VCPIPKzDE_1497236372','erick.rivera6@upr.edu',10,1497236372,1497236372),
+	(13,'n9-gt8Jzn2AvIDPGIIQpTZpcePO-N1F8','$2y$13$K18i4Ytpi9JwW3k3EKKX8uij/y7MZ9nTTT.LPxxO6dw6VnGaOMd0e','EBReFlKYzDfsRsxoI13UdQ4pp3ybJMUr_1497236428','user.test@gmail.com',10,1497236428,1497236428);
 
 /*!40000 ALTER TABLE `admin` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -103,7 +105,6 @@ VALUES
 	(143455,16,4.64,1),
 	(143456,14,2.56,1),
 	(143457,13,6.00,1),
-	(143458,27,14.59,1),
 	(143459,13,6.00,1),
 	(143460,17,2.53,1);
 
@@ -198,7 +199,6 @@ VALUES
 	(22,'Sloth Life','uploads/Sloth Life.jpg',37,1,2.68,0.45,'Just hanging around!',1,3,1),
 	(23,'Desert animals','uploads/Desert animals.jpg',53,3,10.00,1.75,'Camel toe.',1,3,1),
 	(24,'Cat in Lotus Tattoo','uploads/Cat in Lotus Tattoo.jpg',25,1,2.53,0.55,'Pretty Kitty',1,3,1),
-	(27,'Issa Knife','uploads/Issa Knife.jpg',46,4,14.59,2.33,'Nigga gon get stabbed yo\'!',1,4,1),
 	(28,'Happy Pepe, The Frog','uploads/Happy Pepe, The Frog.jpg',26,1,6.00,0.67,'A happy Pepe is a good Pepe.',1,4,1),
 	(29,'Astro Sloth','uploads/Astro Sloth.jpg',26,3,10.00,1.75,'Captain Sloth reporting for duty.',1,4,1),
 	(30,'Heisenberg','uploads/Heisenberg.jpg',63,1,2.64,0.33,'Shades on, hat on.',1,4,1),
@@ -388,10 +388,10 @@ VALUES
 	(14,'1234','20/21','Visa','','','','',1),
 	(19,'1234','05/18','Visa','','','','',1),
 	(20,'2345','08/19','American Express','','','','',1),
-	(21,'3223','12/22','American Express','','','','',1),
-	(21,'3344','27/89','Visa','','','','',1),
-	(21,'5322','07/22','Visa','','','','',1),
-	(21,'8819','12/23','Master card','Elliot Lopez','Villa Huelga en Pro Acceso ','AL','11223',1),
+	(21,'3223','12/22','American Express','Erick Rivera','Barrio de la Calle','AL','12345',0),
+	(21,'3344','27/89','Visa','Erick Rivera','Barrio de la Calle','AL','12345',1),
+	(21,'5322','07/22','Visa','Erick Rivera','Barrio de la Calle','AL','12345',1),
+	(21,'8819','12/23','Master card','Erick Rivera','Barrio de la Calle','AL','12345',1),
 	(24,'1234','0222','Master card','Bryan Hernandez','La Lareña','PR','00675',1),
 	(25,'1212','1212','Visa','Ana M. Polo','Barrio Loiza ','PR','00674',1),
 	(25,'1234','1244','Master Card','Pablo Roman','Urb. Socialicen','PR','00617',1),
@@ -571,8 +571,9 @@ INSERT INTO `shipping_address` (`customer_id`, `street_name`, `apt_number`, `zip
 VALUES
 	(19,'Example Name',123,'00669','PR',1),
 	(20,'wewg',234324,'00669','IL',1),
-	(21,'Barrio Loiza ',123,'00124','AL',1),
-	(21,'Calle Ramoncillo Delgado',123,'00678','AK',1),
+	(21,'Barrio Loiza ',123,'00124','AR',0),
+	(21,'Calle Ramoncillo Delgado',123,'00678','AR',1),
+	(21,'Calle San Marcos',123,'00617','PR',1),
 	(22,'La esquinita Famosa',69,'00234','AR',1),
 	(23,'Uno dos',12,'12121','AK',1),
 	(24,'jejejeje',123,'12345','PR',1),

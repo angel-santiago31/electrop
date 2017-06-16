@@ -52,11 +52,11 @@ use kartik\growl\Growl;
             </tr>
             <tr>
                 <th style = "text-align: right;, font-weight: bold;">From:</th>
-                <td style = "padding-left: 3%;, height: 30px;"><?= $fromDate; ?></td>
+                <td style = "padding-left: 3%;, height: 30px;"><?= Yii::$app->formatter->asDate($fromDate); ?></td>
             </tr>
             <tr>
                 <th style = "text-align: right;, font-weight: bold;">To:</th>
-                <td style = "padding-left: 3%;, height: 30px;"><?= $toDate; ?></td>
+                <td style = "padding-left: 3%;, height: 30px;"><?= Yii::$app->formatter->asDate($toDate); ?></td>
             </tr>
         </table>
         <br>
@@ -127,7 +127,7 @@ use kartik\growl\Growl;
                             <tbody>
                                 <tr style="background: WhiteSmoke; text-align:center;">
                                 <th style="padding: 5px 10px;"><?= $order->order_number; ?></th>
-                                <th style="padding: 5px 10px;"><?= $order->order_date; ?></th>
+                                <th style="padding: 5px 10px;"><?= Yii::$app->formatter->asDate($order->order_date); ?></th>
                                 <td style="padding: 5px 10px;"> <?= $order->contains[$i]->item_id; ?></td>
                                 <th style="padding: 5px 10px;"><?= '$' . $order->contains[$i]->item->production_cost; ?></th>
                                 <th style="padding: 5px 10px;"><?= "$" . $order->contains[$i]->item->gross_price;
@@ -204,7 +204,7 @@ use kartik\growl\Growl;
                         <br>
                         <br>
                     <div class="panel">
-                        <h2>Queries Executed: </h2>
+                        <h2> Queries Executed: </h2>
                         <div class="panel-body">
                             <div> <span style="font-size: 16px;"><?= 'Search Query: ' . $sql;  ?></span> </div>
                             <br>

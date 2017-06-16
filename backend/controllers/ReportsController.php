@@ -42,10 +42,9 @@ class ReportsController extends Controller
     {
         $searchModel = new ReportsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        // echo '<pre>';
-        // var_dump($searchModel);
-        // die(1);
+        $dataProvider->setSort([
+            'defaultOrder' => ['id'=>SORT_DESC],
+        ]);
 
         if($searchModel->title == "" && !$searchModel->type == ""){
             $sql ="SELECT * FROM reports WHERE type = $searchModel->type";
@@ -240,7 +239,7 @@ class ReportsController extends Controller
                 $sumQty = $ordersInfo[0]->findBySql($sqlGroupByQty)->all();
 
                 //Sum of Total Sales grouped by the item category selected.
-                $sqlGroupByPrice = 'SELECT SUM(`order`.total_price) AS total_sum
+                $sqlGroupByPrice = 'SELECT SUM(`item`.gross_price) AS total_sum
                             FROM `order` INNER JOIN `contains` INNER JOIN `item` INNER JOIN `item_category`
                             WHERE `contains`.item_id = `item`.item_id AND `order`.order_number = `contains`.order_number AND `item`.item_category_id = `item_category`.id
                             AND `item`.item_id = ' .  $itemSelected;
@@ -308,7 +307,7 @@ class ReportsController extends Controller
                 $sumQty = $ordersInfo[0]->findBySql($sqlGroupByQty)->all();
 
                 //Sum of Total Sales grouped by the item category selected.
-                $sqlGroupByPrice = 'SELECT SUM(`order`.total_price) AS total_sum
+                $sqlGroupByPrice = 'SELECT SUM(`item`.gross_price * `contains`.quantity_in_order) AS total_sum
                             FROM `order` INNER JOIN `contains` INNER JOIN `item` INNER JOIN `item_category`
                             WHERE `contains`.item_id = `item`.item_id AND `order`.order_number = `contains`.order_number AND `item`.item_category_id = `item_category`.id
                             GROUP BY item_category_id

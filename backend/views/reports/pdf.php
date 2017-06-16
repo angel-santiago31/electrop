@@ -73,7 +73,7 @@ use kartik\growl\Growl;
 
                 if($allOrders && $ordersInfo != null)
                     {                            ?>
-                        <div style="margin-left: 15%; margin-top: 15%;">
+                        <div style="margin-left: 5%; margin-top: 5%;">
                             <table style="font-family: "Helvetica Neue", Helvetica, sans-serif">
                             <caption style="text-align: left;
                             color: silver;
@@ -83,6 +83,8 @@ use kartik\growl\Growl;
                             <thead>
                                 <tr style="background: #4682b4;
                             color: white;">
+                                <th style="text-align: center; color: white; padding: 5px 10px;">Order #</th>
+                                <th style="text-align: center; color: white; padding: 5px 10px;">Date Made</th>
                                 <th style="text-align: center; color: white; padding: 5px 10px;">Item</th>
                                 <th style="text-align: center; color: white; padding: 5px 10px;">Production Price</th>
                                 <th style="text-align: center; color: white; padding: 5px 10px;">Gross Price</th>
@@ -124,6 +126,8 @@ use kartik\growl\Growl;
                             ?>
                             <tbody>
                                 <tr style="background: WhiteSmoke; text-align:center;">
+                                <th style="padding: 5px 10px;"><?= $order->order_number; ?></th>
+                                <th style="padding: 5px 10px;"><?= $order->order_date; ?></th>
                                 <td style="padding: 5px 10px;"> <?= $order->contains[$i]->item_id; ?></td>
                                 <th style="padding: 5px 10px;"><?= '$' . $order->contains[$i]->item->production_cost; ?></th>
                                 <th style="padding: 5px 10px;"><?= "$" . $order->contains[$i]->item->gross_price;
@@ -161,7 +165,7 @@ use kartik\growl\Growl;
                                 <tr style="background: #e50000;
                                     color: white;
                                     text-align: right;">
-                                <th style="padding: 5px 10px; color: white;" colspan="3">Grand Total</th>
+                                <th style="padding: 5px 10px; color: white;" colspan="5">Grand Total</th>
                                 <th style="padding: 5px 10px; font-family: monospace; color: white;"><?php 
                                 
                                 if($allOrders && $groupedBy == 'All')

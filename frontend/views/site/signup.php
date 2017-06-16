@@ -20,7 +20,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/png', 'href' => '/elec
 
     <div class="row">
         <div class="col-sm-12">
-            <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
+            <?php $form = ActiveForm::begin(); ?>
                 <div class="row">
                     <div class="col-sm-4">
                         <?= $form->field($model, 'email')->textInput() ?>

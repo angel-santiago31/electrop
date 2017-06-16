@@ -200,6 +200,7 @@ class CustomerController extends Controller
                     'positonY' => 'top',
                     'positonX' => 'right'
                 ]);
+                    
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 

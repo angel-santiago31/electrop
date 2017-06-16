@@ -71,7 +71,8 @@ class PaymentMethodSearch extends PaymentMethod
             ->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'address', $this->address])
             ->andFilterWhere(['like', 'state', $this->state])
-            ->andFilterWhere(['like', 'zipcode', $this->zipcode]);
+            ->andFilterWhere(['like', 'zipcode', $this->zipcode])
+            ->andFilterWhere(['=', 'active', 1]);
 
         return $dataProvider;
     }

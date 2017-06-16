@@ -16,7 +16,7 @@ class AppAsset extends AssetBundle
     ];
     public $js = [
       'js/order-status.js',
-      'js/dropdown.js',
+      'js/dropdown.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',

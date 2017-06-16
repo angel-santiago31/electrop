@@ -73,7 +73,8 @@ class ShippingAddressSearch extends ShippingAddress
 
         $query->andFilterWhere(['like', 'street_name', $this->street_name])
             ->andFilterWhere(['like', 'zipcode', $this->zipcode])
-            ->andFilterWhere(['like', 'state', $this->state]);
+            ->andFilterWhere(['like', 'state', $this->state])
+            ->andFilterWhere(['=', 'active', 1]);
 
         return $dataProvider;
     }

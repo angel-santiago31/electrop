@@ -1,4 +1,4 @@
-$(function() {
+  
     document.getElementById("itemIdField").hidden = true;
     $("#refers_to").change(function(){
         var ddValue = $('#refers_to').val();
@@ -10,4 +10,3 @@ $(function() {
         }
         return false;
      });
- });

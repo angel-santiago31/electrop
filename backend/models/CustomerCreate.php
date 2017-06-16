@@ -50,22 +50,22 @@ class CustomerCreate extends Model
                 [['email'], 'required', 'message' => 'Email cannot be blank.'],
                 ['email', 'unique', 'targetClass' => '\common\models\Customer', 'message' => 'This email address has already been taken.'],
                 [['firstName', 'fathersLastName', 'mothersLastName', 'dateOfBirth'], 'required'],
-            [['firstName', 'middleName', 'fathersLastName', 'mothersLastName'], 'string', 'max' => 18],
-            [['dateOfBirth'], 'string'],
+                [['firstName', 'middleName', 'fathersLastName', 'mothersLastName'], 'string', 'max' => 18],
+                [['dateOfBirth'], 'string'],
 
-            [['cardLastDigits', 'expDate', 'cardType', 'nameOnCard', 'billingAddress', 'billingState', 'billingZipcode'], 'required'],
-            [['cardLastDigits'], 'integer', 'min' => 4],
-            [['expDate', 'billingZipcode'], 'string', 'max' => 5],
-            [['billingState'], 'string', 'max' => 2],
-            [['cardType', 'nameOnCard', 'billingAddress'], 'string', 'max' => 32],
+                [['cardLastDigits', 'expDate', 'cardType', 'nameOnCard', 'billingAddress', 'billingState', 'billingZipcode'], 'required'],
+                [['cardLastDigits'], 'integer', 'min' => 4],
+                [['expDate', 'billingZipcode'], 'string', 'max' => 5],
+                [['billingState'], 'string', 'max' => 2],
+                [['cardType', 'nameOnCard', 'billingAddress'], 'string', 'max' => 32],
 
-            [['streetName', 'aptNumber', 'zipcode', 'state'], 'required'],
-            [['streetName'], 'string', 'max' => 32],
-            [['aptNumber'], 'integer'],
-            [['state', 'zipcode'], 'string'],
+                [['streetName', 'aptNumber', 'zipcode', 'state'], 'required'],
+                [['streetName'], 'string', 'max' => 32],
+                [['aptNumber'], 'integer'],
+                [['state', 'zipcode'], 'string'],
 
-            [['number'], 'string', 'min' => 10],
-            ];
+                [['number'], 'string', 'min' => 10],
+                ];
     }
 
     /**

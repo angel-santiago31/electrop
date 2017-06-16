@@ -26,15 +26,15 @@ use yii\helpers\ArrayHelper;
           </div>
           <div class="col-sm-3">
               <?= $form->field($model, 'from_date')->widget(DateControl::classname(), [
-                      'displayFormat' => 'php:d-M-Y H:i:s',
-                      'type' => DateControl::FORMAT_DATETIME
+                      'displayFormat' => 'php:d/M/Y',
+                      'type' => DateControl::FORMAT_DATE
                   ]);
               ?>
           </div>
           <div class="col-sm-3">
               <?= $form->field($model, 'to_date')->widget(DateControl::classname(), [
-                      'displayFormat' => 'php:d-M-Y H:i:s',
-                      'type' => DateControl::FORMAT_DATETIME
+                      'displayFormat' => 'php:d/M/Y',
+                      'type' => DateControl::FORMAT_DATE
                   ]);
               ?>
           </div>
